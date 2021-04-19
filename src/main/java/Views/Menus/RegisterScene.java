@@ -1,4 +1,4 @@
-package Menus;
+package Views.Menus;
 
 public class RegisterScene extends Scene {
     @Override

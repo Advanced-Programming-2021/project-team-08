@@ -1,4 +1,4 @@
-package Menus;
+package Views.Menus;
 
 public class ApplicationManger {
     private Scene currentScene;

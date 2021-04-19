@@ -1,4 +1,4 @@
-import Menus.ApplicationManger;
+import Views.Menus.ApplicationManger;
 
 public class Main {
     public static void main(String[] args) {
