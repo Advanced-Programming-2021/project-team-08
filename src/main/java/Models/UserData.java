@@ -1,14 +1,26 @@
 package Models;
 
+import Controllers.User;
+
+import java.util.ArrayList;
+
 public class UserData {
     private String username;
     private String nickname;
     private String password;
     private int point;
     //private ArrayList<Deck> decks;
+
+
     {
         point = 0;
         // decks = new ArrayList<>();
+    }
+
+    public UserData(String username, String password, String nickname) {
+        this.username = username;
+        this.nickname = nickname;
+        this.password = password;
     }
 
     public void setUsername(String username) {
@@ -27,6 +39,12 @@ public class UserData {
         this.point = point;
     }
 
+    /*
+        public ArrayList<Deck> getDecks() {
+            return decks;
+        }
+     */
+
     public String getUsername() {
         return username;
     }
@@ -43,14 +61,7 @@ public class UserData {
         return point;
     }
 
-    /*
-    public Deck getDeckByName(String deckName) {
-        for(Deck deck : decks) {
-            if (deck.getName.equals(deckName)) return deck;
-        }
-        return null;
-    }
-     */
+
 
     public void changePoint(int point) {
         this.point += point;
