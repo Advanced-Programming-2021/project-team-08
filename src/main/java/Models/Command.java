@@ -1,7 +1,7 @@
 package Models;
 
 import Models.Enums.CommandFieldType;
-import Views.Menus.Exceptions.ParseCommandException;
+import Models.Exceptions.ParseCommandException;
 
 import java.util.HashMap;
 import java.util.Map;

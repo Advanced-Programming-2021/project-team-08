@@ -3,6 +3,7 @@ package Controllers;
 import Controllers.User;
 import Models.Command;
 import Models.Enums.CommandFieldType;
+import Models.Exceptions.ParseCommandException;
 import Views.Menus.ApplicationManger;
 import Views.Menus.SceneName;
 
@@ -24,7 +25,7 @@ public class RegisterController {
                 new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
                 System.out.printf("user created successfully!");
             }
-        } catch (Views.Menus.Exceptions.ParseCommandException e) {
+        } catch (ParseCommandException e) {
             System.out.println("Invalid command");
         }
         return 1;
@@ -48,7 +49,7 @@ public class RegisterController {
                 }
 
             }
-        } catch (Views.Menus.Exceptions.ParseCommandException e) {
+        } catch (ParseCommandException e) {
             System.out.println("Invalid command");
         }
         return 1;

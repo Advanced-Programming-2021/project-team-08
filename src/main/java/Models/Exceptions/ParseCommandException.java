@@ -1,4 +1,4 @@
-package Views.Menus.Exceptions;
+package Models.Exceptions;
 
 public class ParseCommandException extends Exception {
     public ParseCommandException(String message) {
