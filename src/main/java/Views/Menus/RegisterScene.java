@@ -23,14 +23,17 @@ public class RegisterScene extends Scene {
         if (matcher.matches()){
             System.out.printf("Login Menu");
         }
-        matcher= Pattern.compile("create").matcher(userInput);
+        matcher= Pattern.compile("user create ([^\\n]+)").matcher(userInput);
         if (matcher.matches()){
-           return RegisterController.registerUser(userInput);
+           return RegisterController.registerUser(matcher.group(1));
         }
         matcher=Pattern.compile("login").matcher(userInput);
         if (matcher.matches()){
             return RegisterController.loginUser(userInput);
         }
+
+        System.out.println("Invalid command");
+
         return 1;
     }
 
