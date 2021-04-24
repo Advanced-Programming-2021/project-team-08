@@ -1,4 +1,4 @@
-package Models.Enums;
+package model.enums;
 
 public enum CommandFieldType {
     INT,

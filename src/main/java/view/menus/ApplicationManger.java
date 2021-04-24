@@ -1,6 +1,6 @@
-package Views.Menus;
+package view.menus;
 
-import Controllers.User;
+import controller.User;
 
 public class ApplicationManger {
     private static Scene currentScene;

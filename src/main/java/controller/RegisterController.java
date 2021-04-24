@@ -1,11 +1,10 @@
-package Controllers;
+package controller;
 
-import Controllers.User;
-import Models.Command;
-import Models.Enums.CommandFieldType;
-import Models.Exceptions.ParseCommandException;
-import Views.Menus.ApplicationManger;
-import Views.Menus.SceneName;
+import model.Command;
+import model.enums.CommandFieldType;
+import model.exceptions.ParseCommandException;
+import view.menus.ApplicationManger;
+import view.menus.SceneName;
 
 import java.util.HashMap;
 

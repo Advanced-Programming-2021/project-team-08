@@ -1,4 +1,4 @@
-package Views.Menus;
+package view.menus;
 
 public enum SceneName {
     REGISTER_MENU,

@@ -1,8 +1,4 @@
-package Models;
-
-import Controllers.User;
-
-import java.util.ArrayList;
+package model;
 
 public class UserData {
     private String username;

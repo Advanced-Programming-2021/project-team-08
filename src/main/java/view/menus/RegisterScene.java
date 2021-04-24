@@ -1,6 +1,6 @@
-package Views.Menus;
+package view.menus;
 
-import Controllers.RegisterController;
+import controller.RegisterController;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

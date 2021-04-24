@@ -1,7 +1,7 @@
-package Models;
+package model;
 
-import Models.Enums.CommandFieldType;
-import Models.Exceptions.ParseCommandException;
+import model.enums.CommandFieldType;
+import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

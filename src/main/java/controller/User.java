@@ -1,7 +1,7 @@
-package Controllers;
+package controller;
 
-import Models.UserData;
-import Views.Menus.ApplicationManger;
+import model.UserData;
+import view.menus.ApplicationManger;
 
 import java.util.ArrayList;
 

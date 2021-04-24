@@ -1,4 +1,4 @@
-package Models.Exceptions;
+package model.exceptions;
 
 public class ParseCommandException extends Exception {
     public ParseCommandException(String message) {

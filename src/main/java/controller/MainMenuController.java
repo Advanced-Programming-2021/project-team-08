@@ -1,7 +1,7 @@
-package Controllers;
+package controller;
 
-import Views.Menus.ApplicationManger;
-import Views.Menus.SceneName;
+import view.menus.ApplicationManger;
+import view.menus.SceneName;
 
 public class MainMenuController {
     public static int enterMenu(String menuName){

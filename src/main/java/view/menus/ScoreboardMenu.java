@@ -1,6 +1,6 @@
-package Views.Menus;
+package view.menus;
 
-import Controllers.User;
+import controller.User;
 
 import java.util.ArrayList;
 
