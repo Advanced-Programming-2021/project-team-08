@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Comparator;
+
 public class UserData {
     private String username;
     private String nickname;
@@ -13,7 +15,7 @@ public class UserData {
         // decks = new ArrayList<>();
     }
 
-    public UserData(String username, String password, String nickname) {
+    public UserData(String username, String nickname, String password) {
         this.username = username;
         this.nickname = nickname;
         this.password = password;
@@ -57,11 +59,11 @@ public class UserData {
         return point;
     }
 
-
-
     public void changePoint(int point) {
         this.point += point;
     }
+
+
 
     /*
     public void addDeck(Deck deck) {
@@ -69,5 +71,7 @@ public class UserData {
     }
      */
 
+
 }
+
 

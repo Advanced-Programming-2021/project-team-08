@@ -4,6 +4,7 @@ import model.UserData;
 import view.menus.ApplicationManger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private static ArrayList<User> allUser;
@@ -55,6 +56,17 @@ public class User {
 
     public static ArrayList<User> getAllUser(){
         return allUser;
+    }
+
+
+    public static UserData[] getAllUserData(){
+        UserData[] scoreboard = new UserData[allUser.size()];
+        int counter=0;
+        for (User user: allUser) {
+            scoreboard[counter]=user.userData;
+            counter++;
+        }
+        return scoreboard;
     }
 
     /*
