@@ -9,7 +9,8 @@ import java.util.HashMap;
 public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
-
+    private ArrayList<String> decksName;
+    private String activeDeck;
     static {
         allUser = new ArrayList<>();
     }
@@ -37,7 +38,6 @@ public class User {
         return userData;
     }
 
-
     public static boolean loginUser(String username, String password) {
         User user = getUserByUsername(username);
         if (user.getUserData().getPassword().equals(password)) {
@@ -58,7 +58,6 @@ public class User {
         return allUser;
     }
 
-
     public static UserData[] getAllUserData(){
         UserData[] scoreboard = new UserData[allUser.size()];
         int counter=0;
@@ -69,7 +68,22 @@ public class User {
         return scoreboard;
     }
 
-    /*
+    public void addDeck(String deckName){
+        this.decksName.add(deckName);
+    }
+
+    public ArrayList<String> getDecksName() {
+        return decksName;
+    }
+
+    public void setActiveDeck(String activeDeck) {
+        this.activeDeck = activeDeck;
+    }
+
+    public String getActiveDeck() {
+        return activeDeck;
+    }
+/*
     public Deck getDeckByName(String deckName) {
         decks  = userData.getDecks;
         for(User deck : decks) {

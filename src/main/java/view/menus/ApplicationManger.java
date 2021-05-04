@@ -1,5 +1,6 @@
 package view.menus;
 
+import controller.DeckController;
 import controller.User;
 
 public class ApplicationManger {
@@ -22,6 +23,11 @@ public class ApplicationManger {
                 currentScene.start();
                 break;
             //TODO: 19/04/2021 other cases
+            case DECK_MENU:
+                currentScene=new DeckController();
+                currentScene.start();
+                break;
+            //TODO: 04/05/2021 other cases
         }
 
     }
