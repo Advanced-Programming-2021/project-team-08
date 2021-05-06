@@ -8,7 +8,7 @@ import view.menus.ProfileScene;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
-import model.enums.ProfileErrors;
+import model.enums.ProfileMessages;
 
 public class ProfileController {
 
@@ -26,11 +26,11 @@ public class ProfileController {
         try {
             Command registerCommand = Command.parseCommand(command.group(), fieldsOfRegisterUser);
             if (registerCommand.getField("nickname").equals(activeUser.getUserData().getNickname())) {
-                profileScene.printMessage(ProfileErrors.REPEATED_NICKNAME);
+                profileScene.errorMessage(ProfileMessages.REPEATED_NICKNAME);
             }
             else {
                 activeUser.getUserData().setUsername(registerCommand.getField("nickname"));
-                profileScene.printMessage(ProfileErrors.NICKNAME_CHANGED);
+                profileScene.successMessage(ProfileMessages.NICKNAME_CHANGED);
             }
         }catch (ParseCommandException e) {
             System.out.println("Invalid command");
@@ -44,14 +44,14 @@ public class ProfileController {
         try {
             Command registerCommand = Command.parseCommand(command.group(), fieldsOfRegisterUser);
             if (!registerCommand.getField("current").equals(activeUser.getUserData().getPassword())) {
-                profileScene.printMessage(ProfileErrors.WRONG_PASSWORD);
+                profileScene.errorMessage(ProfileMessages.WRONG_PASSWORD);
             }
             else if (registerCommand.getField("new").equals(activeUser.getUserData().getPassword())) {
-                profileScene.printMessage(ProfileErrors.REPEATED_PASSWORD);
+                profileScene.errorMessage(ProfileMessages.REPEATED_PASSWORD);
             }
             else {
                 activeUser.getUserData().setPassword(registerCommand.getField("new"));
-                profileScene.printMessage(ProfileErrors.PASSWORD_CHANGED);
+                profileScene.successMessage(ProfileMessages.PASSWORD_CHANGED);
             }
         }catch (ParseCommandException e) {
             System.out.println("Invalid command");

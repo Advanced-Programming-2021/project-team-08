@@ -2,7 +2,7 @@ package view.menus;
 
 import controller.ProfileController;
 import controller.User;
-import model.enums.ProfileErrors;
+import model.enums.ProfileMessages;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +32,7 @@ public class ProfileScene extends Scene{
         return 0;
     }
 
-    public void printMessage(ProfileErrors error) {
+    public void errorMessage(ProfileMessages error) {
         switch (error) {
             case REPEATED_NICKNAME:
                 System.out.println("this nickname is already used");
@@ -43,6 +43,12 @@ public class ProfileScene extends Scene{
             case REPEATED_PASSWORD:
                 System.out.println("please enter a new password");
                 break;
+        }
+        getUserCommand();
+    }
+
+    public void successMessage(ProfileMessages message) {
+        switch (message) {
             case NICKNAME_CHANGED:
                 System.out.println("nickname changed successfully!");
                 break;

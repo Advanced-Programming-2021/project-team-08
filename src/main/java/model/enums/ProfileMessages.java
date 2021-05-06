@@ -1,6 +1,6 @@
 package model.enums;
 
-public enum ProfileErrors {
+public enum ProfileMessages {
     REPEATED_NICKNAME,
     WRONG_PASSWORD,
     REPEATED_PASSWORD,
