@@ -20,13 +20,13 @@ public class ProfileScene extends Scene{
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
-        if ((matcher = Pattern.compile("profile change (--nickname[^\\n]+)").matcher(userInput)).matches()) {
+        if ((matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(userInput)).find()) {
             profileController.changeNickname(matcher);
         }
-        if ((matcher = Pattern.compile("profile change --password ([^\\n]+)").matcher(userInput)).matches()) {
+        if ((matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(userInput)).find()) {
             profileController.changePassword(matcher);
         }
-        if (Pattern.compile("menu show-current").matcher(userInput).matches()) {
+        if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Profile Menu");
         }
         return 0;
