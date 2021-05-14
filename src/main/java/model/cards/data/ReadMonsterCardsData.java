@@ -14,7 +14,9 @@ public class ReadMonsterCardsData {
             csvReader.readLine();
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                readACardData(data);
+                if (data.length == 9) {
+                    readACardData(data);
+                }
             }
             csvReader.close();
         }catch (Exception e) {
