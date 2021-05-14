@@ -11,28 +11,27 @@ public class ReadMonsterCardsData {
         try {
             BufferedReader csvReader = new BufferedReader(new FileReader("Monster.csv"));
             String row;
-            int rowNum = 0;
-            row = csvReader.readLine();
+            csvReader.readLine();
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
                 readACardData(data);
             }
             csvReader.close();
         }catch (Exception e) {
-            System.out.println("some thing was wrong");
+            System.out.println("some thing was wrong in csvReader");
         }
     }
 
     private void readACardData(String[] rowData) {
         MonsterCardData monsterCardData = new MonsterCardData();
-        setMonsterName(rowData[0].trim(), monsterCardData);
+        setMonsterName(rowData[0].trim().replaceAll(" comma",","), monsterCardData);
         setMonsterLevel(rowData[1].trim(), monsterCardData);
         setMonsterAttribute(rowData[2].trim(), monsterCardData);
         setMonsterType(rowData[3].trim(), monsterCardData);
         setMonsterCardType(rowData[4].trim(), monsterCardData);
         setMonsterAttack(rowData[5].trim(), monsterCardData);
         setMonsterDefence(rowData[6].trim(), monsterCardData);
-        setMonsterDescription(rowData[7].trim(), monsterCardData);
+        setMonsterDescription(rowData[7].trim().replaceAll(" comma",","), monsterCardData);
         setMonsterPrice(rowData[8].trim(), monsterCardData);
     }
 
@@ -56,7 +55,7 @@ public class ReadMonsterCardsData {
         try {
             monsterCardData.setAttribute(MonsterAttribute.valueOf(attribute));
         }catch (Exception e) {
-            System.out.println("attribute enum failed");
+            System.out.println("attribute enum failed in card " + monsterCardData.getName());
         }
     }
 
