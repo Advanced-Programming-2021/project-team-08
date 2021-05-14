@@ -17,6 +17,7 @@ public class ReadMonsterCardsData {
                 if (data.length == 9) {
                     readACardData(data);
                 }
+                else System.out.println("couldn't parse a row from monster.csv file");
             }
             csvReader.close();
         }catch (Exception e) {
@@ -33,7 +34,7 @@ public class ReadMonsterCardsData {
         setMonsterCardType(rowData[4].trim(), monsterCardData);
         setMonsterAttack(rowData[5].trim(), monsterCardData);
         setMonsterDefence(rowData[6].trim(), monsterCardData);
-        setMonsterDescription(rowData[7].trim().replaceAll(" comma",","), monsterCardData);
+        setMonsterDescription(rowData[7].trim().replaceAll(" comma",",").replaceAll("\\(nextline\\)","\n"), monsterCardData);
         setMonsterPrice(rowData[8].trim(), monsterCardData);
     }
 
