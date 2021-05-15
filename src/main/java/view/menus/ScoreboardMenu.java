@@ -25,15 +25,12 @@ public class ScoreboardMenu {
                     System.out.println((rowNumber - 1) + "- " + userData.getNickname() + ": " + userData.getPoint());
                     counterOfSamePoint++;
                 } else {
-                    if (counterOfSamePoint == 0) {
-                        System.out.println(rowNumber + "- " + userData.getNickname() + ": " + userData.getPoint());
-                        rowNumber++;
-                    } else {
+                    if (counterOfSamePoint != 0) {
                         rowNumber += counterOfSamePoint;
                         counterOfSamePoint = 0;
-                        System.out.println(rowNumber + "- " + userData.getNickname() + ": " + userData.getPoint());
-                        rowNumber++;
                     }
+                    System.out.println(rowNumber + "- " + userData.getNickname() + ": " + userData.getPoint());
+                    rowNumber++;
                 }
             }
             pointOfPreviousUser = userData.getPoint();

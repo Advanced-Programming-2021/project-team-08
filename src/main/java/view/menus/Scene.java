@@ -10,4 +10,8 @@ public abstract class Scene {
     }
 
     protected abstract int getUserCommand();
+
+    public void ShowError(String errorMessage){
+        System.out.println(errorMessage);
+    }
 }

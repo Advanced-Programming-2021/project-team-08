@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MonsterCardData extends CardData{
 
     private int level;
-    private String name;
+
     private MonsterAttribute attribute;
     private String type;
     private String monsterType;
@@ -47,7 +47,7 @@ public class MonsterCardData extends CardData{
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.cardName = name;
     }
 
     public void setMonsterType(String monsterType) {
@@ -59,7 +59,7 @@ public class MonsterCardData extends CardData{
     }
 
     public String getName() {
-        return name;
+        return cardName;
     }
 
     public int getLevel() {
@@ -109,5 +109,15 @@ public class MonsterCardData extends CardData{
                 System.out.println("null pointer in printing cards");
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName +
+                "\nLevel: " + level +
+                "\nType: " + type +
+                "\nATK: " + attackPoints +
+                "\nDEF: " + defencePoints +
+                "\nDescription: " + cardDescription;
     }
 }

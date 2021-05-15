@@ -20,11 +20,11 @@ public class User {
         allUser.add(this);
     }
 
-    public static User getUserByUsername(String username) {
+    public static User getUserByUsername(String username) throws Exception {
         for(User user : allUser) {
             if (user.getUserData().getUsername().equals(username)) return user;
         }
-        return null;
+        throw new Exception("No user found with this Username");
     }
 
     public static User getUserByNickname(String nickname) {
@@ -39,10 +39,15 @@ public class User {
     }
 
     public static boolean loginUser(String username, String password) {
-        User user = getUserByUsername(username);
-        if (user.getUserData().getPassword().equals(password)) {
-            ApplicationManger.setLoggedInUser(user);
-            return true;
+        User user;
+        try {
+            user = getUserByUsername(username);
+            if (user.getUserData().getPassword().equals(password)) {
+                ApplicationManger.setLoggedInUser(user);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
         }
         return false;
     }
@@ -82,6 +87,10 @@ public class User {
 
     public String getActiveDeck() {
         return activeDeck;
+    }
+
+    public String getUsername(){
+        return userData.getUsername();
     }
 /*
     public Deck getDeckByName(String deckName) {
