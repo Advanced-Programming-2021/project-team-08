@@ -10,6 +10,7 @@ public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
     private ArrayList<String> decksName;
+    private static ArrayList<String> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
     static {
         allUser = new ArrayList<>();
@@ -63,6 +64,10 @@ public class User {
         return allUser;
     }
 
+    public static void setAllUser(ArrayList<User> allUser) {
+        User.allUser = allUser;
+    }
+
     public static UserData[] getAllUserData(){
         UserData[] scoreboard = new UserData[allUser.size()];
         int counter=0;
@@ -92,7 +97,11 @@ public class User {
     public String getUsername(){
         return userData.getUsername();
     }
-/*
+
+    public static ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
+        return cardsThatThereIsNotInAnyDeck;
+    }
+    /*
     public Deck getDeckByName(String deckName) {
         decks  = userData.getDecks;
         for(User deck : decks) {

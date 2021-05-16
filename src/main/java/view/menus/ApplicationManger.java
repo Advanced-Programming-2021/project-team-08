@@ -3,6 +3,8 @@ package view.menus;
 import controller.DeckController;
 import controller.User;
 
+import java.io.*;
+
 public class ApplicationManger {
     private static Scene currentScene;
     private static User loggedInUser;
@@ -39,5 +41,31 @@ public class ApplicationManger {
     }
     public static void logoutCurrentUser() {
             loggedInUser=null;
+    }
+    public static void modifyFile(String filePath, String oldString, String newString) {
+        File fileToBeModified = new File(filePath);
+        String oldContent = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            String line = reader.readLine();
+            while (line != null) {
+                oldContent = oldContent + line + System.lineSeparator();
+                line = reader.readLine();
+            }
+            String newContent = oldContent.replaceAll(oldString, newString);
+            writer = new FileWriter(fileToBeModified);
+            writer.write(newContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

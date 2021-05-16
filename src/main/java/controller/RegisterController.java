@@ -1,14 +1,20 @@
 package controller;
 
+import com.google.gson.Gson;
 import model.Command;
+import model.UserData;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.ApplicationManger;
 import view.menus.SceneName;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class RegisterController {
+
+
     public static int registerUser(String userInput) {
         HashMap<String, CommandFieldType> fieldsOfRegisterUser = new HashMap<>();
         fieldsOfRegisterUser.put("username", CommandFieldType.STRING);
@@ -17,18 +23,23 @@ public class RegisterController {
         try {
             Command registerCommand = Command.parseCommand(userInput, fieldsOfRegisterUser);
             if (User.doesUsernameExists(registerCommand.getField("username")))
-                System.out.printf("user with username" + registerCommand.getField("username") + "already exists");
+                System.out.println("user with username" + registerCommand.getField("username") + "already exists");
             else if (User.doesUsernameExists(registerCommand.getField("nickname")))
-                System.out.printf("user with nickname <nickname> already exists");
+                System.out.println("user with nickname <nickname> already exists");
             else {
-                new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
-                System.out.printf("user created successfully!");
+                User user=new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
+                System.out.println("user created successfully!");
+                FileWriter userFile= new FileWriter("users/"+registerCommand.getField("username")+".json");
+                userFile.write(new Gson().toJson(user));
+                userFile.close();
             }
-        } catch (ParseCommandException e) {
+        } catch (ParseCommandException | IOException e) {
             System.out.println("Invalid command");
         }
         return 1;
     }
+
+
 
     public static int loginUser(String userInput) {
         HashMap<String, CommandFieldType> fieldsOfLoginUser = new HashMap<>();
@@ -37,14 +48,14 @@ public class RegisterController {
         try {
             Command loginCommand = Command.parseCommand(userInput, fieldsOfLoginUser);
             if (!User.doesUsernameExists(loginCommand.getField("username")))
-                System.out.printf("Username and password didn't match!");
+                System.out.println("Username and password didn't match!");
             else {
                 if (User.loginUser(loginCommand.getField("username"), loginCommand.getField("password"))) {
-                    System.out.printf("user logged in successfully!");
+                    System.out.println("user logged in successfully!");
                     ApplicationManger.goToScene(SceneName.MAIN_MENU);
                     return 0;
                 } else {
-                    System.out.printf("Username and password didn't match!");
+                    System.out.println("Username and password didn't match!");
                 }
 
             }

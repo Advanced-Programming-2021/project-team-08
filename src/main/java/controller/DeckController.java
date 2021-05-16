@@ -21,7 +21,8 @@ public class DeckController extends Scene {
                 System.out.println("deck with name " + matcher.group(1) + "already exists");
             } else {
                 System.out.println("deck created successfully!");
-                Deck deck = new Deck(matcher.group(1));
+                String username=ApplicationManger.getLoggedInUser().getUsername();
+                Deck deck = new Deck(matcher.group(1),username);
                 ApplicationManger.getLoggedInUser().addDeck(matcher.group(1));
             }
         }
@@ -31,7 +32,8 @@ public class DeckController extends Scene {
                 System.out.println("deck with name " + matcher.group(1) + " does not exist");
             } else {
                 System.out.println("deck deleted successfully");
-                //Transfer deck cards to player cards
+                User.getCardsThatThereIsNotInAnyDeck().addAll(Deck.getDeckWithName(matcher.group(1)).getMainDeck());
+                User.getCardsThatThereIsNotInAnyDeck().addAll(Deck.getDeckWithName(matcher.group(1)).getSideDeck());
                 Deck.removeADeck(matcher.group(1));
             }
         }
@@ -46,8 +48,10 @@ public class DeckController extends Scene {
         }
         matcher = Pattern.compile("deck add-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-//            No cards between player cards
-            if (!Deck.isThereADeckWithThisName(matcher.group(2))) {
+            if (!User.getCardsThatThereIsNotInAnyDeck().contains(matcher.group(1))){
+                System.out.println("card with name "+matcher.group(1)+" does not exist");
+            }
+            else if (!Deck.isThereADeckWithThisName(matcher.group(2))) {
                 System.out.println("deck with name " + matcher.group(2) + " does not exist");
             } else {
                 matcher1 = Pattern.compile("--side").matcher(userInput);
@@ -60,6 +64,7 @@ public class DeckController extends Scene {
                     else {
                         System.out.println("card added to deck successfully");
                         Deck.addCard(matcher.group(1),matcher.group(2),"side");
+                        User.getCardsThatThereIsNotInAnyDeck().remove(matcher.group(1));
                     }
                 } else {
                     if (Deck.isMainDeckFull(matcher.group(2))) {
@@ -70,6 +75,7 @@ public class DeckController extends Scene {
                     else {
                         System.out.println("card added to deck successfully");
                         Deck.addCard(matcher.group(1),matcher.group(2),"main");
+                        User.getCardsThatThereIsNotInAnyDeck().remove(matcher.group(1));
                     }
                 }
             }

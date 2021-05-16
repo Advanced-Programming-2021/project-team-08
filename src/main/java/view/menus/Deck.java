@@ -10,8 +10,10 @@ public class Deck  {
     private  ArrayList<String> mainDeck;
     private  ArrayList<String> sideDeck;
     private  String name;
-    public Deck(String name){
+    private String username;
+    public Deck(String name,String username){
         this.name=name;
+        this.username=username;
         decks.add(this);
     }
 
@@ -98,5 +100,16 @@ public class Deck  {
     }
     public static int numberOfSideDeckCards(String name){
         return Deck.getDeckWithName(name).sideDeck.size();
+    }
+    public static void setDecks(ArrayList<Deck> decks){
+         Deck.decks=decks;
+    }
+
+    public ArrayList<String> getMainDeck() {
+        return mainDeck;
+    }
+
+    public ArrayList<String> getSideDeck() {
+        return sideDeck;
     }
 }

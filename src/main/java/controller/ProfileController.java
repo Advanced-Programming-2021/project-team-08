@@ -3,6 +3,7 @@ package controller;
 import model.Command;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
+import view.menus.ApplicationManger;
 import view.menus.ProfileScene;
 
 import java.util.HashMap;
@@ -29,8 +30,11 @@ public class ProfileController {
                 profileScene.errorMessage(ProfileMessages.REPEATED_NICKNAME);
             }
             else {
-                activeUser.getUserData().setUsername(registerCommand.getField("nickname"));
+                activeUser.getUserData().setNickname(registerCommand.getField("nickname"));
                 profileScene.successMessage(ProfileMessages.NICKNAME_CHANGED);
+                ApplicationManger.modifyFile("users/"+activeUser.getUsername() +".json",
+                        "\"nickname\":"+activeUser.getUserData().getNickname(),
+                        "\"nickname\":"+registerCommand.getField("nickname"));
             }
         }catch (ParseCommandException e) {
             System.out.println("Invalid command");
@@ -52,6 +56,9 @@ public class ProfileController {
             else {
                 activeUser.getUserData().setPassword(registerCommand.getField("new"));
                 profileScene.successMessage(ProfileMessages.PASSWORD_CHANGED);
+                ApplicationManger.modifyFile("users/"+activeUser.getUsername() +".json",
+                        "\"password\":"+activeUser.getUserData().getPassword(),
+                        "\"password\":"+registerCommand.getField("new"));
             }
         }catch (ParseCommandException e) {
             System.out.println("Invalid command");
