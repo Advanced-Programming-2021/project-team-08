@@ -8,6 +8,12 @@ public class MonsterCard extends Card{
 
     public MonsterCard(MonsterCardData data) {
         this.data = data;
+        cardData = data;
         cardType = CardType.MONSTER;
+    }
+
+    @Override
+    public void setup() {
+
     }
 }

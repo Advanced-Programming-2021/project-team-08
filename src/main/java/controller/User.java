@@ -1,6 +1,7 @@
 package controller;
 
 import model.UserData;
+import model.cards.Card;
 import view.menus.ApplicationManger;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
     private ArrayList<String> decksName;
-    private static ArrayList<String> cardsThatThereIsNotInAnyDeck;
+    private static ArrayList<Card> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
     static {
         allUser = new ArrayList<>();
@@ -98,7 +99,7 @@ public class User {
         return userData.getUsername();
     }
 
-    public static ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
+    public static ArrayList<Card> getCardsThatThereIsNotInAnyDeck() {
         return cardsThatThereIsNotInAnyDeck;
     }
     /*

@@ -1,14 +1,14 @@
 package view.menus;
 
+import model.cards.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Deck  {
     private static ArrayList<Deck> decks=new ArrayList<>();
-    private  ArrayList<String> mainDeck;
-    private  ArrayList<String> sideDeck;
+    private  ArrayList<Card> mainDeck;
+    private  ArrayList<Card> sideDeck;
     private  String name;
     private String username;
     public Deck(String name,String username){
@@ -67,12 +67,18 @@ public class Deck  {
         return Collections.frequency(deck.sideDeck,nameOfCard);
     }
     public static void addCard(String nameOfCard, String nameOfDeck, String mainOrSide){
-        if (mainOrSide.equals("main")){
-            Deck.getDeckWithName(nameOfDeck).mainDeck.add(nameOfCard);
+        try {
+            Card card = Card.createCardByName(nameOfCard);
+            if (mainOrSide.equals("main")){
+                Deck.getDeckWithName(nameOfDeck).mainDeck.add(card);
+            }
+            else if (mainOrSide.equals("side")){
+                Deck.getDeckWithName(nameOfDeck).sideDeck.add(card);
+            }
+        }catch (Exception e){
+            //TODO: show error
         }
-        else if (mainOrSide.equals("side")){
-            Deck.getDeckWithName(nameOfDeck).sideDeck.add(nameOfCard);
-        }
+
     }
     public static boolean isThereThisCardInSideDeckOfThisDeck(String nameOfCard, String nameOfDeck){
         Deck deck=getDeckWithName(nameOfDeck);
@@ -105,11 +111,11 @@ public class Deck  {
          Deck.decks=decks;
     }
 
-    public ArrayList<String> getMainDeck() {
+    public ArrayList<Card> getMainDeck() {
         return mainDeck;
     }
 
-    public ArrayList<String> getSideDeck() {
+    public ArrayList<Card> getSideDeck() {
         return sideDeck;
     }
 }
