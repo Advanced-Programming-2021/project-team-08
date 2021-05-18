@@ -1,6 +1,7 @@
 package controller;
 
 import model.Command;
+import model.UserData;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.ApplicationManger;
@@ -26,47 +27,61 @@ public class GamePlaySceneController {
         this.scene = scene;
     }
 
-    public int duel(String input) {
+    public void duel(String input) {
         Command command;
         try {
             command = Command.parseCommand(input, duelPlayerCommand);
-            return duelPlayer(command);
+            if (command.getField("new").equals("true")) {
+                setupDuel(true, Integer.parseInt(command.getField("round")), command.getField("second-player"));
+            }
         } catch (ParseCommandException e) {
             try {
                 command = Command.parseCommand(input, duelAICommand);
-                return duelAI(command);
+                if (command.getField("ai").equals("true") && command.getField("new").equals("true")) {
+                    setupDuel(false, Integer.parseInt(command.getField("round")), null);
+                }
             } catch (ParseCommandException ee) {
                 scene.ShowError("Invalid Command");
             }
         }
-        return 0;
     }
 
-    private int duelPlayer(Command command){
-        try {
-            User secondUser = User.getUserByUsername(command.getField("second-player"));
-            if (ApplicationManger.getLoggedInUser().getActiveDeck() == null) {
-                scene.ShowError(ApplicationManger.getLoggedInUser().getUsername() + " has no active deck");
-                return 0;
+    private void setupDuel(boolean isPlayer, int rounds, String secondPlayer) {
+        User secondUser = null;
+        if(isPlayer){
+            try {
+                secondUser = User.getUserByUsername(secondPlayer);
+            } catch (Exception e) {
+                scene.ShowError("there is no player with this username");
+                return;
             }
             if (secondUser.getActiveDeck() == null) {
                 scene.ShowError(secondUser.getUsername() + " has no active deck");
-                return 0;
+                return;
             }
             // TODO: ۱۵/۰۵/۲۰۲۱ check if deck is valid
-            if(command.getField("round")!="1" && command.getField("round")!="3"){
-                scene.ShowError("number of rounds is not supported");
-                return 0;
-            }
-
-
-        } catch (Exception e) {
-            scene.ShowError("there is no player with this username");
         }
-        return 0;
+
+        if (ApplicationManger.getLoggedInUser().getActiveDeck() == null) {
+            scene.ShowError(ApplicationManger.getLoggedInUser().getUsername() + " has no active deck");
+            return;
+        }
+        // TODO: ۱۵/۰۵/۲۰۲۱ check if deck is valid
+
+
+        if (rounds == 1 || rounds == 3) {
+            startDuel(rounds, isPlayer, secondUser.getUserData());
+        } else {
+            scene.ShowError("number of rounds is not supported");
+        }
     }
 
-    private int duelAI(Command command){
-        return 0;
+    private void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
+        // TODO: ۱۸/۰۵/۲۰۲۱ play with AI
+
+        for(int i=1; i<=rounds; i++){
+            System.out.println("Round "+i);
+
+        }
     }
 }

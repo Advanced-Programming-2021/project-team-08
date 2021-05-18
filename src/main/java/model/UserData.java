@@ -1,5 +1,8 @@
 package model;
 
+import view.menus.Deck;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class UserData {
@@ -7,7 +10,7 @@ public class UserData {
     private String nickname;
     private String password;
     private int point;
-    //private ArrayList<Deck> decks;
+    private ArrayList<Deck> decks;
 
 
     {
@@ -63,7 +66,9 @@ public class UserData {
         this.point += point;
     }
 
-
+    public Deck getActiveDeck(){
+        return decks.get(0);
+    }
 
     /*
     public void addDeck(Deck deck) {

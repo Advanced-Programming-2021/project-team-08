@@ -21,7 +21,8 @@ public class GamePlayScene extends Scene{
 
         matcher= Pattern.compile("duel ([^\\n]+)").matcher(userInput);
         if (matcher.matches()){
-            return sceneController.duel(matcher.group(1));
+            sceneController.duel(matcher.group(1));
+            return 1;
         }
 
         return 1;
