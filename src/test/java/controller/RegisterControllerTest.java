@@ -18,7 +18,7 @@ class RegisterControllerTest {
 
     @Test
     void registerUser() {
-        String input = "create user --password 123 --nickname ali12 --username Ali";
+        String input = "user create --password 123 --nickname ali12 --username Ali";
         RegisterController.registerUser(input);
         assertEquals("user created successfully!", outputStreamCaptor.toString());
     }

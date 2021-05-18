@@ -55,10 +55,7 @@ public class User {
     }
 
     public static boolean doesUsernameExists(String username) {
-        for(User user : allUser) {
-            if (user.getUserData().getUsername().equals(username)) return true;
-        }
-        return false;
+        return allUser.stream().filter(c -> c.getUserData().getUsername().equals(username)).count() > 0;
     }
 
     public static ArrayList<User> getAllUser(){

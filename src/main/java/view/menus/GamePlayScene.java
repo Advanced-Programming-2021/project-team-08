@@ -25,6 +25,23 @@ public class GamePlayScene extends Scene{
             return 1;
         }
 
+        if(sceneController.isDuelStarted()){
+            processGamePlayCommand(userInput);
+            return 1;
+        }
+
+        System.out.println("Invalid Command!");
+
         return 1;
+    }
+
+    private void processGamePlayCommand(String userInput){
+        Matcher matcher;
+
+        matcher= Pattern.compile("select ([^\\n]+)").matcher(userInput);
+        if (matcher.matches()){
+            //sceneController.(matcher.group(1));
+            return;
+        }
     }
 }

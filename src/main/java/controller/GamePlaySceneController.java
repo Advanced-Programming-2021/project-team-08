@@ -21,10 +21,15 @@ public class GamePlaySceneController {
         put("round", CommandFieldType.INT);
     }};
 
+    private boolean isDuelStarted = false;
     private GamePlayScene scene;
 
     public GamePlaySceneController(GamePlayScene scene) {
         this.scene = scene;
+    }
+
+    public boolean isDuelStarted() {
+        return isDuelStarted;
     }
 
     public void duel(String input) {
@@ -78,7 +83,7 @@ public class GamePlaySceneController {
 
     private void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
         // TODO: ۱۸/۰۵/۲۰۲۱ play with AI
-
+        isDuelStarted = true;
         for(int i=1; i<=rounds; i++){
             System.out.println("Round "+i);
 
