@@ -20,7 +20,6 @@ public class Main {
 
         File users = new File("users");
         users.mkdir();
-
         FileWriter decks = new FileWriter("decks.json");
         ArrayList<Deck> allOfDecks;
         String stringOfDecksFile= new String(Files.readAllBytes(Paths.get("decks.json")));
