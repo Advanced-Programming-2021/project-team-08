@@ -7,6 +7,8 @@ import view.menus.ApplicationManger;
 import view.menus.Deck;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +23,19 @@ public class Main {
 
         FileWriter decks = new FileWriter("decks.json");
         ArrayList<Deck> allOfDecks;
-        allOfDecks = new Gson().fromJson(String.valueOf(decks),
-                new TypeToken<List<Deck>>() {
-                }.getType());
+        String stringOfDecksFile= new String(Files.readAllBytes(Paths.get("decks.json")));
+        allOfDecks = new Gson().fromJson(stringOfDecksFile,
+                new TypeToken<List<Deck>>() {}.getType());
         Deck.setDecks(allOfDecks);
 
 
         File directoryPath = new File("users");
         File[] filesList = directoryPath.listFiles();
+
         ArrayList<User> allOfUsers=null;
         for(File file : filesList) {
-            allOfUsers.add(new Gson().fromJson(String.valueOf(file),
+            String stringOfUserFile= new String(Files.readAllBytes(Paths.get("directoryPath/file")));
+            allOfUsers.add(new Gson().fromJson(stringOfUserFile,
                     new TypeToken<User>() {
                      }.getType()));
     }
