@@ -27,9 +27,9 @@ public class RegisterController {
             else if (User.doesUsernameExists(registerCommand.getField("nickname")))
                 System.out.println("user with nickname <nickname> already exists");
             else {
-                User user=new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
+                User user = new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
                 System.out.println("user created successfully!");
-                FileWriter userFile= new FileWriter("users/"+registerCommand.getField("username")+".json");
+                FileWriter userFile = new FileWriter("users/" + registerCommand.getField("username") + ".json");
                 userFile.write(new Gson().toJson(user));
                 userFile.close();
             }
@@ -40,11 +40,10 @@ public class RegisterController {
     }
 
 
-
     public static int loginUser(String userInput) {
         HashMap<String, CommandFieldType> fieldsOfLoginUser = new HashMap<>();
         fieldsOfLoginUser.put("username", CommandFieldType.STRING);
-        fieldsOfLoginUser.put("nickname", CommandFieldType.STRING);
+        fieldsOfLoginUser.put("password", CommandFieldType.STRING);
         try {
             Command loginCommand = Command.parseCommand(userInput, fieldsOfLoginUser);
             if (!User.doesUsernameExists(loginCommand.getField("username")))

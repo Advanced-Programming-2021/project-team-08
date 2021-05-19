@@ -4,21 +4,20 @@ import view.menus.ApplicationManger;
 import view.menus.SceneName;
 
 public class MainMenuController {
-    public static int enterMenu(String menuName){
+    public static void enterMenu(String menuName) {
         switch (menuName) {
-            case "Scoreboard":
+            case "scoreboard":
                 ApplicationManger.goToScene(SceneName.SCOREBOARD_MENU);
                 break;
-            case "Shop":
+            case "shop":
                 ApplicationManger.goToScene(SceneName.SHOP_MENU);
                 break;
-            case "Profile":
+            case "profile":
                 ApplicationManger.goToScene(SceneName.PROFILE_MENU);
                 break;
-            case "Deck":
+            case "deck":
                 ApplicationManger.goToScene(SceneName.DECK_MENU);
                 break;
         }
-        return 0;
     }
 }

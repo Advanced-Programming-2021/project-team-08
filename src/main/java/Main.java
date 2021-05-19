@@ -22,9 +22,10 @@ public class Main {
         users.mkdir();
         FileWriter decks = new FileWriter("decks.json");
         ArrayList<Deck> allOfDecks;
-        String stringOfDecksFile= new String(Files.readAllBytes(Paths.get("decks.json")));
+        String stringOfDecksFile = new String(Files.readAllBytes(Paths.get("decks.json")));
         allOfDecks = new Gson().fromJson(stringOfDecksFile,
-                new TypeToken<List<Deck>>() {}.getType());
+                new TypeToken<List<Deck>>() {
+                }.getType());
         Deck.setDecks(allOfDecks);
 
 
@@ -32,21 +33,16 @@ public class Main {
         File[] filesList = directoryPath.listFiles();
 
         ArrayList<User> allOfUsers = new ArrayList<>();
-        for(File file : filesList) {
-            String stringOfUserFile= new String(Files.readAllBytes(Paths.get("directoryPath/file")));
+        for (File file : filesList) {
+            String stringOfUserFile = new String(Files.readAllBytes(Paths.get("directoryPath/file")));
             allOfUsers.add(new Gson().fromJson(stringOfUserFile,
                     new TypeToken<User>() {
-                     }.getType()));
-    }
+                    }.getType()));
+        }
         User.setAllUser(allOfUsers);
-
-
 
         applicationManger.run();
     }
-
-
-
 
 
 }
