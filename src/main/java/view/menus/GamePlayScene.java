@@ -26,6 +26,7 @@ public class GamePlayScene extends Scene {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(sceneController.isDuelStarted()){
             matcher= Pattern.compile("change phase ([^\\n]+)").matcher(userInput);
             if (matcher.matches()){
@@ -51,6 +52,8 @@ public class GamePlayScene extends Scene {
                     break;
             }
 =======
+=======
+>>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         if (sceneController.isDuelStarted()) {
             processGamePlayCommand(userInput);
 >>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
@@ -62,6 +65,7 @@ public class GamePlayScene extends Scene {
         return 1;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private void drawPhaseCommand(String userInput){
 
@@ -103,6 +107,11 @@ public class GamePlayScene extends Scene {
 >>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         Matcher matcher;
 
+=======
+    private void processGamePlayCommand(String userInput) {
+        Matcher matcher;
+
+>>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             //sceneController.(matcher.group(1));

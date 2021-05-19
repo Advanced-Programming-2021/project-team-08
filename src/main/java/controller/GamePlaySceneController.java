@@ -93,10 +93,13 @@ public class GamePlaySceneController {
         // TODO: ۱۸/۰۵/۲۰۲۱ play with AI
         isDuelStarted = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
         for(int i=1; i<=rounds; i++){
             System.out.println("Round "+i);
             gameManager = new GameManager(ApplicationManger.getLoggedInUser().getUserData(), secondPlayer);
 =======
+=======
+>>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         for (int i = 1; i <= rounds; i++) {
             System.out.println("Round " + i);
 

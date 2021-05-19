@@ -13,6 +13,10 @@ public class ProfileScene extends Scene {
     private ProfileController profileController;
 
     public ProfileScene() {
+<<<<<<< HEAD
+=======
+        this.activeUser = ApplicationManger.getLoggedInUser();
+>>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         profileController = new ProfileController(this);
     }
 
