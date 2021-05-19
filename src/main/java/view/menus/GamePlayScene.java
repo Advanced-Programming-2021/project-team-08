@@ -25,11 +25,9 @@ public class GamePlayScene extends Scene {
             return 1;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if(sceneController.isDuelStarted()){
-            matcher= Pattern.compile("change phase ([^\\n]+)").matcher(userInput);
-            if (matcher.matches()){
+        if (sceneController.isDuelStarted()) {
+            matcher = Pattern.compile("change phase ([^\\n]+)").matcher(userInput);
+            if (matcher.matches()) {
                 //sceneController.(matcher.group(1));
                 return 1;
             }
@@ -51,13 +49,6 @@ public class GamePlayScene extends Scene {
                     endPhaseCommand(userInput);
                     break;
             }
-=======
-=======
->>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
-        if (sceneController.isDuelStarted()) {
-            processGamePlayCommand(userInput);
->>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
-            return 1;
         }
 
         System.out.println("Invalid Command!");
@@ -65,57 +56,41 @@ public class GamePlayScene extends Scene {
         return 1;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private void drawPhaseCommand(String userInput){
+    private void drawPhaseCommand(String userInput) {
 
     }
 
-    private void standbyPhaseCommand(String userInput){
+    private void standbyPhaseCommand(String userInput) {
         Matcher matcher;
 
-        matcher= Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()){
+        matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
+        if (matcher.matches()) {
             sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
     }
 
-    private void mainPhaseCommand(String userInput){
+    private void mainPhaseCommand(String userInput) {
         Matcher matcher;
 
-        matcher= Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()){
-            //sceneController.(matcher.group(1));
-            return;
-        }
-    }
-
-    private void battlePhaseCommand(String userInput){
-        Matcher matcher;
-
-        matcher= Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()){
-            //sceneController.(matcher.group(1));
-            return;
-        }
-    }
-
-    private void endPhaseCommand(String userInput){
-=======
-    private void processGamePlayCommand(String userInput) {
->>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
-        Matcher matcher;
-
-=======
-    private void processGamePlayCommand(String userInput) {
-        Matcher matcher;
-
->>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             //sceneController.(matcher.group(1));
             return;
         }
+    }
+
+    private void battlePhaseCommand(String userInput) {
+        Matcher matcher;
+
+        matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
+        if (matcher.matches()) {
+            //sceneController.(matcher.group(1));
+            return;
+        }
+    }
+
+    private void endPhaseCommand(String userInput) {
+
     }
 }

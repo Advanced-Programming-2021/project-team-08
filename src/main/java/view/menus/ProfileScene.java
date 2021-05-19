@@ -8,15 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileScene extends Scene {
-
-    //private User activeUser;
     private ProfileController profileController;
 
     public ProfileScene() {
-<<<<<<< HEAD
-=======
-        this.activeUser = ApplicationManger.getLoggedInUser();
->>>>>>> e0fa412a280b75541e41038723e2693c8e9f28ae
         profileController = new ProfileController(this);
     }
 
