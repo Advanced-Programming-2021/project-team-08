@@ -12,7 +12,7 @@ public class MainScene extends Scene {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
         if ((matcher = Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
-            MainMenuController.enterMenu(matcher.group(1));
+            return MainMenuController.enterMenu(matcher.group(1));
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
             ApplicationManger.goToScene(SceneName.REGISTER_MENU);
             return 0;

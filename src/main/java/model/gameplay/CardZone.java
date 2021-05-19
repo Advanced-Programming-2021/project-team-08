@@ -44,4 +44,10 @@ public class CardZone {
     public void addCards(ArrayList<Card> cards) {
         this.cards.addAll(cards);
     }
+
+
+    @Override
+    public String toString() {
+        return "O";
+    }
 }

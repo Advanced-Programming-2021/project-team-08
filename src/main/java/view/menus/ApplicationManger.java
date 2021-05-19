@@ -34,7 +34,16 @@ public class ApplicationManger {
             case PROFILE_MENU:
                 currentScene = new ProfileScene();
                 currentScene.start();
-                //TODO: 04/05/2021 other cases
+            case SCOREBOARD_MENU:
+                //TODO: 04/05/2021 this
+                break;
+            case IMPORT_EXPORT_MENU:
+                // TODO: ۱۹/۰۵/۲۰۲۱ this
+                break;
+            case GAMEPLAY_SCENE:
+                currentScene = new GamePlayScene();
+                currentScene.start();
+                break;
         }
 
     }

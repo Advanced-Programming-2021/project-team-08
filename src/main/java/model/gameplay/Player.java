@@ -6,11 +6,29 @@ import model.cards.Card;
 import java.util.ArrayList;
 
 public class Player {
-    UserData userData;
-    int LP = 8000;
-    ArrayList<Card> handCards = new ArrayList<>();
+    private UserData userData;
+    private int LP = 8000;
+    private ArrayList<Card> handCards = new ArrayList<>();
+    private PlayerBoard playerBoard;
 
-    public Player(UserData userData) {
+    public Player(UserData userData, PlayerBoard playerBoard) {
         this.userData = userData;
+        this.playerBoard = playerBoard;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public int getLP() {
+        return LP;
+    }
+
+    public ArrayList<Card> getHandCards() {
+        return handCards;
+    }
+
+    public PlayerBoard getPlayerBoard() {
+        return playerBoard;
     }
 }

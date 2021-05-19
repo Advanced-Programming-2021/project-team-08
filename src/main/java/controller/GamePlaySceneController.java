@@ -15,12 +15,12 @@ public class GamePlaySceneController {
     private final static HashMap<String, CommandFieldType> duelPlayerCommand = new HashMap<String, CommandFieldType>() {{
         put("new", CommandFieldType.BOOLEAN);
         put("second-player", CommandFieldType.STRING);
-        put("round", CommandFieldType.INT);
+        put("rounds", CommandFieldType.INT);
     }};
     private final static HashMap<String, CommandFieldType> duelAICommand = new HashMap<String, CommandFieldType>() {{
         put("new", CommandFieldType.BOOLEAN);
         put("ai", CommandFieldType.BOOLEAN);
-        put("round", CommandFieldType.INT);
+        put("rounds", CommandFieldType.INT);
     }};
 
 
@@ -45,16 +45,16 @@ public class GamePlaySceneController {
         try {
             command = Command.parseCommand(input, duelPlayerCommand);
             if (command.getField("new").equals("true")) {
-                setupDuel(true, Integer.parseInt(command.getField("round")), command.getField("second-player"));
+                setupDuel(true, Integer.parseInt(command.getField("rounds")), command.getField("second-player"));
             }
         } catch (ParseCommandException e) {
             try {
                 command = Command.parseCommand(input, duelAICommand);
                 if (command.getField("ai").equals("true") && command.getField("new").equals("true")) {
-                    setupDuel(false, Integer.parseInt(command.getField("round")), null);
+                    setupDuel(false, Integer.parseInt(command.getField("rounds")), null);
                 }
             } catch (ParseCommandException ee) {
-                scene.ShowError("Invalid Command");
+                scene.ShowError("Invalid Command +"+ee);
             }
         }
     }

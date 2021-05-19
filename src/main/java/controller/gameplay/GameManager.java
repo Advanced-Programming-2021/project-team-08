@@ -26,9 +26,11 @@ public class GameManager {
     private CardZone currentSelectedZone;
 
     public GameManager(UserData user1, UserData user2) {
-        this.player1 = new Player(user1);
-        this.player2 = new Player(user2);
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck());
+        this.player1 = new Player(user1, gameBoard.getPlayer1Board());
+        this.player2 = new Player(user2, gameBoard.getPlayer2Board());
+
+        System.out.println(getGameBoardString());
     }
 
     public Phase getCurrentPhase() {
@@ -36,7 +38,7 @@ public class GameManager {
     }
 
     public void selectCard(String address) {
-        try{
+        try {
             Command command = Command.parseCommand(address, selectMonsterCardCommand);
             currentSelectedZone = gameBoard.getZone(Boolean.parseBoolean(command.getField("opponent")),
                     ZoneType.MONSTER,
@@ -44,5 +46,17 @@ public class GameManager {
         } catch (ParseCommandException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getGameBoardString() {
+        String toShow = "";
+        if (turn % 2 == 1) {
+            toShow += player2.getUserData().getNickname() + ":" + player2.getLP() + "\n";
+            toShow += player2.getHandCards().size();
+            toShow += player2.getPlayerBoard().getShowingString(false);
+
+        }
+
+        return toShow;
     }
 }
