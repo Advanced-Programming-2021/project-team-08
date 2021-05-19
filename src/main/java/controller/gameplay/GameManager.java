@@ -30,6 +30,7 @@ public class GameManager {
         this.player1 = new Player(user1, gameBoard.getPlayer1Board());
         this.player2 = new Player(user2, gameBoard.getPlayer2Board());
 
+        turn = 1;
         System.out.println(getGameBoardString());
     }
 
@@ -52,9 +53,21 @@ public class GameManager {
         String toShow = "";
         if (turn % 2 == 1) {
             toShow += player2.getUserData().getNickname() + ":" + player2.getLP() + "\n";
-            toShow += player2.getHandCards().size();
+
+            for(int i=7; i>player2.getHandCards().size(); i--){toShow += "\t";}
+            for(int i=0; i<player2.getHandCards().size(); i++){toShow += "c\t";}
+            toShow += "\n";
+
             toShow += player2.getPlayerBoard().getShowingString(false);
 
+            toShow += "-----------------------------\n";
+
+            toShow += player1.getPlayerBoard().getShowingString(true);
+
+            for(int i=0; i<player1.getHandCards().size(); i++){toShow += "c\t";}
+            toShow += "\n";
+
+            toShow += player1.getUserData().getNickname() + ":" + player1.getLP() + "\n";
         }
 
         return toShow;
