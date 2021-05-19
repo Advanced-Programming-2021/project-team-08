@@ -193,7 +193,7 @@ public class DeckController {
         }
     }
 
-    public void showAllCards(){
+    public void showAllDecks(){
         ArrayList<String> decksName = ApplicationManger.getLoggedInUser().getDecksName();
         System.out.println("Decks:");
         System.out.println("Active deck:");

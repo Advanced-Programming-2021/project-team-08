@@ -14,6 +14,7 @@ public class RegisterScene extends Scene {
         matcher = Pattern.compile("menu enter").matcher(userInput);
         if (matcher.matches()) {
             System.out.println("please login first");
+            return 1;
         }
         matcher = Pattern.compile("menu exit").matcher(userInput);
         if (matcher.matches()) {
@@ -22,6 +23,7 @@ public class RegisterScene extends Scene {
         matcher = Pattern.compile("menu show-current").matcher(userInput);
         if (matcher.matches()) {
             System.out.println("Login Menu");
+            return 1;
         }
         matcher = Pattern.compile("user create ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {

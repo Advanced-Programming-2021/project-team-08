@@ -7,8 +7,8 @@ import java.util.Collections;
 
 public class Deck {
     private static ArrayList<Deck> decks = new ArrayList<>();
-    private ArrayList<Card> mainDeck;
-    private ArrayList<Card> sideDeck;
+    private ArrayList<Card> mainDeck=new ArrayList<>();
+    private ArrayList<Card> sideDeck=new ArrayList<>();
     private String name;
     private String username;
 
@@ -51,18 +51,21 @@ public class Deck {
 
     public static boolean isMainDeckFull(String name) {
         Deck deck = getDeckWithName(name);
+        if (deck==null) return false;
         if (deck.mainDeck.size() == 60) return true;
         else return false;
     }
 
     public static boolean isSideDeckFull(String name) {
         Deck deck = getDeckWithName(name);
+        if (deck==null) return false;
         if (deck.sideDeck.size() == 15) return true;
         else return false;
     }
 
     public static boolean isThereAreThreeCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
+        if (deck==null) return false;
         if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) == 3) {
             return true;
         } else return false;
@@ -70,6 +73,7 @@ public class Deck {
 
     public int numberOfThisCardInMainDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
+        if (deck==null) return 0;
         return Collections.frequency(deck.mainDeck, nameOfCard);
     }
 
@@ -94,13 +98,15 @@ public class Deck {
 
     public static boolean isThereThisCardInSideDeckOfThisDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
-        if (deck.sideDeck.contains(nameOfCard)) return true;
+        if (deck==null) return false;
+        else if (deck.sideDeck.contains(nameOfCard)) return true;
         else return false;
     }
 
     public static boolean isThereThisCardInMainDeckOfThisDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
-        if (deck.mainDeck.contains(nameOfCard)) return true;
+        if (deck==null) return false;
+        else if (deck.mainDeck.contains(nameOfCard)) return true;
         else return false;
     }
 
@@ -113,14 +119,17 @@ public class Deck {
     }
 
     public static boolean isThisDeckValid(String name) {
-        return Deck.getDeckWithName(name).mainDeck.size() >= 40;
+        if(Deck.getDeckWithName(name)==null) return false;
+        else return Deck.getDeckWithName(name).mainDeck.size() >= 40;
     }
 
     public static int numberOfMainDeckCards(String name) {
+        if(Deck.getDeckWithName(name)==null) return 0;
         return Deck.getDeckWithName(name).mainDeck.size();
     }
 
     public static int numberOfSideDeckCards(String name) {
+        if(Deck.getDeckWithName(name)==null) return 0;
         return Deck.getDeckWithName(name).sideDeck.size();
     }
 

@@ -56,7 +56,7 @@ public class DeckMenu extends Scene {
 
         matcher = Pattern.compile("deck show --all").matcher(userInput);
         if (matcher.find()) {
-            deckController.showAllCards();
+            deckController.showAllDecks();
         }
 
         //show deck
