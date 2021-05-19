@@ -35,7 +35,8 @@ public class ApplicationManger {
                 currentScene = new ProfileScene();
                 currentScene.start();
             case SCOREBOARD_MENU:
-                //TODO: 04/05/2021 this
+                currentScene = new ScoreboardMenu();
+                currentScene.start();
                 break;
             case IMPORT_EXPORT_MENU:
                 // TODO: ۱۹/۰۵/۲۰۲۱ this

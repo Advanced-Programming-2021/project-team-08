@@ -4,12 +4,30 @@ import controller.User;
 import model.UserData;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ScoreboardMenu {
+public class ScoreboardMenu extends Scene{
+
+    @Override
+    protected int getUserCommand() {
+        String userInput = scanner.nextLine().trim();
+        if (Pattern.compile("^scoreboard show$").matcher(userInput).find()) {
+            showScoreboard();
+        }
+        else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
+            System.out.println("ScoreBoard Menu");
+        }
+        else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
+            return 0;
+        }
+        else {
+            System.out.println("invalid command");
+        }
+        return 1;
+    }
+
     public static void showScoreboard() {
         UserData[] scoreboard = User.getAllUserData();
         Arrays.sort(scoreboard, new sort());
@@ -36,6 +54,8 @@ public class ScoreboardMenu {
             pointOfPreviousUser = userData.getPoint();
         }
     }
+
+
 }
 
 class sort implements Comparator<UserData> {
