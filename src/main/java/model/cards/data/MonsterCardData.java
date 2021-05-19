@@ -94,6 +94,13 @@ public class MonsterCardData extends CardData{
         return cardDescription;
     }
 
+    public static MonsterCardData getCardByName(String cardName) {
+        for (MonsterCardData monsterCardData : allMonsterCardData) {
+            if (cardName.equals(monsterCardData.getName())) return monsterCardData;
+        }
+        return null;
+    }
+
     public static void printAllCard() {
         for(MonsterCardData monsterCardData: allMonsterCardData) {
             try{

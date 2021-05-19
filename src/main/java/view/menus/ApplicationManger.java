@@ -29,6 +29,9 @@ public class ApplicationManger {
                 currentScene=new DeckController();
                 currentScene.start();
                 break;
+            case SHOP_MENU:
+                currentScene = new ShopScene();
+                currentScene.start();
             //TODO: 04/05/2021 other cases
         }
 

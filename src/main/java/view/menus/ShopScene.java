@@ -1,6 +1,5 @@
 package view.menus;
 
-import controller.ProfileController;
 import controller.ShopController;
 import controller.User;
 
@@ -12,9 +11,9 @@ public class ShopScene extends Scene{
     private User activeUser;
     private ShopController shopController;
 
-    public ShopScene(User user) {
-        this.activeUser = user;
-        shopController = new ShopController(user, this);
+    public ShopScene() {
+        this.activeUser = ApplicationManger.getLoggedInUser();
+        shopController = new ShopController(this);
     }
 
     @Override
@@ -27,6 +26,13 @@ public class ShopScene extends Scene{
         if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Shop Menu");
         }
+        if (Pattern.compile("shop show --all").matcher(userInput).find()) {
+            showAllCard();
+        }
         return 0;
+    }
+
+    private void showAllCard() {
+        
     }
 }
