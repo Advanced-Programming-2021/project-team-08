@@ -3,17 +3,18 @@ package view.menus;
 import controller.ProfileController;
 import controller.User;
 import model.enums.ProfileMessages;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProfileScene extends Scene{
+public class ProfileScene extends Scene {
 
     private User activeUser;
     private ProfileController profileController;
 
-    public ProfileScene(User user) {
-        this.activeUser = user;
-        profileController = new ProfileController(user, this);
+    public ProfileScene() {
+        this.activeUser = ApplicationManger.getLoggedInUser();
+        profileController = new ProfileController(this);
     }
 
     @Override
@@ -22,14 +23,14 @@ public class ProfileScene extends Scene{
         Matcher matcher;
         if ((matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(userInput)).find()) {
             profileController.changeNickname(matcher);
-        }
-        if ((matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(userInput)).find()) {
+        } else if ((matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(userInput)).find()) {
             profileController.changePassword(matcher);
-        }
-        if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
+        } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Profile Menu");
-        }
-        return 0;
+        } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
+            return 0;
+        } else System.out.println("invalid commands");
+        return 1;
     }
 
     public void errorMessage(ProfileMessages error) {

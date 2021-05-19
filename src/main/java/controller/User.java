@@ -13,6 +13,7 @@ public class User {
     private ArrayList<String> decksName;
     private static ArrayList<Card> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
+
     static {
         allUser = new ArrayList<>();
     }
@@ -23,7 +24,7 @@ public class User {
     }
 
     public static User getUserByUsername(String username) throws Exception {
-        for(User user : allUser) {
+        for (User user : allUser) {
             if (user.getUserData().getUsername().equals(username)) return user;
         }
         throw new Exception("No user found with this Username");
@@ -58,7 +59,7 @@ public class User {
         return allUser.stream().filter(c -> c.getUserData().getUsername().equals(username)).count() > 0;
     }
 
-    public static ArrayList<User> getAllUser(){
+    public static ArrayList<User> getAllUser() {
         return allUser;
     }
 
@@ -66,17 +67,17 @@ public class User {
         User.allUser = allUser;
     }
 
-    public static UserData[] getAllUserData(){
+    public static UserData[] getAllUserData() {
         UserData[] scoreboard = new UserData[allUser.size()];
-        int counter=0;
-        for (User user: allUser) {
-            scoreboard[counter]=user.userData;
+        int counter = 0;
+        for (User user : allUser) {
+            scoreboard[counter] = user.userData;
             counter++;
         }
         return scoreboard;
     }
 
-    public void addDeck(String deckName){
+    public void addDeck(String deckName) {
         this.decksName.add(deckName);
     }
 
@@ -92,7 +93,7 @@ public class User {
         return activeDeck;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return userData.getUsername();
     }
 

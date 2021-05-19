@@ -26,14 +26,14 @@ public class CardZone {
     }
 
     public void addCard(Card card) throws Exception {
-        if(isSingular){
-            if(cards.size()>0) throw new Exception("this zone already had card");
+        if (isSingular) {
+            if (cards.size() > 0) throw new Exception("this zone already had card");
             return;
         }
         cards.add(card);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return (cards.size() == 0);
     }
 

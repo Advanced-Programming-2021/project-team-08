@@ -53,7 +53,7 @@ public class GamePlaySceneController {
 
     private void setupDuel(boolean isPlayer, int rounds, String secondPlayer) {
         User secondUser = null;
-        if(isPlayer){
+        if (isPlayer) {
             try {
                 secondUser = User.getUserByUsername(secondPlayer);
             } catch (Exception e) {
@@ -84,8 +84,8 @@ public class GamePlaySceneController {
     private void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
         // TODO: ۱۸/۰۵/۲۰۲۱ play with AI
         isDuelStarted = true;
-        for(int i=1; i<=rounds; i++){
-            System.out.println("Round "+i);
+        for (int i = 1; i <= rounds; i++) {
+            System.out.println("Round " + i);
 
         }
     }
