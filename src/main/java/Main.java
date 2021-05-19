@@ -34,7 +34,7 @@ public class Main {
 
         ArrayList<User> allOfUsers = new ArrayList<>();
         for (File file : filesList) {
-            String stringOfUserFile = new String(Files.readAllBytes(Paths.get("directoryPath/file")));
+            String stringOfUserFile = new String(Files.readAllBytes(Paths.get(file.toString())));
             allOfUsers.add(new Gson().fromJson(stringOfUserFile,
                     new TypeToken<User>() {
                     }.getType()));

@@ -4,7 +4,7 @@ import model.enums.MonsterAttribute;
 
 import java.util.ArrayList;
 
-public class MonsterCardData extends CardData{
+public class MonsterCardData extends CardData {
 
     private int level;
 
@@ -102,8 +102,8 @@ public class MonsterCardData extends CardData{
     }
 
     public static void printAllCard() {
-        for(MonsterCardData monsterCardData: allMonsterCardData) {
-            try{
+        for (MonsterCardData monsterCardData : allMonsterCardData) {
+            try {
                 System.out.println("name: " + monsterCardData.getName() + "  level: " + monsterCardData.getLevel());
                 System.out.println("monster attribute: " + monsterCardData.getAttribute());
                 System.out.println("monster type: " + monsterCardData.getMonsterType());
@@ -112,7 +112,7 @@ public class MonsterCardData extends CardData{
                 System.out.println(monsterCardData.getCardDescription());
                 System.out.println("monster price: " + monsterCardData.getPrice());
                 System.out.println();
-            }catch (NullPointerException e) {
+            } catch (NullPointerException e) {
                 System.out.println("null pointer in printing cards");
             }
         }

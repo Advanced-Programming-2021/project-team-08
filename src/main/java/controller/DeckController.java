@@ -21,8 +21,8 @@ public class DeckController extends Scene {
                 System.out.println("deck with name " + matcher.group(1) + "already exists");
             } else {
                 System.out.println("deck created successfully!");
-                String username=ApplicationManger.getLoggedInUser().getUsername();
-                Deck deck = new Deck(matcher.group(1),username);
+                String username = ApplicationManger.getLoggedInUser().getUsername();
+                Deck deck = new Deck(matcher.group(1), username);
                 ApplicationManger.getLoggedInUser().addDeck(matcher.group(1));
             }
         }
@@ -48,10 +48,9 @@ public class DeckController extends Scene {
         }
         matcher = Pattern.compile("deck add-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            if (!User.getCardsThatThereIsNotInAnyDeck().contains(matcher.group(1))){
-                System.out.println("card with name "+matcher.group(1)+" does not exist");
-            }
-            else if (!Deck.isThereADeckWithThisName(matcher.group(2))) {
+            if (!User.getCardsThatThereIsNotInAnyDeck().contains(matcher.group(1))) {
+                System.out.println("card with name " + matcher.group(1) + " does not exist");
+            } else if (!Deck.isThereADeckWithThisName(matcher.group(2))) {
                 System.out.println("deck with name " + matcher.group(2) + " does not exist");
             } else {
                 matcher1 = Pattern.compile("--side").matcher(userInput);
@@ -60,10 +59,9 @@ public class DeckController extends Scene {
                         System.out.println("side deck is full");
                     } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(matcher.group(1), matcher.group(2))) {
                         System.out.println("there are already three cards with name " + matcher.group(1) + " in deck " + matcher.group(2));
-                    }
-                    else {
+                    } else {
                         System.out.println("card added to deck successfully");
-                        Deck.addCard(matcher.group(1),matcher.group(2),"side");
+                        Deck.addCard(matcher.group(1), matcher.group(2), "side");
                         User.getCardsThatThereIsNotInAnyDeck().remove(matcher.group(1));
                     }
                 } else {
@@ -71,60 +69,54 @@ public class DeckController extends Scene {
                         System.out.println("main deck is full");
                     } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(matcher.group(1), matcher.group(2))) {
                         System.out.println("there are already three cards with name " + matcher.group(1) + " in deck " + matcher.group(2));
-                    }
-                    else {
+                    } else {
                         System.out.println("card added to deck successfully");
-                        Deck.addCard(matcher.group(1),matcher.group(2),"main");
+                        Deck.addCard(matcher.group(1), matcher.group(2), "main");
                         User.getCardsThatThereIsNotInAnyDeck().remove(matcher.group(1));
                     }
                 }
             }
         }
         matcher = Pattern.compile("deck rm-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
-        if (matcher.find()){
+        if (matcher.find()) {
             if (!Deck.isThereADeckWithThisName(matcher.group(2))) {
                 System.out.println("deck with name " + matcher.group(2) + " does not exist");
-            }
-            else {
-                matcher1=Pattern.compile("--side").matcher(userInput);
-                if (matcher1.find()){
-                    if (Deck.isThereThisCardInSideDeckOfThisDeck(matcher.group(1),matcher.group(2))){
+            } else {
+                matcher1 = Pattern.compile("--side").matcher(userInput);
+                if (matcher1.find()) {
+                    if (Deck.isThereThisCardInSideDeckOfThisDeck(matcher.group(1), matcher.group(2))) {
                         System.out.println("card with name " + matcher.group(1) + " does not exist in side deck");
-                    }
-                    else {
+                    } else {
                         System.out.println("card removed form deck successfully");
                         //Transfer deck cards to player cards
-                        Deck.removeCardFromDeck(matcher.group(1),matcher.group(2),"side");
+                        Deck.removeCardFromDeck(matcher.group(1), matcher.group(2), "side");
                     }
-                }
-                else {
-                    if (Deck.isThereThisCardInMainDeckOfThisDeck(matcher.group(1),matcher.group(2))){
+                } else {
+                    if (Deck.isThereThisCardInMainDeckOfThisDeck(matcher.group(1), matcher.group(2))) {
                         System.out.println("card with name " + matcher.group(1) + " does not exist in main deck");
-                    }
-                    else {
+                    } else {
                         System.out.println("card removed form deck successfully");
                         //Transfer deck cards to player cards
-                        Deck.removeCardFromDeck(matcher.group(1),matcher.group(2),"main");
+                        Deck.removeCardFromDeck(matcher.group(1), matcher.group(2), "main");
                     }
                 }
             }
         }
-        matcher =Pattern.compile("deck show --all").matcher(userInput);
-        if (matcher.find()){
+        matcher = Pattern.compile("deck show --all").matcher(userInput);
+        if (matcher.find()) {
             ArrayList<String> decksName = ApplicationManger.getLoggedInUser().getDecksName();
             System.out.println("Decks:");
             System.out.println("Active deck:");
-            if(ApplicationManger.getLoggedInUser().getActiveDeck()!=null){
+            if (ApplicationManger.getLoggedInUser().getActiveDeck() != null) {
                 System.out.println(ApplicationManger.getLoggedInUser().getActiveDeck());
             }
             System.out.println("Other decks:");
             decksName.sort(Comparator.naturalOrder());
-            for (String item:decksName){
-                if (Deck.isThisDeckValid(item)){
-                    System.out.println(item+": main deck " + Deck.numberOfMainDeckCards(item) + ", side deck " + Deck.numberOfSideDeckCards(item) + ", valid");
-                }
-                else {
-                    System.out.println(item+": main deck " + Deck.numberOfMainDeckCards(item) + ", side deck " + Deck.numberOfSideDeckCards(item) + ", invalid");
+            for (String item : decksName) {
+                if (Deck.isThisDeckValid(item)) {
+                    System.out.println(item + ": main deck " + Deck.numberOfMainDeckCards(item) + ", side deck " + Deck.numberOfSideDeckCards(item) + ", valid");
+                } else {
+                    System.out.println(item + ": main deck " + Deck.numberOfMainDeckCards(item) + ", side deck " + Deck.numberOfSideDeckCards(item) + ", invalid");
                 }
             }
         }

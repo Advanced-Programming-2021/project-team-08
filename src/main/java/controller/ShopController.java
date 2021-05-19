@@ -1,6 +1,5 @@
 package controller;
 
-import model.cards.data.CardData;
 import view.menus.ApplicationManger;
 import view.menus.ShopScene;
 

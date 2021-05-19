@@ -66,7 +66,7 @@ public class UserData {
         this.point += point;
     }
 
-    public Deck getActiveDeck(){
+    public Deck getActiveDeck() {
         return decks.get(0);
     }
 

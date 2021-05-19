@@ -6,7 +6,7 @@ import controller.User;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShopScene extends Scene{
+public class ShopScene extends Scene {
 
     private User activeUser;
     private ShopController shopController;
@@ -33,6 +33,6 @@ public class ShopScene extends Scene{
     }
 
     private void showAllCard() {
-        
+
     }
 }

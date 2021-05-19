@@ -16,6 +16,7 @@ public abstract class CardData {
     public CardType getCardType() {
         return cardType;
     }
+
     public static CardData getCardByName(String cardName) {
         CardData cardData = MonsterCardData.getCardByName(cardName);
         if (cardData != null) return cardData;

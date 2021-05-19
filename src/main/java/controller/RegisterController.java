@@ -23,7 +23,7 @@ public class RegisterController {
         try {
             Command registerCommand = Command.parseCommand(userInput, fieldsOfRegisterUser);
             if (User.doesUsernameExists(registerCommand.getField("username")))
-                System.out.println("user with username" + registerCommand.getField("username") + "already exists");
+                System.out.println("user with username " + registerCommand.getField("username") + " already exists");
             else if (User.doesUsernameExists(registerCommand.getField("nickname")))
                 System.out.println("user with nickname <nickname> already exists");
             else {
