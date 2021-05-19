@@ -125,7 +125,11 @@ public class Deck {
     }
 
     public static void setDecks(ArrayList<Deck> decks) {
-        Deck.decks = decks;
+        if (decks != null) {
+            Deck.decks.addAll(decks);
+        }else {
+            Deck.decks = new ArrayList<>();
+        }
     }
 
     public ArrayList<Card> getMainDeck() {

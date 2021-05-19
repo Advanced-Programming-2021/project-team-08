@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
-    private ArrayList<String> decksName;
+    private ArrayList<String> decksName = new ArrayList<>();
     private static ArrayList<Card> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
 
@@ -78,7 +78,8 @@ public class User {
     }
 
     public void addDeck(String deckName) {
-        this.decksName.add(deckName);
+        if(decksName == null) decksName = new ArrayList<>();
+        decksName.add(deckName);
     }
 
     public ArrayList<String> getDecksName() {
