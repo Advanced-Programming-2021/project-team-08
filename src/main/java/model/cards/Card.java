@@ -30,5 +30,9 @@ public abstract class Card {
         return card;
     }
 
+    public CardData getCardData() {
+        return cardData;
+    }
+
     public abstract void setup();
 }

@@ -31,27 +31,27 @@ public class DeckMenu extends Scene {
 
         matcher = Pattern.compile("deck create ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckCreate(matcher);
+            deckController.deckCreate(userInput);
         }
 
         matcher = Pattern.compile("deck delete ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckDelete(matcher);
+            deckController.deckDelete(userInput);
         }
 
         matcher = Pattern.compile("deck set-activate ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckSetActive(matcher);
+            deckController.deckSetActive(userInput);
         }
 
         matcher = Pattern.compile("deck add-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.addCard(matcher,userInput);
+            deckController.addCard(userInput);
         }
 
         matcher = Pattern.compile("deck rm-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.removeCard(matcher,userInput);
+            deckController.removeCard(userInput);
         }
 
         matcher = Pattern.compile("deck show --all").matcher(userInput);

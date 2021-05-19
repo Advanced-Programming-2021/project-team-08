@@ -11,7 +11,7 @@ public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
     private ArrayList<String> decksName = new ArrayList<>();
-    private static ArrayList<Card> cardsThatThereIsNotInAnyDeck;
+    private static ArrayList<String> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
 
     static {
@@ -98,7 +98,7 @@ public class User {
         return userData.getUsername();
     }
 
-    public static ArrayList<Card> getCardsThatThereIsNotInAnyDeck() {
+    public static ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
         return cardsThatThereIsNotInAnyDeck;
     }
     /*
