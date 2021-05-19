@@ -143,7 +143,6 @@ public class DeckController {
         HashMap<String, CommandFieldType> fieldsOfAddCard = new HashMap<>();
         fieldsOfAddCard.put("card", CommandFieldType.STRING);
         fieldsOfAddCard.put("deck", CommandFieldType.STRING);
-        fieldsOfAddCard.put("side", CommandFieldType.STRING);
         try {
             Command addCardCommand = Command.parseCommand(userInput, fieldsOfAddCard);
             Matcher matcher1;
@@ -217,7 +216,6 @@ public class DeckController {
         HashMap<String, CommandFieldType> fieldsOfRemoveCard = new HashMap<>();
         fieldsOfRemoveCard.put("card", CommandFieldType.STRING);
         fieldsOfRemoveCard.put("deck", CommandFieldType.STRING);
-        fieldsOfRemoveCard.put("side", CommandFieldType.STRING);
         try {
             Command removeCardCommand = Command.parseCommand(userInput, fieldsOfRemoveCard);
             Matcher matcher1;
