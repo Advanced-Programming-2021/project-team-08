@@ -19,29 +19,67 @@ public class GameManager {
     }};
 
     private Player player1, player2;
-    private int turn;
+    private int turn, currentPlayerTurn;
     private Phase currentPhase;
     private GameBoard gameBoard;
 
-    private CardZone currentSelectedZone;
+    private CardSlot currentSelectedZone;
 
     public GameManager(UserData user1, UserData user2) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck());
         this.player1 = new Player(user1, gameBoard.getPlayer1Board());
         this.player2 = new Player(user2, gameBoard.getPlayer2Board());
 
-        turn = 1;
         System.out.println(getGameBoardString());
+        firstSetup();
     }
 
     public Phase getCurrentPhase() {
         return currentPhase;
     }
 
-    public void selectCard(String address) {
+    public void firstSetup() {
+        turn = 1;
+        currentPlayerTurn = 1;
+        startDrawPhase();
+    }
+
+    public void goToNextPhase() {
+        switch (currentPhase) {
+            case DRAW:
+                break;
+            case STANDBY:
+                break;
+            case MAIN:
+                break;
+            case BATTLE:
+                break;
+            case END:
+                break;
+        }
+    }
+
+    private void startDrawPhase() {
+        currentPhase = Phase.DRAW;
+    }
+
+    private void startMainPhase() {
+        currentPhase = Phase.MAIN;
+    }
+
+    private void startBattlePhase() {
+        currentPhase = Phase.BATTLE;
+    }
+
+    private Player getCurrentTurnPlayer() {
+        if (currentPlayerTurn == 1) return player1;
+        else return player2;
+    }
+
+    public void selectZone(String address) {
         try {
             Command command = Command.parseCommand(address, selectMonsterCardCommand);
-            currentSelectedZone = gameBoard.getZone(Boolean.parseBoolean(command.getField("opponent")),
+            currentSelectedZone = gameBoard.getCardSlot(Boolean.parseBoolean(command.getField("opponent")),
                     ZoneType.MONSTER,
                     Integer.parseInt(command.getField("monster")));
         } catch (ParseCommandException e) {
@@ -54,8 +92,12 @@ public class GameManager {
         if (turn % 2 == 1) {
             toShow += player2.getUserData().getNickname() + ":" + player2.getLP() + "\n";
 
-            for(int i=7; i>player2.getHandCards().size(); i--){toShow += "\t";}
-            for(int i=0; i<player2.getHandCards().size(); i++){toShow += "c\t";}
+            for (int i = 7; i > player2.getHandCards().size(); i--) {
+                toShow += "\t";
+            }
+            for (int i = 0; i < player2.getHandCards().size(); i++) {
+                toShow += "c\t";
+            }
             toShow += "\n";
 
             toShow += player2.getPlayerBoard().getShowingString(false);
@@ -64,7 +106,9 @@ public class GameManager {
 
             toShow += player1.getPlayerBoard().getShowingString(true);
 
-            for(int i=0; i<player1.getHandCards().size(); i++){toShow += "c\t";}
+            for (int i = 0; i < player1.getHandCards().size(); i++) {
+                toShow += "c\t";
+            }
             toShow += "\n";
 
             toShow += player1.getUserData().getNickname() + ":" + player1.getLP() + "\n";

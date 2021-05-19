@@ -65,7 +65,7 @@ public class GamePlayScene extends Scene {
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            sceneController.getGameManager().selectCard(matcher.group(1));
+            sceneController.getGameManager().selectZone(matcher.group(1));
             return;
         }
     }

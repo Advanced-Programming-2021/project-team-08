@@ -31,4 +31,8 @@ public class Player {
     public PlayerBoard getPlayerBoard() {
         return playerBoard;
     }
+
+    public void drawCard(){
+
+    }
 }

@@ -5,12 +5,12 @@ import model.enums.ZoneType;
 
 import java.util.ArrayList;
 
-public class CardZone {
+public class CardSlot {
     private ZoneType zoneType;
     private ArrayList<Card> cards = new ArrayList<>();
     private boolean isSingular;
 
-    public CardZone(ZoneType zoneType) {
+    public CardSlot(ZoneType zoneType) {
         this.zoneType = zoneType;
         switch (zoneType) {
             case GRAVEYARD:

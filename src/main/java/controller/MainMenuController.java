@@ -7,15 +7,19 @@ public class MainMenuController {
     public static int enterMenu(String menuName) {
         switch (menuName) {
             case "scoreboard":
+                System.out.println("ScoreBoard Menu");
                 ApplicationManger.goToScene(SceneName.SCOREBOARD_MENU);
                 return 0;
             case "shop":
+                System.out.println("Shop Menu");
                 ApplicationManger.goToScene(SceneName.SHOP_MENU);
                 return 0;
             case "profile":
+                System.out.println("Profile Menu");
                 ApplicationManger.goToScene(SceneName.PROFILE_MENU);
                 return 0;
             case "deck":
+                System.out.println("Deck Menu");
                 ApplicationManger.goToScene(SceneName.DECK_MENU);
                 return 0;
             case "duel":

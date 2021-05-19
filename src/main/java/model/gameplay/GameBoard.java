@@ -20,7 +20,7 @@ public class GameBoard {
         return player2Board;
     }
 
-    public CardZone getZone(boolean forOpponent, ZoneType zone, int number) {
+    public CardSlot getCardSlot(boolean forOpponent, ZoneType zone, int number) {
         switch (zone) {
             case FIELD:
                 break;

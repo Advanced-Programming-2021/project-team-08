@@ -6,21 +6,21 @@ import view.menus.Deck;
 import java.util.ArrayList;
 
 public class PlayerBoard {
-    private CardZone graveyard = new CardZone(ZoneType.GRAVEYARD);
-    private CardZone deckZone = new CardZone(ZoneType.DECK);
-    private CardZone fieldZone = new CardZone(ZoneType.FIELD);
-    private ArrayList<CardZone> monsterZone = new ArrayList<CardZone>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardZone(ZoneType.MONSTER));
+    private CardSlot graveyard = new CardSlot(ZoneType.GRAVEYARD);
+    private CardSlot deckZone = new CardSlot(ZoneType.DECK);
+    private CardSlot fieldZone = new CardSlot(ZoneType.FIELD);
+    private ArrayList<CardSlot> monsterZone = new ArrayList<CardSlot>(5) {{
+        for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.MONSTER));
     }};
-    private ArrayList<CardZone> spellAndTrapZone = new ArrayList<CardZone>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardZone(ZoneType.SPELL_AND_TRAP));
+    private ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
+        for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.SPELL_AND_TRAP));
     }};
 
     public PlayerBoard(Deck playerDeck) {
         deckZone.addCards(playerDeck.getMainDeck());
     }
 
-    public ArrayList<CardZone> getMonsterZone() {
+    public ArrayList<CardSlot> getMonsterZone() {
         return monsterZone;
     }
 
@@ -41,7 +41,7 @@ public class PlayerBoard {
         return toShow;
     }
 
-    private String zoneArrayToString(boolean isMirror, ArrayList<CardZone> zoneArray) {
+    private String zoneArrayToString(boolean isMirror, ArrayList<CardSlot> zoneArray) {
         String result = "";
         int[] sequence = {5, 3, 1, 2, 4};
         int[] mirroredSequence = {4, 2, 1, 3, 5};
