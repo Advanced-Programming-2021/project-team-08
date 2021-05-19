@@ -1,9 +1,6 @@
 package model;
 
-import view.menus.Deck;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class UserData {
     private String username;

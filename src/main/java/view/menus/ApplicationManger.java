@@ -1,6 +1,5 @@
 package view.menus;
 
-import controller.DeckController;
 import controller.User;
 
 import java.io.*;
@@ -25,7 +24,7 @@ public class ApplicationManger {
                 currentScene.start();
                 break;
             case DECK_MENU:
-                currentScene = new DeckController();
+                currentScene = new DeckMenu();
                 currentScene.start();
                 break;
             case SHOP_MENU:

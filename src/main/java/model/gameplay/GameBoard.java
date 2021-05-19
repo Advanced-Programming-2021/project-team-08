@@ -1,8 +1,7 @@
 package model.gameplay;
 
-import model.cards.Card;
 import model.enums.ZoneType;
-import view.menus.Deck;
+import model.Deck;
 
 public class GameBoard {
     PlayerBoard player1Board, player2Board;

@@ -1,7 +1,7 @@
 package model.gameplay;
 
 import model.enums.ZoneType;
-import view.menus.Deck;
+import model.Deck;
 
 import java.util.ArrayList;
 

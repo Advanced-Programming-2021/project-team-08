@@ -1,10 +1,8 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.User;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import view.menus.ApplicationManger;
-import view.menus.Deck;
+import model.Deck;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package view.menus;
+package model;
 
 import model.cards.Card;
 
@@ -25,6 +25,10 @@ public class Deck {
             }
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static void removeADeck(String name) {
@@ -130,5 +134,9 @@ public class Deck {
 
     public ArrayList<Card> getSideDeck() {
         return sideDeck;
+    }
+
+    public static ArrayList<Deck> getDecks() {
+        return decks;
     }
 }
