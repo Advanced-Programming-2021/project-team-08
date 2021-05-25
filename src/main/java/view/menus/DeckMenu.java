@@ -59,7 +59,17 @@ public class DeckMenu extends Scene {
             deckController.showAllDecks();
         }
 
-        //show deck
+
+        matcher = Pattern.compile("deck show --deck-name ([A-Za-z]+) --side").matcher(userInput);
+        if (matcher.find()){
+            deckController.showDeck(matcher.group(1),userInput);
+        }
+
+        matcher=Pattern.compile("deck show --cards").matcher(userInput);
+        if (matcher.find()){
+            deckController.deckShowCards();
+        }
+
         return 1;
     }
 }

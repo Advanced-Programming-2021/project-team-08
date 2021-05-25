@@ -11,7 +11,7 @@ public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
     private ArrayList<String> decksName = new ArrayList<>();
-    private static ArrayList<String> cardsThatThereIsNotInAnyDeck;
+    private ArrayList<String> cardsThatThereIsNotInAnyDeck;
     private String activeDeck;
 
     static {
@@ -22,6 +22,9 @@ public class User {
         userData = new UserData(username, nickname, password);
         allUser.add(this);
     }
+
+
+
 
     public static User getUserByUsername(String username) throws Exception {
         for (User user : allUser) {
@@ -98,8 +101,8 @@ public class User {
         return userData.getUsername();
     }
 
-    public static ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
-        return cardsThatThereIsNotInAnyDeck;
+    public ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
+        return this.cardsThatThereIsNotInAnyDeck;
     }
     /*
     public Deck getDeckByName(String deckName) {
