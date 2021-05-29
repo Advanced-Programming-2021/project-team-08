@@ -48,6 +48,7 @@ public class GamePlayScene extends Scene {
                     endPhaseCommand(userInput);
                     break;
             }
+            return 1;
         }
 
         System.out.println("Invalid Command!");
@@ -78,7 +79,7 @@ public class GamePlayScene extends Scene {
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            //sceneController.(matcher.group(1));
+            sceneController.getGameManager().selectZone(matcher.group(1));
             return;
         }
     }

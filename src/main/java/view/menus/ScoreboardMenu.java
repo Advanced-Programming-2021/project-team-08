@@ -20,6 +20,7 @@ public class ScoreboardMenu extends Scene{
             System.out.println("ScoreBoard Menu");
         }
         else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
+            ApplicationManger.goToScene(SceneName.MAIN_MENU);
             return 0;
         }
         else {

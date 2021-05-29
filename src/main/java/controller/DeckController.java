@@ -13,7 +13,9 @@ import org.json.simple.parser.JSONParser;
 import view.menus.ApplicationManger;
 import view.menus.DeckMenu;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,132 +23,105 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeckController {
-
-    private User activeUser;
     private DeckMenu deckMenu;
 
     public DeckController(DeckMenu deckMenu) {
-        this.activeUser = ApplicationManger.getLoggedInUser();
         this.deckMenu = deckMenu;
     }
 
-    public void deckCreate(String userInput) {
-        HashMap<String, CommandFieldType> fieldsOfDeckCreate = new HashMap<>();
-        fieldsOfDeckCreate.put("deck name", CommandFieldType.STRING);
-        try {
-            Command deckCreateCommand = Command.parseCommand(userInput, fieldsOfDeckCreate);
-            if (Deck.isThereADeckWithThisName(deckCreateCommand.getField("deck name"))) {
-                System.out.println("deck with name " + deckCreateCommand.getField("deck name") + "already exists");
-            } else {
-                System.out.println("deck created successfully!");
-                String username = ApplicationManger.getLoggedInUser().getUsername();
-                Deck deck = new Deck(deckCreateCommand.getField("deck name"), username);
-                ApplicationManger.getLoggedInUser().addDeck(deckCreateCommand.getField("deck name"));
+    public void deckCreate(String deckName) {
+        if (Deck.isThereADeckWithThisName(deckName)) {
+            System.out.println("deck with name " + deckName + "already exists");
+        } else {
+            System.out.println("deck created successfully!");
+            String username = ApplicationManger.getLoggedInUser().getUsername();
+            Deck deck = new Deck(deckName, username);
+            ApplicationManger.getLoggedInUser().addDeck(deckName);
 
-                try {
-                    File fileToBeModified = new File("decks.json");
-                    FileWriter writer;
-                    writer = new FileWriter(fileToBeModified);
-                    writer.write(new Gson().toJson(Deck.getDecks()));
-                    writer.close();
+            try {
+                File fileToBeModified = new File("decks.json");
+                FileWriter writer;
+                writer = new FileWriter(fileToBeModified);
+                writer.write(new Gson().toJson(Deck.getDecks()));
+                writer.close();
 
-                    File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                    FileWriter writer1;
-                    writer1 = new FileWriter(fileToBeModified1);
-                    writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                    writer1.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
+                FileWriter writer1;
+                writer1 = new FileWriter(fileToBeModified1);
+                writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
+                writer1.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public void deckDelete(String deckName) {
+        if (!Deck.isThereADeckWithThisName(deckName)) {
+            System.out.println("deck with name " + deckName + " does not exist");
+        } else {
+            System.out.println("deck deleted successfully");
+            if (Deck.getDeckWithName(deckName).getMainDeck() != null) {
+                for (Card card : Deck.getDeckWithName(deckName).getMainDeck())
+                    ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardData().getCardName());
+            }
+            if (Deck.getDeckWithName(deckName).getSideDeck() != null) {
+                for (Card card : Deck.getDeckWithName(deckName).getSideDeck())
+                    ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardData().getCardName());
+            }
+            Deck.removeADeck(deckName);
+
+            try {
+                File fileToBeModified = new File("decks.json");
+                FileWriter writer;
+                writer = new FileWriter(fileToBeModified);
+                writer.write(new Gson().toJson(Deck.getDecks()));
+                writer.close();
+
+                File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
+                FileWriter writer1;
+                writer1 = new FileWriter(fileToBeModified1);
+                writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
+                writer1.close();
+            } catch (Exception e) {
 
             }
-        } catch (ParseCommandException e) {
-            e.printStackTrace();
         }
 
     }
 
-    public void deckDelete(String userInput) {
-        HashMap<String, CommandFieldType> fieldsOfDeckDelete = new HashMap<>();
-        fieldsOfDeckDelete.put("deck name", CommandFieldType.STRING);
-        try {
-            Command deckDeleteCommand = Command.parseCommand(userInput, fieldsOfDeckDelete);
-            if (!Deck.isThereADeckWithThisName(deckDeleteCommand.getField("deck name"))) {
-                System.out.println("deck with name " + deckDeleteCommand.getField("deck name") + " does not exist");
-            } else {
-                System.out.println("deck deleted successfully");
-                if (Deck.getDeckWithName(deckDeleteCommand.getField("deck name")).getMainDeck() != null) {
-                    for (Card card : Deck.getDeckWithName(deckDeleteCommand.getField("deck name")).getMainDeck())
-                        ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardData().getCardName());
-                }
-                if (Deck.getDeckWithName(deckDeleteCommand.getField("deck name")).getSideDeck() != null) {
-                    for (Card card : Deck.getDeckWithName(deckDeleteCommand.getField("deck name")).getSideDeck())
-                        ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardData().getCardName());
-                }
-                Deck.removeADeck(deckDeleteCommand.getField("deck name"));
+    public void deckSetActive(String deckName) {
+        if (!Deck.isThereADeckWithThisName(deckName)) {
+            System.out.println("deck with name " + deckName + " does not exist");
+        } else {
+            System.out.println("deck activated successfully");
+            ApplicationManger.getLoggedInUser().setActiveDeck(deckName);
+            try {
+                File fileToBeModified = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
+                FileWriter writer;
+                writer = new FileWriter(fileToBeModified);
+                writer.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
+                writer.close();
+            } catch (Exception e) {
 
-                try {
-                    File fileToBeModified = new File("decks.json");
-                    FileWriter writer;
-                    writer = new FileWriter(fileToBeModified);
-                    writer.write(new Gson().toJson(Deck.getDecks()));
-                    writer.close();
-
-                    File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                    FileWriter writer1;
-                    writer1 = new FileWriter(fileToBeModified1);
-                    writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                    writer1.close();
-                } catch (Exception e) {
-
-                }
             }
-        } catch (ParseCommandException e) {
-            e.printStackTrace();
         }
-
-    }
-
-    public void deckSetActive(String userInput) {
-        HashMap<String, CommandFieldType> fieldsOfDeckSetActive = new HashMap<>();
-        fieldsOfDeckSetActive.put("deck name", CommandFieldType.STRING);
-        try {
-            Command deckSetActiveCommand = Command.parseCommand(userInput, fieldsOfDeckSetActive);
-            if (!Deck.isThereADeckWithThisName(deckSetActiveCommand.getField("deck name"))) {
-                System.out.println("deck with name " + deckSetActiveCommand.getField("deck name") + " does not exist");
-            } else {
-                System.out.println("deck activated successfully");
-                ApplicationManger.getLoggedInUser().setActiveDeck(deckSetActiveCommand.getField("deck name"));
-                try {
-                    File fileToBeModified = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                    FileWriter writer;
-                    writer = new FileWriter(fileToBeModified);
-                    writer.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                    writer.close();
-                } catch (Exception e) {
-
-                }
-            }
-        } catch (ParseCommandException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void addCard(String userInput) {
         HashMap<String, CommandFieldType> fieldsOfAddCard = new HashMap<>();
         fieldsOfAddCard.put("card", CommandFieldType.STRING);
         fieldsOfAddCard.put("deck", CommandFieldType.STRING);
+        fieldsOfAddCard.put("side", CommandFieldType.BOOLEAN);
         try {
             Command addCardCommand = Command.parseCommand(userInput, fieldsOfAddCard);
-            Matcher matcher1;
             if (!ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().contains(addCardCommand.getField("card"))) {
                 System.out.println("card with name " + addCardCommand.getField("card") + " does not exist");
             } else if (!Deck.isThereADeckWithThisName(addCardCommand.getField("deck"))) {
                 System.out.println("deck with name " + addCardCommand.getField("deck") + " does not exist");
             } else {
-                matcher1 = Pattern.compile("--side").matcher(userInput);
-                if (matcher1.find()) {
+                if (Boolean.parseBoolean(addCardCommand.getField("side"))) {
                     if (Deck.isSideDeckFull(addCardCommand.getField("deck"))) {
                         System.out.println("side deck is full");
                     } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
@@ -317,25 +292,25 @@ public class DeckController {
         }
     }
 
-    public void deckShowCards(){
-        ArrayList<String> decksName=ApplicationManger.getLoggedInUser().getDecksName();
-        ArrayList<String> cardsThatThereIsNotInAnyDeck=ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck();
+    public void deckShowCards() {
+        ArrayList<String> decksName = ApplicationManger.getLoggedInUser().getDecksName();
+        ArrayList<String> cardsThatThereIsNotInAnyDeck = ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck();
         ArrayList<String> cardsName = new ArrayList<>(cardsThatThereIsNotInAnyDeck);
-        ArrayList<Card> mainDeck,sideDeck;
-        for (String deckName : decksName){
-            mainDeck=Deck.getDeckWithName(deckName).getMainDeck();
-            sideDeck=Deck.getDeckWithName(deckName).getSideDeck();
-            for (Card card: mainDeck){
-                cardsName.add( card.getCardData().getCardName());
+        ArrayList<Card> mainDeck, sideDeck;
+        for (String deckName : decksName) {
+            mainDeck = Deck.getDeckWithName(deckName).getMainDeck();
+            sideDeck = Deck.getDeckWithName(deckName).getSideDeck();
+            for (Card card : mainDeck) {
+                cardsName.add(card.getCardData().getCardName());
             }
-            for (Card card: sideDeck){
-                cardsName.add( card.getCardData().getCardName());
+            for (Card card : sideDeck) {
+                cardsName.add(card.getCardData().getCardName());
             }
         }
         cardsName.sort(Comparator.naturalOrder());
-        for (String cardName: cardsName){
+        for (String cardName : cardsName) {
             if (CardData.getCardByName(cardName).getCardType().equals(CardType.MONSTER))
-                System.out.println(cardName+": "+MonsterCardData.getCardByName(cardName).getCardDescription());
+                System.out.println(cardName + ": " + MonsterCardData.getCardByName(cardName).getCardDescription());
             // else spell and trap
         }
 

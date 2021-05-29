@@ -27,21 +27,21 @@ public class DeckMenu extends Scene {
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
-        Matcher matcher1;
 
-        matcher = Pattern.compile("deck create ([A-Za-z]+)").matcher(userInput);
+        matcher = Pattern.compile("deck create ([^\\n]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckCreate(userInput);
+            deckController.deckCreate(matcher.group(1));
+            return 1;
         }
 
-        matcher = Pattern.compile("deck delete ([A-Za-z]+)").matcher(userInput);
+        matcher = Pattern.compile("deck delete ([^\\n]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckDelete(userInput);
+            deckController.deckDelete(matcher.group(1));
         }
 
-        matcher = Pattern.compile("deck set-activate ([A-Za-z]+)").matcher(userInput);
+        matcher = Pattern.compile("deck set-activate ([^\\n]+)").matcher(userInput);
         if (matcher.find()) {
-            deckController.deckSetActive(userInput);
+            deckController.deckSetActive(matcher.group(1));
         }
 
         matcher = Pattern.compile("deck add-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
@@ -70,6 +70,12 @@ public class DeckMenu extends Scene {
             deckController.deckShowCards();
         }
 
+        if (Pattern.compile("menu exit").matcher(userInput).matches()) {
+            ApplicationManger.goToScene(SceneName.MAIN_MENU);
+            return 0;
+        }
+
+        System.out.println("Invalid command!");
         return 1;
     }
 }

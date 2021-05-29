@@ -29,10 +29,14 @@ public class ShopScene extends Scene {
         if (Pattern.compile("shop show --all").matcher(userInput).find()) {
             showAllCard();
         }
+        if (Pattern.compile("menu exit").matcher(userInput).matches()) {
+            ApplicationManger.goToScene(SceneName.MAIN_MENU);
+            return 0;
+        }
         return 0;
     }
 
     private void showAllCard() {
-
+        // TODO: ۲۹/۰۵/۲۰۲۱
     }
 }

@@ -6,14 +6,11 @@ public class UserData {
     private String username;
     private String nickname;
     private String password;
-    private int point;
-    private ArrayList<Deck> decks;
+    private int point = 0;
+    private ArrayList<Integer> myCardsIds = new ArrayList<>();
+    private ArrayList<Deck> decks = new ArrayList<>();
+    private String activeDeckName;
 
-
-    {
-        point = 0;
-        // decks = new ArrayList<>();
-    }
 
     public UserData(String username, String nickname, String password) {
         this.username = username;
@@ -37,11 +34,9 @@ public class UserData {
         this.point = point;
     }
 
-    /*
-        public ArrayList<Deck> getDecks() {
-            return decks;
-        }
-     */
+    public ArrayList<Deck> getDecks() {
+        return decks;
+    }
 
     public String getUsername() {
         return username;
@@ -63,15 +58,21 @@ public class UserData {
         this.point += point;
     }
 
-    public Deck getActiveDeck() {
-        return decks.get(0);
+    public void setActiveDeckName(String activeDeckName) {
+        this.activeDeckName = activeDeckName;
     }
 
-    /*
+    public String getActiveDeckName() {
+        return activeDeckName;
+    }
+
+    public Deck getActiveDeck(){
+        return Deck.getDeckWithName(activeDeckName);
+    }
+
     public void addDeck(Deck deck) {
         decks.add(deck);
     }
-     */
 
 
 }

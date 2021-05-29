@@ -1,5 +1,6 @@
 package controller;
 
+import model.Deck;
 import model.UserData;
 import model.cards.Card;
 import view.menus.ApplicationManger;
@@ -12,7 +13,6 @@ public class User {
     private final UserData userData;
     private ArrayList<String> decksName = new ArrayList<>();
     private ArrayList<String> cardsThatThereIsNotInAnyDeck;
-    private String activeDeck;
 
     static {
         allUser = new ArrayList<>();
@@ -85,16 +85,16 @@ public class User {
         decksName.add(deckName);
     }
 
+    public Deck getActiveDeck(){
+        return Deck.getDeckWithName(userData.getActiveDeckName());
+    }
+
     public ArrayList<String> getDecksName() {
         return decksName;
     }
 
-    public void setActiveDeck(String activeDeck) {
-        this.activeDeck = activeDeck;
-    }
-
-    public String getActiveDeck() {
-        return activeDeck;
+    public void setActiveDeckName(String activeDeckName) {
+        userData.setActiveDeckName(activeDeckName);
     }
 
     public String getUsername() {
@@ -104,14 +104,9 @@ public class User {
     public ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
         return this.cardsThatThereIsNotInAnyDeck;
     }
-    /*
-    public Deck getDeckByName(String deckName) {
-        decks  = userData.getDecks;
-        for(User deck : decks) {
-            if (deck.getName.equals(deckName)) return deck;
-        }
-        return null;
+
+    public void setActiveDeck(String deckName) {
+        userData.setActiveDeckName(deckName);
     }
-     */
 }
 
