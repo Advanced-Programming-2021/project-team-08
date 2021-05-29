@@ -11,7 +11,7 @@ public abstract class Scene {
 
     protected abstract int getUserCommand();
 
-    public void ShowError(String errorMessage) {
+    public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 }

@@ -6,6 +6,7 @@ import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
 import model.gameplay.*;
 import model.enums.*;
+import view.menus.GamePlayScene;
 
 import java.util.HashMap;
 
@@ -25,12 +26,14 @@ public class GameManager {
 
     private CardSlot currentSelectedZone;
 
-    public GameManager(UserData user1, UserData user2) {
+    private GamePlayScene scene;
+
+    public GameManager(UserData user1, UserData user2, GamePlayScene scene) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck());
         this.player1 = new Player(user1, gameBoard.getPlayer1Board());
         this.player2 = new Player(user2, gameBoard.getPlayer2Board());
+        this.scene = scene;
 
-        System.out.println(getGameBoardString());
         firstSetup();
     }
 
@@ -47,28 +50,55 @@ public class GameManager {
     public void goToNextPhase() {
         switch (currentPhase) {
             case DRAW:
+                startStandbyPhase();
                 break;
             case STANDBY:
+                startMainPhase();
                 break;
             case MAIN:
+                startBattlePhase();
                 break;
             case BATTLE:
+                changeTurn();
+                startDrawPhase();
                 break;
             case END:
                 break;
         }
     }
 
+    private void changeTurn() {
+        turn++;
+        currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
+        startDrawPhase();
+    }
+
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
+
+        scene.showPhase("Draw");
+        scene.showBoard(getGameBoardString());
+    }
+
+    private void startStandbyPhase() {
+        currentPhase = Phase.STANDBY;
+
+        scene.showPhase("Standby");
+        scene.showBoard(getGameBoardString());
     }
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
+
+        scene.showPhase("Main");
+        scene.showBoard(getGameBoardString());
     }
 
     private void startBattlePhase() {
         currentPhase = Phase.BATTLE;
+
+        scene.showPhase("Battle");
+        scene.showBoard(getGameBoardString());
     }
 
     private Player getCurrentTurnPlayer() {
@@ -82,8 +112,28 @@ public class GameManager {
             currentSelectedZone = gameBoard.getCardSlot(Boolean.parseBoolean(command.getField("opponent")),
                     ZoneType.MONSTER,
                     Integer.parseInt(command.getField("monster")));
+            if (currentSelectedZone == null) {
+                scene.showError("Invalid selection");
+                return;
+            }
+            if (currentSelectedZone.isEmpty()) {
+                scene.showError("No card found in the given position");
+                currentSelectedZone = null;
+                return;
+            }
+
+            System.out.println("card selected");
         } catch (ParseCommandException e) {
-            e.printStackTrace();
+            scene.showError("Invalid selection");
+        }
+    }
+
+    public void deselect() {
+        if (currentSelectedZone == null) {
+            scene.showError("No card selected yet");
+        } else {
+            currentSelectedZone = null;
+            System.out.println("card deselected");
         }
     }
 

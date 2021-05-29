@@ -1,7 +1,6 @@
 package controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import model.Command;
 import model.Deck;
 import model.cards.Card;
@@ -10,18 +9,14 @@ import model.cards.data.MonsterCardData;
 import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import view.menus.ApplicationManger;
 import view.menus.DeckMenu;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -3,7 +3,6 @@ package controller;
 import controller.gameplay.GameManager;
 import model.Command;
 import model.UserData;
-import model.cards.Card;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.ApplicationManger;
@@ -54,7 +53,7 @@ public class GamePlaySceneController {
                     setupDuel(false, Integer.parseInt(command.getField("rounds")), null);
                 }
             } catch (ParseCommandException ee) {
-                scene.ShowError("Invalid Command +"+ee);
+                scene.showError("Invalid Command +"+ee);
             }
         }
     }
@@ -65,18 +64,18 @@ public class GamePlaySceneController {
             try {
                 secondUser = User.getUserByUsername(secondPlayer);
             } catch (Exception e) {
-                scene.ShowError("there is no player with this username");
+                scene.showError("there is no player with this username");
                 return;
             }
             if (secondUser.getActiveDeck() == null) {
-                scene.ShowError(secondUser.getUsername() + " has no active deck");
+                scene.showError(secondUser.getUsername() + " has no active deck");
                 return;
             }
             // TODO: ۱۵/۰۵/۲۰۲۱ check if deck is valid
         }
 
         if (ApplicationManger.getLoggedInUser().getActiveDeck() == null) {
-            scene.ShowError(ApplicationManger.getLoggedInUser().getUsername() + " has no active deck");
+            scene.showError(ApplicationManger.getLoggedInUser().getUsername() + " has no active deck");
             return;
         }
         // TODO: ۱۵/۰۵/۲۰۲۱ check if deck is valid
@@ -85,7 +84,7 @@ public class GamePlaySceneController {
         if (rounds == 1 || rounds == 3) {
             startDuel(rounds, isPlayer, secondUser.getUserData());
         } else {
-            scene.ShowError("number of rounds is not supported");
+            scene.showError("number of rounds is not supported");
         }
     }
 
@@ -94,7 +93,7 @@ public class GamePlaySceneController {
         isDuelStarted = true;
         for (int i = 1; i <= rounds; i++) {
             System.out.println("Round " + i);
-            gameManager = new GameManager(ApplicationManger.getLoggedInUser().getUserData(), secondPlayer);
+            gameManager = new GameManager(ApplicationManger.getLoggedInUser().getUserData(), secondPlayer, scene);
         }
     }
 }

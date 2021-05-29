@@ -1,6 +1,7 @@
 package view.menus;
 
 import controller.GamePlaySceneController;
+import model.enums.Phase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,10 +27,8 @@ public class GamePlayScene extends Scene {
         }
 
         if (sceneController.isDuelStarted()) {
-            matcher = Pattern.compile("change phase ([^\\n]+)").matcher(userInput);
-            if (matcher.matches()) {
-                //sceneController.(matcher.group(1));
-                return 1;
+            if(userInput.equals("next phase")){
+                sceneController.getGameManager().goToNextPhase();
             }
 
             switch (sceneController.getGameManager().getCurrentPhase()) {
@@ -63,6 +62,10 @@ public class GamePlayScene extends Scene {
     private void standbyPhaseCommand(String userInput) {
         Matcher matcher;
 
+        if(userInput.equals("select -d")){
+            sceneController.getGameManager().deselect();
+        }
+
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             sceneController.getGameManager().selectZone(matcher.group(1));
@@ -92,5 +95,13 @@ public class GamePlayScene extends Scene {
 
     private void endPhaseCommand(String userInput) {
 
+    }
+
+    public void showPhase(String phaseName) {
+        System.out.println("Phase: " + phaseName);
+    }
+
+    public void showBoard(String gameBoard) {
+        System.out.println(gameBoard);
     }
 }
