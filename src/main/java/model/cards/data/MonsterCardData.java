@@ -11,6 +11,8 @@ public class MonsterCardData extends CardData {
     private MonsterAttribute attribute;
     private String type;
     private String monsterType;
+    private int id;
+    private static int idCounter = 1;
 
     private int attackPoints, defencePoints;
     int price;
@@ -20,6 +22,8 @@ public class MonsterCardData extends CardData {
 
     public MonsterCardData() {
         allMonsterCardData.add(this);
+        id = idCounter;
+        idCounter ++;
     }
 
     public void setAttackPoints(int attackPoints) {
@@ -70,6 +74,7 @@ public class MonsterCardData extends CardData {
         return attribute;
     }
 
+    @Override
     public int getPrice() {
         return price;
     }
@@ -99,6 +104,15 @@ public class MonsterCardData extends CardData {
             if (cardName.equals(monsterCardData.getName())) return monsterCardData;
         }
         return null;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public static void printAllCard() {

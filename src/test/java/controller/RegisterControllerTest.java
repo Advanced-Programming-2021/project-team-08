@@ -12,7 +12,7 @@ class RegisterControllerTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 

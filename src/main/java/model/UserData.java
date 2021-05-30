@@ -7,6 +7,7 @@ public class UserData {
     private String nickname;
     private String password;
     private int point = 0;
+    private int money = 0;
     private ArrayList<Integer> myCardsIds = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
     private String activeDeckName;
@@ -74,7 +75,17 @@ public class UserData {
         decks.add(deck);
     }
 
+    public int getMoney() {
+        return money;
+    }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void addCard(int id) {
+        myCardsIds.add(id);
+    }
 }
 
 
