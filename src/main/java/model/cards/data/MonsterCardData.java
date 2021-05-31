@@ -21,6 +21,7 @@ public class MonsterCardData extends CardData {
     private static ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
     public MonsterCardData() {
+        CardData.addCardData(this);
         allMonsterCardData.add(this);
         id = idCounter;
         idCounter ++;
@@ -62,6 +63,7 @@ public class MonsterCardData extends CardData {
         this.price = price;
     }
 
+    @Override
     public String getName() {
         return cardName;
     }
@@ -95,6 +97,7 @@ public class MonsterCardData extends CardData {
         return type;
     }
 
+    @Override
     public String getCardDescription() {
         return cardDescription;
     }
@@ -107,7 +110,7 @@ public class MonsterCardData extends CardData {
     }
 
     @Override
-    public int getId() {
+    public int getCardId() {
         return id;
     }
 

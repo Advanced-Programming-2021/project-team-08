@@ -1,5 +1,6 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.MainMenuController;
 
 import java.util.regex.Matcher;

@@ -1,8 +1,9 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.User;
-import view.menus.ApplicationManger;
+import controller.ApplicationManger;
 import model.Deck;
+import model.cards.data.ReadMonsterCardsData;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         ApplicationManger applicationManger = new ApplicationManger();
-
+        new ReadMonsterCardsData().readCardsData();
         File users = new File("users");
         users.mkdir();
         FileWriter decks = new FileWriter("decks.json");

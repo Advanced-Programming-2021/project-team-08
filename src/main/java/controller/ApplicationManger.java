@@ -1,6 +1,6 @@
-package view.menus;
+package controller;
 
-import controller.User;
+import view.menus.*;
 
 import java.io.*;
 

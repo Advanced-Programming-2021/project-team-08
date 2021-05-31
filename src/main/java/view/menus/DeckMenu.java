@@ -1,15 +1,9 @@
 package view.menus;
 
 import controller.DeckController;
-import controller.ShopController;
 import controller.User;
-import view.menus.ApplicationManger;
-import model.Deck;
-import view.menus.Scene;
+import controller.ApplicationManger;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

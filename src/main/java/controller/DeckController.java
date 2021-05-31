@@ -10,7 +10,6 @@ import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import org.json.simple.parser.JSONParser;
-import view.menus.ApplicationManger;
 import view.menus.DeckMenu;
 
 import java.io.File;

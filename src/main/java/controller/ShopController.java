@@ -1,7 +1,6 @@
 package controller;
 
 import model.cards.data.CardData;
-import view.menus.ApplicationManger;
 import view.menus.ShopScene;
 
 public class ShopController {
@@ -17,13 +16,15 @@ public class ShopController {
     public void buyCard(String cardName) {
         CardData cardData = CardData.getCardByName(cardName);
         if (cardData == null) {
-            System.out.println("there is no card with this name");
+            shopScene.printMessage("there is no card with this name");
         }
         else if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
-            System.out.println("you have not enough money");
+            shopScene.printMessage("you have not enough money");
+            shopScene.printMessage("your money is " + activeUser.getUserData().getMoney() + " card Price is " + cardData.getPrice());
         }
         else {
-            activeUser.getUserData().addCard(cardData.getId());
+            activeUser.getUserData().addCard(cardData.getCardId());
+            shopScene.printMessage("you bought " + cardName + " successfully.");
         }
     }
 }

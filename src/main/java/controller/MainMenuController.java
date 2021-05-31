@@ -1,6 +1,5 @@
 package controller;
 
-import view.menus.ApplicationManger;
 import view.menus.SceneName;
 
 public class MainMenuController {

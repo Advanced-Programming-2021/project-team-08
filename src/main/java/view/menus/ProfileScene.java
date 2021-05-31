@@ -1,7 +1,7 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.ProfileController;
-import controller.User;
 import model.enums.ProfileMessages;
 
 import java.util.regex.Matcher;
@@ -55,5 +55,10 @@ public class ProfileScene extends Scene {
                 System.out.println("password changed successfully!");
                 break;
         }
+    }
+
+    public Matcher getCommandMatcher(String regex, String input) {
+        Matcher matcher = Pattern.compile(regex).matcher(input);
+        return matcher;
     }
 }

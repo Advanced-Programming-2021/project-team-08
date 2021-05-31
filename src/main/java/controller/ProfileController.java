@@ -3,7 +3,6 @@ package controller;
 import model.Command;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
-import view.menus.ApplicationManger;
 import view.menus.ProfileScene;
 
 import java.util.HashMap;

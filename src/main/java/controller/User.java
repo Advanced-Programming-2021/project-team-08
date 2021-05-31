@@ -2,11 +2,8 @@ package controller;
 
 import model.Deck;
 import model.UserData;
-import model.cards.Card;
-import view.menus.ApplicationManger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User {
     private static ArrayList<User> allUser;

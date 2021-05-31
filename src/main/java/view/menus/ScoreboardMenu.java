@@ -1,11 +1,11 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.User;
 import model.UserData;
 
 
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ScoreboardMenu extends Scene{

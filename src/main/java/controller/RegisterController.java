@@ -2,10 +2,8 @@ package controller;
 
 import com.google.gson.Gson;
 import model.Command;
-import model.UserData;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
-import view.menus.ApplicationManger;
 import view.menus.SceneName;
 
 import java.io.FileWriter;
