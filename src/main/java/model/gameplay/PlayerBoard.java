@@ -1,5 +1,6 @@
 package model.gameplay;
 
+import model.cards.Card;
 import model.enums.ZoneType;
 import model.Deck;
 
@@ -22,6 +23,10 @@ public class PlayerBoard {
 
     public ArrayList<CardSlot> getMonsterZone() {
         return monsterZone;
+    }
+
+    public Card drawCardFromDeck(){
+        return deckZone.drawTopCard();
     }
 
     public String getShowingString(boolean isCurrentTurnPlayerBoard) {

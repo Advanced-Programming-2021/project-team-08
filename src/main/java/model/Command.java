@@ -30,9 +30,9 @@ public class Command {
                     }
                     break;
                 case STRING:
-                    matcher = Pattern.compile("--" + entry.getKey() + " (\\S+)").matcher(commandString);
+                    matcher = Pattern.compile("--" + entry.getKey() + " ([^-]+)").matcher(commandString);
                     if (matcher.find()) {
-                        gottenFieldValues.put(entry.getKey(), matcher.group(1));
+                        gottenFieldValues.put(entry.getKey(), matcher.group(1).trim());
                     } else {
                         throw new ParseCommandException("Couldn't parse command! " +
                                 "Couldn't get field " + entry.getKey());

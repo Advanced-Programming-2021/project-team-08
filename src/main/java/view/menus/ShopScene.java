@@ -5,6 +5,8 @@ import controller.ShopController;
 import controller.User;
 import model.cards.data.CardData;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,12 +46,21 @@ public class ShopScene extends Scene {
 
     private void showAllCard() {
         System.out.println("show all card entered " + CardData.getAllCardData().size());
-        for (CardData cardData : CardData.getAllCardData()) {
-            System.out.println(cardData.getName() + " : "  + cardData.getCardDescription());
+        ArrayList<CardData> allCards = CardData.getAllCardData();
+        allCards.sort(new sortCardsAlphabetically());
+        for (CardData cardData : allCards) {
+            System.out.println(cardData.getName() + " : "  + cardData.getPrice());
         }
     }
 
     public void printMessage(String message) {
         System.out.println(message);
+    }
+
+    class sortCardsAlphabetically implements Comparator<CardData> {
+        public int compare(CardData a, CardData b)
+        {
+            return a.getCardName().compareTo(b.getCardName());
+        }
     }
 }

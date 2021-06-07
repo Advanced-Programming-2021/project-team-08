@@ -38,12 +38,13 @@ public class DeckMenu extends Scene {
             deckController.deckSetActive(matcher.group(1));
         }
 
-        matcher = Pattern.compile("deck add-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
+        matcher = Pattern.compile("deck add-card --card ([^\\n]+) --deck ([^\\n]+)").matcher(userInput);
         if (matcher.find()) {
             deckController.addCard(userInput);
+            return 1;
         }
 
-        matcher = Pattern.compile("deck rm-card --card ([A-Za-z]+) --deck ([A-Za-z]+)").matcher(userInput);
+        matcher = Pattern.compile("deck rm-card --card ([^\\n]+) --deck ([^\\n]+)").matcher(userInput);
         if (matcher.find()) {
             deckController.removeCard(userInput);
         }
@@ -54,7 +55,7 @@ public class DeckMenu extends Scene {
         }
 
 
-        matcher = Pattern.compile("deck show --deck-name ([A-Za-z]+) --side").matcher(userInput);
+        matcher = Pattern.compile("deck show --deck-name ([^\\n]+) --side").matcher(userInput);
         if (matcher.find()){
             deckController.showDeck(matcher.group(1),userInput);
         }

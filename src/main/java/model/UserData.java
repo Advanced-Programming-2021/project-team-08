@@ -7,7 +7,7 @@ public class UserData {
     private String nickname;
     private String password;
     private int point = 0;
-    private int money = 0;
+    private int money;
     private ArrayList<Integer> myCardsIds = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
     private String activeDeckName;
@@ -17,6 +17,7 @@ public class UserData {
         this.username = username;
         this.nickname = nickname;
         this.password = password;
+        this.money = 100000;
     }
 
     public void setUsername(String username) {

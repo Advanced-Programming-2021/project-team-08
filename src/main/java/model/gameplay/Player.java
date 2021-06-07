@@ -14,6 +14,10 @@ public class Player {
     public Player(UserData userData, PlayerBoard playerBoard) {
         this.userData = userData;
         this.playerBoard = playerBoard;
+
+        for(int i=0; i<6; i++){
+            drawCard();
+        }
     }
 
     public UserData getUserData() {
@@ -33,6 +37,6 @@ public class Player {
     }
 
     public void drawCard(){
-
+        handCards.add(playerBoard.drawCardFromDeck());
     }
 }

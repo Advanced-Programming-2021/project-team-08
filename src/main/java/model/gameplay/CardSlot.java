@@ -45,6 +45,11 @@ public class CardSlot {
         this.cards.addAll(cards);
     }
 
+    public Card drawTopCard() {
+        Card c = cards.get(cards.size() - 1);
+        cards.remove(cards.size() - 1);
+        return c;
+    }
 
     @Override
     public String toString() {
