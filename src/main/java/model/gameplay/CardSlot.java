@@ -25,12 +25,11 @@ public class CardSlot {
         }
     }
 
-    public void addCard(Card card) throws Exception {
+    public void setCard(Card card) throws Exception {
         if (isSingular) {
             if (cards.size() > 0) throw new Exception("this zone already had card");
             return;
         }
-        cards.add(card);
     }
 
     public boolean isEmpty() {
@@ -43,6 +42,10 @@ public class CardSlot {
     //for non-singular zone
     public void addCards(ArrayList<Card> cards) {
         this.cards.addAll(cards);
+    }
+
+    public void appendCard(Card card){
+        cards.add(card);
     }
 
     public Card drawTopCard() {

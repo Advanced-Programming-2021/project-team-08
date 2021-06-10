@@ -1,25 +1,26 @@
 package model;
 
+import controller.ApplicationManger;
+import controller.DataManager;
 import model.cards.Card;
+import model.cards.data.CardData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    private static ArrayList<Deck> decks = new ArrayList<>();
-    private ArrayList<Card> mainDeck = new ArrayList<>();
-    private ArrayList<Card> sideDeck = new ArrayList<>();
+    private ArrayList<Integer> mainDeck = new ArrayList<>();
+    private ArrayList<Integer> sideDeck = new ArrayList<>();
     private String name;
     private String username;
 
     public Deck(String name, String username) {
         this.name = name;
         this.username = username;
-        decks.add(this);
     }
 
     public static boolean isThereADeckWithThisName(String name) {
-        for (Deck deck : decks) {
+        for (Deck deck : ApplicationManger.getLoggedInUser().getUserData().getDecks()) {
             if (deck.name.equals(name)) {
                 return true;
             }
@@ -32,21 +33,14 @@ public class Deck {
     }
 
     public static void removeADeck(String name) {
-        for (Deck deck : decks) {
-            if (deck.name.equals(name)) {
-                decks.remove(deck);
-                break;
-            }
-        }
+        Deck deck = getDeckWithName(name);
+        if (deck == null) return;
+
+        ApplicationManger.getLoggedInUser().getUserData().getDecks().remove(deck);
     }
 
     public static Deck getDeckWithName(String name) {
-        for (Deck deck : decks) {
-            if (deck.name.equals(name)) {
-                return deck;
-            }
-        }
-        return null;
+        return ApplicationManger.getLoggedInUser().getUserData().getDecks().stream().filter(e -> e.name.equals(name)).findFirst().orElse(null);
     }
 
     public static boolean isMainDeckFull(String name) {
@@ -71,6 +65,14 @@ public class Deck {
         } else return false;
     }
 
+    public static ArrayList<CardData> getCardDataArrayFromIdArray(ArrayList<Integer> cardIds) {
+        ArrayList<CardData> result = new ArrayList<>();
+        for (Integer id : cardIds) {
+            result.add(CardData.getAllCardData().stream().filter(c -> c.getCardId() == id).findFirst().orElse(null));
+        }
+        return result;
+    }
+
     public int numberOfThisCardInMainDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return 0;
@@ -84,11 +86,11 @@ public class Deck {
 
     public static void addCard(String nameOfCard, String nameOfDeck, String mainOrSide) {
         try {
-            Card card = Card.createCardByName(nameOfCard);
+            int cardId = Card.getCardIdByName(nameOfCard);
             if (mainOrSide.equals("main")) {
-                Deck.getDeckWithName(nameOfDeck).mainDeck.add(card);
+                Deck.getDeckWithName(nameOfDeck).mainDeck.add(cardId);
             } else if (mainOrSide.equals("side")) {
-                Deck.getDeckWithName(nameOfDeck).sideDeck.add(card);
+                Deck.getDeckWithName(nameOfDeck).sideDeck.add(cardId);
             }
         } catch (Exception e) {
             //TODO: show error
@@ -118,9 +120,8 @@ public class Deck {
         }
     }
 
-    public static boolean isThisDeckValid(String name) {
-        if (Deck.getDeckWithName(name) == null) return false;
-        else return Deck.getDeckWithName(name).mainDeck.size() >= 40;
+    public static boolean isThisDeckValid(Deck deck) {
+        return deck.mainDeck.size() >= 40;
     }
 
     public static int numberOfMainDeckCards(String name) {
@@ -133,23 +134,19 @@ public class Deck {
         return Deck.getDeckWithName(name).sideDeck.size();
     }
 
-    public static void setDecks(ArrayList<Deck> decks) {
-        if (decks != null) {
-            Deck.decks.addAll(decks);
-        } else {
-            Deck.decks = new ArrayList<>();
-        }
+    public ArrayList<CardData> getMainDeck() {
+        return getCardDataArrayFromIdArray(mainDeck);
     }
 
-    public ArrayList<Card> getMainDeck() {
+    public ArrayList<CardData> getSideDeck() {
+        return getCardDataArrayFromIdArray(sideDeck);
+    }
+
+    public ArrayList<Integer> getMainDeckIds() {
         return mainDeck;
     }
 
-    public ArrayList<Card> getSideDeck() {
+    public ArrayList<Integer> getSideDeckIds() {
         return sideDeck;
-    }
-
-    public static ArrayList<Deck> getDecks() {
-        return decks;
     }
 }

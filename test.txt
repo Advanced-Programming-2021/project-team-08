@@ -1,0 +1,20 @@
+user create --password abc123 --nickname abolfazl12 --username Abolfazl
+user create --password abc123 --nickname ali12 --username Ali
+user login --password abc123 --username Abolfazl
+user login --password abc123 --username Ali
+menu enter duel
+duel --new --second-player Abolfazl --rounds 1
+user login --password abc123 --username Ali
+user login --password abc123 --username Abolfazl
+menu enter deck
+deck create test
+deck set-activate test
+deck add-card --card Alexandrite Dragon --deck test
+select --monster 5 --opponent
+
+
+user login --password abc123 --username Abolfazl
+menu enter shop
+shop show --all
+shop buy Alexandrite Dragon
+shop buy Yomi Ship

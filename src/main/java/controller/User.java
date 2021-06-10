@@ -2,14 +2,13 @@ package controller;
 
 import model.Deck;
 import model.UserData;
+import model.cards.Card;
 
 import java.util.ArrayList;
 
 public class User {
     private static ArrayList<User> allUser;
     private final UserData userData;
-    private ArrayList<String> decksName = new ArrayList<>();
-    private ArrayList<String> cardsThatThereIsNotInAnyDeck;
 
     static {
         allUser = new ArrayList<>();
@@ -19,9 +18,6 @@ public class User {
         userData = new UserData(username, nickname, password);
         allUser.add(this);
     }
-
-
-
 
     public static User getUserByUsername(String username) throws Exception {
         for (User user : allUser) {
@@ -77,17 +73,16 @@ public class User {
         return scoreboard;
     }
 
-    public void addDeck(String deckName) {
-        if(decksName == null) decksName = new ArrayList<>();
-        decksName.add(deckName);
+    public void addDeck(Deck deck) {
+        userData.addDeck(deck);
     }
 
     public Deck getActiveDeck(){
         return Deck.getDeckWithName(userData.getActiveDeckName());
     }
 
-    public ArrayList<String> getDecksName() {
-        return decksName;
+    public ArrayList<Deck> getDecks() {
+        return userData.getDecks();
     }
 
     public void setActiveDeckName(String activeDeckName) {
@@ -98,8 +93,22 @@ public class User {
         return userData.getUsername();
     }
 
-    public ArrayList<String> getCardsThatThereIsNotInAnyDeck() {
-        return this.cardsThatThereIsNotInAnyDeck;
+    public boolean haveThisCardFree(String cardName){
+        try {
+            return getCardsThatThereIsNotInAnyDeck().contains(Card.getCardIdByName(cardName));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public ArrayList<Integer> getCardsThatThereIsNotInAnyDeck() {
+        ArrayList<Integer> result = new ArrayList<>(userData.getMyCardsIds());
+        for (Deck deck : getDecks()){
+            result.removeAll(deck.getMainDeckIds());
+            result.removeAll(deck.getSideDeckIds());
+        }
+
+        return result;
     }
 
     public void setActiveDeck(String deckName) {

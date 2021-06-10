@@ -2,14 +2,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.User;
 import controller.ApplicationManger;
-import model.Deck;
 import model.cards.data.ReadMonsterCardsData;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -19,14 +17,6 @@ public class Main {
         new ReadMonsterCardsData().readCardsData();
         File users = new File("users");
         users.mkdir();
-        FileWriter decks = new FileWriter("decks.json");
-        ArrayList<Deck> allOfDecks = new ArrayList<>();
-        String stringOfDecksFile = new String(Files.readAllBytes(Paths.get("decks.json")));
-        allOfDecks = new Gson().fromJson(stringOfDecksFile,
-                new TypeToken<List<Deck>>() {
-                }.getType());
-        Deck.setDecks(allOfDecks);
-
 
         File directoryPath = new File("users");
         File[] filesList = directoryPath.listFiles();

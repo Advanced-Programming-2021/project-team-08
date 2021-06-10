@@ -1,6 +1,7 @@
 package model.gameplay;
 
 import model.cards.Card;
+import model.cards.data.CardData;
 import model.enums.ZoneType;
 import model.Deck;
 
@@ -18,7 +19,10 @@ public class PlayerBoard {
     }};
 
     public PlayerBoard(Deck playerDeck) {
-        deckZone.addCards(playerDeck.getMainDeck());
+        ArrayList<CardData> deck = playerDeck.getMainDeck();
+        for(CardData data : deck){
+            deckZone.appendCard(Card.createCardByCardData(data));
+        }
     }
 
     public ArrayList<CardSlot> getMonsterZone() {

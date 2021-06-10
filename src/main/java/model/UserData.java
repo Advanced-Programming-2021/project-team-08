@@ -87,6 +87,10 @@ public class UserData {
     public void addCard(int id) {
         myCardsIds.add(id);
     }
+
+    public ArrayList<Integer> getMyCardsIds() {
+        return myCardsIds;
+    }
 }
 
 
