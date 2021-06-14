@@ -25,6 +25,9 @@ public class MainMenuController {
                 System.out.println("Duel Menu");
                 ApplicationManger.goToScene(SceneName.GAMEPLAY_SCENE);
                 return 0;
+            case "import":
+                System.out.println("import menu");
+                ApplicationManger.goToScene(SceneName.IMPORT_EXPORT_MENU);
             default:
                 System.out.println("invalid menu name");
                 return 1;

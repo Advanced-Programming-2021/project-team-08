@@ -38,7 +38,8 @@ public class ApplicationManger {
                 currentScene.start();
                 break;
             case IMPORT_EXPORT_MENU:
-                // TODO: ۱۹/۰۵/۲۰۲۱ this
+                currentScene = new ImportScene();
+                currentScene.start();
                 break;
             case GAMEPLAY_SCENE:
                 currentScene = new GamePlayScene();
