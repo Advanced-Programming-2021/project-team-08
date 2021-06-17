@@ -20,7 +20,11 @@ public class Player {
         this.playerBoard = playerBoard;
 
         for (int i = 0; i < 6; i++) {
-            drawCard();
+            try {
+                handCards.add(playerBoard.drawCardFromDeck());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -41,11 +45,17 @@ public class Player {
     }
 
     public void drawCard() {
-        handCards.add(playerBoard.drawCardFromDeck());
+        try {
+            Card c = playerBoard.drawCardFromDeck();
+            handCards.add(c);
+            System.out.println("new card added to the hand: " + c.getCardData().getCardName());
+        } catch (Exception e) {
+            // TODO: ۱۷/۰۶/۲۰۲۱ Game Over
+        }
     }
 
     public Card getCardFromHand(int number) {
-        return handCards.get(number);
+        return handCards.get(number - 1);
     }
 
     public void summonCard(Card card) throws Exception {
@@ -60,7 +70,8 @@ public class Player {
         } else {
             handCards.remove(card);
             playerBoard.summonMonster(card);
-            ((MonsterCard)card).onSummon();
+            ((MonsterCard) card).onSummon();
+            summonOrSetInThisTurn = true;
         }
     }
 
@@ -71,12 +82,13 @@ public class Player {
             throw new Exception("You can't set this card");
         } else if (playerBoard.isMonsterZoneFull()) {
             throw new Exception("Monster zone is full");
-        }else if (summonOrSetInThisTurn) {
+        } else if (summonOrSetInThisTurn) {
             throw new Exception("You already summon/set in this turn");
         } else {
             handCards.remove(card);
             playerBoard.setMonster(card);
-            ((MonsterCard)card).onSet();
+            ((MonsterCard) card).onSet();
+            summonOrSetInThisTurn = true;
         }
     }
 }

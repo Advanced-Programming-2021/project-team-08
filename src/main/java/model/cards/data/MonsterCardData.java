@@ -1,5 +1,6 @@
 package model.cards.data;
 
+import model.enums.CardType;
 import model.enums.MonsterAttribute;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MonsterCardData extends CardData {
     private static ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
     public MonsterCardData() {
+        cardType = CardType.MONSTER;
         CardData.addCardData(this);
         allMonsterCardData.add(this);
         id = idCounter;

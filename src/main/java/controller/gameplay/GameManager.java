@@ -76,6 +76,7 @@ public class GameManager {
 
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
+        getCurrentTurnPlayer().drawCard();
 
         scene.showPhase("Draw");
         scene.showBoard(getGameBoardString());
@@ -104,6 +105,11 @@ public class GameManager {
 
     private Player getCurrentTurnPlayer() {
         if (currentPlayerTurn == 1) return player1;
+        else return player2;
+    }
+
+    private Player getCurrentTurnOpponentPlayer() {
+        if (currentPlayerTurn == 2) return player1;
         else return player2;
     }
 
@@ -154,44 +160,45 @@ public class GameManager {
     public void summonCard() {
         try {
             getCurrentTurnPlayer().summonCard(currentSelectedCard);
-        }catch (Exception e){
+            scene.log("summoned successfully");
+        } catch (Exception e) {
             scene.showError(e.getMessage());
         }
     }
+
     public void setCard() {
         try {
             getCurrentTurnPlayer().setCard(currentSelectedCard);
-        }catch (Exception e){
+            scene.log("set successfully");
+        } catch (Exception e) {
             scene.showError(e.getMessage());
         }
     }
 
     public String getGameBoardString() {
         String toShow = "";
-        if (turn % 2 == 1) {
-            toShow += player2.getUserData().getNickname() + ":" + player2.getLP() + "\n";
+        toShow += getCurrentTurnOpponentPlayer().getUserData().getNickname() + ":" + getCurrentTurnOpponentPlayer().getLP() + "\n";
 
-            for (int i = 7; i > player2.getHandCards().size(); i--) {
-                toShow += "\t";
-            }
-            for (int i = 0; i < player2.getHandCards().size(); i++) {
-                toShow += "c\t";
-            }
-            toShow += "\n";
-
-            toShow += player2.getPlayerBoard().getShowingString(false);
-
-            toShow += "-----------------------------\n";
-
-            toShow += player1.getPlayerBoard().getShowingString(true);
-
-            for (int i = 0; i < player1.getHandCards().size(); i++) {
-                toShow += "c\t";
-            }
-            toShow += "\n";
-
-            toShow += player1.getUserData().getNickname() + ":" + player1.getLP() + "\n";
+        for (int i = 7; i > getCurrentTurnOpponentPlayer().getHandCards().size(); i--) {
+            toShow += "\t";
         }
+        for (int i = 0; i < getCurrentTurnOpponentPlayer().getHandCards().size(); i++) {
+            toShow += "c\t";
+        }
+        toShow += "\n";
+
+        toShow += getCurrentTurnOpponentPlayer().getPlayerBoard().getShowingString(false);
+
+        toShow += "-----------------------------\n";
+
+        toShow += getCurrentTurnPlayer().getPlayerBoard().getShowingString(true);
+
+        for (int i = 0; i < getCurrentTurnPlayer().getHandCards().size(); i++) {
+            toShow += "c\t";
+        }
+        toShow += "\n";
+
+        toShow += getCurrentTurnPlayer().getUserData().getNickname() + ":" + getCurrentTurnPlayer().getLP() + "\n";
 
         return toShow;
     }

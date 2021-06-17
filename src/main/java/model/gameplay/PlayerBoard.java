@@ -29,7 +29,7 @@ public class PlayerBoard {
         return monsterZone;
     }
 
-    public Card drawCardFromDeck() {
+    public Card drawCardFromDeck() throws Exception {
         return deckZone.drawTopCard();
     }
 
@@ -76,10 +76,11 @@ public class PlayerBoard {
     }
 
     public void summonMonster(Card card) {
-        for (CardSlot slot : monsterZone){
-            if(slot.isEmpty()){
+        for (CardSlot slot : monsterZone) {
+            if (slot.isEmpty()) {
                 try {
                     slot.setCard(card);
+                    return;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -88,8 +89,8 @@ public class PlayerBoard {
     }
 
     public void setMonster(Card card) {
-        for (CardSlot slot : monsterZone){
-            if(slot.isEmpty()){
+        for (CardSlot slot : monsterZone) {
+            if (slot.isEmpty()) {
                 try {
                     slot.setCard(card);
                 } catch (Exception e) {

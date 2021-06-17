@@ -29,7 +29,11 @@ public class CardSlot {
 
     public void setCard(Card card) throws Exception {
         if (isSingular) {
-            if (cards.size() > 0) throw new Exception("this zone already had card");
+            if (cards.size() > 0) {
+                throw new Exception("this zone already had card");
+            } else {
+                cards.add(card);
+            }
             return;
         }
     }
@@ -52,7 +56,8 @@ public class CardSlot {
         cards.add(card);
     }
 
-    public Card drawTopCard() {
+    public Card drawTopCard() throws Exception {
+        if (cards.size() == 0) throw new Exception("There is no card to draw");
         Card c = cards.get(cards.size() - 1);
         cards.remove(cards.size() - 1);
         return c;

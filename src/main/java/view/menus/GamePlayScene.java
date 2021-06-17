@@ -26,8 +26,9 @@ public class GamePlayScene extends Scene {
         }
 
         if (sceneController.isDuelStarted()) {
-            if(userInput.equals("next phase")){
+            if (userInput.equals("next phase")) {
                 sceneController.getGameManager().goToNextPhase();
+                return 1;
             }
 
             switch (sceneController.getGameManager().getCurrentPhase()) {
@@ -56,14 +57,15 @@ public class GamePlayScene extends Scene {
     }
 
     private void drawPhaseCommand(String userInput) {
-
+        System.out.println("Invalid Command!");
     }
 
     private void standbyPhaseCommand(String userInput) {
         Matcher matcher;
 
-        if(userInput.equals("select -d")){
+        if (userInput.equals("select -d")) {
             sceneController.getGameManager().deselect();
+            return;
         }
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
@@ -71,38 +73,48 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
+
+        System.out.println("Invalid Command!");
     }
 
     private void mainPhaseCommand(String userInput) {
         Matcher matcher;
 
+        if (userInput.equals("select -d")) {
+            sceneController.getGameManager().deselect();
+            return;
+        }
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
-
-        if(userInput.equals("select -d")){
-            sceneController.getGameManager().deselect();
-        }
-
-        if(userInput.equals("summon")){
+        if (userInput.equals("summon")) {
             sceneController.getGameManager().summonCard();
+            return;
         }
+        if (userInput.equals("set")) {
+            sceneController.getGameManager().setCard();
+            return;
+        }
+
+        System.out.println("Invalid Command!");
     }
 
     private void battlePhaseCommand(String userInput) {
         Matcher matcher;
 
+        if (userInput.equals("select -d")) {
+            sceneController.getGameManager().deselect();
+            return;
+        }
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
 
-        if(userInput.equals("select -d")){
-            sceneController.getGameManager().deselect();
-        }
+        System.out.println("Invalid Command!");
     }
 
     private void endPhaseCommand(String userInput) {

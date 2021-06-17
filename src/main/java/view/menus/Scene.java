@@ -14,4 +14,8 @@ public abstract class Scene {
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
+
+    public void log(String message){
+        System.out.println(message);
+    }
 }
