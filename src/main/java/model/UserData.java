@@ -69,7 +69,7 @@ public class UserData {
     }
 
     public Deck getActiveDeck(){
-        return Deck.getDeckWithName(activeDeckName);
+        return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
     }
 
     public void addDeck(Deck deck) {

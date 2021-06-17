@@ -58,5 +58,11 @@ public abstract class Card {
         return cardData;
     }
 
+    public CardType getCardType() {
+        return cardType;
+    }
+
     public abstract void setup();
+
+    public void onAttacked(){}
 }

@@ -2,6 +2,7 @@ package controller.gameplay;
 
 import model.Command;
 import model.UserData;
+import model.cards.Card;
 import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
 import model.gameplay.*;
@@ -24,7 +25,7 @@ public class GameManager {
     private Phase currentPhase;
     private GameBoard gameBoard;
 
-    private CardSlot currentSelectedZone;
+    private Card currentSelectedCard;
 
     private GamePlayScene scene;
 
@@ -106,10 +107,10 @@ public class GameManager {
         else return player2;
     }
 
-    public void selectZone(String address) {
+    public void selectCard(String address) {
         try {
             Command command = Command.parseCommand(address, selectMonsterCardCommand);
-            currentSelectedZone = gameBoard.getCardSlot(Boolean.parseBoolean(command.getField("opponent")),
+            CardSlot currentSelectedZone = gameBoard.getCardSlot(Boolean.parseBoolean(command.getField("opponent")),
                     ZoneType.MONSTER,
                     Integer.parseInt(command.getField("monster")));
             if (currentSelectedZone == null) {
@@ -118,22 +119,50 @@ public class GameManager {
             }
             if (currentSelectedZone.isEmpty()) {
                 scene.showError("No card found in the given position");
-                currentSelectedZone = null;
                 return;
             }
+            currentSelectedCard = currentSelectedZone.getCard();
 
             System.out.println("card selected");
         } catch (ParseCommandException e) {
-            scene.showError("Invalid selection");
+            try {
+                Command command = Command.parseCommand(address, selectHandCardCommand);
+                Card temp = getCurrentTurnPlayer().getCardFromHand(Integer.parseInt(command.getField("hand")));
+
+                if (temp == null) {
+                    scene.showError("Invalid selection");
+                    return;
+                }
+                currentSelectedCard = temp;
+
+                System.out.println("card selected");
+            } catch (ParseCommandException e2) {
+                scene.showError("Invalid selection");
+            }
         }
     }
 
     public void deselect() {
-        if (currentSelectedZone == null) {
+        if (currentSelectedCard == null) {
             scene.showError("No card selected yet");
         } else {
-            currentSelectedZone = null;
+            currentSelectedCard = null;
             System.out.println("card deselected");
+        }
+    }
+
+    public void summonCard() {
+        try {
+            getCurrentTurnPlayer().summonCard(currentSelectedCard);
+        }catch (Exception e){
+            scene.showError(e.getMessage());
+        }
+    }
+    public void setCard() {
+        try {
+            getCurrentTurnPlayer().setCard(currentSelectedCard);
+        }catch (Exception e){
+            scene.showError(e.getMessage());
         }
     }
 

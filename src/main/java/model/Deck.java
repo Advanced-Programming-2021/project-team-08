@@ -67,8 +67,10 @@ public class Deck {
 
     public static ArrayList<CardData> getCardDataArrayFromIdArray(ArrayList<Integer> cardIds) {
         ArrayList<CardData> result = new ArrayList<>();
+        CardData temp;
         for (Integer id : cardIds) {
-            result.add(CardData.getAllCardData().stream().filter(c -> c.getCardId() == id).findFirst().orElse(null));
+            temp = CardData.getAllCardData().stream().filter(c -> c.getCardId() == id).findFirst().orElse(null);
+            if(temp != null) result.add(temp);
         }
         return result;
     }

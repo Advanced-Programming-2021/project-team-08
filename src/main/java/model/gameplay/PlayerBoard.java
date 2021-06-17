@@ -20,7 +20,7 @@ public class PlayerBoard {
 
     public PlayerBoard(Deck playerDeck) {
         ArrayList<CardData> deck = playerDeck.getMainDeck();
-        for(CardData data : deck){
+        for (CardData data : deck) {
             deckZone.appendCard(Card.createCardByCardData(data));
         }
     }
@@ -29,7 +29,7 @@ public class PlayerBoard {
         return monsterZone;
     }
 
-    public Card drawCardFromDeck(){
+    public Card drawCardFromDeck() {
         return deckZone.drawTopCard();
     }
 
@@ -65,5 +65,37 @@ public class PlayerBoard {
             }
         }
         return result;
+    }
+
+    public boolean isMonsterZoneFull() {
+        for (int i = 0; i < 5; i++) {
+            if (monsterZone.get(i).isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    public void summonMonster(Card card) {
+        for (CardSlot slot : monsterZone){
+            if(slot.isEmpty()){
+                try {
+                    slot.setCard(card);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void setMonster(Card card) {
+        for (CardSlot slot : monsterZone){
+            if(slot.isEmpty()){
+                try {
+                    slot.setCard(card);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

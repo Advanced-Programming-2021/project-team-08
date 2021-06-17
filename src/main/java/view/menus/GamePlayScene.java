@@ -1,7 +1,6 @@
 package view.menus;
 
 import controller.GamePlaySceneController;
-import model.enums.Phase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,7 +68,7 @@ public class GamePlayScene extends Scene {
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            sceneController.getGameManager().selectZone(matcher.group(1));
+            sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
     }
@@ -79,8 +78,16 @@ public class GamePlayScene extends Scene {
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            sceneController.getGameManager().selectZone(matcher.group(1));
+            sceneController.getGameManager().selectCard(matcher.group(1));
             return;
+        }
+
+        if(userInput.equals("select -d")){
+            sceneController.getGameManager().deselect();
+        }
+
+        if(userInput.equals("summon")){
+            sceneController.getGameManager().summonCard();
         }
     }
 
@@ -89,8 +96,12 @@ public class GamePlayScene extends Scene {
 
         matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            //sceneController.(matcher.group(1));
+            sceneController.getGameManager().selectCard(matcher.group(1));
             return;
+        }
+
+        if(userInput.equals("select -d")){
+            sceneController.getGameManager().deselect();
         }
     }
 

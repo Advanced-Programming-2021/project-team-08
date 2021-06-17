@@ -78,7 +78,7 @@ public class User {
     }
 
     public Deck getActiveDeck(){
-        return Deck.getDeckWithName(userData.getActiveDeckName());
+        return userData.getActiveDeck();
     }
 
     public ArrayList<Deck> getDecks() {

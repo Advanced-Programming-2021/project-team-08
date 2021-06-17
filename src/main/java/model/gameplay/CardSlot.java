@@ -1,6 +1,8 @@
 package model.gameplay;
 
 import model.cards.Card;
+import model.cards.MonsterCard;
+import model.enums.CardStatus;
 import model.enums.ZoneType;
 
 import java.util.ArrayList;
@@ -37,14 +39,16 @@ public class CardSlot {
     }
 
     //for singular zone
-
+    public Card getCard() {
+        return cards.get(0);
+    }
 
     //for non-singular zone
     public void addCards(ArrayList<Card> cards) {
         this.cards.addAll(cards);
     }
 
-    public void appendCard(Card card){
+    public void appendCard(Card card) {
         cards.add(card);
     }
 
@@ -56,6 +60,38 @@ public class CardSlot {
 
     @Override
     public String toString() {
+        switch (zoneType) {
+            case GRAVEYARD:
+            case DECK:
+                return cards.size() + "";
+            case FIELD:
+                if (isEmpty()) {
+                    return "E";
+                } else {
+                    return "O";
+                }
+            case MONSTER:
+                if (isEmpty()) {
+                    return "E";
+                } else {
+                    MonsterCard card = (MonsterCard) cards.get(0);
+                    if (card.getCardStatus() == CardStatus.FACE_UP) {
+                        if (card.isAttackPosition()) {
+                            return "OO";
+                        } else {
+                            return "DO";
+                        }
+                    } else {
+                        return "DH";
+                    }
+                }
+            case SPELL_AND_TRAP:
+                if (isEmpty()) {
+                    return "E";
+                } else {
+                    return "O";
+                }
+        }
         return "O";
     }
 }

@@ -1,14 +1,12 @@
 package controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import model.UserData;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
