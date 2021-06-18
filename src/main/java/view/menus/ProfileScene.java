@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileScene extends Scene {
-    private ProfileController profileController;
+    private final ProfileController profileController;
 
     public ProfileScene() {
         profileController = new ProfileController(this);
@@ -57,8 +57,4 @@ public class ProfileScene extends Scene {
         }
     }
 
-    public Matcher getCommandMatcher(String regex, String input) {
-        Matcher matcher = Pattern.compile(regex).matcher(input);
-        return matcher;
-    }
 }

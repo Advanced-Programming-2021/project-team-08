@@ -14,7 +14,7 @@ public class MonsterCardData extends CardData {
     private String monsterType;
 
     private int attackPoints, defencePoints;
-    private static ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
+    private static final ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
     public MonsterCardData() {
         cardType = CardType.MONSTER;
@@ -77,8 +77,6 @@ public class MonsterCardData extends CardData {
         }
         return null;
     }
-
-
 
     public static void printAllMonsterCard() {
         for (MonsterCardData monsterCardData : allMonsterCardData) {

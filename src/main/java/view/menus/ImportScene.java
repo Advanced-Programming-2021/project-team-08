@@ -25,6 +25,7 @@ public class ImportScene extends Scene {
             return 1;
         } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("import menu");
+            return 1;
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
             return 0;
         }

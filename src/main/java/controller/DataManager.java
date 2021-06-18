@@ -1,9 +1,13 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import model.UserData;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
+import model.cards.data.SpellCardData;
+import model.cards.data.TrapCardData;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -33,17 +37,34 @@ public class DataManager {
     }
 
     public static void exportCard(String cardName) {
-        File fileReader;
+        FileReader fileReader;
         String fileLocation = "cards/" + cardName + ".json";
-        fileReader = new File(fileLocation);
+        File file = new File(fileLocation);
         try {
-            String fileData = new String(Files.readAllBytes(Paths.get(fileReader.toString())));
-            CardData cardData = new Gson().fromJson(fileData, MonsterCardData.class);
+            fileReader = new FileReader(fileLocation);
+            String fileData = new String(Files.readAllBytes(Paths.get(file.toString())));
+            JsonObject jsonObject = JsonParser.parseReader(fileReader).getAsJsonObject();
+            CardData cardData;
+            switch (jsonObject.get("cardType").toString().replaceAll("\"", "")) {
+                case "MONSTER" :
+                    cardData = new Gson().fromJson(fileData, MonsterCardData.class);
+                    break;
+                case "SPELL":
+                    cardData = new Gson().fromJson(fileData, SpellCardData.class);
+                    break;
+                case "TRAP":
+                    cardData = new Gson().fromJson(fileData, TrapCardData.class);
+                    break;
+                default:
+                    System.out.println("couldn't find card type");
+                    return;
+            }
             System.out.println(cardData);
         } catch (IOException e) {
             System.out.println("the file isn't saved yet.");
         }
 
     }
+
 
 }

@@ -17,10 +17,13 @@ public class ReadSpellTrapCardsData {
                 String[] data = row.split(",");
                 if (data.length == 7) {
                     readACardData(data);
-                } else System.out.println("couldn't parse a row from SpellTrap.csv file");
+                } else {
+                    System.out.println("couldn't parse a row from SpellTrap.csv file in row ");
+                }
             }
             csvReader.close();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             System.out.println("some thing was wrong in csvReader in spell trap reader");
         }
     }
@@ -30,12 +33,12 @@ public class ReadSpellTrapCardsData {
             TrapCardData trapCardData = new TrapCardData();
             trapCardData = (TrapCardData) setSpellTrapData(data, trapCardData);
             trapCardData.setLimited(data[4].trim().equals("Limited"));
-            trapCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT)));
+            trapCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-","_")));
         }else if (data[1].equals("Spell")) {
             SpellCardData spellCardData = new SpellCardData();
             spellCardData = (SpellCardData) setSpellTrapData(data, spellCardData);
             spellCardData.setLimited(data[4].trim().equals("Limited"));
-            spellCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT)));
+            spellCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-","_")));
         }else {
             System.out.println("the card type is wrong");
         }
