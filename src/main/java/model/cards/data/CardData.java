@@ -9,6 +9,7 @@ public abstract class CardData {
     protected String cardName;
     protected int cardId;
     protected int price;
+    protected String cardDescription;
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
     public String getCardName() {
@@ -20,8 +21,9 @@ public abstract class CardData {
     }
 
     public static CardData getCardByName(String cardName) {
-        CardData cardData = MonsterCardData.getCardByName(cardName);
-        if (cardData != null) return cardData;
+        for (CardData cardData : allCardData) {
+            if (cardData.getName().equals(cardName)) return cardData;
+        }
         return null;
     }
 
@@ -41,7 +43,27 @@ public abstract class CardData {
         return allCardData;
     }
 
-    public abstract String getName();
+    public  String getName() {
+        return cardName;
+    }
 
-    public abstract String getCardDescription();
+    public void setName(String name) {
+        this.cardName = name;
+    }
+
+    public String getCardDescription() {
+        return cardDescription;
+    }
+
+    public void setCardDescription(String cardDescription) {
+        this.cardDescription = cardDescription;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setId(int id) {
+        this.cardId = id;
+    }
 }

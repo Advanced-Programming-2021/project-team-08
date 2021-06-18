@@ -12,19 +12,14 @@ public class MonsterCardData extends CardData {
     private MonsterAttribute attribute;
     private String type;
     private String monsterType;
-    private static int idCounter = 1;
 
     private int attackPoints, defencePoints;
-    private String cardDescription;
-
     private static ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
     public MonsterCardData() {
         cardType = CardType.MONSTER;
         CardData.addCardData(this);
         allMonsterCardData.add(this);
-        cardId = idCounter;
-        idCounter ++;
     }
 
     public void setAttackPoints(int attackPoints) {
@@ -33,10 +28,6 @@ public class MonsterCardData extends CardData {
 
     public void setAttribute(MonsterAttribute attribute) {
         this.attribute = attribute;
-    }
-
-    public void setCardDescription(String cardDescription) {
-        this.cardDescription = cardDescription;
     }
 
     public void setDefencePoints(int defencePoints) {
@@ -51,21 +42,8 @@ public class MonsterCardData extends CardData {
         this.type = type;
     }
 
-    public void setName(String name) {
-        this.cardName = name;
-    }
-
     public void setMonsterType(String monsterType) {
         this.monsterType = monsterType;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    @Override
-    public String getName() {
-        return cardName;
     }
 
     public int getLevel() {
@@ -92,10 +70,6 @@ public class MonsterCardData extends CardData {
         return type;
     }
 
-    @Override
-    public String getCardDescription() {
-        return cardDescription;
-    }
 
     public static MonsterCardData getCardByName(String cardName) {
         for (MonsterCardData monsterCardData : allMonsterCardData) {
@@ -104,14 +78,12 @@ public class MonsterCardData extends CardData {
         return null;
     }
 
-    public void setId(int id) {
-        this.cardId = id;
-    }
 
-    public static void printAllCard() {
+
+    public static void printAllMonsterCard() {
         for (MonsterCardData monsterCardData : allMonsterCardData) {
             try {
-                System.out.println("name: " + monsterCardData.getName() + "  level: " + monsterCardData.getLevel());
+                System.out.println("name: " + monsterCardData.getName() + "  level: " + monsterCardData.getLevel() + " id: " + monsterCardData.getCardId());
                 System.out.println("monster attribute: " + monsterCardData.getAttribute());
                 System.out.println("monster type: " + monsterCardData.getMonsterType());
                 System.out.println("monster card type:" + monsterCardData.getType());

@@ -3,6 +3,7 @@ import com.google.gson.reflect.TypeToken;
 import controller.User;
 import controller.ApplicationManger;
 import model.cards.data.ReadMonsterCardsData;
+import model.cards.data.ReadSpellTrapCardsData;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         ApplicationManger applicationManger = new ApplicationManger();
         new ReadMonsterCardsData().readCardsData();
+        new ReadSpellTrapCardsData().readSpellTrapData();
         File users = new File("users");
         users.mkdir();
 
