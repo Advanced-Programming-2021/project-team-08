@@ -29,6 +29,14 @@ public class PlayerBoard {
         return monsterZone;
     }
 
+    public CardSlot getGraveyard() {
+        return graveyard;
+    }
+
+    public ArrayList<CardSlot> getSpellAndTrapZone() {
+        return spellAndTrapZone;
+    }
+
     public Card drawCardFromDeck() throws Exception {
         return deckZone.drawTopCard();
     }

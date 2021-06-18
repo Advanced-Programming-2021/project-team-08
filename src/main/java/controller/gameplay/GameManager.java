@@ -1,5 +1,6 @@
 package controller.gameplay;
 
+import controller.GamePlaySceneController;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
@@ -28,18 +29,24 @@ public class GameManager {
     private Card currentSelectedCard;
 
     private GamePlayScene scene;
+    private GamePlaySceneController sceneController;
 
-    public GameManager(UserData user1, UserData user2, GamePlayScene scene) {
-        gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck());
+    public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
+        gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
         this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
         this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
         this.scene = scene;
+        this.sceneController = gamePlaySceneController;
 
         firstSetup();
     }
 
     public Phase getCurrentPhase() {
         return currentPhase;
+    }
+
+    public int getCurrentPlayerTurn() {
+        return currentPlayerTurn;
     }
 
     public void firstSetup() {
@@ -186,8 +193,10 @@ public class GameManager {
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
-        // TODO: ۱۸/۰۶/۲۰۲۱ destroy cards
+        if(result.isDestroyCard1()) CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
+        if(result.isDestroyCard2()) CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
         scene.log(result.getResultMessage());
+        attacked.onAttacked();
     }
 
     public String getGameBoardString() {
@@ -216,5 +225,20 @@ public class GameManager {
         toShow += getCurrentTurnPlayer().getUserData().getNickname() + ":" + getCurrentTurnPlayer().getLP() + "\n";
 
         return toShow;
+    }
+
+    public void checkGameOver(){
+        if(player1.getLP() <= 0){
+            finishGame(player2, player1);
+        }
+        if(player2.getLP() <= 0){
+            finishGame(player1, player2);
+        }
+        // TODO: ۱۹/۰۶/۲۰۲۱ draw
+    }
+
+    private void finishGame(Player winner, Player looser){
+        sceneController.gameFinished();
+        scene.log("Game Over");
     }
 }

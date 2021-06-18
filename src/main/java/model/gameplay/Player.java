@@ -43,7 +43,10 @@ public class Player {
 
     public void decreaseLP(int amount) {
         LP -= amount;
-        if (LP < 0) LP = 0;
+        if (LP <= 0) {
+            LP = 0;
+            gameManager.checkGameOver();
+        }
     }
 
     public ArrayList<Card> getHandCards() {

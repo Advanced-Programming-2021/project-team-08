@@ -1,6 +1,6 @@
 package model.cards;
 
-public class SpellCard extends Card {
+public class TrapCard extends Card {
     @Override
     public void setup() {
 

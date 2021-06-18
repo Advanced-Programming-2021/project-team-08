@@ -27,6 +27,11 @@ public class CardSlot {
         }
     }
 
+    public static void moveToGraveyard(CardSlot cardSlot, CardSlot graveyard) {
+        graveyard.appendCard(cardSlot.getCard());
+        cardSlot.removeCard();
+    }
+
     public ZoneType getZoneType() {
         return zoneType;
     }
@@ -49,6 +54,10 @@ public class CardSlot {
     //for singular zone
     public Card getCard() {
         return cards.get(0);
+    }
+
+    public void removeCard() {
+        cards.clear();
     }
 
     //for non-singular zone

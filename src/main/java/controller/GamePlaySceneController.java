@@ -92,7 +92,11 @@ public class GamePlaySceneController {
         isDuelStarted = true;
         for (int i = 1; i <= rounds; i++) {
             System.out.println("Round " + i);
-            gameManager = new GameManager(ApplicationManger.getLoggedInUser().getUserData(), secondPlayer, scene);
+            gameManager = new GameManager(ApplicationManger.getLoggedInUser().getUserData(), secondPlayer, scene, this);
         }
+    }
+
+    public void gameFinished() {
+        isDuelStarted = false;
     }
 }
