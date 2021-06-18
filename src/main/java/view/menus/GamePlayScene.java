@@ -113,6 +113,11 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().selectCard(matcher.group(1));
             return;
         }
+        matcher = Pattern.compile("attack ([1-5])").matcher(userInput);
+        if (matcher.matches()) {
+            sceneController.getGameManager().attack(Integer.parseInt(matcher.group(1)));
+            return;
+        }
 
         System.out.println("Invalid Command!");
     }

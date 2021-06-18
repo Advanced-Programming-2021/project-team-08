@@ -75,28 +75,31 @@ public class PlayerBoard {
         return true;
     }
 
-    public void summonMonster(Card card) {
+    public CardSlot summonMonster(Card card) {
         for (CardSlot slot : monsterZone) {
             if (slot.isEmpty()) {
                 try {
                     slot.setCard(card);
-                    return;
+                    return slot;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+        return null;
     }
 
-    public void setMonster(Card card) {
+    public CardSlot setMonster(Card card) {
         for (CardSlot slot : monsterZone) {
             if (slot.isEmpty()) {
                 try {
                     slot.setCard(card);
+                    return slot;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+        return null;
     }
 }

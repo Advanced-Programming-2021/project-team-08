@@ -1,9 +1,12 @@
 package model.gameplay;
 
+import controller.GamePlaySceneController;
+import controller.gameplay.GameManager;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.enums.CardType;
+import model.enums.ZoneType;
 
 import java.util.ArrayList;
 
@@ -12,12 +15,14 @@ public class Player {
     private int LP = 8000;
     private ArrayList<Card> handCards = new ArrayList<>();
     private PlayerBoard playerBoard;
+    private GameManager gameManager;
 
     private boolean summonOrSetInThisTurn = false;
 
-    public Player(UserData userData, PlayerBoard playerBoard) {
+    public Player(UserData userData, PlayerBoard playerBoard, GameManager gameManager) {
         this.userData = userData;
         this.playerBoard = playerBoard;
+        this.gameManager = gameManager;
 
         for (int i = 0; i < 6; i++) {
             try {
@@ -34,6 +39,11 @@ public class Player {
 
     public int getLP() {
         return LP;
+    }
+
+    public void decreaseLP(int amount) {
+        LP -= amount;
+        if (LP < 0) LP = 0;
     }
 
     public ArrayList<Card> getHandCards() {
@@ -69,10 +79,11 @@ public class Player {
             throw new Exception("You already summon/set in this turn");
         } else {
             handCards.remove(card);
-            playerBoard.summonMonster(card);
-            ((MonsterCard) card).onSummon();
+            ((MonsterCard) card).onSummon(playerBoard.summonMonster(card));
             summonOrSetInThisTurn = true;
         }
+
+        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
     }
 
     public void setCard(Card card) throws Exception {
@@ -86,9 +97,26 @@ public class Player {
             throw new Exception("You already summon/set in this turn");
         } else {
             handCards.remove(card);
-            playerBoard.setMonster(card);
-            ((MonsterCard) card).onSet();
+            ((MonsterCard) card).onSet(playerBoard.setMonster(card));
             summonOrSetInThisTurn = true;
         }
+
+        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+    }
+
+    public void attack(Card myCard, CardSlot attackTo) throws Exception {
+        if (myCard == null) {
+            throw new Exception("No card selected yet");
+        } else if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
+            throw new Exception("You can't attack with this card");
+        } else if (attackTo.isEmpty()) {
+            throw new Exception("There is no card to attack here");
+        } else {
+            AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
+            gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
+        }
+
+        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+        // TODO: ۱۷/۰۶/۲۰۲۱ already attacked
     }
 }

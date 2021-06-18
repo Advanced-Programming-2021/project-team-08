@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public abstract class CardData {
     protected CardType cardType;
     protected String cardName;
-    protected int CardId;
+    protected int cardId;
+    protected int price;
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
     public String getCardName() {
@@ -24,9 +25,13 @@ public abstract class CardData {
         return null;
     }
 
-    public abstract int getPrice();
+    public int getPrice(){
+        return  price;
+    }
 
-    public abstract int getCardId();
+    public int getCardId(){
+        return cardId;
+    }
 
     public static void addCardData(CardData cardData) {
         allCardData.add(cardData);

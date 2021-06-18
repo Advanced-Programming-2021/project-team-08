@@ -31,8 +31,8 @@ public class GameManager {
 
     public GameManager(UserData user1, UserData user2, GamePlayScene scene) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck());
-        this.player1 = new Player(user1, gameBoard.getPlayer1Board());
-        this.player2 = new Player(user2, gameBoard.getPlayer2Board());
+        this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
+        this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
         this.scene = scene;
 
         firstSetup();
@@ -173,6 +173,21 @@ public class GameManager {
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
+    }
+
+    public void attack(int number) {
+        try {
+            getCurrentTurnPlayer().attack(currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+        } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+
+    public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
+        getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
+        getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
+        // TODO: ۱۸/۰۶/۲۰۲۱ destroy cards
+        scene.log(result.getResultMessage());
     }
 
     public String getGameBoardString() {

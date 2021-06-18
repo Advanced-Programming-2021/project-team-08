@@ -12,11 +12,9 @@ public class MonsterCardData extends CardData {
     private MonsterAttribute attribute;
     private String type;
     private String monsterType;
-    private int id;
     private static int idCounter = 1;
 
     private int attackPoints, defencePoints;
-    int price;
     private String cardDescription;
 
     private static ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
@@ -25,7 +23,7 @@ public class MonsterCardData extends CardData {
         cardType = CardType.MONSTER;
         CardData.addCardData(this);
         allMonsterCardData.add(this);
-        id = idCounter;
+        cardId = idCounter;
         idCounter ++;
     }
 
@@ -78,11 +76,6 @@ public class MonsterCardData extends CardData {
         return attribute;
     }
 
-    @Override
-    public int getPrice() {
-        return price;
-    }
-
     public int getAttackPoints() {
         return attackPoints;
     }
@@ -111,13 +104,8 @@ public class MonsterCardData extends CardData {
         return null;
     }
 
-    @Override
-    public int getCardId() {
-        return id;
-    }
-
     public void setId(int id) {
-        this.id = id;
+        this.cardId = id;
     }
 
     public static void printAllCard() {

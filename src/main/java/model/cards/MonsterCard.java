@@ -3,6 +3,7 @@ package model.cards;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
+import model.gameplay.CardSlot;
 
 public class MonsterCard extends Card {
     private MonsterCardData data;
@@ -13,6 +14,10 @@ public class MonsterCard extends Card {
         this.data = data;
         cardData = data;
         cardType = CardType.MONSTER;
+    }
+
+    public MonsterCardData getData() {
+        return data;
     }
 
     public CardStatus getCardStatus() {
@@ -28,15 +33,19 @@ public class MonsterCard extends Card {
 
     }
 
-    public void changePosition(boolean toAttack){
-
+    public void changePosition(boolean toAttack) {
+        // TODO: ۱۸/۰۶/۲۰۲۱
     }
 
-    public void onSummon(){
+    public void onSummon(CardSlot cardSlot) {
+        this.cardSlot = cardSlot;
         cardStatus = CardStatus.FACE_UP;
+        isAttackPosition = true;
     }
 
-    public void onSet(){
+    public void onSet(CardSlot cardSlot) {
+        this.cardSlot = cardSlot;
         cardStatus = CardStatus.TO_BACK;
+        isAttackPosition = false;
     }
 }

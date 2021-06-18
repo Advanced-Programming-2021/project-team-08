@@ -27,6 +27,10 @@ public class CardSlot {
         }
     }
 
+    public ZoneType getZoneType() {
+        return zoneType;
+    }
+
     public void setCard(Card card) throws Exception {
         if (isSingular) {
             if (cards.size() > 0) {

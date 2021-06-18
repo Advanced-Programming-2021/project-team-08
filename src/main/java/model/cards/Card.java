@@ -1,13 +1,15 @@
 package model.cards;
 
-import controller.DataManager;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.enums.CardType;
+import model.gameplay.CardSlot;
 
 public abstract class Card {
     protected CardType cardType;
     protected CardData cardData;
+
+    protected CardSlot cardSlot;
 
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);
@@ -65,4 +67,8 @@ public abstract class Card {
     public abstract void setup();
 
     public void onAttacked(){}
+
+    public CardSlot getCardSlot(){
+        return cardSlot;
+    }
 }
