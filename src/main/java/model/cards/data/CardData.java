@@ -1,7 +1,12 @@
 package model.cards.data;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import model.effects.Effect;
 import model.enums.CardType;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public abstract class CardData {
@@ -10,6 +15,7 @@ public abstract class CardData {
     protected int cardId;
     protected int price;
     protected String cardDescription;
+    private ArrayList<Effect> effects = new ArrayList<>();
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
     public String getCardName() {
@@ -33,6 +39,10 @@ public abstract class CardData {
 
     public int getCardId(){
         return cardId;
+    }
+
+    public ArrayList<Effect> getEffects() {
+        return effects;
     }
 
     public static void addCardData(CardData cardData) {
@@ -65,5 +75,24 @@ public abstract class CardData {
 
     public void setId(int id) {
         this.cardId = id;
+    }
+
+    public void setEffect(String effectsJson){
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(effectsJson).getAsJsonObject();
+        for (String effectName : jsonObject.keySet()){
+            try {
+                Object[] args = gson.fromJson(jsonObject.get(effectName), Object[].class);
+                effects.add(Effect.getEffectClass(effectName).getConstructor().newInstance(args));
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import controller.GamePlaySceneController;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
+import model.effects.Effect;
 import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
 import model.gameplay.*;
@@ -37,8 +38,13 @@ public class GameManager {
         this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
         this.scene = scene;
         this.sceneController = gamePlaySceneController;
+        Effect.setGameManager(this);
 
         firstSetup();
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
     }
 
     public Phase getCurrentPhase() {

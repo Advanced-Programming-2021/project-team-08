@@ -4,6 +4,7 @@ import controller.User;
 import controller.ApplicationManger;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
+import model.effects.Effect;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -11,8 +12,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Main {
-
-
     public static void main(String[] args) throws Exception {
         ApplicationManger applicationManger = new ApplicationManger();
         new ReadMonsterCardsData().readCardsData();

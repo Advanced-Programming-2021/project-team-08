@@ -1,5 +1,6 @@
 package model.cards.data;
 
+import model.effects.Effect;
 import model.enums.CardType;
 import model.enums.SpellTrapProperty;
 
