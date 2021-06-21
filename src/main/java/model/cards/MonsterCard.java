@@ -7,7 +7,6 @@ import model.gameplay.CardSlot;
 
 public class MonsterCard extends Card {
     private MonsterCardData data;
-    private CardStatus cardStatus;
     private boolean isAttackPosition;
 
     public MonsterCard(MonsterCardData data) {
@@ -18,10 +17,6 @@ public class MonsterCard extends Card {
 
     public MonsterCardData getData() {
         return data;
-    }
-
-    public CardStatus getCardStatus() {
-        return cardStatus;
     }
 
     public boolean isAttackPosition() {

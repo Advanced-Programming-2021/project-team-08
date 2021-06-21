@@ -65,6 +65,10 @@ public class CardSlot {
         this.cards.addAll(cards);
     }
 
+    public ArrayList<Card> getAllCards() {
+        return cards;
+    }
+
     public void appendCard(Card card) {
         cards.add(card);
     }

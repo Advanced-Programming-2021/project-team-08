@@ -27,6 +27,7 @@ public class GameManager {
     private Phase currentPhase;
     private GameBoard gameBoard;
 
+    private CardSlotAddress currentSelectedCardAddress;
     private Card currentSelectedCard;
 
     private GamePlayScene scene;
@@ -41,6 +42,11 @@ public class GameManager {
         Effect.setGameManager(this);
 
         firstSetup();
+    }
+
+    private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
+        this.currentSelectedCard = currentSelectedCard;
+        this.currentSelectedCardAddress = address;
     }
 
     public GameBoard getGameBoard() {
@@ -129,9 +135,10 @@ public class GameManager {
     public void selectCard(String address) {
         try {
             Command command = Command.parseCommand(address, selectMonsterCardCommand);
-            CardSlot currentSelectedZone = gameBoard.getCardSlot(Boolean.parseBoolean(command.getField("opponent")),
+            currentSelectedCardAddress = new CardSlotAddress(Boolean.parseBoolean(command.getField("opponent")),
                     ZoneType.MONSTER,
                     Integer.parseInt(command.getField("monster")));
+            CardSlot currentSelectedZone = gameBoard.getCardSlot(currentSelectedCardAddress);
             if (currentSelectedZone == null) {
                 scene.showError("Invalid selection");
                 return;
@@ -140,7 +147,7 @@ public class GameManager {
                 scene.showError("No card found in the given position");
                 return;
             }
-            currentSelectedCard = currentSelectedZone.getCard();
+            setCurrentSelectedCard(currentSelectedZone.getCard(), currentSelectedCardAddress);
 
             System.out.println("card selected");
         } catch (ParseCommandException e) {
@@ -152,7 +159,7 @@ public class GameManager {
                     scene.showError("Invalid selection");
                     return;
                 }
-                currentSelectedCard = temp;
+                setCurrentSelectedCard(temp, null);
 
                 System.out.println("card selected");
             } catch (ParseCommandException e2) {
@@ -165,7 +172,7 @@ public class GameManager {
         if (currentSelectedCard == null) {
             scene.showError("No card selected yet");
         } else {
-            currentSelectedCard = null;
+            setCurrentSelectedCard(null, null);
             System.out.println("card deselected");
         }
     }
@@ -199,10 +206,31 @@ public class GameManager {
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
-        if(result.isDestroyCard1()) CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
-        if(result.isDestroyCard2()) CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
+        if (result.isDestroyCard1())
+            CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
+        if (result.isDestroyCard2())
+            CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
         scene.log(result.getResultMessage());
         attacked.onAttacked();
+    }
+
+    public void showGraveyard() {
+        scene.showGraveyard(gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0).getAllCards());
+    }
+
+    public void showSelectedCard() {
+        if (currentSelectedCard == null) {
+            scene.showCard("no card is selected yet");
+            return;
+        }
+
+        if (currentSelectedCardAddress != null) {
+            if (currentSelectedCard.getCardStatus() == CardStatus.TO_BACK && currentSelectedCardAddress.forOpponent) {
+                scene.showCard("card is not visible");
+                return;
+            }
+        }
+        scene.showCard(currentSelectedCard.toString());
     }
 
     public String getGameBoardString() {
@@ -233,18 +261,49 @@ public class GameManager {
         return toShow;
     }
 
-    public void checkGameOver(){
-        if(player1.getLP() <= 0){
+    public void checkGameOver() {
+        if (player1.getLP() <= 0) {
             finishGame(player2, player1);
         }
-        if(player2.getLP() <= 0){
+        if (player2.getLP() <= 0) {
             finishGame(player1, player2);
         }
         // TODO: ۱۹/۰۶/۲۰۲۱ draw
     }
 
-    private void finishGame(Player winner, Player looser){
+    private void finishGame(Player winner, Player looser) {
         sceneController.gameFinished();
         scene.log("Game Over");
+    }
+
+
+    public class CardSlotAddress {
+        private boolean forOpponent;
+        private ZoneType zone;
+        private int number;
+
+        public CardSlotAddress(boolean forOpponent, ZoneType zone, int number) {
+            this.forOpponent = forOpponent;
+            this.zone = zone;
+            this.number = number;
+        }
+
+        public CardSlotAddress(boolean forOpponent, ZoneType zone) {
+            this.forOpponent = forOpponent;
+            this.zone = zone;
+            this.number = 0;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public ZoneType getZone() {
+            return zone;
+        }
+
+        public boolean isForOpponent() {
+            return forOpponent;
+        }
     }
 }

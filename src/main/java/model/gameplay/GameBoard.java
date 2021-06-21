@@ -23,6 +23,10 @@ public class GameBoard {
     }
 
 
+    public CardSlot getCardSlot(GameManager.CardSlotAddress address) {
+        return getCardSlot(address.isForOpponent(), address.getZone(), address.getNumber());
+    }
+
     public CardSlot getCardSlot(boolean forOpponent, ZoneType zone, int number) {
         PlayerBoard board;
         if (forOpponent) {

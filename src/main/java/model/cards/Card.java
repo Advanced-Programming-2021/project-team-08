@@ -2,6 +2,7 @@ package model.cards;
 
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
+import model.enums.CardStatus;
 import model.enums.CardType;
 import model.gameplay.CardSlot;
 
@@ -10,6 +11,8 @@ public abstract class Card {
     protected CardData cardData;
 
     protected CardSlot cardSlot;
+
+    protected CardStatus cardStatus;
 
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);
@@ -56,6 +59,11 @@ public abstract class Card {
         }
     }
 
+
+    public CardStatus getCardStatus() {
+        return cardStatus;
+    }
+
     public CardData getCardData() {
         return cardData;
     }
@@ -66,9 +74,15 @@ public abstract class Card {
 
     public abstract void setup();
 
-    public void onAttacked(){}
+    public void onAttacked() {
+    }
 
-    public CardSlot getCardSlot(){
+    public CardSlot getCardSlot() {
         return cardSlot;
+    }
+
+    @Override
+    public String toString() {
+        return cardData.getCardName() + ":" + cardData.getCardDescription();
     }
 }

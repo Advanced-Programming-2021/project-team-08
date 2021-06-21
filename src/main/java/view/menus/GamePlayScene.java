@@ -1,7 +1,9 @@
 package view.menus;
 
 import controller.GamePlaySceneController;
+import model.cards.Card;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +30,23 @@ public class GamePlayScene extends Scene {
         if (sceneController.isDuelStarted()) {
             if (userInput.equals("next phase")) {
                 sceneController.getGameManager().goToNextPhase();
+                return 1;
+            }
+            if (userInput.equals("select -d")) {
+                sceneController.getGameManager().deselect();
+                return 1;
+            }
+            if (userInput.equals("card show --selected")) {
+                sceneController.getGameManager().showSelectedCard();
+                return 1;
+            }
+            if (userInput.equals("show graveyard")) {
+                sceneController.getGameManager().showGraveyard();
+                return 1;
+            }
+            matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
+            if (matcher.matches()) {
+                sceneController.getGameManager().selectCard(matcher.group(1));
                 return 1;
             }
 
@@ -63,32 +82,12 @@ public class GamePlayScene extends Scene {
     private void standbyPhaseCommand(String userInput) {
         Matcher matcher;
 
-        if (userInput.equals("select -d")) {
-            sceneController.getGameManager().deselect();
-            return;
-        }
-
-        matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()) {
-            sceneController.getGameManager().selectCard(matcher.group(1));
-            return;
-        }
-
         System.out.println("Invalid Command!");
     }
 
     private void mainPhaseCommand(String userInput) {
         Matcher matcher;
 
-        if (userInput.equals("select -d")) {
-            sceneController.getGameManager().deselect();
-            return;
-        }
-        matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()) {
-            sceneController.getGameManager().selectCard(matcher.group(1));
-            return;
-        }
         if (userInput.equals("summon")) {
             sceneController.getGameManager().summonCard();
             return;
@@ -104,15 +103,6 @@ public class GamePlayScene extends Scene {
     private void battlePhaseCommand(String userInput) {
         Matcher matcher;
 
-        if (userInput.equals("select -d")) {
-            sceneController.getGameManager().deselect();
-            return;
-        }
-        matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()) {
-            sceneController.getGameManager().selectCard(matcher.group(1));
-            return;
-        }
         matcher = Pattern.compile("attack ([1-5])").matcher(userInput);
         if (matcher.matches()) {
             sceneController.getGameManager().attack(Integer.parseInt(matcher.group(1)));
@@ -132,5 +122,19 @@ public class GamePlayScene extends Scene {
 
     public void showBoard(String gameBoard) {
         System.out.println(gameBoard);
+    }
+
+    public void showGraveyard(ArrayList<Card> cards) {
+        if (cards.size() == 0) {
+            System.out.println("graveyard empty");
+        } else {
+            for (int i = 1; i <= cards.size(); i++) {
+                System.out.println(i + ". " + cards.get(i - 1).toString());
+            }
+        }
+    }
+
+    public void showCard(String toShow){
+        System.out.println(toShow);
     }
 }
