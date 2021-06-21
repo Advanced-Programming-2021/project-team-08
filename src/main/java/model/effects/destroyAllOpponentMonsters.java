@@ -4,8 +4,10 @@ import model.enums.ZoneType;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
+import java.util.ArrayList;
+
 public class destroyAllOpponentMonsters extends Effect {
-    public destroyAllOpponentMonsters(Object[] args) {
+    public destroyAllOpponentMonsters(ArrayList<String> args) {
         super(args);
     }
 
@@ -17,5 +19,6 @@ public class destroyAllOpponentMonsters extends Effect {
                 cardSlot.removeCard();
             }
         }
+        System.out.println("destroyAllOpponentMonsters");
     }
 }

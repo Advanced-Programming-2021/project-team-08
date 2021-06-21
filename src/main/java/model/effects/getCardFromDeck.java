@@ -2,12 +2,15 @@ package model.effects;
 
 import model.gameplay.Player;
 
+import java.util.ArrayList;
+
 public class getCardFromDeck extends Effect{
     private int n;
 
-    public getCardFromDeck(Object[] args) {
+    public getCardFromDeck(ArrayList<String> args) {
         super(args);
-        this.n = (int)args[0];
+        this.n = Integer.parseInt(args.get(0));
+        System.out.println("getCardFromDeck Con");
     }
 
     @Override
@@ -15,5 +18,6 @@ public class getCardFromDeck extends Effect{
         for (int i=0; i<n; i++){
             cardOwner.drawCard();
         }
+        System.out.println("getCardFromDeck " + n);
     }
 }

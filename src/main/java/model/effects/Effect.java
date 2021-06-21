@@ -4,6 +4,7 @@ import controller.gameplay.GameManager;
 import model.gameplay.Player;
 import org.reflections.Reflections;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public abstract class Effect {
@@ -19,10 +20,10 @@ public abstract class Effect {
     }
 
     public static Class<? extends Effect> getEffectClass(String className){
-        return allEffects.stream().filter(c -> c.getName().equals(className)).findFirst().orElse(null);
+        return allEffects.stream().filter(c -> c.getSimpleName().equals(className)).findFirst().orElse(null);
     }
 
-    public Effect(Object[] args) {
+    public Effect(ArrayList<String> args) {
     }
 
     public abstract void activate(Player cardOwner);

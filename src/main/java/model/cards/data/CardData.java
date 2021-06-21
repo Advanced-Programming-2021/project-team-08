@@ -8,6 +8,7 @@ import model.enums.CardType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class CardData {
     protected CardType cardType;
@@ -82,15 +83,9 @@ public abstract class CardData {
         JsonObject jsonObject = JsonParser.parseString(effectsJson).getAsJsonObject();
         for (String effectName : jsonObject.keySet()){
             try {
-                Object[] args = gson.fromJson(jsonObject.get(effectName), Object[].class);
-                effects.add(Effect.getEffectClass(effectName).getConstructor().newInstance(args));
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
+                ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
+                effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
+            } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }

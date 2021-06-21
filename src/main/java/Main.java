@@ -4,7 +4,6 @@ import controller.User;
 import controller.ApplicationManger;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
-import model.effects.Effect;
 
 import java.io.*;
 import java.nio.file.Files;
