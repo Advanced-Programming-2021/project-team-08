@@ -42,4 +42,12 @@ public class SpellCardData extends CardData{
             System.out.println();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName +
+                "\nSpell" +
+                "\nType: " + spellProperty +
+                "\nDescription: " + cardDescription;
+    }
 }

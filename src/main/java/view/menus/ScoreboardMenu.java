@@ -13,6 +13,10 @@ public class ScoreboardMenu extends Scene{
     @Override
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
+        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+            System.out.println("menu navigation is not possible");
+            return 1;
+        }
         if (Pattern.compile("^scoreboard show$").matcher(userInput).find()) {
             showScoreboard();
         }

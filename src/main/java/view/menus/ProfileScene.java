@@ -18,6 +18,10 @@ public class ProfileScene extends Scene {
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
+        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+            System.out.println("menu navigation is not possible");
+            return 1;
+        }
         if ((matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(userInput)).find()) {
             profileController.changeNickname(matcher);
         } else if ((matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(userInput)).find()) {

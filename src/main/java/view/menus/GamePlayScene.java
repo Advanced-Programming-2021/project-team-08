@@ -21,6 +21,14 @@ public class GamePlayScene extends Scene {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
 
+        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+            System.out.println("menu navigation is not possible");
+            return 1;
+        }
+        if(userInput.equals("menu show-current")){
+            System.out.println("Duel Menu");
+            return 1;
+        }
         matcher = Pattern.compile("duel ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
             sceneController.duel(matcher.group(1));
@@ -132,9 +140,5 @@ public class GamePlayScene extends Scene {
                 System.out.println(i + ". " + cards.get(i - 1).toString());
             }
         }
-    }
-
-    public void showCard(String toShow){
-        System.out.println(toShow);
     }
 }

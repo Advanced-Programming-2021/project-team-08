@@ -41,4 +41,12 @@ public class TrapCardData extends CardData{
             System.out.println();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName +
+                "\nTrap" +
+                "\nType: " + trapProperty +
+                "\nDescription: " + cardDescription;
+    }
 }

@@ -220,17 +220,17 @@ public class GameManager {
 
     public void showSelectedCard() {
         if (currentSelectedCard == null) {
-            scene.showCard("no card is selected yet");
+            scene.showError("no card is selected yet");
             return;
         }
 
         if (currentSelectedCardAddress != null) {
             if (currentSelectedCard.getCardStatus() == CardStatus.TO_BACK && currentSelectedCardAddress.forOpponent) {
-                scene.showCard("card is not visible");
+                scene.showError("no card is selected yet");
                 return;
             }
         }
-        scene.showCard(currentSelectedCard.toString());
+        scene.showCard(currentSelectedCard);
     }
 
     public String getGameBoardString() {

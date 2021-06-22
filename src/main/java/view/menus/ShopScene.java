@@ -1,6 +1,7 @@
 package view.menus;
 
 import controller.ApplicationManger;
+import controller.MainMenuController;
 import controller.ShopController;
 import controller.User;
 import model.cards.data.CardData;
@@ -24,6 +25,14 @@ public class ShopScene extends Scene {
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
+        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+            System.out.println("menu navigation is not possible");
+            return 1;
+        }
+        if ((matcher = Pattern.compile("^card show ([^\n]+)$").matcher(userInput)).find()) {
+            showCard(CardData.getCardByName(matcher.group(1)));
+            return 1;
+        }
         if ((matcher = Pattern.compile("^shop buy ([\\w ]+)$").matcher(userInput)).find()) {
             shopController.buyCard(matcher.group(1));
         }

@@ -17,6 +17,10 @@ public class ImportScene extends Scene {
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
+        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+            System.out.println("menu navigation is not possible");
+            return 1;
+        }
         if ((matcher = Pattern.compile("^import card ([a-zA-Z ]+)$").matcher(userInput)).find()) {
             importController.importCard(matcher.group(1).trim());
             return 1;

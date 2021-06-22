@@ -11,8 +11,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ApplicationManger applicationManger = new ApplicationManger();
+        try {
+            firstSetup();
+        }catch (IOException e){
+            System.out.println("ERROR: Couldn't load game!");
+            System.exit(-1);
+        }
+        applicationManger.run();
+    }
+
+    public static void firstSetup() throws IOException {
         new ReadMonsterCardsData().readCardsData();
         new ReadSpellTrapCardsData().readSpellTrapData();
         File users = new File("users");
@@ -29,7 +39,5 @@ public class Main {
                     }.getType()));
         }
         User.setAllUser(allOfUsers);
-
-        applicationManger.run();
     }
 }

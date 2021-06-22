@@ -21,3 +21,4 @@ public class getCardFromDeck extends Effect{
         System.out.println("getCardFromDeck " + n);
     }
 }
+

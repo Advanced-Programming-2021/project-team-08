@@ -210,8 +210,13 @@ public class DeckController {
         ArrayList<Deck> decks = ApplicationManger.getLoggedInUser().getDecks();
         System.out.println("Decks:");
         System.out.println("Active deck:");
-        if (ApplicationManger.getLoggedInUser().getActiveDeck() != null) {
-            System.out.println(ApplicationManger.getLoggedInUser().getActiveDeck());
+        Deck activeDeck = ApplicationManger.getLoggedInUser().getActiveDeck();
+        if (activeDeck !=null){
+            if (Deck.isThisDeckValid(activeDeck)) {
+                System.out.println(activeDeck.getName() + ": main deck " + activeDeck.getMainDeck().size() + ", side deck " + activeDeck.getSideDeck().size() + ", valid");
+            } else {
+                System.out.println(activeDeck.getName() + ": main deck " + activeDeck.getMainDeck().size() + ", side deck " + activeDeck.getSideDeck().size() + ", invalid");
+            }
         }
         System.out.println("Other decks:");
         decks.sort(Comparator.comparing(Deck::getName));
