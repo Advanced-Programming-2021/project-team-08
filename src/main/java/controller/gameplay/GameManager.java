@@ -357,4 +357,8 @@ public class GameManager {
             scene.showError("card with this name doesn't exist");
         }
     }
+
+    public void increaseLP_C(int amount) {
+        getCurrentTurnPlayer().increaseLP(amount);
+    }
 }

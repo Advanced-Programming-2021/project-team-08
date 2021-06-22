@@ -48,6 +48,9 @@ public class Player {
             gameManager.checkGameOver();
         }
     }
+    public void increaseLP(int amount) {
+        LP += amount;
+    }
 
     public ArrayList<Card> getHandCards() {
         return handCards;

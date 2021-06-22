@@ -91,6 +91,11 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().addCard_C(matcher.group(1));
             return 1;
         }
+        matcher = Pattern.compile("increase --LP ([0-9]+)").matcher(userInput);
+        if (matcher.matches()) {
+            sceneController.getGameManager().increaseLP_C(Integer.parseInt(matcher.group(1)));
+            return 1;
+        }
         return 0;
     }
 
