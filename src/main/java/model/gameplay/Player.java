@@ -68,7 +68,8 @@ public class Player {
     }
 
     public Card getCardFromHand(int number) throws Exception {
-        if(number < 1 || number > handCards.size()) throw new Exception("number out of bounds");;
+        if (number < 1 || number > handCards.size()) throw new Exception("number out of bounds");
+        ;
         return handCards.get(number - 1);
     }
 
@@ -122,14 +123,19 @@ public class Player {
     public void attack(Card myCard, CardSlot attackTo) throws Exception {
         if (myCard == null) {
             throw new Exception("no card selected yet");
-        } else if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
-            throw new Exception("you can't attack with this card");
-        } else if (attackTo.isEmpty()) {
-            throw new Exception("there is no card to attack here");
-        } else {
-            AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
-            gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
         }
+        if (myCard.getCardSlot() == null) {
+            throw new Exception("you can't attack with this card");
+        }
+        if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
+            throw new Exception("you can't attack with this card");
+        }
+        if (attackTo.isEmpty()) {
+            throw new Exception("there is no card to attack here");
+        }
+        AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
+        gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
+
 
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۱۷/۰۶/۲۰۲۱ already attacked

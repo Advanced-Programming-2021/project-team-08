@@ -346,4 +346,15 @@ public class GameManager {
             return forOpponent;
         }
     }
+
+
+    //// Cheat codes
+
+    public void addCard_C(String cardName) {
+        try {
+            getCurrentTurnPlayer().getHandCards().add(Card.createCardByName(cardName));
+        } catch (Exception e) {
+            scene.showError("card with this name doesn't exist");
+        }
+    }
 }

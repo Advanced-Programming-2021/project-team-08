@@ -21,11 +21,13 @@ public class GamePlayScene extends Scene {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
 
+        if (cheatCommand(userInput) == 1) return 1;
+
         if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
             System.out.println("menu navigation is not possible");
             return 1;
         }
-        if(userInput.equals("menu show-current")){
+        if (userInput.equals("menu show-current")) {
             System.out.println("Duel Menu");
             return 1;
         }
@@ -81,6 +83,15 @@ public class GamePlayScene extends Scene {
         System.out.println("Invalid Command!");
 
         return 1;
+    }
+
+    private int cheatCommand(String userInput) {
+        Matcher matcher = Pattern.compile("add card to hand ([^\\n]+)").matcher(userInput);
+        if (matcher.matches()) {
+            sceneController.getGameManager().addCard_C(matcher.group(1));
+            return 1;
+        }
+        return 0;
     }
 
     private void drawPhaseCommand(String userInput) {
@@ -145,9 +156,9 @@ public class GamePlayScene extends Scene {
     public int getTributeCommand() throws Exception {
         System.out.println("enter tribute monster number:");
         String input = scanner.nextLine();
-        if(input.equals("cancel")){
+        if (input.equals("cancel")) {
             throw new Exception("operation canceled");
         }
-        return Integer.parseInt(scanner.nextLine());
+        return Integer.parseInt(input);
     }
 }
