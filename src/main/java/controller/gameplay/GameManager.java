@@ -263,16 +263,16 @@ public class GameManager {
 
     public void checkGameOver() {
         if (player1.getLP() <= 0) {
-            finishGame(player2, player1);
+            finishGame(2);
         }
         if (player2.getLP() <= 0) {
-            finishGame(player1, player2);
+            finishGame(1);
         }
         // TODO: ۱۹/۰۶/۲۰۲۱ draw
     }
 
-    private void finishGame(Player winner, Player looser) {
-        sceneController.gameFinished();
+    private void finishGame(int winnerNumber) {
+        sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
 

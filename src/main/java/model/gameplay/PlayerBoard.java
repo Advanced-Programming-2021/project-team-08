@@ -44,15 +44,15 @@ public class PlayerBoard {
     public String getShowingString(boolean isCurrentTurnPlayerBoard) {
         String toShow = "";
         if (isCurrentTurnPlayerBoard) {
-            toShow += "GY\t\t\t\t\t\tFZ\n";
+            toShow += graveyard.toString() + "\t\t\t\t\t\t" + fieldZone.toString() + "\n";
             toShow += zoneArrayToString(false, monsterZone) + "\n";
             toShow += zoneArrayToString(false, spellAndTrapZone) + "\n";
-            toShow += "DN\n";
+            toShow += deckZone.toString() + "\n";
         } else {
-            toShow += "\t\t\t\t\t\tDN\n";
+            toShow += "\t\t\t\t\t\t" + deckZone.toString() + "\n";
             toShow += zoneArrayToString(false, spellAndTrapZone) + "\n";
             toShow += zoneArrayToString(false, monsterZone) + "\n";
-            toShow += "FZ\t\t\t\t\t\tGY\n";
+            toShow += fieldZone.toString() + "\t\t\t\t\t\t" + graveyard.toString() + "\n";
         }
 
         return toShow;

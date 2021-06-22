@@ -56,7 +56,7 @@ public class UserData {
         return point;
     }
 
-    public void changePoint(int point) {
+    public void addPoint(int point) {
         this.point += point;
     }
 
@@ -82,6 +82,10 @@ public class UserData {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public void addMoney(int amount){
+        this.money += amount;
     }
 
     public void addCard(int id) {
