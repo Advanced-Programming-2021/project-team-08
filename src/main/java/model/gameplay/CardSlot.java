@@ -2,9 +2,14 @@ package model.gameplay;
 
 import model.cards.Card;
 import model.cards.MonsterCard;
-import model.enums.CardStatus;
-import model.enums.ZoneType;
+import model.cards.SpellCard;
+import model.cards.TrapCard;
+import model.cards.data.MonsterCardData;
+import model.cards.data.SpellCardData;
+import model.cards.data.TrapCardData;
+import model.enums.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class CardSlot {
@@ -56,6 +61,14 @@ public class CardSlot {
         return cards.get(0);
     }
 
+    public ArrayList<Card> getAllCard() {
+        return cards;
+    }
+
+    public void removeACard(Card card) {
+        this.cards.remove(card);
+    }
+
     public void removeCard() {
         cards.clear();
     }
@@ -78,6 +91,62 @@ public class CardSlot {
         Card c = cards.get(cards.size() - 1);
         cards.remove(cards.size() - 1);
         return c;
+    }
+
+    public Card drawParticularMonster(MonsterAttribute monsterAttribute) {
+        ArrayList <Card> deckCards = this.getAllCard();
+        if (monsterAttribute == null) {
+            for (Card card : deckCards) {
+                if (card.getCardType().equals(CardType.MONSTER)) {
+                    this.removeACard(card);
+                    return card;
+                }
+            }
+        }
+        else {
+            for (Card card : deckCards) {
+                if (card.getCardType().equals(CardType.MONSTER)) {
+                    MonsterCard monsterCard = (MonsterCard) card;
+                    if (((MonsterCardData)monsterCard.getCardData()).getAttribute().equals(monsterAttribute)) {
+                        this.removeACard(card);
+                        return card;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Card drawParticularSpellTrap(CardType cardType, SpellTrapProperty spellTrapProperty) {
+        ArrayList <Card> deckCards = this.getAllCard();
+        if (spellTrapProperty == null) {
+            for (Card card : deckCards) {
+                if (card.getCardType().equals(cardType)) {
+                    this.removeACard(card);
+                    return card;
+                }
+            }
+        }else {
+            for (Card card : deckCards) {
+                if (card.getCardType().equals(cardType)) {
+                    if (cardType.equals(CardType.SPELL)) {
+                        SpellCard spellCard = (SpellCard) card;
+                        if (((SpellCardData) spellCard.getCardData()).getSpellProperty().equals(spellTrapProperty)) {
+                            this.removeACard(card);
+                            return card;
+                        }
+                    }
+                    else if (cardType.equals(CardType.TRAP)) {
+                        TrapCardData trapCardData = (TrapCardData) ((TrapCard) card).getCardData();
+                        if (trapCardData.getTrapProperty().equals(spellTrapProperty)) {
+                            this.removeACard(card);
+                            return card;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @Override

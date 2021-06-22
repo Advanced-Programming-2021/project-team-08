@@ -1,6 +1,5 @@
 package model.cards.data;
 
-import model.effects.Effect;
 import model.enums.CardType;
 import model.enums.SpellTrapProperty;
 
@@ -17,7 +16,7 @@ public class SpellCardData extends CardData{
         cardType = CardType.SPELL;
     }
 
-    public SpellTrapProperty getTrapProperty() {
+    public SpellTrapProperty getSpellProperty() {
         return spellProperty;
     }
 
@@ -37,7 +36,7 @@ public class SpellCardData extends CardData{
         for (SpellCardData spellCardData : allSpellCard) {
             System.out.println("spell name is : " + spellCardData.cardName + " spell id is: " + spellCardData.getCardId());
             System.out.println("spell price is : " + spellCardData.getPrice());
-            System.out.println("spell property is : " + spellCardData.getTrapProperty());
+            System.out.println("spell property is : " + spellCardData.getSpellProperty());
             System.out.println("spell description is : " + spellCardData.getCardDescription());
             System.out.println();
         }

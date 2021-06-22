@@ -15,7 +15,7 @@ public class ReadSpellTrapCardsData {
             csvReader.readLine();
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                if (data.length == 7) {
+                if (data.length == 7 || data.length == 8) {
                     readACardData(data);
                 } else {
                     System.out.println("couldn't parse a row from SpellTrap.csv file in row ");

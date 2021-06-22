@@ -144,4 +144,8 @@ public class Player {
     public void onChangeTurn() {
         summonOrSetInThisTurn = false;
     }
+
+    public void addCardToHand(Card card) {
+        handCards.add(card);
+    }
 }

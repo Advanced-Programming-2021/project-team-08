@@ -1,7 +1,16 @@
 package model.gameplay;
 
 import model.cards.Card;
+import model.cards.MonsterCard;
+import model.cards.SpellCard;
+import model.cards.TrapCard;
 import model.cards.data.CardData;
+import model.cards.data.MonsterCardData;
+import model.cards.data.SpellCardData;
+import model.cards.data.TrapCardData;
+import model.enums.CardType;
+import model.enums.MonsterAttribute;
+import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
 import model.Deck;
 
@@ -41,6 +50,14 @@ public class PlayerBoard {
 
     public Card drawCardFromDeck() throws Exception {
         return deckZone.drawTopCard();
+    }
+
+    public Card drawParticularMonster(MonsterAttribute monsterAttribute) {
+       return deckZone.drawParticularMonster(monsterAttribute);
+    }
+
+    public Card drawParticularSpellTrap(CardType cardType, SpellTrapProperty spellTrapProperty) {
+        return deckZone.drawParticularSpellTrap(cardType, spellTrapProperty);
     }
 
     public String getShowingString(boolean isCurrentTurnPlayerBoard) {

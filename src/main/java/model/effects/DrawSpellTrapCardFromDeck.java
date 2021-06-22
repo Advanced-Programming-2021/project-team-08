@@ -1,0 +1,48 @@
+package model.effects;
+
+
+import model.cards.Card;
+import model.enums.CardType;
+import model.enums.SpellTrapProperty;
+import model.enums.ZoneType;
+import model.gameplay.CardSlot;
+import model.gameplay.Player;
+
+import java.util.ArrayList;
+
+public class DrawSpellTrapCardFromDeck extends Effect{
+    int number;
+    CardType cardType;
+    SpellTrapProperty spellProperty;
+
+
+    public DrawSpellTrapCardFromDeck(ArrayList<String> args) {
+        super(args);
+        number = Integer.parseInt(args.get(0));
+        try {
+            cardType = CardType.valueOf(args.get(1));
+        }catch (Exception e) {
+            e.printStackTrace();
+            cardType = null;
+        }
+        try {
+            spellProperty = SpellTrapProperty.valueOf(args.get(2));
+        }catch (Exception e) {
+            spellProperty = null;
+        }
+    }
+
+    @Override
+    public void activate(Player cardOwner) {
+        if (cardType == null) {
+            try {
+                Card card = gameManager.getGameBoard().getCardSlot(false, ZoneType.DECK, 1).drawTopCard();
+                cardOwner.addCardToHand(card);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Card card = cardOwner.getPlayerBoard().drawParticularSpellTrap(cardType, spellProperty);
+        cardOwner.addCardToHand(card);
+    }
+}
