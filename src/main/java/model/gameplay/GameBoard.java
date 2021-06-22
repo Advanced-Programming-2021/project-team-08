@@ -23,11 +23,11 @@ public class GameBoard {
     }
 
 
-    public CardSlot getCardSlot(GameManager.CardSlotAddress address) {
+    public CardSlot getCardSlot(GameManager.CardSlotAddress address) throws Exception {
         return getCardSlot(address.isForOpponent(), address.getZone(), address.getNumber());
     }
 
-    public CardSlot getCardSlot(boolean forOpponent, ZoneType zone, int number) {
+    public CardSlot getCardSlot(boolean forOpponent, ZoneType zone, int number) throws Exception {
         PlayerBoard board;
         if (forOpponent) {
             board = (gameManager.getCurrentPlayerTurn() == 2) ? player1Board : player2Board;
@@ -41,8 +41,10 @@ public class GameBoard {
             case FIELD:
                 break;
             case MONSTER:
+                if(number < 1 || number > 5) throw new Exception("number out of bounds");
                 return board.getMonsterZone().get(number - 1);
             case SPELL_AND_TRAP:
+                if(number < 1 || number > 5) throw new Exception("number out of bounds");
                 return board.getSpellAndTrapZone().get(number - 1);
         }
         return null;

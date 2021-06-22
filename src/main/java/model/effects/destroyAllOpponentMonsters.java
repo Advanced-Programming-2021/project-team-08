@@ -14,9 +14,14 @@ public class destroyAllOpponentMonsters extends Effect {
     @Override
     public void activate(Player cardOwner) {
         for (int i = 1; i <= 5; i++) {
-            CardSlot cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
-            if (!cardSlot.isEmpty()) {
-                cardSlot.removeCard();
+            CardSlot cardSlot = null;
+            try {
+                cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
+                if (!cardSlot.isEmpty()) {
+                    cardSlot.removeCard();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         System.out.println("destroyAllOpponentMonsters");

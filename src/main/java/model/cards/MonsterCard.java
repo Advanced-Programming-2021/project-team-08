@@ -23,6 +23,16 @@ public class MonsterCard extends Card {
         return isAttackPosition;
     }
 
+    public int getTributeNumber(){
+        if(data.getLevel() <= 4){
+            return 0;
+        }else if(data.getLevel() <= 6){
+            return 1;
+        }else {
+            return 2;
+        }
+    }
+
     @Override
     public void setup() {
 

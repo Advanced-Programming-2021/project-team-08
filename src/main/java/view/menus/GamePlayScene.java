@@ -141,4 +141,13 @@ public class GamePlayScene extends Scene {
             }
         }
     }
+
+    public int getTributeCommand() throws Exception {
+        System.out.println("enter tribute monster number:");
+        String input = scanner.nextLine();
+        if(input.equals("cancel")){
+            throw new Exception("operation canceled");
+        }
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

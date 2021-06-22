@@ -67,20 +67,32 @@ public class Player {
         }
     }
 
-    public Card getCardFromHand(int number) {
+    public Card getCardFromHand(int number) throws Exception {
+        if(number < 1 || number > handCards.size()) throw new Exception("number out of bounds");;
         return handCards.get(number - 1);
     }
 
     public void summonCard(Card card) throws Exception {
         if (card == null) {
-            throw new Exception("No card selected yet");
+            throw new Exception("no card selected yet");
         } else if (card.getCardType() != CardType.MONSTER) {
-            throw new Exception("You can't summon this card");
+            throw new Exception("you can't summon this card");
         } else if (playerBoard.isMonsterZoneFull()) {
-            throw new Exception("Monster zone is full");
+            throw new Exception("monster zone is full");
         } else if (summonOrSetInThisTurn) {
-            throw new Exception("You already summon/set in this turn");
+            throw new Exception("you already summon/set in this turn");
         } else {
+            int tributeNumber = ((MonsterCard) card).getTributeNumber();
+            if (tributeNumber > 0) {
+                if (playerBoard.numberOfMonstersInZone() < tributeNumber) {
+                    throw new Exception("there are not enough cards to tribute");
+                }
+
+                ArrayList<Integer> tributes = gameManager.getTribute(tributeNumber);
+                for (int n : tributes) {
+                    CardSlot.moveToGraveyard(playerBoard.getMonsterZone().get(n - 1), playerBoard.getGraveyard());
+                }
+            }
             handCards.remove(card);
             ((MonsterCard) card).onSummon(playerBoard.summonMonster(card));
             summonOrSetInThisTurn = true;
@@ -91,13 +103,13 @@ public class Player {
 
     public void setCard(Card card) throws Exception {
         if (card == null) {
-            throw new Exception("No card selected yet");
+            throw new Exception("no card selected yet");
         } else if (card.getCardType() != CardType.MONSTER) {
-            throw new Exception("You can't set this card");
+            throw new Exception("you can't set this card");
         } else if (playerBoard.isMonsterZoneFull()) {
-            throw new Exception("Monster zone is full");
+            throw new Exception("monster zone is full");
         } else if (summonOrSetInThisTurn) {
-            throw new Exception("You already summon/set in this turn");
+            throw new Exception("you already summon/set in this turn");
         } else {
             handCards.remove(card);
             ((MonsterCard) card).onSet(playerBoard.setMonster(card));
@@ -109,11 +121,11 @@ public class Player {
 
     public void attack(Card myCard, CardSlot attackTo) throws Exception {
         if (myCard == null) {
-            throw new Exception("No card selected yet");
+            throw new Exception("no card selected yet");
         } else if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
-            throw new Exception("You can't attack with this card");
+            throw new Exception("you can't attack with this card");
         } else if (attackTo.isEmpty()) {
-            throw new Exception("There is no card to attack here");
+            throw new Exception("there is no card to attack here");
         } else {
             AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
             gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
@@ -121,5 +133,9 @@ public class Player {
 
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۱۷/۰۶/۲۰۲۱ already attacked
+    }
+
+    public void onChangeTurn() {
+        summonOrSetInThisTurn = false;
     }
 }

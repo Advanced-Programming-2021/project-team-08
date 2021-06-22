@@ -6,6 +6,7 @@ import model.enums.ZoneType;
 import model.Deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayerBoard {
     private CardSlot graveyard = new CardSlot(ZoneType.GRAVEYARD);
@@ -20,6 +21,7 @@ public class PlayerBoard {
 
     public PlayerBoard(Deck playerDeck) {
         ArrayList<CardData> deck = playerDeck.getMainDeck();
+        Collections.shuffle(deck);
         for (CardData data : deck) {
             deckZone.appendCard(Card.createCardByCardData(data));
         }
@@ -81,6 +83,15 @@ public class PlayerBoard {
                 return false;
         }
         return true;
+    }
+
+    public int numberOfMonstersInZone() {
+        int res = 0;
+        for (int i = 0; i < 5; i++) {
+            if (!monsterZone.get(i).isEmpty())
+                res++;
+        }
+        return res;
     }
 
     public CardSlot summonMonster(Card card) {

@@ -11,6 +11,7 @@ import model.gameplay.*;
 import model.enums.*;
 import view.menus.GamePlayScene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameManager {
@@ -48,6 +49,10 @@ public class GameManager {
         this.currentSelectedCard = currentSelectedCard;
         this.currentSelectedCardAddress = address;
     }
+    private void clearSelection(){
+        this.currentSelectedCard = null;
+        this.currentSelectedCardAddress = null;
+    }
 
     public GameBoard getGameBoard() {
         return gameBoard;
@@ -80,7 +85,6 @@ public class GameManager {
                 break;
             case BATTLE:
                 changeTurn();
-                startDrawPhase();
                 break;
             case END:
                 break;
@@ -90,6 +94,8 @@ public class GameManager {
     private void changeTurn() {
         turn++;
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
+        player1.onChangeTurn();
+        player2.onChangeTurn();
         startDrawPhase();
     }
 
@@ -98,28 +104,25 @@ public class GameManager {
         getCurrentTurnPlayer().drawCard();
 
         scene.showPhase("Draw");
-        scene.showBoard(getGameBoardString());
+        onCardActionDone();
     }
 
     private void startStandbyPhase() {
         currentPhase = Phase.STANDBY;
 
         scene.showPhase("Standby");
-        scene.showBoard(getGameBoardString());
     }
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
 
         scene.showPhase("Main");
-        scene.showBoard(getGameBoardString());
     }
 
     private void startBattlePhase() {
         currentPhase = Phase.BATTLE;
 
         scene.showPhase("Battle");
-        scene.showBoard(getGameBoardString());
     }
 
     private Player getCurrentTurnPlayer() {
@@ -149,8 +152,8 @@ public class GameManager {
             }
             setCurrentSelectedCard(currentSelectedZone.getCard(), currentSelectedCardAddress);
 
-            System.out.println("card selected");
-        } catch (ParseCommandException e) {
+            scene.log("card selected");
+        } catch (Exception e) {
             try {
                 Command command = Command.parseCommand(address, selectHandCardCommand);
                 Card temp = getCurrentTurnPlayer().getCardFromHand(Integer.parseInt(command.getField("hand")));
@@ -161,8 +164,8 @@ public class GameManager {
                 }
                 setCurrentSelectedCard(temp, null);
 
-                System.out.println("card selected");
-            } catch (ParseCommandException e2) {
+                scene.log("card selected");
+            } catch (Exception e2) {
                 scene.showError("Invalid selection");
             }
         }
@@ -172,7 +175,7 @@ public class GameManager {
         if (currentSelectedCard == null) {
             scene.showError("No card selected yet");
         } else {
-            setCurrentSelectedCard(null, null);
+            clearSelection();
             System.out.println("card deselected");
         }
     }
@@ -181,6 +184,7 @@ public class GameManager {
         try {
             getCurrentTurnPlayer().summonCard(currentSelectedCard);
             scene.log("summoned successfully");
+            onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
@@ -190,6 +194,7 @@ public class GameManager {
         try {
             getCurrentTurnPlayer().setCard(currentSelectedCard);
             scene.log("set successfully");
+            onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
@@ -198,6 +203,7 @@ public class GameManager {
     public void attack(int number) {
         try {
             getCurrentTurnPlayer().attack(currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+            onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
@@ -206,16 +212,46 @@ public class GameManager {
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
-        if (result.isDestroyCard1())
-            CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
-        if (result.isDestroyCard2())
-            CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
+        if (result.isDestroyCard1()) {
+            try {
+                CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
+            } catch (Exception e) {
+            }
+        }
+        if (result.isDestroyCard2()) {
+            try {
+                CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
+            } catch (Exception e) {
+            }
+        }
         scene.log(result.getResultMessage());
         attacked.onAttacked();
     }
 
+    public ArrayList<Integer> getTribute(int numberOfTributes) throws Exception {
+        ArrayList<Integer> tributes = new ArrayList<>();
+        while (tributes.size() < numberOfTributes){
+            int tNumber = scene.getTributeCommand();
+            try {
+                CardSlot cardSlot = gameBoard.getCardSlot(false, ZoneType.MONSTER, tNumber);
+                if(cardSlot.isEmpty()){
+                    scene.showError("there is no monster in this address");
+                }else {
+                    tributes.add(tNumber);
+                }
+            }catch (Exception e){
+                scene.showError(e.getMessage());
+            }
+        }
+        return tributes;
+    }
+
     public void showGraveyard() {
-        scene.showGraveyard(gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0).getAllCards());
+        try {
+            scene.showGraveyard(gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0).getAllCards());
+        } catch (Exception e) {
+
+        }
     }
 
     public void showSelectedCard() {
@@ -234,31 +270,36 @@ public class GameManager {
     }
 
     public String getGameBoardString() {
-        String toShow = "";
-        toShow += getCurrentTurnOpponentPlayer().getUserData().getNickname() + ":" + getCurrentTurnOpponentPlayer().getLP() + "\n";
+        StringBuilder toShow = new StringBuilder();
+        toShow.append(getCurrentTurnOpponentPlayer().getUserData().getNickname()).append(":").append(getCurrentTurnOpponentPlayer().getLP()).append("\n");
 
         for (int i = 7; i > getCurrentTurnOpponentPlayer().getHandCards().size(); i--) {
-            toShow += "\t";
+            toShow.append("\t");
         }
         for (int i = 0; i < getCurrentTurnOpponentPlayer().getHandCards().size(); i++) {
-            toShow += "c\t";
+            toShow.append("c\t");
         }
-        toShow += "\n";
+        toShow.append("\n");
 
-        toShow += getCurrentTurnOpponentPlayer().getPlayerBoard().getShowingString(false);
+        toShow.append(getCurrentTurnOpponentPlayer().getPlayerBoard().getShowingString(false));
 
-        toShow += "-----------------------------\n";
+        toShow.append("-----------------------------\n");
 
-        toShow += getCurrentTurnPlayer().getPlayerBoard().getShowingString(true);
+        toShow.append(getCurrentTurnPlayer().getPlayerBoard().getShowingString(true));
 
         for (int i = 0; i < getCurrentTurnPlayer().getHandCards().size(); i++) {
-            toShow += "c\t";
+            toShow.append("c\t");
         }
-        toShow += "\n";
+        toShow.append("\n");
 
-        toShow += getCurrentTurnPlayer().getUserData().getNickname() + ":" + getCurrentTurnPlayer().getLP() + "\n";
+        toShow.append(getCurrentTurnPlayer().getUserData().getNickname()).append(":").append(getCurrentTurnPlayer().getLP()).append("\n");
 
-        return toShow;
+        return toShow.toString();
+    }
+
+    private void onCardActionDone(){
+        clearSelection();
+        scene.showBoard(getGameBoardString());
     }
 
     public void checkGameOver() {
@@ -275,7 +316,6 @@ public class GameManager {
         sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
-
 
     public class CardSlotAddress {
         private boolean forOpponent;
