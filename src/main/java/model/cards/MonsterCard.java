@@ -3,7 +3,6 @@ package model.cards;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
-import model.gameplay.CardSlot;
 
 public class MonsterCard extends Card {
     private boolean isAttackPosition;
@@ -19,10 +18,6 @@ public class MonsterCard extends Card {
 
     public boolean isAttackPosition() {
         return isAttackPosition;
-    }
-
-    public void setAttackPosition(boolean attackPosition) {
-        isAttackPosition = attackPosition;
     }
 
     public int getTributeNumber(){
@@ -49,8 +44,12 @@ public class MonsterCard extends Card {
         isAttackPosition = true;
     }
 
+    @Override
     public void onSet() {
         cardStatus = CardStatus.TO_BACK;
         isAttackPosition = false;
+    }
+
+    public void onAttacked() {
     }
 }

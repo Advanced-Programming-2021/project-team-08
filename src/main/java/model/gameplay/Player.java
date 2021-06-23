@@ -6,10 +6,7 @@ import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
-import model.enums.CardStatus;
-import model.enums.CardType;
-import model.enums.SpellTrapProperty;
-import model.enums.ZoneType;
+import model.enums.*;
 
 import java.util.ArrayList;
 
@@ -76,16 +73,23 @@ public class Player {
 
     public Card getCardFromHand(int number) throws Exception {
         if (number < 1 || number > handCards.size()) throw new Exception("number out of bounds");
-        ;
         return handCards.get(number - 1);
     }
 
     public void summonCard(Card card) throws Exception {
         if (card == null) {
             throw new Exception("no card selected yet");
-        } else if (card.getCardType() != CardType.MONSTER) {
+        }
+        if (card.getCardSlot() != null) {
             throw new Exception("you can't summon this card");
-        } else if (playerBoard.isMonsterZoneFull()) {
+        }
+        if (card.getCardType() != CardType.MONSTER) {
+            throw new Exception("you can't summon this card");
+        }
+        if(gameManager.getCurrentPhase() != Phase.MAIN){
+            throw new Exception("action not allowed in this phase");
+        }
+        else if (playerBoard.isMonsterZoneFull()) {
             throw new Exception("monster zone is full");
         } else if (summonOrSetInThisTurn) {
             throw new Exception("you already summon/set in this turn");
@@ -106,27 +110,38 @@ public class Player {
             ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
         }
-
-        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
     }
 
     public void setCard(Card card) throws Exception {
         if (card == null) {
             throw new Exception("no card selected yet");
-        } else if (card.getCardType() != CardType.MONSTER) {
+        }
+        if (card.getCardSlot() != null) {
             throw new Exception("you can't set this card");
-        } else if (playerBoard.isMonsterZoneFull()) {
-            throw new Exception("monster zone is full");
-        } else if (summonOrSetInThisTurn) {
-            throw new Exception("you already summon/set in this turn");
+        }
+        if(gameManager.getCurrentPhase() != Phase.MAIN){
+            throw new Exception("action not allowed in this phase");
+        }
+        if (card.getCardType() == CardType.MONSTER) {
+            if (playerBoard.isMonsterZoneFull()) {
+                throw new Exception("monster zone is full");
+            } else if (summonOrSetInThisTurn) {
+                throw new Exception("you already summon/set in this turn");
+            } else {
+                handCards.remove(card);
+                playerBoard.addMonsterCardToZone(card);
+                card.onSet();
+                summonOrSetInThisTurn = true;
+            }
         } else {
+            if (playerBoard.isSpellTrapZoneFull()) {
+                throw new Exception("spell/trap card zone is full");
+            }
             handCards.remove(card);
-            playerBoard.addMonsterCardToZone(card);
-            ((MonsterCard) card).onSet();
-            summonOrSetInThisTurn = true;
+            playerBoard.addSpellTrapCardToZone(card);
+            card.onSet();
         }
 
-        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۲۳/۰۶/۲۰۲۱ get tribute
     }
 
@@ -140,8 +155,10 @@ public class Player {
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't attack with this card");
         }
+        if(gameManager.getCurrentPhase() != Phase.BATTLE){
+            throw new Exception("action not allowed in this phase");
+        }
 
-        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۱۷/۰۶/۲۰۲۱ already attacked
 
         if (direct) {
@@ -169,12 +186,14 @@ public class Player {
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't change this card position");
         }
-        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+        if(gameManager.getCurrentPhase() != Phase.MAIN){
+            throw new Exception("action not allowed in this phase");
+        }
         // TODO: ۱۷/۰۶/۲۰۲۱ already changed
         if (((MonsterCard) myCard).isAttackPosition() == toAttack) {
             throw new Exception("this card is already in the wanted position");
         }
-        ((MonsterCard) myCard).setAttackPosition(toAttack);
+        ((MonsterCard) myCard).changePosition(toAttack);
     }
 
     public void activateSpellCard(Card myCard) throws Exception {
@@ -184,8 +203,10 @@ public class Player {
         if (myCard.getCardType() != CardType.SPELL) {
             throw new Exception("activate effect is only for spell cards");
         }
+        if(gameManager.getCurrentPhase() != Phase.MAIN){
+            throw new Exception("action not allowed in this phase");
+        }
         SpellCard spellCard = (SpellCard) myCard;
-        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         if (spellCard.isActivated()) {
             throw new Exception("you have already activated this card");
         }

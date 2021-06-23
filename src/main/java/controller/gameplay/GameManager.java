@@ -4,6 +4,7 @@ import controller.GamePlaySceneController;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
+import model.cards.MonsterCard;
 import model.effects.Effect;
 import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
@@ -254,7 +255,7 @@ public class GameManager {
             }
         }
         scene.log(result.getResultMessage());
-        attacked.onAttacked();
+        ((MonsterCard)attacked).onAttacked();
     }
 
     public void applyDirectAttack(int damage){

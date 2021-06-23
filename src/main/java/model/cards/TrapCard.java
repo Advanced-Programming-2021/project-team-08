@@ -1,6 +1,7 @@
 package model.cards;
 
 import model.cards.data.TrapCardData;
+import model.enums.CardStatus;
 import model.enums.CardType;
 
 public class TrapCard extends Card {
@@ -16,5 +17,10 @@ public class TrapCard extends Card {
     @Override
     public void setup() {
 
+    }
+
+    @Override
+    public void onSet() {
+        cardStatus = CardStatus.TO_BACK;
     }
 }

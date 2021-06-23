@@ -72,8 +72,7 @@ public abstract class Card {
 
     public abstract void setup();
 
-    public void onAttacked() {
-    }
+    public abstract void onSet();
 
     public CardSlot getCardSlot() {
         return cardSlot;

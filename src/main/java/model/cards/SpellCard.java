@@ -40,6 +40,7 @@ public class SpellCard extends Card {
         activateEffect(cardOwner);
     }
 
+    @Override
     public void onSet() {
         cardStatus = CardStatus.TO_BACK;
     }
