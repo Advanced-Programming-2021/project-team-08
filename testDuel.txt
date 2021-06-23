@@ -1,0 +1,32 @@
+user login --password abc123 --username Ali
+menu enter duel
+duel --new --second-player Abolfazl --rounds 1
+next phase
+next phase
+select --hand 1
+summon
+next phase
+next phase
+next phase
+next phase
+select --hand 1
+set
+next phase
+next phase
+next phase
+next phase
+select --hand 1
+set
+next phase
+next phase
+next phase
+next phase
+select --hand 1
+summon
+next phase
+next phase
+next phase
+next phase
+add card to hand Beast King Barbaros
+select --hand 8
+summon

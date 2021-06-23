@@ -48,6 +48,7 @@ public class Player {
             gameManager.checkGameOver();
         }
     }
+
     public void increaseLP(int amount) {
         LP += amount;
     }
@@ -123,7 +124,7 @@ public class Player {
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
     }
 
-    public void attack(Card myCard, CardSlot attackTo) throws Exception {
+    public void attack(boolean direct, Card myCard, CardSlot attackTo) throws Exception {
         if (myCard == null) {
             throw new Exception("no card selected yet");
         }
@@ -133,15 +134,22 @@ public class Player {
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't attack with this card");
         }
-        if (attackTo.isEmpty()) {
-            throw new Exception("there is no card to attack here");
-        }
-        AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
-        gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
-
 
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۱۷/۰۶/۲۰۲۱ already attacked
+
+        if (direct) {
+            if (gameManager.getCurrentTurnOpponentPlayer().getPlayerBoard().numberOfMonstersInZone() > 0) {
+                throw new Exception("you can't attack the opponent directly");
+            }
+            gameManager.applyDirectAttack(((MonsterCard) myCard).getData().getAttackPoints());
+        } else {
+            if (attackTo.isEmpty()) {
+                throw new Exception("there is no card to attack here");
+            }
+            AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
+            gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
+        }
     }
 
     public void onChangeTurn() {

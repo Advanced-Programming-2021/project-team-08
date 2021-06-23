@@ -3,7 +3,7 @@ user create --password abc123 --nickname ali12 --username Ali
 user login --password abc123 --username Abolfazl
 user login --password abc123 --username Ali
 menu enter duel
-duel --new --second-player Abolfazl --rounds 1
+duel --new --second-player Abolfazl --rounds 3
 user login --password abc123 --username Ali
 user login --password abc123 --username Abolfazl
 menu enter deck
@@ -18,8 +18,11 @@ next phase
 next phase
 select --hand 1
 summon
+next phase
+next phase
 select --hand 1
 set
+
 
 
 user login --password abc123 --username Abolfazl
@@ -30,4 +33,4 @@ shop buy Yomi Ship
 
 user login --password abc123 --username Abolfazl
 menu enter deck
-deck add-card --card Alexandrite Dragon --deck test
+deck add-card --card Beast King Barbaros --deck test

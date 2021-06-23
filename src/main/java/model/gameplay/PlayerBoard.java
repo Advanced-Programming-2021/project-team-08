@@ -48,6 +48,14 @@ public class PlayerBoard {
         return spellAndTrapZone;
     }
 
+    public CardSlot getFieldZone() {
+        return fieldZone;
+    }
+
+    public CardSlot getDeckZone() {
+        return deckZone;
+    }
+
     public Card drawCardFromDeck() throws Exception {
         return deckZone.drawTopCard();
     }

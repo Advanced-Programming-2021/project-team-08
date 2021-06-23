@@ -9,7 +9,6 @@ import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
 import model.enums.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class CardSlot {

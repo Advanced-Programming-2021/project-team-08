@@ -132,6 +132,10 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().attack(Integer.parseInt(matcher.group(1)));
             return;
         }
+        if (userInput.equals("attack direct")) {
+            sceneController.getGameManager().attackDirect();
+            return;
+        }
 
         System.out.println("Invalid Command!");
     }

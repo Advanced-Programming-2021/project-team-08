@@ -38,8 +38,10 @@ public class GameBoard {
         switch (zone) {
             case GRAVEYARD:
                 return board.getGraveyard();
+            case DECK:
+                return board.getDeckZone();
             case FIELD:
-                break;
+                return board.getFieldZone();
             case MONSTER:
                 if(number < 1 || number > 5) throw new Exception("number out of bounds");
                 return board.getMonsterZone().get(number - 1);

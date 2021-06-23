@@ -125,12 +125,12 @@ public class GameManager {
         scene.showPhase("Battle");
     }
 
-    private Player getCurrentTurnPlayer() {
+    public Player getCurrentTurnPlayer() {
         if (currentPlayerTurn == 1) return player1;
         else return player2;
     }
 
-    private Player getCurrentTurnOpponentPlayer() {
+    public Player getCurrentTurnOpponentPlayer() {
         if (currentPlayerTurn == 2) return player1;
         else return player2;
     }
@@ -202,7 +202,16 @@ public class GameManager {
 
     public void attack(int number) {
         try {
-            getCurrentTurnPlayer().attack(currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+            getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+            onCardActionDone();
+        } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+
+    public void attackDirect(){
+        try {
+            getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -226,6 +235,11 @@ public class GameManager {
         }
         scene.log(result.getResultMessage());
         attacked.onAttacked();
+    }
+
+    public void applyDirectAttack(int damage){
+        getCurrentTurnOpponentPlayer().decreaseLP(damage);
+        scene.log("your opponent received "+ damage + " battle damage");
     }
 
     public ArrayList<Integer> getTribute(int numberOfTributes) throws Exception {
