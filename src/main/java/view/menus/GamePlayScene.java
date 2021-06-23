@@ -120,6 +120,11 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().setCard();
             return;
         }
+        matcher = Pattern.compile("set --position (attack|defence)").matcher(userInput);
+        if (matcher.matches()) {
+            sceneController.getGameManager().setPosition(matcher.group(1));
+            return;
+        }
 
         System.out.println("Invalid Command!");
     }

@@ -218,6 +218,16 @@ public class GameManager {
         }
     }
 
+    public void setPosition(String toPos) {
+        try {
+            getCurrentTurnPlayer().setPosition(currentSelectedCard, toPos);
+            scene.log("monster card position changed successfully");
+            onCardActionDone();
+        } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());

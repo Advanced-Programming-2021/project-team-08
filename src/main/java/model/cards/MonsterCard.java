@@ -6,27 +6,29 @@ import model.enums.CardType;
 import model.gameplay.CardSlot;
 
 public class MonsterCard extends Card {
-    private MonsterCardData data;
     private boolean isAttackPosition;
 
     public MonsterCard(MonsterCardData data) {
-        this.data = data;
         cardData = data;
         cardType = CardType.MONSTER;
     }
 
     public MonsterCardData getData() {
-        return data;
+        return (MonsterCardData) cardData;
     }
 
     public boolean isAttackPosition() {
         return isAttackPosition;
     }
 
+    public void setAttackPosition(boolean attackPosition) {
+        isAttackPosition = attackPosition;
+    }
+
     public int getTributeNumber(){
-        if(data.getLevel() <= 4){
+        if(getData().getLevel() <= 4){
             return 0;
-        }else if(data.getLevel() <= 6){
+        }else if(getData().getLevel() <= 6){
             return 1;
         }else {
             return 2;

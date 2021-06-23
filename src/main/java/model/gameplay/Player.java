@@ -122,6 +122,7 @@ public class Player {
         }
 
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+        // TODO: ۲۳/۰۶/۲۰۲۱ get tribute
     }
 
     public void attack(boolean direct, Card myCard, CardSlot attackTo) throws Exception {
@@ -150,6 +151,25 @@ public class Player {
             AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
             gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
         }
+    }
+
+    public void setPosition(Card myCard, String toPos) throws Exception{
+        boolean toAttack = toPos.equals("attack");
+        if (myCard == null) {
+            throw new Exception("no card selected yet");
+        }
+        if (myCard.getCardSlot() == null) {
+            throw new Exception("you can't change this card position");
+        }
+        if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
+            throw new Exception("you can't change this card position");
+        }
+        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+        // TODO: ۱۷/۰۶/۲۰۲۱ already changed
+        if(((MonsterCard)myCard).isAttackPosition() == toAttack){
+            throw new Exception("this card is already in the wanted position");
+        }
+        ((MonsterCard)myCard).setAttackPosition(toAttack);
     }
 
     public void onChangeTurn() {
