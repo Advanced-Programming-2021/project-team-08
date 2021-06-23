@@ -11,7 +11,7 @@ public class SpellCard extends Card {
     private boolean activated = false;
 
     public SpellCard(SpellCardData data) {
-        cardData = data;
+        super(data);
         cardType = CardType.SPELL;
     }
 
@@ -23,21 +23,16 @@ public class SpellCard extends Card {
         return (SpellCardData) cardData;
     }
 
-    @Override
-    public void setup() {
-
-    }
-
-    public void activateEffect(Player cardOwner){
+    public void activateEffect(){
         for(Effect effect: cardData.getEffects()){
-            effect.activate(cardOwner);
+            effect.activate();
         }
         activated = true;
     }
 
-    public void onActivate(Player cardOwner) {
+    public void onActivate() {
         cardStatus = CardStatus.FACE_UP;
-        activateEffect(cardOwner);
+        activateEffect();
     }
 
     @Override

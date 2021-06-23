@@ -4,9 +4,11 @@ import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
+import model.effects.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
 import model.gameplay.CardSlot;
+import model.gameplay.Player;
 
 public abstract class Card {
     protected CardType cardType;
@@ -15,6 +17,8 @@ public abstract class Card {
     protected CardSlot cardSlot;
 
     protected CardStatus cardStatus;
+
+    protected Player cardOwner;
 
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);
@@ -53,6 +57,16 @@ public abstract class Card {
         }
     }
 
+    public Card(CardData cardData) {
+        this.cardData = cardData;
+        for (Effect effect : cardData.getEffects()) {
+            effect.setCard(this);
+        }
+    }
+
+    public Player getCardOwner() {
+        return cardOwner;
+    }
 
     public CardStatus getCardStatus() {
         return cardStatus;
@@ -70,7 +84,9 @@ public abstract class Card {
         return cardType;
     }
 
-    public abstract void setup();
+    public void setup(Player owner){
+        cardOwner = owner;
+    }
 
     public abstract void onSet();
 

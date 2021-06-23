@@ -2,11 +2,10 @@ package controller.gameplay;
 
 import controller.GamePlaySceneController;
 import model.Command;
+import model.event.Event;
 import model.UserData;
 import model.cards.Card;
-import model.cards.MonsterCard;
 import model.effects.Effect;
-import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
 import model.gameplay.*;
 import model.enums.*;
@@ -34,6 +33,8 @@ public class GameManager {
 
     private GamePlayScene scene;
     private GamePlaySceneController sceneController;
+
+    private Event<Card> onAnSpellActivated;
 
     public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
@@ -65,6 +66,10 @@ public class GameManager {
 
     public int getCurrentPlayerTurn() {
         return currentPlayerTurn;
+    }
+
+    public Event<Card> getOnAnSpellActivated() {
+        return onAnSpellActivated;
     }
 
     public void firstSetup() {
@@ -233,6 +238,7 @@ public class GameManager {
         try {
             getCurrentTurnPlayer().activateSpellCard(currentSelectedCard);
             scene.log("spell activated");
+            onAnSpellActivated.invoke(currentSelectedCard);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -255,7 +261,6 @@ public class GameManager {
             }
         }
         scene.log(result.getResultMessage());
-        ((MonsterCard)attacked).onAttacked();
     }
 
     public void applyDirectAttack(int damage){

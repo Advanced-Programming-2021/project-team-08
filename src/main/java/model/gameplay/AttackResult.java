@@ -50,6 +50,7 @@ public class AttackResult {
         if (attacked.getCardStatus() == CardStatus.TO_BACK) {
             resultMessage = "opponent's monster card was " + attacked.getData().getCardName() + " and " + resultMessage;
         }
+        attacked.onAttacked(this);
     }
 
     public int getPlayer1LPDecrease() {
@@ -70,5 +71,9 @@ public class AttackResult {
 
     public String getResultMessage() {
         return resultMessage;
+    }
+
+    public void setDestroyCard1(boolean destroyCard1) {
+        this.destroyCard1 = destroyCard1;
     }
 }

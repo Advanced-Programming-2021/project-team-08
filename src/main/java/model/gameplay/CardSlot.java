@@ -61,10 +61,6 @@ public class CardSlot {
         return cards.get(0);
     }
 
-    public ArrayList<Card> getAllCard() {
-        return cards;
-    }
-
     public void removeACard(Card card) {
         this.cards.remove(card);
     }
@@ -95,7 +91,7 @@ public class CardSlot {
     }
 
     public Card drawParticularMonster(MonsterAttribute monsterAttribute) {
-        ArrayList<Card> deckCards = this.getAllCard();
+        ArrayList<Card> deckCards = this.getAllCards();
         if (monsterAttribute == null) {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(CardType.MONSTER)) {
@@ -118,7 +114,7 @@ public class CardSlot {
     }
 
     public Card drawParticularSpellTrap(CardType cardType, SpellTrapProperty spellTrapProperty) {
-        ArrayList<Card> deckCards = this.getAllCard();
+        ArrayList<Card> deckCards = this.getAllCards();
         if (spellTrapProperty == null) {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(cardType)) {

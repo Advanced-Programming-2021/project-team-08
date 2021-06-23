@@ -12,13 +12,13 @@ public class destroyAllOpponentMonsters extends Effect {
     }
 
     @Override
-    public void activate(Player cardOwner) {
+    public void activate() {
         for (int i = 1; i <= 5; i++) {
             CardSlot cardSlot = null;
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
                 if (!cardSlot.isEmpty()) {
-                    CardSlot.moveToGraveyard(cardSlot,cardOwner.getPlayerBoard().getGraveyard());                }
+                    CardSlot.moveToGraveyard(cardSlot,card.getCardOwner().getPlayerBoard().getGraveyard());                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -6,17 +6,12 @@ import model.enums.CardType;
 
 public class TrapCard extends Card {
     public TrapCard(TrapCardData data) {
-        cardData = data;
+        super(data);
         cardType = CardType.TRAP;
     }
 
     public TrapCardData getData() {
         return (TrapCardData) cardData;
-    }
-
-    @Override
-    public void setup() {
-
     }
 
     @Override

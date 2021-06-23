@@ -15,7 +15,7 @@ public class DestroyAllOpponentAttackPositionMonster extends Effect{
     }
 
     @Override
-    public void activate(Player cardOwner) {
+    public void activate() {
         CardSlot cardSlot;
         MonsterCard monsterCard;
         for (int i=1;i<=5;i++){
@@ -23,7 +23,7 @@ public class DestroyAllOpponentAttackPositionMonster extends Effect{
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
                 monsterCard = (MonsterCard) cardSlot.getCard();
                 if (!cardSlot.isEmpty()&&monsterCard.isAttackPosition()) {
-                    CardSlot.moveToGraveyard(cardSlot,cardOwner.getPlayerBoard().getGraveyard());
+                    CardSlot.moveToGraveyard(cardSlot,card.getCardOwner().getPlayerBoard().getGraveyard());
                 }
             }
             catch (Exception e){

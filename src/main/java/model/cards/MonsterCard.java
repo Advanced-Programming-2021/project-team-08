@@ -1,14 +1,18 @@
 package model.cards;
 
+import model.event.Event;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
+import model.gameplay.AttackResult;
 
 public class MonsterCard extends Card {
     private boolean isAttackPosition;
 
+    private Event<AttackResult> onAttacked;
+
     public MonsterCard(MonsterCardData data) {
-        cardData = data;
+        super(data);
         cardType = CardType.MONSTER;
     }
 
@@ -30,11 +34,6 @@ public class MonsterCard extends Card {
         }
     }
 
-    @Override
-    public void setup() {
-
-    }
-
     public void changePosition(boolean toAttack) {
         // TODO: ۱۸/۰۶/۲۰۲۱
     }
@@ -50,6 +49,11 @@ public class MonsterCard extends Card {
         isAttackPosition = false;
     }
 
-    public void onAttacked() {
+    public Event<AttackResult> getOnAttacked() {
+        return onAttacked;
+    }
+
+    public void onAttacked(AttackResult result) {
+        onAttacked.invoke(result);
     }
 }

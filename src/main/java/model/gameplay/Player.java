@@ -24,6 +24,10 @@ public class Player {
         this.playerBoard = playerBoard;
         this.gameManager = gameManager;
 
+        for(Card card : playerBoard.getDeckZone().getAllCards()){
+            card.setup(this);
+        }
+
         for (int i = 0; i < 6; i++) {
             try {
                 handCards.add(playerBoard.drawCardFromDeck());
@@ -228,7 +232,7 @@ public class Player {
                 playerBoard.addSpellTrapCardToZone(myCard);
             }
         }
-        spellCard.onActivate(this);
+        spellCard.onActivate();
     }
 
     public void onChangeTurn() {
