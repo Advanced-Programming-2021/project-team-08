@@ -23,7 +23,7 @@ public class DestroyAllOpponentAttackPositionMonster extends Effect{
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
                 monsterCard = (MonsterCard) cardSlot.getCard();
                 if (!cardSlot.isEmpty()&&monsterCard.isAttackPosition()) {
-                    cardSlot.removeCard();
+                    CardSlot.moveToGraveyard(cardSlot,cardOwner.getPlayerBoard().getGraveyard());
                 }
             }
             catch (Exception e){
