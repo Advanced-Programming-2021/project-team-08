@@ -6,6 +6,7 @@ import model.event.Event;
 import model.UserData;
 import model.cards.Card;
 import model.effects.Effect;
+import model.event.EventNoParam;
 import model.gameplay.Player;
 import model.gameplay.*;
 import model.enums.*;
@@ -34,7 +35,7 @@ public class GameManager {
     private GamePlayScene scene;
     private GamePlaySceneController sceneController;
 
-    private Event<Card> onAnSpellActivated;
+    private EventNoParam onAnSpellActivated;
 
     public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
@@ -68,7 +69,7 @@ public class GameManager {
         return currentPlayerTurn;
     }
 
-    public Event<Card> getOnAnSpellActivated() {
+    public EventNoParam getOnAnSpellActivated() {
         return onAnSpellActivated;
     }
 
@@ -238,7 +239,7 @@ public class GameManager {
         try {
             getCurrentTurnPlayer().activateSpellCard(currentSelectedCard);
             scene.log("spell activated");
-            onAnSpellActivated.invoke(currentSelectedCard);
+            onAnSpellActivated.invoke();
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class increaseLPOnSpellActivate extends Effect{
     public increaseLPOnSpellActivate(ArrayList<String> args) {
         super(args);
-        gameManager.getOnAnSpellActivated().addListener((card)->activate());
+        gameManager.getOnAnSpellActivated().addListener(this::activate);
     }
 
     @Override

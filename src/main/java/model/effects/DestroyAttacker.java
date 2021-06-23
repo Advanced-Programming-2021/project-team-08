@@ -2,7 +2,6 @@ package model.effects;
 
 import model.cards.MonsterCard;
 import model.gameplay.AttackResult;
-import model.gameplay.Player;
 
 import java.util.ArrayList;
 
