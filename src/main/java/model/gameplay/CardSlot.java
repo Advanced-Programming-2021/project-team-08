@@ -46,6 +46,7 @@ public class CardSlot {
                 throw new Exception("this zone already had card");
             } else {
                 cards.add(card);
+                card.setCardSlot(this);
             }
             return;
         }
@@ -83,6 +84,7 @@ public class CardSlot {
 
     public void appendCard(Card card) {
         cards.add(card);
+        card.setCardSlot(this);
     }
 
     public Card drawTopCard() throws Exception {
@@ -93,7 +95,7 @@ public class CardSlot {
     }
 
     public Card drawParticularMonster(MonsterAttribute monsterAttribute) {
-        ArrayList <Card> deckCards = this.getAllCard();
+        ArrayList<Card> deckCards = this.getAllCard();
         if (monsterAttribute == null) {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(CardType.MONSTER)) {
@@ -101,12 +103,11 @@ public class CardSlot {
                     return card;
                 }
             }
-        }
-        else {
+        } else {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(CardType.MONSTER)) {
                     MonsterCard monsterCard = (MonsterCard) card;
-                    if (((MonsterCardData)monsterCard.getCardData()).getAttribute().equals(monsterAttribute)) {
+                    if (((MonsterCardData) monsterCard.getCardData()).getAttribute().equals(monsterAttribute)) {
                         this.removeACard(card);
                         return card;
                     }
@@ -117,7 +118,7 @@ public class CardSlot {
     }
 
     public Card drawParticularSpellTrap(CardType cardType, SpellTrapProperty spellTrapProperty) {
-        ArrayList <Card> deckCards = this.getAllCard();
+        ArrayList<Card> deckCards = this.getAllCard();
         if (spellTrapProperty == null) {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(cardType)) {
@@ -125,7 +126,7 @@ public class CardSlot {
                     return card;
                 }
             }
-        }else {
+        } else {
             for (Card card : deckCards) {
                 if (card.getCardType().equals(cardType)) {
                     if (cardType.equals(CardType.SPELL)) {
@@ -134,8 +135,7 @@ public class CardSlot {
                             this.removeACard(card);
                             return card;
                         }
-                    }
-                    else if (cardType.equals(CardType.TRAP)) {
+                    } else if (cardType.equals(CardType.TRAP)) {
                         TrapCardData trapCardData = (TrapCardData) ((TrapCard) card).getCardData();
                         if (trapCardData.getTrapProperty().equals(spellTrapProperty)) {
                             this.removeACard(card);
@@ -155,10 +155,13 @@ public class CardSlot {
             case DECK:
                 return cards.size() + "";
             case FIELD:
+            case SPELL_AND_TRAP:
                 if (isEmpty()) {
                     return "E";
-                } else {
+                } else if (getCard().getCardStatus() == CardStatus.FACE_UP) {
                     return "O";
+                } else {
+                    return "H";
                 }
             case MONSTER:
                 if (isEmpty()) {
@@ -174,12 +177,6 @@ public class CardSlot {
                     } else {
                         return "DH";
                     }
-                }
-            case SPELL_AND_TRAP:
-                if (isEmpty()) {
-                    return "E";
-                } else {
-                    return "O";
                 }
         }
         return "O";

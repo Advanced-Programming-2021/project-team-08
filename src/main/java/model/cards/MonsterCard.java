@@ -44,14 +44,12 @@ public class MonsterCard extends Card {
         // TODO: ۱۸/۰۶/۲۰۲۱
     }
 
-    public void onSummon(CardSlot cardSlot) {
-        this.cardSlot = cardSlot;
+    public void onSummon() {
         cardStatus = CardStatus.FACE_UP;
         isAttackPosition = true;
     }
 
-    public void onSet(CardSlot cardSlot) {
-        this.cardSlot = cardSlot;
+    public void onSet() {
         cardStatus = CardStatus.TO_BACK;
         isAttackPosition = false;
     }

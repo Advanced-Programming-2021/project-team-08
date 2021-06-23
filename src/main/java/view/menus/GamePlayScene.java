@@ -125,6 +125,10 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().setPosition(matcher.group(1));
             return;
         }
+        if (userInput.equals("activate effect")) {
+            sceneController.getGameManager().activateCard();
+            return;
+        }
 
         System.out.println("Invalid Command!");
     }

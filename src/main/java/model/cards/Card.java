@@ -58,6 +58,10 @@ public abstract class Card {
         return cardStatus;
     }
 
+    public void setCardStatus(CardStatus cardStatus) {
+        this.cardStatus = cardStatus;
+    }
+
     public CardData getCardData() {
         return cardData;
     }
@@ -73,6 +77,10 @@ public abstract class Card {
 
     public CardSlot getCardSlot() {
         return cardSlot;
+    }
+
+    public void setCardSlot(CardSlot cardSlot) {
+        this.cardSlot = cardSlot;
     }
 
     @Override

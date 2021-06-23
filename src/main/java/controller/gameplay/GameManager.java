@@ -228,6 +228,16 @@ public class GameManager {
         }
     }
 
+    public void activateCard() {
+        try {
+            getCurrentTurnPlayer().activateSpellCard(currentSelectedCard);
+            scene.log("spell activated");
+            onCardActionDone();
+        } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());

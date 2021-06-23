@@ -109,6 +109,13 @@ public class PlayerBoard {
         }
         return true;
     }
+    public boolean isSpellTrapZoneFull() {
+        for (int i = 0; i < 5; i++) {
+            if (spellAndTrapZone.get(i).isEmpty())
+                return false;
+        }
+        return true;
+    }
 
     public int numberOfMonstersInZone() {
         int res = 0;
@@ -119,7 +126,7 @@ public class PlayerBoard {
         return res;
     }
 
-    public CardSlot summonMonster(Card card) {
+    public CardSlot addMonsterCardToZone(Card card) {
         for (CardSlot slot : monsterZone) {
             if (slot.isEmpty()) {
                 try {
@@ -132,9 +139,8 @@ public class PlayerBoard {
         }
         return null;
     }
-
-    public CardSlot setMonster(Card card) {
-        for (CardSlot slot : monsterZone) {
+    public CardSlot addSpellTrapCardToZone(Card card){
+        for (CardSlot slot : spellAndTrapZone) {
             if (slot.isEmpty()) {
                 try {
                     slot.setCard(card);

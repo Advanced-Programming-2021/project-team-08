@@ -5,7 +5,10 @@ import controller.gameplay.GameManager;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
+import model.cards.SpellCard;
+import model.enums.CardStatus;
 import model.enums.CardType;
+import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
 
 import java.util.ArrayList;
@@ -99,7 +102,8 @@ public class Player {
                 }
             }
             handCards.remove(card);
-            ((MonsterCard) card).onSummon(playerBoard.summonMonster(card));
+            playerBoard.addMonsterCardToZone(card);
+            ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
         }
 
@@ -117,7 +121,8 @@ public class Player {
             throw new Exception("you already summon/set in this turn");
         } else {
             handCards.remove(card);
-            ((MonsterCard) card).onSet(playerBoard.setMonster(card));
+            playerBoard.addMonsterCardToZone(card);
+            ((MonsterCard) card).onSet();
             summonOrSetInThisTurn = true;
         }
 
@@ -153,7 +158,7 @@ public class Player {
         }
     }
 
-    public void setPosition(Card myCard, String toPos) throws Exception{
+    public void setPosition(Card myCard, String toPos) throws Exception {
         boolean toAttack = toPos.equals("attack");
         if (myCard == null) {
             throw new Exception("no card selected yet");
@@ -166,10 +171,43 @@ public class Player {
         }
         // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
         // TODO: ۱۷/۰۶/۲۰۲۱ already changed
-        if(((MonsterCard)myCard).isAttackPosition() == toAttack){
+        if (((MonsterCard) myCard).isAttackPosition() == toAttack) {
             throw new Exception("this card is already in the wanted position");
         }
-        ((MonsterCard)myCard).setAttackPosition(toAttack);
+        ((MonsterCard) myCard).setAttackPosition(toAttack);
+    }
+
+    public void activateSpellCard(Card myCard) throws Exception {
+        if (myCard == null) {
+            throw new Exception("no card selected yet");
+        }
+        if (myCard.getCardType() != CardType.SPELL) {
+            throw new Exception("activate effect is only for spell cards");
+        }
+        SpellCard spellCard = (SpellCard) myCard;
+        // TODO: ۱۷/۰۶/۲۰۲۱ not allowed in this phase
+        if (spellCard.isActivated()) {
+            throw new Exception("you have already activated this card");
+        }
+        // TODO: ۲۳/۰۶/۲۰۲۱ preparation not done
+        if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
+            if (spellCard.getCardSlot().getZoneType() != ZoneType.FIELD) {
+                if (!playerBoard.getFieldZone().isEmpty()) {
+                    CardSlot.moveToGraveyard(playerBoard.getFieldZone(), playerBoard.getGraveyard());
+                }
+                handCards.remove(myCard);
+                playerBoard.getFieldZone().setCard(myCard);
+            }
+        } else {
+            if (spellCard.getCardSlot().getZoneType() != ZoneType.SPELL_AND_TRAP) {
+                if (playerBoard.isSpellTrapZoneFull()) {
+                    throw new Exception("spell card zone is full");
+                }
+                handCards.remove(myCard);
+                playerBoard.addSpellTrapCardToZone(myCard);
+            }
+        }
+        spellCard.onActivate(this);
     }
 
     public void onChangeTurn() {
