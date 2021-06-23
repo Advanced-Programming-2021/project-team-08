@@ -2,10 +2,9 @@ package controller.gameplay;
 
 import controller.GamePlaySceneController;
 import model.Command;
-import model.event.Event;
 import model.UserData;
 import model.cards.Card;
-import model.effects.Effect;
+import model.effectSystem.Effect;
 import model.event.EventNoParam;
 import model.gameplay.Player;
 import model.gameplay.*;

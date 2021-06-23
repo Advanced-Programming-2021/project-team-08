@@ -1,15 +1,13 @@
-package model.effects;
+package model.effectSystem.effects;
 
-import model.cards.Card;
 import model.cards.MonsterCard;
-import model.cards.data.MonsterCardData;
+import model.effectSystem.Effect;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
-import model.gameplay.Player;
 
 import java.util.ArrayList;
 
-public class DestroyAllOpponentAttackPositionMonster extends Effect{
+public class DestroyAllOpponentAttackPositionMonster extends Effect {
     public DestroyAllOpponentAttackPositionMonster(ArrayList<String> args) {
         super(args);
     }

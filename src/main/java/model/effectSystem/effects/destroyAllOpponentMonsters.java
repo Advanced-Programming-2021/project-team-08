@@ -1,8 +1,8 @@
-package model.effects;
+package model.effectSystem.effects;
 
+import model.effectSystem.Effect;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
-import model.gameplay.Player;
 
 import java.util.ArrayList;
 

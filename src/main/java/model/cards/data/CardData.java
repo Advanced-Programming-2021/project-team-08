@@ -3,7 +3,7 @@ package model.cards.data;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.effects.Effect;
+import model.effectSystem.Effect;
 import model.enums.CardType;
 
 import java.lang.reflect.InvocationTargetException;

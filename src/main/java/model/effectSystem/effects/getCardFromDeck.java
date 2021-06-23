@@ -1,10 +1,10 @@
-package model.effects;
+package model.effectSystem.effects;
 
-import model.gameplay.Player;
+import model.effectSystem.Effect;
 
 import java.util.ArrayList;
 
-public class getCardFromDeck extends Effect{
+public class getCardFromDeck extends Effect {
     private int n;
 
     public getCardFromDeck(ArrayList<String> args) {

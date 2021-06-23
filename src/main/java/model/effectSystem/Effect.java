@@ -1,4 +1,4 @@
-package model.effects;
+package model.effectSystem;
 
 import controller.gameplay.GameManager;
 import model.cards.Card;
@@ -12,8 +12,12 @@ public abstract class Effect {
     protected Card card;
     private static Set<Class<? extends Effect>> allEffects;
     static {
-        Reflections r = new Reflections("model.effects");
+        Reflections r = new Reflections("model.effectSystem.effects");
         allEffects = r.getSubTypesOf(Effect.class);
+    }
+
+    public static Class<? extends Effect> getEffectClass(String className){
+        return allEffects.stream().filter(c -> c.getSimpleName().equals(className)).findFirst().orElse(null);
     }
 
     public static void setGameManager(GameManager gameManager) {
@@ -24,9 +28,7 @@ public abstract class Effect {
         this.card = card;
     }
 
-    public static Class<? extends Effect> getEffectClass(String className){
-        return allEffects.stream().filter(c -> c.getSimpleName().equals(className)).findFirst().orElse(null);
-    }
+
 
     public Effect(ArrayList<String> args) {
     }

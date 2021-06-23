@@ -1,11 +1,9 @@
 package model.cards;
 
 import model.cards.data.SpellCardData;
-import model.effects.Effect;
+import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
-import model.gameplay.CardSlot;
-import model.gameplay.Player;
 
 public class SpellCard extends Card {
     private boolean activated = false;

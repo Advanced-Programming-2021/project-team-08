@@ -4,7 +4,7 @@ import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
-import model.effects.Effect;
+import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
 import model.gameplay.CardSlot;
