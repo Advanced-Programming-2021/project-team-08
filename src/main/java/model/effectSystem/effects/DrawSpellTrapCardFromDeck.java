@@ -33,15 +33,17 @@ public class DrawSpellTrapCardFromDeck extends Effect {
 
     @Override
     public void activate() {
-        if (cardType == null) {
-            try {
-                Card card = gameManager.getGameBoard().getCardSlot(false, ZoneType.DECK, 1).drawTopCard();
-                card.getCardOwner().addCardToHand(card);
-            } catch (Exception e) {
-                e.printStackTrace();
+        for (int i = 0; i < number; i++) {
+            if (cardType == null) {
+                try {
+                    Card card = gameManager.getGameBoard().getCardSlot(false, ZoneType.DECK, 1).drawTopCard();
+                    card.getCardOwner().addCardToHand(card);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            Card card = this.card.getCardOwner().getPlayerBoard().drawParticularSpellTrap(cardType, spellProperty);
+            this.card.getCardOwner().addCardToHand(card);
         }
-        Card card = this.card.getCardOwner().getPlayerBoard().drawParticularSpellTrap(cardType, spellProperty);
-        this.card.getCardOwner().addCardToHand(card);
     }
 }
