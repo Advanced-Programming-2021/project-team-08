@@ -1,6 +1,5 @@
 package model.gameplay;
 
-import controller.GamePlaySceneController;
 import controller.gameplay.GameManager;
 import model.UserData;
 import model.cards.Card;
@@ -58,10 +57,6 @@ public class Player {
         LP += amount;
     }
 
-    /*public ArrayList<Card> getHandCards() {
-        return handCards;
-    }*/
-
     public PlayerBoard getPlayerBoard() {
         return playerBoard;
     }
@@ -85,10 +80,7 @@ public class Player {
         if (card == null) {
             throw new Exception("no card selected yet");
         }
-        if (card.getCardSlot() != null) {
-            throw new Exception("you can't summon this card");
-        }
-        if (card.getCardType() != CardType.MONSTER) {
+        if (card.getCardSlot().getZoneType() != ZoneType.HAND || card.getCardType() != CardType.MONSTER) {
             throw new Exception("you can't summon this card");
         }
         if(gameManager.getCurrentPhase() != Phase.MAIN){
@@ -121,7 +113,7 @@ public class Player {
         if (card == null) {
             throw new Exception("no card selected yet");
         }
-        if (card.getCardSlot() != null) {
+        if (card.getCardSlot().getZoneType() != ZoneType.HAND) {
             throw new Exception("you can't set this card");
         }
         if(gameManager.getCurrentPhase() != Phase.MAIN){
@@ -154,9 +146,6 @@ public class Player {
         if (myCard == null) {
             throw new Exception("no card selected yet");
         }
-        if (myCard.getCardSlot() == null) {
-            throw new Exception("you can't attack with this card");
-        }
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't attack with this card");
         }
@@ -184,9 +173,6 @@ public class Player {
         boolean toAttack = toPos.equals("attack");
         if (myCard == null) {
             throw new Exception("no card selected yet");
-        }
-        if (myCard.getCardSlot() == null) {
-            throw new Exception("you can't change this card position");
         }
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't change this card position");
