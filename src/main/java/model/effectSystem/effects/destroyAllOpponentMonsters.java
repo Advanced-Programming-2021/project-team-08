@@ -18,7 +18,8 @@ public class destroyAllOpponentMonsters extends Effect {
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
                 if (!cardSlot.isEmpty()) {
-                    CardSlot.moveToGraveyard(cardSlot,card.getCardOwner().getPlayerBoard().getGraveyard());                }
+                    CardSlot.moveToGraveyard(cardSlot, gameManager.getGameBoard().getCardSlot(true, ZoneType.GRAVEYARD, 0));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

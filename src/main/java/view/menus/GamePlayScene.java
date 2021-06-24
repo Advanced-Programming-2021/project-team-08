@@ -120,6 +120,10 @@ public class GamePlayScene extends Scene {
             sceneController.getGameManager().summonCard();
             return;
         }
+        if (userInput.equals("flip-summon")) {
+            sceneController.getGameManager().flipSummonCard();
+            return;
+        }
         if (userInput.equals("set")) {
             sceneController.getGameManager().setCard();
             return;
@@ -182,5 +186,16 @@ public class GamePlayScene extends Scene {
             throw new Exception("operation canceled");
         }
         return Integer.parseInt(input);
+    }
+
+
+    public boolean getActivateTrapCommand() {
+        System.out.println("do you want to activate your trap and spell?");
+        String input = scanner.nextLine();
+        while (!input.equals("yes") && !input.equals("no")){
+            System.out.println("you should enter yes/no");
+            input = scanner.nextLine();
+        }
+        return input.equals("yes");
     }
 }

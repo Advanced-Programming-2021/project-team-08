@@ -109,6 +109,9 @@ public class Player {
         }
     }
 
+    public void flipSummonCard(Card currentSelectedCard) {
+    }
+
     public void setCard(Card card) throws Exception {
         if (card == null) {
             throw new Exception("no card selected yet");
@@ -142,7 +145,7 @@ public class Player {
         // TODO: ۲۳/۰۶/۲۰۲۱ get tribute
     }
 
-    public void attack(boolean direct, Card myCard, CardSlot attackTo) throws Exception {
+    public AttackResult attack(boolean direct, Card myCard, CardSlot attackTo) throws Exception {
         if (myCard == null) {
             throw new Exception("no card selected yet");
         }
@@ -160,12 +163,13 @@ public class Player {
                 throw new Exception("you can't attack the opponent directly");
             }
             gameManager.applyDirectAttack(((MonsterCard) myCard).getData().getAttackPoints());
+            return null;
+            // TODO: ۲۴/۰۶/۲۰۲۱ directAttack
         } else {
             if (attackTo.isEmpty()) {
                 throw new Exception("there is no card to attack here");
             }
-            AttackResult attackResult = new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
-            gameManager.applyAttackResult(attackResult, myCard, attackTo.getCard());
+            return new AttackResult((MonsterCard) myCard, (MonsterCard) attackTo.getCard());
         }
     }
 

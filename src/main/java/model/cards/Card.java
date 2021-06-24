@@ -89,6 +89,9 @@ public abstract class Card {
 
     public void setup(Player owner){
         cardOwner = owner;
+        for (Effect effect: cardData.getEffects()){
+            effect.setup();
+        }
     }
 
     public abstract void onSet();

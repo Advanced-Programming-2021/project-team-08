@@ -5,6 +5,7 @@ import model.Command;
 import model.UserData;
 import model.cards.Card;
 import model.effectSystem.Effect;
+import model.event.Event;
 import model.event.EventNoParam;
 import model.exceptions.ParseCommandException;
 import model.gameplay.Player;
@@ -44,6 +45,7 @@ public class GameManager {
     private GamePlaySceneController sceneController;
 
     private EventNoParam onAnSpellActivated = new EventNoParam();
+    private Event<Player> onWantAttack = new Event<>();
 
     public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
@@ -70,6 +72,10 @@ public class GameManager {
         return gameBoard;
     }
 
+    public GamePlayScene getScene() {
+        return scene;
+    }
+
     public Phase getCurrentPhase() {
         return currentPhase;
     }
@@ -80,6 +86,10 @@ public class GameManager {
 
     public EventNoParam getOnAnSpellActivated() {
         return onAnSpellActivated;
+    }
+
+    public Event<Player> getOnWantAttack() {
+        return onWantAttack;
     }
 
     public void firstSetup() {
@@ -97,6 +107,10 @@ public class GameManager {
                 startMainPhase();
                 break;
             case MAIN:
+                if(turn == 1){
+                    changeTurn();
+                    return;
+                }
                 startBattlePhase();
                 break;
             case BATTLE:
@@ -114,10 +128,13 @@ public class GameManager {
         player2.onChangeTurn();
         startDrawPhase();
     }
+    public void temporaryChangeTurn(){
+        currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
+    }
 
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
-        getCurrentTurnPlayer().drawCard();
+        if(turn > 2) getCurrentTurnPlayer().drawCard();
 
         scene.showPhase("Draw");
         onCardActionDone();
@@ -242,6 +259,16 @@ public class GameManager {
         }
     }
 
+    public void flipSummonCard() {
+        try {
+            getCurrentTurnPlayer().flipSummonCard(currentSelectedCard);
+            scene.log("flip summoned successfully");
+            onCardActionDone();
+        } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+
     public void setCard() {
         try {
             getCurrentTurnPlayer().setCard(currentSelectedCard);
@@ -254,7 +281,9 @@ public class GameManager {
 
     public void attack(int number) {
         try {
-            getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+            AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
+            onWantAttack.invoke(getCurrentTurnPlayer());
+            applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -432,7 +461,9 @@ public class GameManager {
 
     public void addCard_C(String cardName) {
         try {
-            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(Card.createCardByName(cardName));
+            Card card = Card.createCardByName(cardName);
+            card.setup(getCurrentTurnPlayer());
+            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(card);
         } catch (Exception e) {
             scene.showError("card with this name doesn't exist");
         }

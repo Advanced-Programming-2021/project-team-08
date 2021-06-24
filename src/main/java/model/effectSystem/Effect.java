@@ -28,7 +28,9 @@ public abstract class Effect {
         this.card = card;
     }
 
+    public void setup(){
 
+    }
 
     public Effect(ArrayList<String> args) {
     }

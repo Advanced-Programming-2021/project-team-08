@@ -50,6 +50,7 @@ public class ReadSpellTrapCardsData {
             cardData.setCardDescription(data[3].replace(" comma", ",").trim());
             cardData.setPrice(Integer.parseInt(data[5].trim()));
             cardData.setId(Integer.parseInt(data[6].trim()));
+            if(data.length == 8) cardData.setEffect(data[7]);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }

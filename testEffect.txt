@@ -28,4 +28,12 @@ next phase
 next phase
 add card to hand Mirror Force
 select --hand 7
+card show --selected
+select --hand 1
 summon
+next phase
+next phase
+summon
+next phase
+select --monster 2
+attack 1
