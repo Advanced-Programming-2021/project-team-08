@@ -5,5 +5,6 @@ public enum ZoneType {
     DECK,
     FIELD,
     MONSTER,
-    SPELL_AND_TRAP
+    SPELL_AND_TRAP,
+    HAND
 }

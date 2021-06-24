@@ -9,7 +9,7 @@ import model.gameplay.AttackResult;
 public class MonsterCard extends Card {
     private boolean isAttackPosition;
 
-    private Event<AttackResult> onAttacked;
+    private Event<AttackResult> onAttacked = new Event<>();
 
     public MonsterCard(MonsterCardData data) {
         super(data);

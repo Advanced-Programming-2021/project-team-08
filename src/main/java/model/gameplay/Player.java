@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Player {
     private UserData userData;
     private int LP = 8000;
-    private ArrayList<Card> handCards = new ArrayList<>();
     private PlayerBoard playerBoard;
     private GameManager gameManager;
 
@@ -24,13 +23,15 @@ public class Player {
         this.playerBoard = playerBoard;
         this.gameManager = gameManager;
 
+
+
         for(Card card : playerBoard.getDeckZone().getAllCards()){
             card.setup(this);
         }
 
         for (int i = 0; i < 6; i++) {
             try {
-                handCards.add(playerBoard.drawCardFromDeck());
+                playerBoard.getHand().appendCard(playerBoard.drawCardFromDeck());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -57,9 +58,9 @@ public class Player {
         LP += amount;
     }
 
-    public ArrayList<Card> getHandCards() {
+    /*public ArrayList<Card> getHandCards() {
         return handCards;
-    }
+    }*/
 
     public PlayerBoard getPlayerBoard() {
         return playerBoard;
@@ -68,7 +69,7 @@ public class Player {
     public void drawCard() {
         try {
             Card c = playerBoard.drawCardFromDeck();
-            handCards.add(c);
+            playerBoard.getHand().appendCard(c);
             System.out.println("new card added to the hand: " + c.getCardData().getCardName());
         } catch (Exception e) {
             // TODO: ۱۷/۰۶/۲۰۲۱ Game Over
@@ -76,8 +77,8 @@ public class Player {
     }
 
     public Card getCardFromHand(int number) throws Exception {
-        if (number < 1 || number > handCards.size()) throw new Exception("number out of bounds");
-        return handCards.get(number - 1);
+        if (number < 1 || number > playerBoard.getHand().getAllCards().size()) throw new Exception("number out of bounds");
+        return playerBoard.getHand().getAllCards().get(number - 1);
     }
 
     public void summonCard(Card card) throws Exception {
@@ -109,7 +110,7 @@ public class Player {
                     CardSlot.moveToGraveyard(playerBoard.getMonsterZone().get(n - 1), playerBoard.getGraveyard());
                 }
             }
-            handCards.remove(card);
+            playerBoard.getHand().removeACard(card);
             playerBoard.addMonsterCardToZone(card);
             ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
@@ -132,7 +133,7 @@ public class Player {
             } else if (summonOrSetInThisTurn) {
                 throw new Exception("you already summon/set in this turn");
             } else {
-                handCards.remove(card);
+                playerBoard.getHand().removeACard(card);
                 playerBoard.addMonsterCardToZone(card);
                 card.onSet();
                 summonOrSetInThisTurn = true;
@@ -141,7 +142,7 @@ public class Player {
             if (playerBoard.isSpellTrapZoneFull()) {
                 throw new Exception("spell/trap card zone is full");
             }
-            handCards.remove(card);
+            playerBoard.getHand().removeACard(card);
             playerBoard.addSpellTrapCardToZone(card);
             card.onSet();
         }
@@ -220,7 +221,7 @@ public class Player {
                 if (!playerBoard.getFieldZone().isEmpty()) {
                     CardSlot.moveToGraveyard(playerBoard.getFieldZone(), playerBoard.getGraveyard());
                 }
-                handCards.remove(myCard);
+                playerBoard.getHand().removeACard(myCard);
                 playerBoard.getFieldZone().setCard(myCard);
             }
         } else {
@@ -228,7 +229,7 @@ public class Player {
                 if (playerBoard.isSpellTrapZoneFull()) {
                     throw new Exception("spell card zone is full");
                 }
-                handCards.remove(myCard);
+                playerBoard.getHand().removeACard(myCard);
                 playerBoard.addSpellTrapCardToZone(myCard);
             }
         }
@@ -240,6 +241,6 @@ public class Player {
     }
 
     public void addCardToHand(Card card) {
-        handCards.add(card);
+        playerBoard.getHand().appendCard(card);
     }
 }

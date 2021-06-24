@@ -7,6 +7,7 @@ import model.cards.data.TrapCardData;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
+import model.event.EventNoParam;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
@@ -19,6 +20,8 @@ public abstract class Card {
     protected CardStatus cardStatus;
 
     protected Player cardOwner;
+
+    protected EventNoParam onDestroy = new EventNoParam();
 
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);
