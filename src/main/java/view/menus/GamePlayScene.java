@@ -56,7 +56,11 @@ public class GamePlayScene extends Scene {
             }
             matcher = Pattern.compile("select ([^\\n]+)").matcher(userInput);
             if (matcher.matches()) {
-                sceneController.getGameManager().selectCard(matcher.group(1));
+                try {
+                    sceneController.getGameManager().selectCard(matcher.group(1));
+                } catch (Exception e) {
+                    showError(e.getMessage());
+                }
                 return 1;
             }
 

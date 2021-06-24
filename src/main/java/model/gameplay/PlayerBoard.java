@@ -1,13 +1,7 @@
 package model.gameplay;
 
 import model.cards.Card;
-import model.cards.MonsterCard;
-import model.cards.SpellCard;
-import model.cards.TrapCard;
 import model.cards.data.CardData;
-import model.cards.data.MonsterCardData;
-import model.cards.data.SpellCardData;
-import model.cards.data.TrapCardData;
 import model.enums.CardType;
 import model.enums.MonsterAttribute;
 import model.enums.SpellTrapProperty;
@@ -27,6 +21,7 @@ public class PlayerBoard {
     private ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
         for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.SPELL_AND_TRAP));
     }};
+    private CardSlot hand = new CardSlot(ZoneType.HAND);
 
     public PlayerBoard(Deck playerDeck) {
         ArrayList<CardData> deck = playerDeck.getMainDeck();
@@ -56,12 +51,16 @@ public class PlayerBoard {
         return deckZone;
     }
 
+    public CardSlot getHand() {
+        return hand;
+    }
+
     public Card drawCardFromDeck() throws Exception {
         return deckZone.drawTopCard();
     }
 
     public Card drawParticularMonster(MonsterAttribute monsterAttribute) {
-       return deckZone.drawParticularMonster(monsterAttribute);
+        return deckZone.drawParticularMonster(monsterAttribute);
     }
 
     public Card drawParticularSpellTrap(CardType cardType, SpellTrapProperty spellTrapProperty) {
@@ -69,20 +68,31 @@ public class PlayerBoard {
     }
 
     public String getShowingString(boolean isCurrentTurnPlayerBoard) {
-        String toShow = "";
+        StringBuilder toShow = new StringBuilder();
         if (isCurrentTurnPlayerBoard) {
-            toShow += graveyard.toString() + "\t\t\t\t\t\t" + fieldZone.toString() + "\n";
-            toShow += zoneArrayToString(false, monsterZone) + "\n";
-            toShow += zoneArrayToString(false, spellAndTrapZone) + "\n";
-            toShow += deckZone.toString() + "\n";
+            toShow.append(graveyard.toString()).append("\t\t\t\t\t\t").append(fieldZone.toString()).append("\n");
+            toShow.append(zoneArrayToString(false, monsterZone)).append("\n");
+            toShow.append(zoneArrayToString(false, spellAndTrapZone)).append("\n");
+            toShow.append(deckZone.toString()).append("\n");
+            for (int i = 0; i < hand.getAllCards().size(); i++) {
+                toShow.append("c\t");
+            }
+            toShow.append("\n");
         } else {
-            toShow += "\t\t\t\t\t\t" + deckZone.toString() + "\n";
-            toShow += zoneArrayToString(false, spellAndTrapZone) + "\n";
-            toShow += zoneArrayToString(false, monsterZone) + "\n";
-            toShow += fieldZone.toString() + "\t\t\t\t\t\t" + graveyard.toString() + "\n";
+            for (int i = 7; i > hand.getAllCards().size(); i--) {
+                toShow.append("\t");
+            }
+            for (int i = 0; i < hand.getAllCards().size(); i++) {
+                toShow.append("c\t");
+            }
+            toShow.append("\n");
+            toShow.append("\t\t\t\t\t\t").append(deckZone.toString()).append("\n");
+            toShow.append(zoneArrayToString(true, spellAndTrapZone)).append("\n");
+            toShow.append(zoneArrayToString(true, monsterZone)).append("\n");
+            toShow.append(fieldZone.toString()).append("\t\t\t\t\t\t").append(graveyard.toString()).append("\n");
         }
 
-        return toShow;
+        return toShow.toString();
     }
 
     private String zoneArrayToString(boolean isMirror, ArrayList<CardSlot> zoneArray) {
@@ -109,6 +119,7 @@ public class PlayerBoard {
         }
         return true;
     }
+
     public boolean isSpellTrapZoneFull() {
         for (int i = 0; i < 5; i++) {
             if (spellAndTrapZone.get(i).isEmpty())
@@ -139,7 +150,8 @@ public class PlayerBoard {
         }
         return null;
     }
-    public CardSlot addSpellTrapCardToZone(Card card){
+
+    public CardSlot addSpellTrapCardToZone(Card card) {
         for (CardSlot slot : spellAndTrapZone) {
             if (slot.isEmpty()) {
                 try {

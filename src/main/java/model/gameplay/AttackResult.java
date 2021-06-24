@@ -48,7 +48,7 @@ public class AttackResult {
         }
 
         if (attacked.getCardStatus() == CardStatus.TO_BACK) {
-            resultMessage = "opponent's monster card was " + attacked.getData().getCardName() + " and " + resultMessage;
+            resultMessage = "opponent's monster card was \"" + attacked.getData().getCardName() + "\" and " + resultMessage;
         }
         attacked.onAttacked(this);
     }
