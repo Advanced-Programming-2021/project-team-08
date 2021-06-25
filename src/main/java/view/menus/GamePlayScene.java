@@ -216,4 +216,14 @@ public class GamePlayScene extends Scene {
         }
         return input.equals("yes");
     }
+
+    public int getPlaceOfMonster(){
+        System.out.println("insert number of place of monster that you want to destroy.");
+        String input = scanner.nextLine();
+        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")&&!input.equals("4")&&!input.equals("5")){
+            System.out.println("you should enter a number between 1 to 5.");
+            input = scanner.nextLine();
+        }
+        return Integer.parseInt(input);
+    }
 }

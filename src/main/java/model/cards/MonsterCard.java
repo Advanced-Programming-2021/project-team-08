@@ -57,6 +57,10 @@ public class MonsterCard extends Card {
         isAttackPosition = true;
     }
 
+    public  void rotate(){
+        cardStatus = CardStatus.FACE_UP;
+    }
+
     public void onAttacked(AttackResult result) {
         onAttacked.invoke(result);
     }

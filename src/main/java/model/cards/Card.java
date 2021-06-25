@@ -25,6 +25,8 @@ public abstract class Card {
 
     protected EventNoParam onDestroy = new EventNoParam();
 
+
+
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);
         if (data == null) {
@@ -76,6 +78,7 @@ public abstract class Card {
     public CardStatus getCardStatus() {
         return cardStatus;
     }
+
 
     public CardData getCardData() {
         return cardData;

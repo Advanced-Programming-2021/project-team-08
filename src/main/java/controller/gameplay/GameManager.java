@@ -49,7 +49,7 @@ public class GameManager {
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
-
+    protected Event<Card> faceUp = new Event<>();
 
     private boolean canAttack = true;
 
@@ -529,5 +529,17 @@ public class GameManager {
         if (nickname.equals(player2.getUserData().getNickname())) {
             finishGame(2);
         }
+    }
+
+    public void aCardFaceUp(){
+        ((MonsterCard) currentSelectedCard).rotate();
+        scene.log("rotate successfully");
+        onCardActionDone();
+        faceUp.invoke(currentSelectedCard);
+    }
+
+
+    public Event<Card> getFaceUp() {
+        return faceUp;
     }
 }
