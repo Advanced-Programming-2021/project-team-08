@@ -3,20 +3,18 @@ package model.effectSystem.effects;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.FieldEffect;
 import model.enums.CardType;
-import model.enums.MonsterAttribute;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class ChangeAttackDefenceMonsters extends FieldEffect{
+public class ChangeAllAttackDefenceMonsters extends FieldEffect{
 
     private int changedAttack;
     private int changedDefence;
 
     private ArrayList<String> monsterTypes = new ArrayList<>();
-    public ChangeAttackDefenceMonsters(ArrayList<String> args) {
+    public ChangeAllAttackDefenceMonsters(ArrayList<String> args) {
         super(args);
         try {
             changedAttack = Integer.parseInt(args.get(0).trim());
