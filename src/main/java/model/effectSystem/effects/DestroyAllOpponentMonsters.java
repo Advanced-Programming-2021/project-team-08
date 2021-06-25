@@ -6,8 +6,8 @@ import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
 
-public class destroyAllOpponentMonsters extends Effect {
-    public destroyAllOpponentMonsters(ArrayList<String> args) {
+public class DestroyAllOpponentMonsters extends Effect {
+    public DestroyAllOpponentMonsters(ArrayList<String> args) {
         super(args);
     }
 

@@ -65,14 +65,6 @@ public class Deck {
         } else return false;
     }
 
-    public static boolean isThereAreTwoCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
-        Deck deck = getDeckWithName(nameOfDeck);
-        if (deck == null) return false;
-        if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) == 2) {
-            return true;
-        } else return false;
-    }
-
     public static boolean isThereAreOneCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return false;

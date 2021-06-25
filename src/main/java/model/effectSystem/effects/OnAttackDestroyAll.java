@@ -8,8 +8,8 @@ import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
 
-public class onAttackDestroyAll extends Effect {
-    public onAttackDestroyAll(ArrayList<String> args) {
+public class OnAttackDestroyAll extends Effect {
+    public OnAttackDestroyAll(ArrayList<String> args) {
         super(args);
     }
 
