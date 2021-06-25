@@ -175,9 +175,7 @@ public class Player {
             if (gameManager.getCurrentTurnOpponentPlayer().getPlayerBoard().numberOfMonstersInZone() > 0) {
                 throw new Exception("you can't attack the opponent directly");
             }
-            gameManager.applyDirectAttack(monsterCard.getData().getAttackPoints());
-            return null;
-            // TODO: ۲۴/۰۶/۲۰۲۱ directAttack
+            return new AttackResult(monsterCard);
         } else {
             if (attackTo.isEmpty()) {
                 throw new Exception("there is no card to attack here");

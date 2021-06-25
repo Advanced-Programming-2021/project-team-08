@@ -2,15 +2,18 @@ package controller.gameplay;
 
 import model.Deck;
 import model.UserData;
+import model.cards.Card;
 import model.cards.MonsterCard;
 import model.enums.CardStatus;
-import model.enums.Phase;
+import model.enums.CardType;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
 import model.gameplay.PlayerBoard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class AI_Player {
     private Deck deck = new Deck("myDeck", "AI");
@@ -44,10 +47,11 @@ public class AI_Player {
     public void playATurn() {
         gameManager.goToNextPhase();
         gameManager.goToNextPhase();
-        try {
-            playerObject.summonCard(playerObject.getCardFromHand(1));
+        setTraps();
+        summonMonster();
+        gameManager.goToNextPhase();
 
-            gameManager.goToNextPhase();
+        try {
             ArrayList<CardSlot> monsterZone = board.getMonsterZone();
             for (int i = 0, monsterZoneSize = monsterZone.size(); i < monsterZoneSize; i++) {
                 CardSlot cardSlot = monsterZone.get(i);
@@ -63,6 +67,34 @@ public class AI_Player {
             e.printStackTrace();
         }
         gameManager.goToNextPhase();
+    }
+
+    private void setTraps() {
+        if (board.isSpellTrapZoneFull()) return;
+        ArrayList<Card> trapCards = new ArrayList<>();
+        trapCards.addAll(board.getHand().getAllCards().stream().filter(c -> c.getCardType() == CardType.TRAP).collect(Collectors.toList()));
+        while (board.isSpellTrapZoneFull() && trapCards.size() > 0){
+            try {
+                gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(trapCards.get(0)) + 1));
+                gameManager.setCard();
+                setTraps();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void summonMonster() {
+        if (board.isMonsterZoneFull()) return;
+        ArrayList<Card> monsterCards = new ArrayList<>();
+        monsterCards.addAll(board.getHand().getAllCards().stream().filter(c -> c.getCardType() == CardType.MONSTER).collect(Collectors.toList()));
+        monsterCards.sort(Comparator.comparing(m -> ((MonsterCard)m).getData().getLevel()).reversed());
+        try {
+            gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(monsterCards.get(0)) + 1));
+            gameManager.summonCard();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void doAttack() {

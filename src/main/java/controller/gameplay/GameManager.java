@@ -46,7 +46,7 @@ public class GameManager {
     private GamePlaySceneController sceneController;
 
     private EventNoParam onAnSpellActivated = new EventNoParam();
-    private Event<Player> onWantAttack = new Event<>();
+    private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFieldCardDestroy = new Event<>();
 
@@ -112,7 +112,7 @@ public class GameManager {
         return onAnSpellActivated;
     }
 
-    public Event<Player> getOnWantAttack() {
+    public Event<AttackResult> getOnWantAttack() {
         return onWantAttack;
     }
 
@@ -317,7 +317,7 @@ public class GameManager {
     public void attack(int number) {
         try {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
-            onWantAttack.invoke(getCurrentTurnPlayer());
+            onWantAttack.invoke(attackResult);
             applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
@@ -328,7 +328,9 @@ public class GameManager {
 
     public void attackDirect() {
         try {
-            getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
+            AttackResult attackResult =getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
+            onWantAttack.invoke(attackResult);
+            applyDirectAttack(attackResult);
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
@@ -363,26 +365,22 @@ public class GameManager {
     }
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
+        if(result.isCanceled()) return;
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         if (result.isDestroyCard1()) {
-            try {
-                attacker.moveToGraveyard();
-            } catch (Exception e) {
-            }
+            attacker.moveToGraveyard();
         }
         if (result.isDestroyCard2()) {
-            try {
-                attacked.moveToGraveyard();
-            } catch (Exception e) {
-            }
+            attacked.moveToGraveyard();
         }
         scene.log(result.getResultMessage());
     }
 
-    public void applyDirectAttack(int damage) {
-        getCurrentTurnOpponentPlayer().decreaseLP(damage);
-        scene.log("your opponent received " + damage + " battle damage");
+    public void applyDirectAttack(AttackResult result) {
+        if(result.isCanceled()) return;
+        getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
+        scene.log(result.getResultMessage());
     }
 
     public ArrayList<Integer> getTribute(int numberOfTributes) throws Exception {

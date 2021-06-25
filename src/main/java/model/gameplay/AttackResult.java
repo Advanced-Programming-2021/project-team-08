@@ -7,13 +7,17 @@ public class AttackResult {
     //1 for attacker
     //2 for attacked
 
+    private Player attackerPlayer;
     private int player1LPDecrease = 0;
     private int player2LPDecrease = 0;
     private boolean destroyCard1 = false;
     private boolean destroyCard2 = false;
     private String resultMessage = "";
 
+    private boolean canceled = false;
+
     public AttackResult(MonsterCard attacker, MonsterCard attacked) {
+        attackerPlayer = attacker.getCardOwner();
         int point1, point2;
         if (attacked.isAttackPosition()) {
             point1 = attacker.getData().getAttackPoints();
@@ -53,6 +57,12 @@ public class AttackResult {
         attacked.onAttacked(this);
     }
 
+    public AttackResult(MonsterCard attacker) {
+        attackerPlayer = attacker.getCardOwner();
+        player1LPDecrease = attacker.getData().getAttackPoints();
+        resultMessage = "your opponent received " + attacker.getData().getAttackPoints() + " battle damage";
+    }
+
     public int getPlayer1LPDecrease() {
         return player1LPDecrease;
     }
@@ -75,5 +85,17 @@ public class AttackResult {
 
     public void setDestroyCard1(boolean destroyCard1) {
         this.destroyCard1 = destroyCard1;
+    }
+
+    public Player getAttackerPlayer() {
+        return attackerPlayer;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public void cancel() {
+        this.canceled = true;
     }
 }
