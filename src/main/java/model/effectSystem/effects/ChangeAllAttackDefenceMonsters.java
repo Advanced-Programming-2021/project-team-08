@@ -19,10 +19,8 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
         try {
             changedAttack = Integer.parseInt(args.get(0).trim());
             changedDefence = Integer.parseInt(args.get(1).trim());
-            int i = 2;
-            while (args.get(i) != null) {
+            for(int i=2;i<args.size(); i++){
                 monsterTypes.add(args.get(i).trim());
-                i++;
             }
         }catch (Exception e) {
             e.printStackTrace();
