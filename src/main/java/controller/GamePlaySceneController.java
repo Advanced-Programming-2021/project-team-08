@@ -1,5 +1,6 @@
 package controller;
 
+import controller.gameplay.AI_Player;
 import controller.gameplay.GameManager;
 import model.Command;
 import model.Deck;
@@ -75,34 +76,39 @@ public class GamePlaySceneController {
             scene.showError(ApplicationManger.getLoggedInUser().getUsername() + " has no active deck");
             return;
         }
-        if (secondUser.getActiveDeck() == null) {
-            scene.showError(secondUser.getUsername() + " has no active deck");
-            return;
+        if (isPlayer) {
+            if (secondUser.getActiveDeck() == null) {
+                scene.showError(secondUser.getUsername() + " has no active deck");
+                return;
+            }
         }
         if (!Deck.isThisDeckValid(ApplicationManger.getLoggedInUser().getActiveDeck())) {
             scene.showError(ApplicationManger.getLoggedInUser().getUsername() + "'s deck is invalid");
             return;
         }
-        if (!Deck.isThisDeckValid(secondUser.getActiveDeck())) {
-            scene.showError(secondUser.getUsername() + "'s deck is invalid");
-            return;
+        if (isPlayer) {
+            if (!Deck.isThisDeckValid(secondUser.getActiveDeck())) {
+                scene.showError(secondUser.getUsername() + "'s deck is invalid");
+                return;
+            }
         }
 
         if (rounds == 1 || rounds == 3) {
-            startDuel(rounds, isPlayer, secondUser.getUserData());
+            if (isPlayer) {
+                startDuel(rounds, true, secondUser.getUserData());
+            } else {
+                startDuel(rounds, false, null);
+            }
         } else {
             scene.showError("number of rounds is not supported");
         }
     }
 
     private void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
-        // TODO: ۱۸/۰۵/۲۰۲۱ play with AI
         currentDuelData = new DuelData(rounds, isPlayer, ApplicationManger.getLoggedInUser().getUserData(), secondPlayer);
-
         currentRound = 1;
         System.out.println("Round " + currentRound);
-        gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
-
+        gameManager = new GameManager(isPlayer, currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
         isDuelStarted = true;
     }
 
@@ -113,7 +119,7 @@ public class GamePlaySceneController {
         if (!currentDuelData.isFinished()) {
             currentRound++;
             System.out.println("Round " + currentRound);
-            gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
+            gameManager = new GameManager(currentDuelData.isPlayer, currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
 
             isDuelStarted = true;
             return;
@@ -151,7 +157,10 @@ public class GamePlaySceneController {
                 return firstPlayer.getUsername() + " won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
             } else {
                 secondPlayerWins++;
-                return secondPlayer.getUsername() + " won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
+                if (isPlayer)
+                    return secondPlayer.getUsername() + " won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
+                else
+                    return "AI won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
             }
         }
 
@@ -159,7 +168,10 @@ public class GamePlaySceneController {
             if (firstPlayerWins > secondPlayerWins) {
                 return firstPlayer.getUsername() + " won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
             } else {
-                return secondPlayer.getUsername() + " won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
+                if (isPlayer)
+                    return secondPlayer.getUsername() + " won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
+                else
+                    return "AI won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
             }
         }
 
@@ -167,16 +179,16 @@ public class GamePlaySceneController {
             if (firstPlayerWins > secondPlayerWins) {
                 firstPlayer.addPoint(rounds * 1000);
                 firstPlayer.addMoney(rounds * (1000 + maxLP1));
-                secondPlayer.addMoney(rounds * (100));
+                if (isPlayer) secondPlayer.addMoney(rounds * (100));
             } else {
-                secondPlayer.addPoint(rounds * 1000);
-                secondPlayer.addMoney(rounds * (1000 + maxLP2));
+                if (isPlayer) secondPlayer.addPoint(rounds * 1000);
+                if (isPlayer) secondPlayer.addMoney(rounds * (1000 + maxLP2));
                 firstPlayer.addMoney(rounds * (100));
             }
         }
 
         public boolean isFinished() {
-            if(firstPlayerWins == 2 || secondPlayerWins == 2) return true;
+            if (firstPlayerWins == 2 || secondPlayerWins == 2) return true;
             return currentRound >= rounds;
         }
     }

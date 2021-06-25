@@ -1,0 +1,8 @@
+user login --password abc123 --username Ali
+menu enter duel
+duel --new --ai --rounds 1
+next phase
+next phase
+select --hand 1
+summon
+next phase

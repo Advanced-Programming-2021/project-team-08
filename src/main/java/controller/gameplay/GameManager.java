@@ -48,10 +48,23 @@ public class GameManager {
     private EventNoParam onAnSpellActivated = new EventNoParam();
     private Event<Player> onWantAttack = new Event<>();
 
-    public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
-        gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
-        this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
-        this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
+    private boolean isAI;
+    private AI_Player ai;
+
+    public GameManager(boolean isPlayer, UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
+        isAI = !isPlayer;
+        if (isAI) {
+            ai = new AI_Player(this);
+            gameBoard = new GameBoard(user1.getActiveDeck(), ai.getAIUserData().getActiveDeck(), this);
+            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
+            this.player2 = new Player(ai.getAIUserData(), gameBoard.getPlayer2Board(), this);
+            ai.setup(player2, player1);
+        } else {
+            gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
+            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
+            this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
+        }
+
         this.scene = scene;
         this.sceneController = gamePlaySceneController;
         Effect.setGameManager(this);
@@ -127,7 +140,16 @@ public class GameManager {
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
         player1.onChangeTurn();
         player2.onChangeTurn();
+
         startDrawPhase();
+        if (isAI) {
+            if (currentPlayerTurn == 2) {
+                scene.setWaitForAI(true);
+                ai.playATurn();
+            } else {
+                scene.setWaitForAI(false);
+            }
+        }
     }
 
     public void temporaryChangeTurn() {
@@ -286,7 +308,7 @@ public class GameManager {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
             onWantAttack.invoke(getCurrentTurnPlayer());
             applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
-            ((MonsterCard)currentSelectedCard).setAttackedThisTurn(true);
+            ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -296,7 +318,7 @@ public class GameManager {
     public void attackDirect() {
         try {
             getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
-            ((MonsterCard)currentSelectedCard).setAttackedThisTurn(true);
+            ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());

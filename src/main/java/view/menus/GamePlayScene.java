@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
 
 public class GamePlayScene extends Scene {
     private GamePlaySceneController sceneController;
+    private boolean waitForAI = false;
+
+    public void setWaitForAI(boolean waitForAI) {
+        this.waitForAI = waitForAI;
+    }
 
     @Override
     public void start() {
@@ -20,6 +25,8 @@ public class GamePlayScene extends Scene {
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
+
+        if(waitForAI) return 1;
 
         if (cheatCommand(userInput) == 1) return 1;
 
