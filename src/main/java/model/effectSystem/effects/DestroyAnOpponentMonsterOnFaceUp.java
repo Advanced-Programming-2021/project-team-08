@@ -1,5 +1,6 @@
 package model.effectSystem.effects;
 
+import model.cards.MonsterCard;
 import model.cards.TrapCard;
 import model.effectSystem.Effect;
 import model.enums.ZoneType;
@@ -16,7 +17,7 @@ public class DestroyAnOpponentMonsterOnFaceUp extends Effect {
     @Override
     public void setup(){
         super.setup();
-        gameManager.getFaceUp().addListener((rotateCard)->{
+        gameManager.getRotate().addListener((rotateCard)->{
             if(gameManager.getScene().getDestroyingAMonsterCommand()) {
                 placeOfMonster = gameManager.getScene().getPlaceOfMonster();
                 activate();

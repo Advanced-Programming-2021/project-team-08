@@ -11,6 +11,8 @@ public class MonsterCard extends Card {
     private boolean isAttackPosition;
     private boolean attackedThisTurn;
 
+    protected Event<Card> faceUp = new Event<>();
+
     private Event<AttackResult> onAttacked = new Event<>();
 
     public MonsterCard(MonsterCardData data) {
@@ -54,11 +56,12 @@ public class MonsterCard extends Card {
 
     public void onSummon() {
         cardStatus = CardStatus.FACE_UP;
+        faceUp.invoke(this);
         isAttackPosition = true;
-    }
 
-    public  void rotate(){
-        cardStatus = CardStatus.FACE_UP;
+    }
+    public  Event<Card> getFaceUp() {
+        return faceUp;
     }
 
     public void onAttacked(AttackResult result) {
