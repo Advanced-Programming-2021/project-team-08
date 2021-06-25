@@ -33,12 +33,7 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
     public void setup() {
         super.setup();
         activate();
-        gameManager.getOnSummonACard().addListener((summonerCard) -> {
-            if (summonerCard.getCardType().equals(CardType.MONSTER)) {
-                MonsterCardData monsterCardData = (MonsterCardData) summonerCard.getCardData();
-                changeCardAttackDefence(monsterCardData, 1);
-            }
-        });
+
 
     }
 
@@ -46,6 +41,12 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
     public void activate() {
         card.getOnDestroyEvent().addListener(() -> {
             setAllCardsChangedAttackDefence(false);
+        });
+        gameManager.getOnSummonACard().addListener((summonerCard) -> {
+            if (summonerCard.getCardType().equals(CardType.MONSTER)) {
+                MonsterCardData monsterCardData = (MonsterCardData) summonerCard.getCardData();
+                changeCardAttackDefence(monsterCardData, 1);
+            }
         });
         setAllCardsChangedAttackDefence(true);
     }
