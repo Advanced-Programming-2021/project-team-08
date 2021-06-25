@@ -14,8 +14,8 @@ public class MonsterCardData extends CardData {
     private String monsterType;
 
     private int attackPoints, defencePoints;
-    private int increasedAttack = 0;
-    private int increasedDefence = 0;
+    private int changedAttack = 0;
+    private int changedDefence = 0;
 
     private static final ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class MonsterCardData extends CardData {
     }
 
     public int getAttackPoints() {
-        return attackPoints + increasedAttack;
+        return attackPoints + changedAttack;
     }
 
     public String getMonsterType() {
@@ -66,27 +66,27 @@ public class MonsterCardData extends CardData {
     }
 
     public int getDefencePoints() {
-        return defencePoints + increasedDefence;
+        return defencePoints + changedDefence;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setIncreasedAttack(int increasedAttack) {
-        this.increasedAttack = increasedAttack;
+    public void setChangedAttack(int changedAttack) {
+        this.changedAttack = changedAttack;
     }
 
-    public void setIncreasedDefence(int increasedDefence) {
-        this.increasedDefence = increasedDefence;
+    public void setChangedDefence(int changedDefence) {
+        this.changedDefence = changedDefence;
     }
 
-    public int getIncreasedAttack() {
-        return increasedAttack;
+    public int getChangedAttack() {
+        return changedAttack;
     }
 
-    public int getIncreasedDefence() {
-        return increasedDefence;
+    public int getChangedDefence() {
+        return changedDefence;
     }
 
     public static MonsterCardData getCardByName(String cardName) {
@@ -115,8 +115,8 @@ public class MonsterCardData extends CardData {
 
     public static void setAllIncreasedAttackDefenceZero() {
         for (MonsterCardData monsterCardData : allMonsterCardData) {
-            monsterCardData.setIncreasedAttack(0);
-            monsterCardData.setIncreasedDefence(0);
+            monsterCardData.setChangedAttack(0);
+            monsterCardData.setChangedDefence(0);
         }
     }
 

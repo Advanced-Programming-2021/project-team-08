@@ -101,6 +101,9 @@ public abstract class Card {
         this.cardSlot = cardSlot;
     }
 
+    public EventNoParam getOnDestroyEvent() {
+        return onDestroy;
+    }
 
     public void moveToGraveyard() {
         CardSlot graveyard = cardOwner.getPlayerBoard().getGraveyard();
