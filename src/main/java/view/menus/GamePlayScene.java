@@ -2,6 +2,8 @@ package view.menus;
 
 import controller.GamePlaySceneController;
 import model.cards.Card;
+import model.effectSystem.EquipEffect;
+import model.gameplay.Player;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -215,6 +217,29 @@ public class GamePlayScene extends Scene {
             input = scanner.nextLine();
         }
         return input.equals("yes");
+    }
+
+    public Card getSelectedCard(EquipEffect equipEffect, Player player) {
+        System.out.println("enter the card that you want to equip");
+        String input = scanner.nextLine();
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        }catch (Exception e) {
+            System.out.println("you should enter a number");
+            return getSelectedCard(equipEffect, player);
+        }
+        try {
+            if (equipEffect.hasCardCondition(player.getPlayerBoard().getMonsterZone().get(number).getCard())) {
+                return player.getPlayerBoard().getMonsterZone().get(number).getCard();
+            }
+            else {
+                System.out.println("selected card has not the condition");
+                return getSelectedCard(equipEffect, player);
+            }
+        }catch (Exception e) {
+            return getSelectedCard(equipEffect, player);
+        }
     }
 
 

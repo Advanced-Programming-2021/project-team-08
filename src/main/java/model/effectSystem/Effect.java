@@ -35,5 +35,12 @@ public abstract class Effect {
     public Effect(ArrayList<String> args) {
     }
 
+    public boolean entryCondition() {
+        return true;
+    }
+
+
     public abstract void activate();
+
+
 }

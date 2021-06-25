@@ -13,6 +13,8 @@ import model.event.EventNoParam;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
+import java.util.ArrayList;
+
 public abstract class Card {
     protected CardType cardType;
     protected CardData cardData;
@@ -115,6 +117,9 @@ public abstract class Card {
         cardSlot.removeCard();
         graveyard.appendCard(this);
     }
+
+
+
 
     @Override
     public String toString() {

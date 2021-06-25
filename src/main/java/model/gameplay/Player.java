@@ -5,6 +5,9 @@ import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
+import model.cards.data.SpellCardData;
+import model.effectSystem.Effect;
+import model.effectSystem.EquipEffect;
 import model.enums.*;
 import model.event.EventNoParam;
 
@@ -230,7 +233,10 @@ public class Player {
         if (spellCard.isActivated()) {
             throw new Exception("you have already activated this card");
         }
-        // TODO: ۲۳/۰۶/۲۰۲۱ preparation not done
+        Effect effect = myCard.getCardData().getEffects().get(0);
+        if (effect != null) {
+            if (!effect.entryCondition()) throw new Exception("preparations of this spell are not done yet");
+        }
         if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
             if (spellCard.getCardSlot().getZoneType() != ZoneType.FIELD) {
                 if (!playerBoard.getFieldZone().isEmpty()) {
@@ -246,6 +252,12 @@ public class Player {
                 }
                 playerBoard.getHand().removeACard(myCard);
                 playerBoard.addSpellTrapCardToZone(myCard);
+            }
+        }
+        if (((SpellCardData)spellCard.getCardData()).getSpellProperty().equals(SpellTrapProperty.EQUIP)) {
+            Card card = gameManager.getScene().getSelectedCard((EquipEffect) spellCard.getCardData().getEffects().get(0), this);
+            for (Effect equipEffect :  spellCard.getCardData().getEffects()) {
+                ((EquipEffect) equipEffect).setSelectedMonster((MonsterCard) card);
             }
         }
         spellCard.onActivate();
