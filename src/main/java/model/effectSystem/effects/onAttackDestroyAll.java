@@ -23,7 +23,7 @@ public class onAttackDestroyAll extends Effect {
                 gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());
                 if (gameManager.getScene().getActivateTrapCommand()) {
-                    ((TrapCard)card).onActivate();
+                    ((TrapCard) card).onActivate();
                 }
                 gameManager.temporaryChangeTurn();
                 gameManager.getScene().log("now it will be " + attacker.getUserData().getUsername() + "'s turn");
@@ -41,7 +41,7 @@ public class onAttackDestroyAll extends Effect {
                 if (!cardSlot.isEmpty()) {
                     MonsterCard monsterCard = (MonsterCard) cardSlot.getCard();
                     if (monsterCard.isAttackPosition()) {
-                        CardSlot.moveToGraveyard(cardSlot, gameManager.getGameBoard().getCardSlot(true, ZoneType.GRAVEYARD, 0));
+                        monsterCard.moveToGraveyard();
                     }
                 }
             } catch (Exception e) {
@@ -49,6 +49,6 @@ public class onAttackDestroyAll extends Effect {
             }
         }
 
-        CardSlot.moveToGraveyard(card.getCardSlot(), card.getCardOwner().getPlayerBoard().getGraveyard());
+        card.moveToGraveyard();
     }
 }

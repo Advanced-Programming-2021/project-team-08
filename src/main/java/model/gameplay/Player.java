@@ -102,7 +102,7 @@ public class Player {
 
                 ArrayList<Integer> tributes = gameManager.getTribute(tributeNumber);
                 for (int n : tributes) {
-                    CardSlot.moveToGraveyard(playerBoard.getMonsterZone().get(n - 1), playerBoard.getGraveyard());
+                    playerBoard.getMonsterZone().get(n - 1).getCard().moveToGraveyard();
                 }
             }
             playerBoard.getHand().removeACard(card);
@@ -218,7 +218,7 @@ public class Player {
         if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
             if (spellCard.getCardSlot().getZoneType() != ZoneType.FIELD) {
                 if (!playerBoard.getFieldZone().isEmpty()) {
-                    CardSlot.moveToGraveyard(playerBoard.getFieldZone(), playerBoard.getGraveyard());
+                    playerBoard.getFieldZone().getCard().moveToGraveyard();
                 }
                 playerBoard.getHand().removeACard(myCard);
                 playerBoard.getFieldZone().setCard(myCard);

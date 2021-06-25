@@ -19,7 +19,7 @@ public class DestroyAllOpponentSpellTrap extends Effect {
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.SPELL_AND_TRAP, i);
                 if (cardSlot != null) {
-                    CardSlot.moveToGraveyard(cardSlot, gameManager.getGameBoard().getCardSlot(true, ZoneType.GRAVEYARD, 0));
+                    cardSlot.getCard().moveToGraveyard();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

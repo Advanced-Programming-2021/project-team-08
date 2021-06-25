@@ -1,5 +1,6 @@
 package model.gameplay;
 
+import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -29,11 +30,6 @@ public class CardSlot {
                 isSingular = true;
                 break;
         }
-    }
-
-    public static void moveToGraveyard(CardSlot cardSlot, CardSlot graveyard) {
-        graveyard.appendCard(cardSlot.getCard());
-        cardSlot.removeCard();
     }
 
     public ZoneType getZoneType() {

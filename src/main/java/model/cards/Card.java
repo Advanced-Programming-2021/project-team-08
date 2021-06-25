@@ -7,6 +7,7 @@ import model.cards.data.TrapCardData;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
+import model.enums.ZoneType;
 import model.event.EventNoParam;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
@@ -98,6 +99,14 @@ public abstract class Card {
 
     public void setCardSlot(CardSlot cardSlot) {
         this.cardSlot = cardSlot;
+    }
+
+
+    public void moveToGraveyard() {
+        CardSlot graveyard = cardOwner.getPlayerBoard().getGraveyard();
+        onDestroy.invoke();
+        graveyard.appendCard(this);
+        cardSlot.removeCard();
     }
 
     @Override

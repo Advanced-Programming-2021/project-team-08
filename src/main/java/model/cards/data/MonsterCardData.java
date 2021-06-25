@@ -14,6 +14,9 @@ public class MonsterCardData extends CardData {
     private String monsterType;
 
     private int attackPoints, defencePoints;
+    private int increasedAttack = 0;
+    private int increasedDefence = 0;
+
     private static final ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
     public MonsterCardData() {
@@ -55,7 +58,7 @@ public class MonsterCardData extends CardData {
     }
 
     public int getAttackPoints() {
-        return attackPoints;
+        return attackPoints + increasedAttack;
     }
 
     public String getMonsterType() {
@@ -63,13 +66,28 @@ public class MonsterCardData extends CardData {
     }
 
     public int getDefencePoints() {
-        return defencePoints;
+        return defencePoints + increasedDefence;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setIncreasedAttack(int increasedAttack) {
+        this.increasedAttack = increasedAttack;
+    }
+
+    public void setIncreasedDefence(int increasedDefence) {
+        this.increasedDefence = increasedDefence;
+    }
+
+    public int getIncreasedAttack() {
+        return increasedAttack;
+    }
+
+    public int getIncreasedDefence() {
+        return increasedDefence;
+    }
 
     public static MonsterCardData getCardByName(String cardName) {
         for (MonsterCardData monsterCardData : allMonsterCardData) {
@@ -94,6 +112,14 @@ public class MonsterCardData extends CardData {
             }
         }
     }
+
+    public static void setAllIncreasedAttackDefenceZero() {
+        for (MonsterCardData monsterCardData : allMonsterCardData) {
+            monsterCardData.setIncreasedAttack(0);
+            monsterCardData.setIncreasedDefence(0);
+        }
+    }
+
 
     @Override
     public String toString() {

@@ -21,7 +21,7 @@ public class DestroyAllOpponentAttackPositionMonster extends Effect {
                 if(!cardSlot.isEmpty()){
                     MonsterCard monsterCard = (MonsterCard) cardSlot.getCard();
                     if (monsterCard.isAttackPosition()) {
-                        CardSlot.moveToGraveyard(cardSlot, gameManager.getGameBoard().getCardSlot(true, ZoneType.GRAVEYARD, 0));
+                        monsterCard.moveToGraveyard();
                     }
                 }
             }

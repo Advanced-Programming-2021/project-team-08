@@ -47,6 +47,8 @@ public class GameManager {
 
     private EventNoParam onAnSpellActivated = new EventNoParam();
     private Event<Player> onWantAttack = new Event<>();
+    private Event<Card> onSummonACard = new Event<>();
+    private Event<Card> onFieldCardDestroy = new Event<>();
 
     private boolean isAI;
     private AI_Player ai;
@@ -84,6 +86,14 @@ public class GameManager {
 
     public GameBoard getGameBoard() {
         return gameBoard;
+    }
+
+    public Event<Card> getOnSummonACard() {
+        return onSummonACard;
+    }
+
+    public Event<Card> getOnFieldCardDestroy() {
+        return onFieldCardDestroy;
     }
 
     public GamePlayScene getScene() {
@@ -278,6 +288,7 @@ public class GameManager {
             getCurrentTurnPlayer().summonCard(currentSelectedCard);
             scene.log("summoned successfully");
             onCardActionDone();
+            onSummonACard.invoke(currentSelectedCard);
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
@@ -356,13 +367,13 @@ public class GameManager {
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         if (result.isDestroyCard1()) {
             try {
-                CardSlot.moveToGraveyard(attacker.getCardSlot(), gameBoard.getCardSlot(false, ZoneType.GRAVEYARD, 0));
+                attacker.moveToGraveyard();
             } catch (Exception e) {
             }
         }
         if (result.isDestroyCard2()) {
             try {
-                CardSlot.moveToGraveyard(attacked.getCardSlot(), gameBoard.getCardSlot(true, ZoneType.GRAVEYARD, 0));
+                attacked.moveToGraveyard();
             } catch (Exception e) {
             }
         }
