@@ -9,6 +9,8 @@ import model.enums.CardType;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class CardData {
     protected CardType cardType;
@@ -79,15 +81,20 @@ public abstract class CardData {
     }
 
     public void setEffect(String effectsJson){
-        Gson gson = new Gson();
-        JsonObject jsonObject = JsonParser.parseString(effectsJson).getAsJsonObject();
-        for (String effectName : jsonObject.keySet()){
-            try {
-                ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
-                effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
-            } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                e.printStackTrace();
+        Matcher matcher = Pattern.compile("\\{[^\\n]+?\\}").matcher(effectsJson);
+        while (matcher.find()){
+            Gson gson = new Gson();
+            JsonObject jsonObject = JsonParser.parseString(matcher.group()).getAsJsonObject();
+            for (String effectName : jsonObject.keySet()){
+                try {
+                    ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
+                    effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
+                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
+
     }
 }
