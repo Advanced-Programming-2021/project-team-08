@@ -247,9 +247,7 @@ public class DeckController {
         ArrayList<CardData> cards = Deck.getCardDataArrayFromIdArray(ApplicationManger.getLoggedInUser().getUserData().getMyCardsIds());
         cards.sort(Comparator.comparing(CardData::getName));
         for (CardData card : cards) {
-            if (card.getCardType().equals(CardType.MONSTER))
-                System.out.println(card.getCardName() + ": " + card.getCardDescription());
-            //TODO else spell and trap
+            System.out.println(card.getCardName() + ": " + card.getCardDescription());
         }
 
     }

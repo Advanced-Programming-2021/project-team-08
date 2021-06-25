@@ -11,23 +11,20 @@ public class DestroyAttacker extends Effect {
 
     public DestroyAttacker(ArrayList<String> args) {
         super(args);
-        ((MonsterCard)card).getOnAttacked().addListener((attackResult)->{
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
+        ((MonsterCard) card).getOnAttacked().addListener((attackResult) -> {
             this.attackResult = attackResult;
             activate();
         });
-        /*class myEvent implements Event<AttackResult>{
-            @Override
-            public void invoke(AttackResult arg) {
-                attackResult = arg;
-                activate(null);
-            }
-        }
-        ((MonsterCard)card).getOnAttacked().addListener(new myEvent());*/
     }
 
     @Override
     public void activate() {
-        if(attackResult.isDestroyCard2()){
+        if (attackResult.isDestroyCard2()) {
             attackResult.setDestroyCard1(true);
         }
     }

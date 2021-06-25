@@ -24,6 +24,9 @@ public class ShopScene extends Scene {
     @Override
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
+
+        if (cheatCommand(userInput) == 1) return 1;
+
         Matcher matcher;
         if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
             System.out.println("menu navigation is not possible");
@@ -35,22 +38,27 @@ public class ShopScene extends Scene {
         }
         if ((matcher = Pattern.compile("^shop buy ([\\w ]+)$").matcher(userInput)).find()) {
             shopController.buyCard(matcher.group(1));
-        }
-        else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
+        } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Shop Menu");
-        }
-        else if (Pattern.compile("shop show --all").matcher(userInput).find()) {
+        } else if (Pattern.compile("shop show --all").matcher(userInput).find()) {
             showAllCard();
-        }
-        else if (Pattern.compile("menu exit").matcher(userInput).matches()) {
+        } else if (Pattern.compile("menu exit").matcher(userInput).matches()) {
             ApplicationManger.goToScene(SceneName.MAIN_MENU);
             return 0;
-        }
-        else {
+        } else {
             System.out.println("invalid command");
 
         }
         return 1;
+    }
+
+    private int cheatCommand(String userInput) {
+        Matcher matcher = Pattern.compile("increse --money ([0-9]+)").matcher(userInput);
+        if (matcher.matches()) {
+            ApplicationManger.getLoggedInUser().getUserData().addMoney(Integer.parseInt(matcher.group(1)));
+            return 1;
+        }
+        return 0;
     }
 
     private void showAllCard() {
@@ -58,7 +66,7 @@ public class ShopScene extends Scene {
         ArrayList<CardData> allCards = CardData.getAllCardData();
         allCards.sort(new sortCardsAlphabetically());
         for (CardData cardData : allCards) {
-            System.out.println(cardData.getName() + " : "  + cardData.getPrice());
+            System.out.println(cardData.getName() + " : " + cardData.getPrice());
         }
     }
 
@@ -67,8 +75,7 @@ public class ShopScene extends Scene {
     }
 
     class sortCardsAlphabetically implements Comparator<CardData> {
-        public int compare(CardData a, CardData b)
-        {
+        public int compare(CardData a, CardData b) {
             return a.getCardName().compareTo(b.getCardName());
         }
     }

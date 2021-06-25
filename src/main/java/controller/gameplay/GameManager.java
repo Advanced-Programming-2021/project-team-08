@@ -4,6 +4,7 @@ import controller.GamePlaySceneController;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
+import model.cards.MonsterCard;
 import model.effectSystem.Effect;
 import model.event.Event;
 import model.event.EventNoParam;
@@ -107,7 +108,7 @@ public class GameManager {
                 startMainPhase();
                 break;
             case MAIN:
-                if(turn == 1){
+                if (turn == 1) {
                     changeTurn();
                     return;
                 }
@@ -128,13 +129,14 @@ public class GameManager {
         player2.onChangeTurn();
         startDrawPhase();
     }
-    public void temporaryChangeTurn(){
+
+    public void temporaryChangeTurn() {
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
     }
 
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
-        if(turn > 2) getCurrentTurnPlayer().drawCard();
+        if (turn > 2) getCurrentTurnPlayer().drawCard();
 
         scene.showPhase("Draw");
         onCardActionDone();
@@ -284,6 +286,7 @@ public class GameManager {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
             onWantAttack.invoke(getCurrentTurnPlayer());
             applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
+            ((MonsterCard)currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -293,6 +296,7 @@ public class GameManager {
     public void attackDirect() {
         try {
             getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
+            ((MonsterCard)currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -318,6 +322,11 @@ public class GameManager {
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
+    }
+
+    public void surrender() {
+        scene.log(getCurrentTurnPlayer().getUserData().getUsername() + " surrendered");
+        finishGame(getCurrentPlayerTurn() == 1 ? 2 : 1);
     }
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
@@ -414,7 +423,7 @@ public class GameManager {
         // TODO: ۱۹/۰۶/۲۰۲۱ draw
     }
 
-    private void finishGame(int winnerNumber) {
+    public void finishGame(int winnerNumber) {
         sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
@@ -471,5 +480,14 @@ public class GameManager {
 
     public void increaseLP_C(int amount) {
         getCurrentTurnPlayer().increaseLP(amount);
+    }
+
+    public void setWinner_C(String nickname) {
+        if (nickname.equals(player1.getUserData().getNickname())) {
+            finishGame(1);
+        }
+        if (nickname.equals(player2.getUserData().getNickname())) {
+            finishGame(2);
+        }
     }
 }

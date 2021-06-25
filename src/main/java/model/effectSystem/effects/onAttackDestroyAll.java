@@ -1,6 +1,7 @@
 package model.effectSystem.effects;
 
 import model.cards.MonsterCard;
+import model.cards.TrapCard;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.ZoneType;
@@ -22,7 +23,7 @@ public class onAttackDestroyAll extends Effect {
                 gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());
                 if (gameManager.getScene().getActivateTrapCommand()) {
-                    activate();
+                    ((TrapCard)card).onActivate();
                 }
                 gameManager.temporaryChangeTurn();
                 gameManager.getScene().log("now it will be " + attacker.getUserData().getUsername() + "'s turn");
@@ -33,7 +34,6 @@ public class onAttackDestroyAll extends Effect {
 
     @Override
     public void activate() {
-        card.setCardStatus(CardStatus.FACE_UP);
         CardSlot cardSlot;
         for (int i = 1; i <= 5; i++) {
             try {

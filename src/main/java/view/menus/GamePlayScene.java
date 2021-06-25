@@ -23,7 +23,7 @@ public class GamePlayScene extends Scene {
 
         if (cheatCommand(userInput) == 1) return 1;
 
-        if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
+        if ((Pattern.compile("^menu enter ([^\n]+)$").matcher(userInput)).find()) {
             System.out.println("menu navigation is not possible");
             return 1;
         }
@@ -63,6 +63,10 @@ public class GamePlayScene extends Scene {
                 }
                 return 1;
             }
+            if (userInput.equals("surrender")) {
+                sceneController.getGameManager().surrender();
+                return 1;
+            }
 
             switch (sceneController.getGameManager().getCurrentPhase()) {
                 case DRAW:
@@ -90,15 +94,22 @@ public class GamePlayScene extends Scene {
     }
 
     private int cheatCommand(String userInput) {
-        Matcher matcher = Pattern.compile("add card to hand ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()) {
-            sceneController.getGameManager().addCard_C(matcher.group(1));
-            return 1;
-        }
-        matcher = Pattern.compile("increase --LP ([0-9]+)").matcher(userInput);
-        if (matcher.matches()) {
-            sceneController.getGameManager().increaseLP_C(Integer.parseInt(matcher.group(1)));
-            return 1;
+        if (sceneController.isDuelStarted()) {
+            Matcher matcher = Pattern.compile("add card to hand ([^\\n]+)").matcher(userInput);
+            if (matcher.matches()) {
+                sceneController.getGameManager().addCard_C(matcher.group(1));
+                return 1;
+            }
+            matcher = Pattern.compile("increase --LP ([0-9]+)").matcher(userInput);
+            if (matcher.matches()) {
+                sceneController.getGameManager().increaseLP_C(Integer.parseInt(matcher.group(1)));
+                return 1;
+            }
+            matcher = Pattern.compile("duel set-winner ([^\\n]+)").matcher(userInput);
+            if (matcher.matches()) {
+                sceneController.getGameManager().setWinner_C(matcher.group(1));
+                return 1;
+            }
         }
         return 0;
     }
@@ -192,7 +203,7 @@ public class GamePlayScene extends Scene {
     public boolean getActivateTrapCommand() {
         System.out.println("do you want to activate your trap and spell?");
         String input = scanner.nextLine();
-        while (!input.equals("yes") && !input.equals("no")){
+        while (!input.equals("yes") && !input.equals("no")) {
             System.out.println("you should enter yes/no");
             input = scanner.nextLine();
         }

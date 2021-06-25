@@ -75,10 +75,6 @@ public abstract class Card {
         return cardStatus;
     }
 
-    public void setCardStatus(CardStatus cardStatus) {
-        this.cardStatus = cardStatus;
-    }
-
     public CardData getCardData() {
         return cardData;
     }
