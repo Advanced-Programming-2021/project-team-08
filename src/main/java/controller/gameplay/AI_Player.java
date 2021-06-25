@@ -4,7 +4,6 @@ import model.Deck;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
-import model.enums.CardStatus;
 import model.enums.CardType;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
@@ -122,9 +121,9 @@ public class AI_Player {
         }
 
         attacks.sort(Comparator.comparing(AttackResultCalculated::attackValue).reversed());
-        for (AttackResultCalculated a:attacks){
+        /*for (AttackResultCalculated a:attacks){
             System.out.println(a);
-        }
+        }*/
 
         for(int i=0; i<attacks.size(); i++){
             AttackResultCalculated attack = attacks.get(i);
@@ -132,7 +131,6 @@ public class AI_Player {
             if(attack.attackValue() <= 0) break;
             if(attack.attacked.getCardSlot().getZoneType() != ZoneType.MONSTER) continue;
 
-            System.out.println((board.getMonsterZone().indexOf(attack.attacker.getCardSlot()) + 1) + "," + (opponent.getPlayerBoard().getMonsterZone().indexOf(attack.attacked.getCardSlot()) + 1));
             try {
                 gameManager.selectCard("--monster " + (board.getMonsterZone().indexOf(attack.attacker.getCardSlot()) + 1));
                 gameManager.attack(opponent.getPlayerBoard().getMonsterZone().indexOf(attack.attacked.getCardSlot()) + 1);
@@ -196,18 +194,6 @@ public class AI_Player {
                     player1LPDecrease = point2 - point1;
                 }
             }
-        }
-
-        @Override
-        public String toString() {
-            return "AttackResultCalculated{" +
-                    "player1LPDecrease=" + player1LPDecrease +
-                    ", player2LPDecrease=" + player2LPDecrease +
-                    ", destroyCard1=" + destroyCard1 +
-                    ", destroyCard2=" + destroyCard2 +
-                    ", attacker=" + attacker +
-                    ", attacked=" + attacked +
-                    '}';
         }
 
         public int attackValue(){
