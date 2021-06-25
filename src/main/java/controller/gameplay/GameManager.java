@@ -48,7 +48,9 @@ public class GameManager {
     private EventNoParam onAnSpellActivated = new EventNoParam();
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
-    private Event<Card> onFieldCardDestroy = new Event<>();
+    private Event<Card> onAttack = new Event<>();
+
+    private boolean canAttack = true;
 
     private boolean isAI;
     private AI_Player ai;
@@ -92,8 +94,12 @@ public class GameManager {
         return onSummonACard;
     }
 
-    public Event<Card> getOnFieldCardDestroy() {
-        return onFieldCardDestroy;
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public Event<Card> getOnAttack() {
+        return onAttack;
     }
 
     public GamePlayScene getScene() {
@@ -318,7 +324,9 @@ public class GameManager {
         try {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
             onWantAttack.invoke(attackResult);
-            applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
+            onAttack.invoke(currentSelectedCard);
+             if (canAttack) applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
+             else canAttack = true;
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {
