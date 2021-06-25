@@ -33,4 +33,5 @@ public class TrapCard extends Card {
     public void onSet() {
         cardStatus = CardStatus.TO_BACK;
     }
+
 }
