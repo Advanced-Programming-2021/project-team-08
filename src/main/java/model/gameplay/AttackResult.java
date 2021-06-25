@@ -95,6 +95,10 @@ public class AttackResult {
         this.destroyCard1 = destroyCard1;
     }
 
+    public void setDestroyCard2(boolean destroyCard2) {
+        this.destroyCard2 = destroyCard2;
+    }
+
     public Player getAttackerPlayer() {
         return attackerPlayer;
     }
