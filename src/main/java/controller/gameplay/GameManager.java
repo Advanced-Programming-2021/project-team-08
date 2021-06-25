@@ -48,7 +48,7 @@ public class GameManager {
     private EventNoParam onAnSpellActivated = new EventNoParam();
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
-    private Event<Card> onAttack = new Event<>();
+
 
     private boolean canAttack = true;
 
@@ -98,9 +98,6 @@ public class GameManager {
         this.canAttack = canAttack;
     }
 
-    public Event<Card> getOnAttack() {
-        return onAttack;
-    }
 
     public GamePlayScene getScene() {
         return scene;
@@ -324,9 +321,7 @@ public class GameManager {
         try {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
             onWantAttack.invoke(attackResult);
-            onAttack.invoke(currentSelectedCard);
-             if (canAttack) applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
-             else canAttack = true;
+             applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             onCardActionDone();
         } catch (Exception e) {

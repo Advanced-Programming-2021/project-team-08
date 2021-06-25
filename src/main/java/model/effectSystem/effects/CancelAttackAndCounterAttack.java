@@ -4,13 +4,15 @@ import model.cards.Card;
 import model.cards.TrapCard;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
+import model.gameplay.AttackResult;
 import model.gameplay.Player;
 
 import java.util.ArrayList;
 
 public class CancelAttackAndCounterAttack extends Effect {
 
-    MonsterCardData attacker;
+    private MonsterCardData attacker;
+    private AttackResult attackResult;
 
     public CancelAttackAndCounterAttack(ArrayList<String> args) {
         super(args);
@@ -19,7 +21,7 @@ public class CancelAttackAndCounterAttack extends Effect {
     @Override
     public void setup() {
         super.setup();
-        gameManager.getOnAttack().addListener((attacker) -> {
+        gameManager.getOnWantAttack().addListener((attackResult) -> {
             gameManager.temporaryChangeTurn();
             gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());
@@ -29,14 +31,15 @@ public class CancelAttackAndCounterAttack extends Effect {
             gameManager.temporaryChangeTurn();
             gameManager.getScene().log("now it will be " + getOpponentPlayer().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());
-            this.attacker = (MonsterCardData) attacker.getCardData();
+            this.attacker = (MonsterCardData) attackResult.getAttacker().getCardData();
+            this.attackResult = attackResult;
             activate();
         });
     }
 
     @Override
     public void activate() {
-        gameManager.setCanAttack(false);
+        attackResult.cancel();
         gameManager.getCurrentTurnPlayer().decreaseLP(attacker.getAttackPoints());
     }
 

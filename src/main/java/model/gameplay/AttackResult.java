@@ -1,5 +1,6 @@
 package model.gameplay;
 
+import model.cards.Card;
 import model.cards.MonsterCard;
 import model.enums.CardStatus;
 
@@ -13,11 +14,13 @@ public class AttackResult {
     private boolean destroyCard1 = false;
     private boolean destroyCard2 = false;
     private String resultMessage = "";
+    private Card attacker;
 
     private boolean canceled = false;
 
     public AttackResult(MonsterCard attacker, MonsterCard attacked) {
         attackerPlayer = attacker.getCardOwner();
+        this.attacker = attacker;
         int point1, point2;
         if (attacked.isAttackPosition()) {
             point1 = attacker.getData().getAttackPoints();
@@ -98,6 +101,10 @@ public class AttackResult {
 
     public boolean isCanceled() {
         return canceled;
+    }
+
+    public Card getAttacker() {
+        return attacker;
     }
 
     public void cancel() {

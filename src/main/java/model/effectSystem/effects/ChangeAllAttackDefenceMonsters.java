@@ -31,8 +31,6 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
     public void setup() {
         super.setup();
         activate();
-
-
     }
 
     @Override
