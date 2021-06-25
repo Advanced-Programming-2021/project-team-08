@@ -17,8 +17,10 @@ public class DestroyAnOpponentMonsterOnFaceUp extends Effect {
     public void setup(){
         super.setup();
         gameManager.getFaceUp().addListener((rotateCard)->{
-            placeOfMonster = gameManager.getScene().getPlaceOfMonster();
-            activate();
+            if(gameManager.getScene().getDestroyingAMonsterCommand()) {
+                placeOfMonster = gameManager.getScene().getPlaceOfMonster();
+                activate();
+            }
         });
     }
 

@@ -217,6 +217,17 @@ public class GamePlayScene extends Scene {
         return input.equals("yes");
     }
 
+
+    public boolean getDestroyingAMonsterCommand() {
+        System.out.println("do you want to destroy an opponent monster?");
+        String input = scanner.nextLine();
+        while (!input.equals("yes") && !input.equals("no")) {
+            System.out.println("you should enter yes/no");
+            input = scanner.nextLine();
+        }
+        return input.equals("yes");
+    }
+
     public int getPlaceOfMonster(){
         System.out.println("insert number of place of monster that you want to destroy.");
         String input = scanner.nextLine();
