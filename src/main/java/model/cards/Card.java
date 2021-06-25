@@ -105,8 +105,8 @@ public abstract class Card {
     public void moveToGraveyard() {
         CardSlot graveyard = cardOwner.getPlayerBoard().getGraveyard();
         onDestroy.invoke();
-        graveyard.appendCard(this);
         cardSlot.removeCard();
+        graveyard.appendCard(this);
     }
 
     @Override
