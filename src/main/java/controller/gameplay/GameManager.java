@@ -48,6 +48,7 @@ public class GameManager {
     private EventNoParam onAnSpellActivated = new EventNoParam();
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
+    private Event<Card> onFlipSummon = new Event<>();
 
 
     private boolean canAttack = true;
@@ -84,6 +85,10 @@ public class GameManager {
     private void clearSelection() {
         this.currentSelectedCard = null;
         this.currentSelectedCardAddress = null;
+    }
+
+    public Event<Card> getOnFlipSummon() {
+        return onFlipSummon;
     }
 
     public GameBoard getGameBoard() {
@@ -302,6 +307,7 @@ public class GameManager {
             getCurrentTurnPlayer().flipSummonCard(currentSelectedCard);
             scene.log("flip summoned successfully");
             onCardActionDone();
+            onFlipSummon.invoke(currentSelectedCard);
         } catch (Exception e) {
             scene.showError(e.getMessage());
         }
