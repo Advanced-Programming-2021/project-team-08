@@ -23,6 +23,7 @@ public class BanOpponentFromGetCard extends Effect {
     public void setup() {
         super.setup();
         gameManager.getOnChangeTurn().addListener(() -> {
+            if (card.getCardOwner().getTrapBanned() > 0) return;
             gameManager.temporaryChangeTurn();
             gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());

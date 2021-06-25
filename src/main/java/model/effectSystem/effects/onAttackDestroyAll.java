@@ -18,6 +18,7 @@ public class onAttackDestroyAll extends Effect {
         super.setup();
         gameManager.getOnWantAttack().addListener((attackResult) -> {
             if (!attackResult.getAttackerPlayer().equals(card.getCardOwner())) {
+                if (card.getCardOwner().getTrapBanned() > 0) return;
                 gameManager.temporaryChangeTurn();
                 gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());

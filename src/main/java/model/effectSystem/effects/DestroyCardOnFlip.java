@@ -19,6 +19,7 @@ public class DestroyCardOnFlip extends Effect {
             e.printStackTrace();
         }
         gameManager.getOnFlipSummon().addListener((summonCard) -> {
+            if (card.getCardOwner().getTrapBanned() > 0) return;
             this.summonCard = (MonsterCard) summonCard;
             if (((MonsterCardData)summonCard.getCardData()).getAttackPoints() >= minAttack) {
                 gameManager.temporaryChangeTurn();

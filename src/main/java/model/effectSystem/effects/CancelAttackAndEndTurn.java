@@ -18,6 +18,7 @@ public class CancelAttackAndEndTurn extends CounterEffect {
     public void setup() {
         super.setup();
         gameManager.getOnWantAttack().addListener((attackResult -> {
+            if (card.getCardOwner().getTrapBanned() > 0) return;
             this.attackResult = attackResult;
             gameManager.temporaryChangeTurn();
             gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");

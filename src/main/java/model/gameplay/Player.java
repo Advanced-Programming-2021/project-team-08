@@ -16,6 +16,7 @@ public class Player {
     private PlayerBoard playerBoard;
     private GameManager gameManager;
     private int bannedCardTurn = 0;
+    private int trapBanned = 0;
 
     private boolean summonOrSetInThisTurn = false;
     private EventNoParam onChangeTurnEvent = new EventNoParam();
@@ -49,6 +50,14 @@ public class Player {
 
     public void setBannedCardTurn(int bannedCardTurn) {
         this.bannedCardTurn = bannedCardTurn;
+    }
+
+    public int getTrapBanned() {
+        return trapBanned;
+    }
+
+    public void setTrapBanned(int trapBanned) {
+        this.trapBanned = trapBanned;
     }
 
     public EventNoParam getOnChangeTurnEvent() {
