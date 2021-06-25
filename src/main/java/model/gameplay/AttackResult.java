@@ -57,10 +57,15 @@ public class AttackResult {
         attacked.onAttacked(this);
     }
 
+<<<<<<< HEAD
     public AttackResult(MonsterCard attacker) {
         attackerPlayer = attacker.getCardOwner();
         player1LPDecrease = attacker.getData().getAttackPoints();
         resultMessage = "your opponent received " + attacker.getData().getAttackPoints() + " battle damage";
+=======
+    public void setPlayer2LPDecrease(int player2LPDecrease) {
+        this.player2LPDecrease = player2LPDecrease;
+>>>>>>> 118164f736424e7ef581d43374d71037fdf92173
     }
 
     public int getPlayer1LPDecrease() {

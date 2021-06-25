@@ -37,6 +37,7 @@ public class MonsterCardData extends CardData {
         this.defencePoints = defencePoints;
     }
 
+
     public void setLevel(int level) {
         this.level = level;
     }
