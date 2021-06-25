@@ -53,6 +53,10 @@ public class AttackResult {
         attacked.onAttacked(this);
     }
 
+    public void setPlayer2LPDecrease(int player2LPDecrease) {
+        this.player2LPDecrease = player2LPDecrease;
+    }
+
     public int getPlayer1LPDecrease() {
         return player1LPDecrease;
     }
