@@ -1,27 +1,28 @@
 package model.effectSystem.effects;
 
-import model.cards.Card;
+import controller.User;
 import model.cards.TrapCard;
-import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
-import model.gameplay.AttackResult;
 import model.gameplay.Player;
 
 import java.util.ArrayList;
 
-public class CancelAttackAndCounterAttack extends Effect {
+public class BanOpponentFromGetCard extends Effect {
 
-    private MonsterCardData attacker;
-    private AttackResult attackResult;
-
-    public CancelAttackAndCounterAttack(ArrayList<String> args) {
+    int bannedTurn;
+    public BanOpponentFromGetCard(ArrayList<String> args) {
         super(args);
+        try {
+            bannedTurn = Integer.parseInt(args.get(0).trim());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void setup() {
         super.setup();
-        gameManager.getOnWantAttack().addListener((attackResult) -> {
+        gameManager.getOnChangeTurn().addListener(() -> {
             if (card.getCardOwner().getTrapBanned() > 0) return;
             gameManager.temporaryChangeTurn();
             gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
@@ -30,17 +31,17 @@ public class CancelAttackAndCounterAttack extends Effect {
                 ((TrapCard) card).onActivate();
             }
             gameManager.temporaryChangeTurn();
-            gameManager.getScene().log("now it will be " + attackResult.getAttackerPlayer().getUserData().getUsername() + "'s turn");
+            gameManager.getScene().log("now it will be " + gameManager.getCurrentTurnPlayer().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());
-            this.attacker = (MonsterCardData) attackResult.getAttacker().getCardData();
-            this.attackResult = attackResult;
         });
     }
 
+
     @Override
     public void activate() {
-        attackResult.cancel();
-        gameManager.getCurrentTurnPlayer().decreaseLP(attacker.getAttackPoints());
+        Player player;
+        if (gameManager.getCurrentTurnPlayer().equals(card.getCardOwner())) player = gameManager.getCurrentTurnOpponentPlayer();
+        else player = gameManager.getCurrentTurnPlayer();
+        player.setBannedCardTurn(bannedTurn);
     }
-
 }

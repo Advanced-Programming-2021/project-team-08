@@ -49,8 +49,11 @@ public class GameManager {
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
+    protected Event<Card> faceUp = new Event<>();
+    private EventNoParam onChangeTurn = new EventNoParam();
 
     private boolean canAttack = true;
+
 
     private boolean isAI;
     private AI_Player ai;
@@ -105,6 +108,10 @@ public class GameManager {
 
     public GamePlayScene getScene() {
         return scene;
+    }
+
+    public EventNoParam getOnChangeTurn() {
+        return onChangeTurn;
     }
 
     public Phase getCurrentPhase() {
@@ -175,8 +182,13 @@ public class GameManager {
 
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
-        if (turn > 2) getCurrentTurnPlayer().drawCard();
-
+        if (turn > 2) {
+            if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
+                getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
+            }else {
+                getCurrentTurnPlayer().drawCard();
+            }
+        }
         scene.showPhase("Draw");
         onCardActionDone();
     }
@@ -189,7 +201,7 @@ public class GameManager {
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
-
+        onChangeTurn.invoke();
         scene.showPhase("Main");
     }
 
