@@ -40,7 +40,6 @@ public class AttackResult {
                 destroyCard1 = true;
                 if (attacker.getCardType().equals(CardType.MONSTER))
                     ++destroyMonsterCard1;
-
                 destroyCard2 = true;
                 if (attacked.getCardType().equals(CardType.MONSTER))
                     ++destroyMonsterCard2;
@@ -78,7 +77,7 @@ public class AttackResult {
 
     public AttackResult(MonsterCard attacker) {
         attackerPlayer = attacker.getCardOwner();
-        player1LPDecrease = attacker.getData().getAttackPoints();
+        player2LPDecrease = attacker.getData().getAttackPoints();
         resultMessage = "your opponent received " + attacker.getData().getAttackPoints() + " battle damage";
     }
 
