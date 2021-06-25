@@ -29,11 +29,10 @@ public class CancelAttackAndCounterAttack extends Effect {
                 ((TrapCard) card).onActivate();
             }
             gameManager.temporaryChangeTurn();
-            gameManager.getScene().log("now it will be " + getOpponentPlayer().getUserData().getUsername() + "'s turn");
+            gameManager.getScene().log("now it will be " + attackResult.getAttackerPlayer().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());
             this.attacker = (MonsterCardData) attackResult.getAttacker().getCardData();
             this.attackResult = attackResult;
-            activate();
         });
     }
 
@@ -43,9 +42,4 @@ public class CancelAttackAndCounterAttack extends Effect {
         gameManager.getCurrentTurnPlayer().decreaseLP(attacker.getAttackPoints());
     }
 
-    private Player getOpponentPlayer() {
-        if (card.getCardOwner().equals(gameManager.getCurrentTurnPlayer()))
-            return gameManager.getCurrentTurnPlayer();
-        else return gameManager.getCurrentTurnOpponentPlayer();
-    }
 }
