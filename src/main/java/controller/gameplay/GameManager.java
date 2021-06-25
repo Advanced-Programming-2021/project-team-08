@@ -49,8 +49,9 @@ public class GameManager {
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
-    protected Event<Card> faceUp = new Event<>();
     private EventNoParam onChangeTurn = new EventNoParam();
+    protected Event<AttackResult> destroyAMonster=new Event<>();
+
 
     private boolean canAttack = true;
 
@@ -87,6 +88,10 @@ public class GameManager {
     private void clearSelection() {
         this.currentSelectedCard = null;
         this.currentSelectedCardAddress = null;
+    }
+
+    public Event<AttackResult> getDestroyAMonster() {
+        return destroyAMonster;
     }
 
     public Event<Card> getOnFlipSummon() {
@@ -340,6 +345,7 @@ public class GameManager {
             onWantAttack.invoke(attackResult);
              applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
+            destroyAMonster.invoke(attackResult);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());
@@ -544,5 +550,6 @@ public class GameManager {
             finishGame(2);
         }
     }
+
 
 }
