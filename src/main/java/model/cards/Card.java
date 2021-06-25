@@ -8,6 +8,7 @@ import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
 import model.enums.ZoneType;
+import model.event.Event;
 import model.event.EventNoParam;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
