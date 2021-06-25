@@ -5,10 +5,10 @@ import model.effectSystem.Effect;
 
 import java.util.ArrayList;
 
-public class increaseLPOnSpellActivate extends ContinuousEffect {
+public class IncreaseLPOnSpellActivate extends ContinuousEffect {
     private int amount;
 
-    public increaseLPOnSpellActivate(ArrayList<String> args) {
+    public IncreaseLPOnSpellActivate(ArrayList<String> args) {
         super(args);
         amount = Integer.parseInt(args.get(0));
     }

@@ -3,6 +3,8 @@ package model.gameplay;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.enums.CardStatus;
+import model.enums.CardType;
+import model.event.Event;
 
 public class AttackResult {
     //1 for attacker
@@ -13,9 +15,11 @@ public class AttackResult {
     private int player2LPDecrease = 0;
     private boolean destroyCard1 = false;
     private boolean destroyCard2 = false;
+    private int destroyMonsterCard1=0;
+    private int destroyMonsterCard2=0;
+
     private String resultMessage = "";
     private Card attacker;
-
     private boolean canceled = false;
 
     public AttackResult(MonsterCard attacker, MonsterCard attacked) {
@@ -29,14 +33,22 @@ public class AttackResult {
             if (point1 > point2) {
                 player2LPDecrease = point1 - point2;
                 destroyCard2 = true;
+                if (attacked.getCardType().equals(CardType.MONSTER))
+                    ++destroyMonsterCard2;
                 resultMessage = "your opponent's monster is destroyed and your opponent received " + player2LPDecrease + " battle damage";
             } else if (point1 == point2) {
                 destroyCard1 = true;
+                if (attacker.getCardType().equals(CardType.MONSTER))
+                    ++destroyMonsterCard1;
                 destroyCard2 = true;
+                if (attacked.getCardType().equals(CardType.MONSTER))
+                    ++destroyMonsterCard2;
                 resultMessage = "both your and your opponent's monster cards are destroyed and no one received damage";
             } else {
                 player1LPDecrease = point2 - point1;
                 destroyCard1 = true;
+                if (attacker.getCardType().equals(CardType.MONSTER))
+                    ++destroyMonsterCard1;
                 resultMessage = "your monster card is destroyed and you received " + player1LPDecrease + " battle damage";
             }
         } else {
@@ -45,6 +57,8 @@ public class AttackResult {
 
             if (point1 > point2) {
                 destroyCard2 = true;
+                if (attacked.getCardType().equals(CardType.MONSTER))
+                    ++destroyMonsterCard2;
                 resultMessage = "the defence position monster is destroyed";
             } else if (point1 == point2) {
                 resultMessage = "no card is destroyed";
@@ -63,8 +77,16 @@ public class AttackResult {
 
     public AttackResult(MonsterCard attacker) {
         attackerPlayer = attacker.getCardOwner();
-        player1LPDecrease = attacker.getData().getAttackPoints();
+        player2LPDecrease = attacker.getData().getAttackPoints();
         resultMessage = "your opponent received " + attacker.getData().getAttackPoints() + " battle damage";
+    }
+
+    public int getDestroyMonsterCard1() {
+        return destroyMonsterCard1;
+    }
+
+    public int getDestroyMonsterCard2() {
+        return destroyMonsterCard2;
     }
 
     public void setPlayer2LPDecrease(int player2LPDecrease) {

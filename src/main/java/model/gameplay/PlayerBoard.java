@@ -22,6 +22,7 @@ public class PlayerBoard {
         for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.SPELL_AND_TRAP));
     }};
     private CardSlot hand = new CardSlot(ZoneType.HAND);
+    private int placeOfCard;
 
     public PlayerBoard(Deck playerDeck) {
         ArrayList<CardData> deck = playerDeck.getMainDeck();
@@ -138,6 +139,7 @@ public class PlayerBoard {
     }
 
     public CardSlot addMonsterCardToZone(Card card) {
+        placeOfCard=1;
         for (CardSlot slot : monsterZone) {
             if (slot.isEmpty()) {
                 try {
@@ -147,8 +149,13 @@ public class PlayerBoard {
                     e.printStackTrace();
                 }
             }
+            ++placeOfCard;
         }
         return null;
+    }
+
+    public int getPlaceOfCardThatTransfer() {
+        return placeOfCard;
     }
 
     public CardSlot addSpellTrapCardToZone(Card card) {

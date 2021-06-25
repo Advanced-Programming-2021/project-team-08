@@ -12,6 +12,7 @@ import model.enums.*;
 import model.event.EventNoParam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
     private UserData userData;
@@ -103,7 +104,7 @@ public class Player {
         return playerBoard.getHand().getAllCards().get(number - 1);
     }
 
-    public void summonCard(Card card) throws Exception {
+    public void summonCard(Card card, Integer... args) throws Exception {
         checkCardSelected(card);
         if (card.getCardSlot().getZoneType() != ZoneType.HAND || card.getCardType() != CardType.MONSTER) {
             throw new Exception("you can't summon this card");
@@ -121,7 +122,12 @@ public class Player {
                     throw new Exception("there are not enough cards to tribute");
                 }
 
-                ArrayList<Integer> tributes = gameManager.getTribute(tributeNumber);
+                ArrayList<Integer> tributes;
+                if(args.length < tributeNumber){
+                    tributes = gameManager.getTribute(tributeNumber);
+                }else {
+                    tributes = new ArrayList<>(Arrays.asList(args));
+                }
                 for (int n : tributes) {
                     playerBoard.getMonsterZone().get(n - 1).getCard().moveToGraveyard();
                 }

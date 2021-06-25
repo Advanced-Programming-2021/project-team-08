@@ -4,10 +4,10 @@ import model.effectSystem.Effect;
 
 import java.util.ArrayList;
 
-public class getCardFromDeck extends Effect {
+public class GetCardFromDeck extends Effect {
     private int n;
 
-    public getCardFromDeck(ArrayList<String> args) {
+    public GetCardFromDeck(ArrayList<String> args) {
         super(args);
         this.n = Integer.parseInt(args.get(0));
         System.out.println("getCardFromDeck Con");

@@ -2,6 +2,7 @@ package model.effectSystem;
 
 import controller.gameplay.GameManager;
 import model.cards.Card;
+import model.cards.TrapCard;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
@@ -30,6 +31,17 @@ public abstract class Effect {
 
     public void setup(){
 
+    }
+
+    protected void trapActivateQuestion(){
+        if (card.getCardOwner().getTrapBanned() > 0) return;
+        gameManager.temporaryChangeTurn();
+        gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
+        gameManager.getScene().showBoard(gameManager.getGameBoardString());
+        if (gameManager.getScene().getActivateTrapCommand()) {
+            ((TrapCard) card).onActivate();
+        }
+        gameManager.temporaryChangeTurn();
     }
 
     public Effect(ArrayList<String> args) {

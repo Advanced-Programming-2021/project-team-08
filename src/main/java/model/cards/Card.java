@@ -28,6 +28,23 @@ public abstract class Card {
     protected EventNoParam onDestroy = new EventNoParam();
 
 
+    public static Card getCardByCardData(CardData data){
+        Card card = null;
+
+        switch (data.getCardType()) {
+            case MONSTER:
+                card = new MonsterCard((MonsterCardData) data);
+                break;
+            case SPELL:
+                card = new SpellCard((SpellCardData) data);
+                break;
+            case TRAP:
+                card = new TrapCard((TrapCardData) data);
+                break;
+        }
+
+        return card;
+    }
 
     public static Card createCardByName(String cardName) throws Exception {
         CardData data = CardData.getAllCardData().stream().filter(c -> c.getCardName().equals(cardName)).findFirst().orElse(null);

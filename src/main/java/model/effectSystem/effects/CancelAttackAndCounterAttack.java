@@ -22,14 +22,7 @@ public class CancelAttackAndCounterAttack extends Effect {
     public void setup() {
         super.setup();
         gameManager.getOnWantAttack().addListener((attackResult) -> {
-            if (card.getCardOwner().getTrapBanned() > 0) return;
-            gameManager.temporaryChangeTurn();
-            gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
-            gameManager.getScene().showBoard(gameManager.getGameBoardString());
-            if (gameManager.getScene().getActivateTrapCommand()) {
-                ((TrapCard) card).onActivate();
-            }
-            gameManager.temporaryChangeTurn();
+            trapActivateQuestion();
             gameManager.getScene().log("now it will be " + attackResult.getAttackerPlayer().getUserData().getUsername() + "'s turn");
             gameManager.getScene().showBoard(gameManager.getGameBoardString());
             this.attacker = (MonsterCardData) attackResult.getAttacker().getCardData();

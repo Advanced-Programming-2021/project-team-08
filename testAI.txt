@@ -6,3 +6,10 @@ next phase
 select --hand 1
 summon
 next phase
+
+next phase
+next phase
+select --hand 1
+summon
+next phase
+next phase

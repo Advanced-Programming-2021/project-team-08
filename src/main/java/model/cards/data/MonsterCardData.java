@@ -4,6 +4,7 @@ import model.enums.CardType;
 import model.enums.MonsterAttribute;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class MonsterCardData extends CardData {
 
@@ -19,10 +20,21 @@ public class MonsterCardData extends CardData {
 
     private static final ArrayList<MonsterCardData> allMonsterCardData = new ArrayList<>();
 
+    private boolean calculatedAttackPoint = false;
+    private Supplier<Integer> calculateAttackMethod;
+
     public MonsterCardData() {
         cardType = CardType.MONSTER;
         CardData.addCardData(this);
         allMonsterCardData.add(this);
+    }
+
+    public void setCalculatedAttackPoint(boolean calculatedAttackPoint) {
+        this.calculatedAttackPoint = calculatedAttackPoint;
+    }
+
+    public void setCalculateAttackMethod(Supplier<Integer> calculateAttackMethod) {
+        this.calculateAttackMethod = calculateAttackMethod;
     }
 
     public void setAttackPoints(int attackPoints) {
@@ -36,7 +48,6 @@ public class MonsterCardData extends CardData {
     public void setDefencePoints(int defencePoints) {
         this.defencePoints = defencePoints;
     }
-
 
     public void setLevel(int level) {
         this.level = level;
@@ -59,6 +70,9 @@ public class MonsterCardData extends CardData {
     }
 
     public int getAttackPoints() {
+        if(calculatedAttackPoint){
+            return calculateAttackMethod.get();
+        }
         return attackPoints + changedAttack;
     }
 

@@ -8,8 +8,8 @@ import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
 
-public class onAttackDestroyAll extends Effect {
-    public onAttackDestroyAll(ArrayList<String> args) {
+public class OnAttackDestroyAll extends Effect {
+    public OnAttackDestroyAll(ArrayList<String> args) {
         super(args);
     }
 
@@ -18,14 +18,7 @@ public class onAttackDestroyAll extends Effect {
         super.setup();
         gameManager.getOnWantAttack().addListener((attackResult) -> {
             if (!attackResult.getAttackerPlayer().equals(card.getCardOwner())) {
-                if (card.getCardOwner().getTrapBanned() > 0) return;
-                gameManager.temporaryChangeTurn();
-                gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
-                gameManager.getScene().showBoard(gameManager.getGameBoardString());
-                if (gameManager.getScene().getActivateTrapCommand()) {
-                    ((TrapCard) card).onActivate();
-                }
-                gameManager.temporaryChangeTurn();
+                trapActivateQuestion();
                 gameManager.getScene().log("now it will be " + attackResult.getAttackerPlayer().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());
             }
