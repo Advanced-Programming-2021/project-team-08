@@ -45,7 +45,7 @@ public class GameManager {
     private GamePlayScene scene;
     private GamePlaySceneController sceneController;
 
-    private EventNoParam onAnSpellActivated = new EventNoParam();
+    private Event<Card> onAnSpellActivated = new Event<>();
     private Event<AttackResult> onWantAttack = new Event<>();
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
@@ -127,7 +127,7 @@ public class GameManager {
         return currentPlayerTurn;
     }
 
-    public EventNoParam getOnAnSpellActivated() {
+    public Event<Card> getOnAnSpellActivated() {
         return onAnSpellActivated;
     }
 
@@ -378,7 +378,7 @@ public class GameManager {
         try {
             getCurrentTurnPlayer().activateSpellCard(currentSelectedCard);
             scene.log("spell activated");
-            onAnSpellActivated.invoke();
+            onAnSpellActivated.invoke(currentSelectedCard);
             onCardActionDone();
         } catch (Exception e) {
             scene.showError(e.getMessage());

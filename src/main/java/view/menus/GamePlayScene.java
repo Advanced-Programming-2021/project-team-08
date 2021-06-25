@@ -272,4 +272,16 @@ public class GamePlayScene extends Scene {
         }
         return Integer.parseInt(input);
     }
+    public int trowAwayACardFromHand(int numberOfCardsInHand){
+        System.out.println("insert number of card in your hand that you want to trow away.");
+        String input = scanner.nextLine();
+        Matcher matcher;
+        matcher = Pattern.compile("([\\d]+)").matcher(input);
+        while (!matcher.matches()||Integer.parseInt(matcher.group(1))>numberOfCardsInHand){
+            System.out.println("you should insert a number from 1 to"+numberOfCardsInHand);
+            input = scanner.nextLine();
+            matcher = Pattern.compile("([\\d]+)").matcher(input);
+        }
+        return Integer.parseInt(matcher.group(1));
+    }
 }
