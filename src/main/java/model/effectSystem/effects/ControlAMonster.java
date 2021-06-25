@@ -21,6 +21,7 @@ public class ControlAMonster extends Effect {
             cardSlot.removeCard();
             int placeOfCardInPlayer1 = card.getCardOwner().getPlayerBoard().getPlaceOfCardThatTransfer();
 
+
         } catch (
                 Exception e) {
             e.printStackTrace();
