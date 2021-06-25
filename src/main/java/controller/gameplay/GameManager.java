@@ -290,9 +290,9 @@ public class GameManager {
         }
     }
 
-    public void summonCard() {
+    public void summonCard(Integer... args) {
         try {
-            getCurrentTurnPlayer().summonCard(currentSelectedCard);
+            getCurrentTurnPlayer().summonCard(currentSelectedCard, args);
             scene.log("summoned successfully");
             onCardActionDone();
             onSummonACard.invoke(currentSelectedCard);
