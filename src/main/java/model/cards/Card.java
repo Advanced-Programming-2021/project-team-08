@@ -135,9 +135,6 @@ public abstract class Card {
         graveyard.appendCard(this);
     }
 
-
-
-
     @Override
     public String toString() {
         return cardData.getCardName() + ":" + cardData.getCardDescription();
