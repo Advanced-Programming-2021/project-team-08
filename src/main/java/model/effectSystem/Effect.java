@@ -3,6 +3,7 @@ package model.effectSystem;
 import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.cards.TrapCard;
+import model.gameplay.Player;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public abstract class Effect {
     public Effect(ArrayList<String> args) {
     }
 
-    public boolean entryCondition() {
+    public boolean entryCondition(Player player) {
         return true;
     }
 

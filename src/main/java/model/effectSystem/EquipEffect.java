@@ -2,6 +2,7 @@ package model.effectSystem;
 
 import model.cards.Card;
 import model.cards.MonsterCard;
+import model.cards.data.MonsterCardData;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public abstract class EquipEffect extends Effect {
         super(args);
     }
 
-    public boolean hasCardCondition(Card card) {
+    public boolean hasCardCondition(MonsterCardData monsterCardData) {
         return true;
     }
 }

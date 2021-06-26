@@ -241,7 +241,7 @@ public class Player {
         }
         Effect effect = myCard.getCardData().getEffects().get(0);
         if (effect != null) {
-            if (!effect.entryCondition()) throw new Exception("preparations of this spell are not done yet");
+            if (!effect.entryCondition(this)) throw new Exception("preparations of this spell are not done yet");
         }
         if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
             if (spellCard.getCardSlot().getZoneType() != ZoneType.FIELD) {
@@ -261,7 +261,7 @@ public class Player {
             }
         }
         if (((SpellCardData)spellCard.getCardData()).getSpellProperty().equals(SpellTrapProperty.EQUIP)) {
-            Card card = gameManager.getScene().getSelectedCard((EquipEffect) spellCard.getCardData().getEffects().get(0), this);
+            Card card = gameManager.getScene().getSelectedMonsterCard((EquipEffect) spellCard.getCardData().getEffects().get(0), this);
             for (Effect equipEffect :  spellCard.getCardData().getEffects()) {
                 ((EquipEffect) equipEffect).setSelectedMonster((MonsterCard) card);
             }

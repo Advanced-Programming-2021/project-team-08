@@ -2,6 +2,7 @@ package view.menus;
 
 import controller.GamePlaySceneController;
 import model.cards.Card;
+import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.gameplay.Player;
 
@@ -28,7 +29,7 @@ public class GamePlayScene extends Scene {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
 
-        if(waitForAI) return 1;
+        if (waitForAI) return 1;
 
         if (cheatCommand(userInput) == 1) return 1;
 
@@ -219,26 +220,23 @@ public class GamePlayScene extends Scene {
         return input.equals("yes");
     }
 
-    public Card getSelectedCard(EquipEffect equipEffect, Player player) {
+    public Card getSelectedMonsterCard(EquipEffect equipEffect, Player player) {
         System.out.println("enter the card that you want to equip");
-        String input = scanner.nextLine();
-        int number;
-        try {
-            number = Integer.parseInt(input);
-        }catch (Exception e) {
-            System.out.println("you should enter a number");
-            return getSelectedCard(equipEffect, player);
+        String input = scanner.nextLine().trim();
+        while (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4") && !input.equals("5")) {
+            System.out.println("you should enter a number between 1 and 5");
+            input = scanner.nextLine().trim();
         }
+        int number = Integer.parseInt(input) - 1;
         try {
-            if (equipEffect.hasCardCondition(player.getPlayerBoard().getMonsterZone().get(number).getCard())) {
+            if (equipEffect.hasCardCondition((MonsterCardData) player.getPlayerBoard().getMonsterZone().get(number).getCard().getCardData())) {
                 return player.getPlayerBoard().getMonsterZone().get(number).getCard();
-            }
-            else {
+            } else {
                 System.out.println("selected card has not the condition");
-                return getSelectedCard(equipEffect, player);
+                return getSelectedMonsterCard(equipEffect, player);
             }
-        }catch (Exception e) {
-            return getSelectedCard(equipEffect, player);
+        } catch (Exception e) {
+            return getSelectedMonsterCard(equipEffect, player);
         }
     }
 
@@ -253,20 +251,20 @@ public class GamePlayScene extends Scene {
         return input.equals("yes");
     }
 
-    public int getPlaceOfMonster(){
+    public int getPlaceOfMonster() {
         System.out.println("insert number of place of monster that you want to destroy.");
         String input = scanner.nextLine();
-        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")&&!input.equals("4")&&!input.equals("5")){
+        while (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4") && !input.equals("5")) {
             System.out.println("you should enter a number between 1 to 5.");
             input = scanner.nextLine();
         }
         return Integer.parseInt(input);
     }
 
-    public int getPlaceOfMonsterTransfer(){
+    public int getPlaceOfMonsterTransfer() {
         System.out.println("insert number of place of monster that you want to transfer.");
         String input = scanner.nextLine();
-        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")&&!input.equals("4")&&!input.equals("5")){
+        while (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4") && !input.equals("5")) {
             System.out.println("you should enter a number between 1 to 5.");
             input = scanner.nextLine();
         }
