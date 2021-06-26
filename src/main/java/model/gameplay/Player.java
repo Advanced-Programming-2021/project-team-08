@@ -239,9 +239,8 @@ public class Player {
         if (spellCard.isActivated()) {
             throw new Exception("you have already activated this card");
         }
-        Effect effect = myCard.getCardData().getEffects().get(0);
-        if (effect != null) {
-            if (!effect.entryCondition(this)) throw new Exception("preparations of this spell are not done yet");
+        for (Effect effect : myCard.getCardData().getEffects()){
+            if (!effect.entryCondition()) throw new Exception("preparations of this spell are not done yet");
         }
         if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
             if (spellCard.getCardSlot().getZoneType() != ZoneType.FIELD) {

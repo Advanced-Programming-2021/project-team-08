@@ -48,7 +48,7 @@ public abstract class Effect {
     public Effect(ArrayList<String> args) {
     }
 
-    public boolean entryCondition(Player player) {
+    public boolean entryCondition() {
         return true;
     }
 
