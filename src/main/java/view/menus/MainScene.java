@@ -13,9 +13,9 @@ public class MainScene extends Scene {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
         if ((matcher = Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
-            return MainMenuController.enterMenu(matcher.group(1));
+            return MainMenuController.enterMenu(matcher.group(1), false);
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
-            ApplicationManger.goToScene(SceneName.REGISTER_MENU);
+            ApplicationManger.goToScene(SceneName.REGISTER_MENU, false);
             return 0;
         } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Main Menu");
@@ -30,7 +30,7 @@ public class MainScene extends Scene {
     public int logout() {
         System.out.println("user logged out successfully!");
         ApplicationManger.logoutCurrentUser();
-        ApplicationManger.goToScene(SceneName.REGISTER_MENU);
+        ApplicationManger.goToScene(SceneName.REGISTER_MENU, false);
         return 0;
     }
 

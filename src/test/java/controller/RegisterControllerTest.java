@@ -1,5 +1,7 @@
 package controller;
 
+import model.UserData;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +11,17 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegisterControllerTest {
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    @BeforeAll
+    static void setup() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+        User testUser = new User("test", "testing", "test123");
+    }
 
     @BeforeEach
      void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-        User testUser = new User("test", "testing", "test123");
+        outputStreamCaptor.reset();
     }
 
     @Test
@@ -42,19 +49,24 @@ class RegisterControllerTest {
 
     @Test
     void loginTest() {
-        String input = "user login --password test --username test";
-        RegisterController.loginUser(input);
+        String input = "user login --password tested --username test";
+        RegisterController.loginUser(input, true);
         String output = "username and password didn't match\r\n";
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "user login --password test --username wrong";
-        RegisterController.loginUser(input);
+        RegisterController.loginUser(input, true);
         output = "username and password didn't match\r\n";
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "user login --password test123 la la la";
-        RegisterController.loginUser(input);
+        RegisterController.loginUser(input, true);
         output = "Invalid command\r\n";
+        assertEquals(output, outputStreamCaptor.toString());
+        outputStreamCaptor.reset();
+        input = "user login --password test123 --username test";
+        RegisterController.loginUser(input, true);
+        output = "user logged in successfully!\r\n";
         assertEquals(output, outputStreamCaptor.toString());
     }
 }

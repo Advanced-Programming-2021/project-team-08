@@ -115,5 +115,9 @@ public class User {
     public void setActiveDeck(String deckName) {
         userData.setActiveDeckName(deckName);
     }
+
+    public static void deleteAccount(User user) {
+        allUser.remove(user);
+    }
 }
 

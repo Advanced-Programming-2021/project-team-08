@@ -47,7 +47,7 @@ public class ShopScene extends Scene {
         } else if (Pattern.compile("shop show --all").matcher(userInput).find()) {
             showAllCard();
         } else if (Pattern.compile("menu exit").matcher(userInput).matches()) {
-            ApplicationManger.goToScene(SceneName.MAIN_MENU);
+            ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
             return 0;
         } else {
             System.out.println("invalid command");

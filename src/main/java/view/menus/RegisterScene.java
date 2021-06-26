@@ -31,7 +31,7 @@ public class RegisterScene extends Scene {
         }
         matcher = Pattern.compile("user login ([^\\n]+)").matcher(userInput);
         if (matcher.matches()) {
-            return RegisterController.loginUser(matcher.group(1));
+            return RegisterController.loginUser(matcher.group(1), false);
         }
 
         System.out.println("Invalid command");

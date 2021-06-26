@@ -14,20 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShopControllerTest {
 
-    private  final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private  ShopController shopController;
-    private  ShopScene shopScene;
-    private  User testUser;
+    private static  final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static ShopController shopController;
+    private static ShopScene shopScene;
+    private static   User testUser;
 
 
 
     @BeforeAll
     private static void setup() {
-
-    }
-
-    @BeforeEach
-    private  void setUser() {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
         FileWriter userFile = null;
@@ -42,6 +37,11 @@ public class ShopControllerTest {
         shopScene = new ShopScene();
         shopController = new ShopController(shopScene);
         new ReadSpellTrapCardsData().readSpellTrapData();
+    }
+
+    @BeforeEach
+    private  void set() {
+        outputStreamCaptor.reset();
     }
 
     @Test
@@ -72,6 +72,7 @@ public class ShopControllerTest {
     public static void endWorks() {
         File userFile = new File("users/" + "test" + ".json");
         userFile.delete();
+        User.deleteAccount(testUser);
     }
 
 

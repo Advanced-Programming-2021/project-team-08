@@ -29,7 +29,7 @@ public class ProfileScene extends Scene {
         } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Profile Menu");
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
-            ApplicationManger.goToScene(SceneName.MAIN_MENU);
+            ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
             return 0;
         } else System.out.println("invalid commands");
         return 1;

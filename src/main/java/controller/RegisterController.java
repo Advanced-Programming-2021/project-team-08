@@ -38,7 +38,7 @@ public class RegisterController {
     }
 
 
-    public static int loginUser(String userInput) {
+    public static int loginUser(String userInput, boolean isTest) {
         HashMap<String, CommandFieldType> fieldsOfLoginUser = new HashMap<>();
         fieldsOfLoginUser.put("username", CommandFieldType.STRING);
         fieldsOfLoginUser.put("password", CommandFieldType.STRING);
@@ -49,7 +49,7 @@ public class RegisterController {
             else {
                 if (User.loginUser(loginCommand.getField("username"), loginCommand.getField("password"))) {
                     System.out.println("user logged in successfully!");
-                    ApplicationManger.goToScene(SceneName.MAIN_MENU);
+                    if (!isTest) ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
                     return 0;
                 } else {
                     System.out.println("username and password didn't match");

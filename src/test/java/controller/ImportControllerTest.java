@@ -1,6 +1,7 @@
 package controller;
 
 import model.cards.data.ReadMonsterCardsData;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.ImportScene;

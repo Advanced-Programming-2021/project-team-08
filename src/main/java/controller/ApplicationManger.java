@@ -10,12 +10,13 @@ public class ApplicationManger {
     private static User loggedInUser;
 
     public void run() {
-        goToScene(SceneName.REGISTER_MENU);
+        goToScene(SceneName.REGISTER_MENU, false);
     }
 
 
-    public static void goToScene(SceneName sceneName) {
+    public static void goToScene(SceneName sceneName, boolean isTest) {
         System.out.println("<<" + sceneName.name().replace("_", " ") + ">>");
+        if (isTest) return;
         switch (sceneName) {
             case REGISTER_MENU:
                 currentScene = new RegisterScene();

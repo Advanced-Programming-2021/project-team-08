@@ -32,7 +32,7 @@ public class ImportScene extends Scene {
             System.out.println("import menu");
             return 1;
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
-            ApplicationManger.goToScene(SceneName.MAIN_MENU);
+            ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
             return 0;
         }
         System.out.println("invalid command.");

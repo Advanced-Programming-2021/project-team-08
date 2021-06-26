@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProfileControllerTest {
 
-    private  final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private User testUser;
-    private ProfileController profileController;
+    private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static User testUser;
+    private static ProfileController profileController;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void set() {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
         ApplicationManger.setLoggedInUser(testUser);
@@ -34,6 +34,11 @@ public class ProfileControllerTest {
             e.printStackTrace();
         }
         profileController = new ProfileController(new ProfileScene());
+    }
+
+    @BeforeEach
+    public void setup() {
+        outputStreamCaptor.reset();
     }
 
     @Test
@@ -88,5 +93,6 @@ public class ProfileControllerTest {
     public static void endWorks() {
         File userFile = new File("users/" + "test" + ".json");
         userFile.delete();
+        User.deleteAccount(testUser);
     }
 }
