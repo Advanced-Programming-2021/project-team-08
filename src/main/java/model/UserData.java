@@ -95,6 +95,10 @@ public class UserData {
         save();
     }
 
+    public void changeMoneyWithoutSave(int money) {
+        this.money += money;
+    }
+
     public void addCard(int id) {
         myCardsIds.add(id);
         save();
