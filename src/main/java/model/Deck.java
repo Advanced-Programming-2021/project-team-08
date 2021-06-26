@@ -78,7 +78,7 @@ public class Deck {
         CardData temp;
         for (Integer id : cardIds) {
             temp = CardData.getAllCardData().stream().filter(c -> c.getCardId() == id).findFirst().orElse(null);
-            if(temp != null) result.add(temp);
+            if (temp != null) result.add(temp);
         }
         return result;
     }
@@ -86,12 +86,20 @@ public class Deck {
     public int numberOfThisCardInMainDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return 0;
-        return Collections.frequency(deck.mainDeck, nameOfCard);
+        try {
+            return Collections.frequency(deck.mainDeck, Card.getCardIdByName(nameOfCard));
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public int numberOfThisCardInSideDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
-        return Collections.frequency(deck.sideDeck, nameOfCard);
+        try {
+            return Collections.frequency(deck.sideDeck, Card.getCardIdByName(nameOfCard));
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public static void addCard(String nameOfCard, String nameOfDeck, String mainOrSide) {
@@ -120,8 +128,7 @@ public class Deck {
         try {
             if (deck == null) return false;
             else return deck.mainDeck.contains(Card.getCardIdByName(nameOfCard));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
