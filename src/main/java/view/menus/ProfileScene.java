@@ -15,7 +15,7 @@ public class ProfileScene extends Scene {
     }
 
     @Override
-    protected int getUserCommand() {
+    public int getUserCommand() {
         String userInput = scanner.nextLine().trim();
         Matcher matcher;
         if ((Pattern.compile("^menu enter ([A-Za-z]+)$").matcher(userInput)).find()) {
@@ -23,9 +23,9 @@ public class ProfileScene extends Scene {
             return 1;
         }
         if ((matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(userInput)).find()) {
-            profileController.changeNickname(matcher);
+            profileController.changeNickname(matcher.group());
         } else if ((matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(userInput)).find()) {
-            profileController.changePassword(matcher);
+            profileController.changePassword(matcher.group());
         } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {
             System.out.println("Profile Menu");
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
@@ -47,7 +47,6 @@ public class ProfileScene extends Scene {
                 System.out.println("please enter a new password");
                 break;
         }
-        getUserCommand();
     }
 
     public void successMessage(ProfileMessages message) {

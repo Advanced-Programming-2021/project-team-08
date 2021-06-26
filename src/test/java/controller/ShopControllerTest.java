@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import model.cards.data.ReadSpellTrapCardsData;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.ShopScene;
@@ -13,14 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShopControllerTest {
 
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private ShopController shopController;
-    private ShopScene shopScene;
-    private User testUser;
+    private  final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private  ShopController shopController;
+    private  ShopScene shopScene;
+    private  User testUser;
 
+
+
+    @BeforeAll
+    private static void setup() {
+
+    }
 
     @BeforeEach
-    private void setUser() {
+    private  void setUser() {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
         FileWriter userFile = null;
@@ -31,7 +38,6 @@ public class ShopControllerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ApplicationManger applicationManger = new ApplicationManger();
         ApplicationManger.setLoggedInUser(testUser);
         shopScene = new ShopScene();
         shopController = new ShopController(shopScene);

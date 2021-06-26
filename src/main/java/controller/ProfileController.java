@@ -20,11 +20,11 @@ public class ProfileController {
         this.profileScene = profileScene;
     }
 
-    public void changeNickname(Matcher command) {
+    public void changeNickname(String command) {
         HashMap<String, CommandFieldType> fieldsOfRegisterUser = new HashMap<>();
         fieldsOfRegisterUser.put("nickname", CommandFieldType.STRING);
         try {
-            Command registerCommand = Command.parseCommand(command.group(), fieldsOfRegisterUser);
+            Command registerCommand = Command.parseCommand(command, fieldsOfRegisterUser);
             if (User.doesNicknameExists(registerCommand.getField("nickname"))) {
                 profileScene.errorMessage(ProfileMessages.REPEATED_NICKNAME);
             } else {
@@ -36,12 +36,12 @@ public class ProfileController {
         }
     }
 
-    public void changePassword(Matcher command) {
+    public void changePassword(String command) {
         HashMap<String, CommandFieldType> fieldsOfRegisterUser = new HashMap<>();
         fieldsOfRegisterUser.put("current", CommandFieldType.STRING);
         fieldsOfRegisterUser.put("new", CommandFieldType.STRING);
         try {
-            Command registerCommand = Command.parseCommand(command.group(), fieldsOfRegisterUser);
+            Command registerCommand = Command.parseCommand(command, fieldsOfRegisterUser);
             if (!registerCommand.getField("current").equals(activeUser.getUserData().getPassword())) {
                 profileScene.errorMessage(ProfileMessages.WRONG_PASSWORD);
             } else if (registerCommand.getField("new").equals(activeUser.getUserData().getPassword())) {
