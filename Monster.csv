@@ -30,7 +30,7 @@ Texchanger,1,DARK,Cyberse,Effect,100,100,Once per turn comma when your monster i
 Leotron ,4,EARTH,Cyberse,Normal,2000,0,A territorial electronic monster that guards its own domain.,2500,29
 The Calculator,2,LIGHT,Thunder,Effect,0,0,The ATK of this card is the combined Levels of all face-up monsters you control x 300.,8000,30
 Alexandrite Dragon,4,LIGHT,Dragon,Normal,2000,100,Many of the czars' lost jewels can be found in the scales of this priceless dragon. Its creator remains a mystery comma along with how they acquired the imperial treasures. But whosoever finds this dragon has hit the jackpot... whether they know it or not.,2600,31
-Mirage Dragon,4,LIGHT,Dragon,Effect,1600,600,Your opponent cannot activate Trap Cards during the Battle Phase.,2500,32
+Mirage Dragon,4,LIGHT,Dragon,Effect,1600,600,Your opponent cannot activate Trap Cards during the Battle Phase.,2500,32, {"BanOpponentTrapUse" : []}
 Herald of Creation,4,LIGHT,Spellcaster,Effect,1800,600,Once per turn: You can discard 1 card comma then target 1 Level 7 or higher monster in your Graveyard; add that target to your hand.,2700,33
 Exploder Dragon,3,EARTH,Dragon,Effect,1000,0,If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that destroyed it. Neither player takes any battle damage from attacks involving this attacking card.,1000,34
 Warrior Dai Grepher,4,EARTH,Warrior,Normal,1700,1600,The warrior who can manipulate dragons. Nobody knows his mysterious past.,3400,35

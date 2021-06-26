@@ -17,7 +17,7 @@ Pot of Greed,Spell,Normal,Draw 2 cards.,Limited,2500,56,
 Raigeki,Spell,Normal,Destroy all monsters your opponent controls.,Limited,2500,57,
 Change of Heart,Spell,Normal,Target 1 monster your opponent controls; take control of it until the End Phase.,Limited,2500,58,
 Swords of Revealing Light,Spell,Normal,After this card's activation comma it remains on the field comma but destroy it during the End Phase of your opponent's 3rd turn. When this card is activated: If your opponent controls a face-down monster comma flip all monsters they control face-up. While this card is face-up on the field comma your opponent's monsters cannot declare an attack.,Unlimited,2500,59,
-Harpie's Feather Duster,Spell,Normal,Destroy all Spells and Traps your opponent controls.,Limited,2500,60,
+Harpie's Feather Duster,Spell,Normal,Destroy all Spells and Traps your opponent controls.,Limited,2500,60,{"DestroyAllOpponentSpellTrap" : []}
 Dark Hole,Spell,Normal,Destroy all monsters on the field.,Unlimited,2500,61,
 Supply Squad,Spell,Continuous,Once per turn comma if a monster(s) you control is destroyed by battle or card effect: Draw 1 card.,Unlimited,4000,62,
 Spell Absorption,Spell,Continuous,Each time a Spell Card is activated comma gain 500 Life Points immediately after it resolves.,Unlimited,4000,63,

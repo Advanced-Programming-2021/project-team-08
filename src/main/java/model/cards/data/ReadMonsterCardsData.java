@@ -16,13 +16,13 @@ public class ReadMonsterCardsData {
             csvReader.readLine();
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                if (data.length == 10) {
+                if (data.length == 10|| data.length == 11) {
                     readACardData(data);
                 } else System.out.println("couldn't parse a row from monster.csv file");
             }
             csvReader.close();
         } catch (Exception e) {
-            System.out.println("some thing was wrong in csvReader");
+            System.out.println("some thing was wrong in monsterData csvReader");
         }
     }
 
@@ -38,6 +38,7 @@ public class ReadMonsterCardsData {
         setMonsterDescription(rowData[7].trim().replaceAll(" comma", ",").replaceAll("\\(nextline\\)", "\n"), monsterCardData);
         setMonsterPrice(rowData[8].trim(), monsterCardData);
         setMonsterId(rowData[9].trim(), monsterCardData);
+        if(rowData.length == 11) monsterCardData.setEffect(rowData[7].replace(" comma", ",").trim());
     }
 
     private void setMonsterName(String name, MonsterCardData monsterCardData) {
