@@ -28,6 +28,7 @@ public class SpellCard extends Card {
         activated = true;
     }
 
+
     public void onActivate() {
         cardStatus = CardStatus.FACE_UP;
         activateEffect();

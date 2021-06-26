@@ -57,6 +57,10 @@ public class CardSlot {
         return cards.get(0);
     }
 
+    public Card getAParticularCard(int number){
+        return cards.get(number-1);
+    }
+
     public void removeACard(Card card) {
         this.cards.remove(card);
     }

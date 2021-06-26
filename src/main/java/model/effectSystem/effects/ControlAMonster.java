@@ -18,7 +18,7 @@ public class ControlAMonster extends Effect {
         try {
             CardSlot cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, placeOfCardInPlayer2);
             card.getCardOwner().getPlayerBoard().addMonsterCardToZone(cardSlot.getCard());
-            cardSlot.removeCard();
+            cardSlot.getCard().moveToGraveyard();
             int placeOfCardInPlayer1 = card.getCardOwner().getPlayerBoard().getPlaceOfCardThatTransfer();
 
 
