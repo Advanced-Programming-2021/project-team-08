@@ -2,9 +2,13 @@ import com.google.gson.Gson;
 import controller.ApplicationManger;
 import controller.GamePlaySceneController;
 import controller.User;
+import controller.gameplay.GameManager;
 import model.Deck;
+import model.cards.Card;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
+import model.enums.Phase;
+import model.gameplay.PlayerBoard;
 import org.junit.jupiter.api.*;
 import view.menus.GamePlayScene;
 
@@ -13,7 +17,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GamePlayTest {
+public class EffectsTest {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private static User testUser1;
     private static User testUser2;
@@ -42,47 +46,41 @@ public class GamePlayTest {
         ApplicationManger.setLoggedInUser(testUser1);
         scene = new GamePlayScene();
         sceneController = scene.getSceneController();
+
+        Integer[] cards = {31, 31, 31, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 12, 12, 12, 13};
+
+        Deck deck1 = new Deck("deckTest1", "test1");
+        Deck deck2 = new Deck("deckTest2", "test2");
+        testUser1.getUserData().addDeck(deck1);
+        testUser2.getUserData().addDeck(deck2);
+        testUser1.getUserData().setActiveDeckName("deckTest1");
+        testUser2.getUserData().setActiveDeckName("deckTest2");
+        deck1.getMainDeckIds().addAll(Arrays.asList(cards));
+        deck2.getMainDeckIds().addAll(Arrays.asList(cards));
+        sceneController.duel("--new --second-player test2 --rounds 1");
     }
 
     @Test
-    public void newDuel(){
-        Integer[] cards1 = {1, 1, 1};
-        Integer[] cards2 = {31, 31, 31, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 12, 12, 12, 13};
+    public void checkEffect() throws Exception {
+        GameManager gameManager = sceneController.getGameManager();
+        for(int i=0; i<2; i++){
+            Card card = Card.createCardByName("Fireyarou");
+            card.setup(gameManager.getCurrentTurnPlayer());
+            gameManager.getGameBoard().getPlayer1Board().addMonsterCardToZone(card);
+        }
+        for(int i=0; i<2; i++){
+            Card card = Card.createCardByName("Fireyarou");
+            card.setup(gameManager.getCurrentTurnOpponentPlayer());
+            gameManager.getGameBoard().getPlayer2Board().addMonsterCardToZone(card);
+        }
 
-        sceneController.duel("--new --second-player wrong --rounds 1");
-        assertEquals("there is no player with this username" + System.lineSeparator(), outputStreamCaptor.toString());
-        outputStreamCaptor.reset();
+        gameManager.setCurrentPhase(Phase.MAIN);
+        PlayerBoard playerBoard = gameManager.getCurrentTurnPlayer().getPlayerBoard();
+        gameManager.addCard_C("Raigeki");
+        gameManager.selectCard("select --hand " + playerBoard.getHand().getAllCards().size());
+        gameManager.activateCard();
 
-        Deck deck1 = new Deck("deckTest1", "test1");
-        deck1.getMainDeckIds().addAll(Arrays.asList(cards1));
-        testUser1.getUserData().addDeck(deck1);
-        Deck deck2 = new Deck("deckTest2", "test2");
-        deck2.getMainDeckIds().addAll(Arrays.asList(cards1));
-        testUser2.getUserData().addDeck(deck2);
-
-        sceneController.duel("--new --second-player test2 --rounds 1");
-        assertEquals("test1 has no active deck" + System.lineSeparator(), outputStreamCaptor.toString());
-        outputStreamCaptor.reset();
-
-        testUser1.getUserData().setActiveDeckName("deckTest1");
-        sceneController.duel("--new --second-player test2 --rounds 1");
-        assertEquals("test2 has no active deck" + System.lineSeparator(), outputStreamCaptor.toString());
-        outputStreamCaptor.reset();
-
-        testUser2.getUserData().setActiveDeckName("deckTest2");
-        sceneController.duel("--new --second-player test2 --rounds 1");
-        assertEquals("test1's deck is invalid" + System.lineSeparator(), outputStreamCaptor.toString());
-        outputStreamCaptor.reset();
-
-        deck1.getMainDeckIds().addAll(Arrays.asList(cards2));
-        sceneController.duel("--new --second-player test2 --rounds 1");
-        assertEquals("test2's deck is invalid" + System.lineSeparator(), outputStreamCaptor.toString());
-        outputStreamCaptor.reset();
-
-        deck2.getMainDeckIds().addAll(Arrays.asList(cards2));
-        sceneController.duel("--new --second-player test2 --rounds 1");
-        assertEquals("Round 1", outputStreamCaptor.toString().split(System.lineSeparator())[0]);
-        outputStreamCaptor.reset();
+        assertEquals(0, gameManager.getCurrentTurnOpponentPlayer().getPlayerBoard().numberOfMonstersInZone());
     }
 
     @AfterAll

@@ -4,7 +4,9 @@ import model.Deck;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
+import model.cards.SpellCard;
 import model.enums.CardType;
+import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
@@ -49,6 +51,7 @@ public class AI_Player {
         gameManager.goToNextPhase();
         gameManager.goToNextPhase();
         setTraps();
+        activateSpells();
         summonMonster();
         gameManager.goToNextPhase();
         doAttack();
@@ -59,10 +62,49 @@ public class AI_Player {
         if (board.isSpellTrapZoneFull()) return;
         ArrayList<Card> trapCards = new ArrayList<>();
         trapCards.addAll(board.getHand().getAllCards().stream().filter(c -> c.getCardType() == CardType.TRAP).collect(Collectors.toList()));
-        while (board.isSpellTrapZoneFull() && trapCards.size() > 0) {
+        while (!board.isSpellTrapZoneFull() && trapCards.size() > 0) {
             try {
                 gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(trapCards.get(0)) + 1));
                 gameManager.setCard();
+                trapCards.remove(0);
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void activateSpells(){
+        if (board.isSpellTrapZoneFull()) return;
+        ArrayList<Card> spellCards = new ArrayList<>();
+        spellCards.addAll(board.getHand().getAllCards().stream().filter(c -> c.getCardType() == CardType.SPELL).collect(Collectors.toList()));
+        ArrayList<Card> fieldCards = new ArrayList<>();
+        fieldCards.addAll(spellCards.stream().filter(c -> ((SpellCard)c).getData().getSpellProperty() == SpellTrapProperty.FIELD).collect(Collectors.toList()));
+        spellCards.removeAll(fieldCards);
+
+        while (!board.isSpellTrapZoneFull() && spellCards.size() > 0) {
+            try {
+                gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(spellCards.get(0)) + 1));
+                gameManager.activateCard();
+                spellCards.remove(0);
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        if(fieldCards.size() > 0){
+            try {
+                gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(fieldCards.get(0)) + 1));
+                gameManager.activateCard();
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {

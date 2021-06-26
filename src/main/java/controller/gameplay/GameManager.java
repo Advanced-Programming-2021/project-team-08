@@ -164,6 +164,10 @@ public class GameManager {
         }
     }
 
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
     private void changeTurn() {
         turn++;
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
@@ -255,7 +259,8 @@ public class GameManager {
             case HAND:
                 command = Command.parseCommand(address, selectHandCardCommand);
                 Card temp = getCurrentTurnPlayer().getCardFromHand(Integer.parseInt(command.getField("hand")));
-                setCurrentSelectedCard(temp, null);
+                currentSelectedCardAddress = new CardSlotAddress(false, ZoneType.HAND, 0);
+                setCurrentSelectedCard(temp, currentSelectedCardAddress);
                 scene.log("card selected");
                 break;
         }
@@ -377,7 +382,7 @@ public class GameManager {
     }
 
     public void setPosition(String toPos) {
-        if(currentSelectedCardAddress.forOpponent){
+        if (currentSelectedCardAddress.forOpponent) {
             scene.showError("it is not your card");
             return;
         }
@@ -391,7 +396,7 @@ public class GameManager {
     }
 
     public void activateCard() {
-        if(currentSelectedCardAddress.forOpponent){
+        if (currentSelectedCardAddress.forOpponent) {
             scene.showError("it is not your card");
             return;
         }
