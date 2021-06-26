@@ -51,16 +51,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             deckController.deckCreate(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
+
     }
 
-//    @Test
-//    public void deckDelete(){
-//
-//        String input="deck delete second";
-//        String output="deck with name second does not exist"+ System.lineSeparator();
-//        deckController.deckDelete(input);
-//        assertEquals(output,outputStreamCaptor.toString());
-//
-//    }
+    @Test
+     void deckDelete(){
+
+        String input="deck delete first";
+        Matcher matcher = Pattern.compile("deck delete ([^\\n]+)").matcher(input);
+        if(matcher.find()) {
+            String output = "deck with name first does not exist" + System.lineSeparator();
+            deckController.deckDelete(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+        String username = ApplicationManger.getLoggedInUser().getUsername();
+        Deck deck = new Deck("first", username);
+        ApplicationManger.getLoggedInUser().addDeck(deck);
+
+        if(matcher.find()) {
+            String output = "deck deleted successfully" + System.lineSeparator();
+            deckController.deckDelete(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+
+    }
 
 }
