@@ -1,0 +1,9 @@
+user login --password abc123 --username Abolfazl
+menu enter import
+menu show-current
+export card wrongName
+export card Yami
+export card Fireyarou
+import card wrongName
+import card Test
+menu exit

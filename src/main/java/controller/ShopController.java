@@ -23,6 +23,7 @@ public class ShopController {
             shopScene.printMessage("your money is " + activeUser.getUserData().getMoney() + " card Price is " + cardData.getPrice());
         }
         else {
+            activeUser.getUserData().decreaseMoney(cardData.getPrice());
             activeUser.getUserData().addCard(cardData.getCardId());
             shopScene.printMessage("you bought " + cardName + " successfully.");
         }

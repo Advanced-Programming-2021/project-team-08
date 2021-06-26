@@ -1,0 +1,11 @@
+user login --password abc123 --username Abolfazl
+menu enter shop
+menu show-current
+shop show --all
+show my balance
+card show wrongName
+shop buy wrongName
+card show Yami
+shop buy Yami
+show my balance
+menu exit

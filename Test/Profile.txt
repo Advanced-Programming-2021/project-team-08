@@ -1,0 +1,9 @@
+user login --password abc123 --username Abolfazl
+menu enter profile
+menu show-current
+profile change --nickname mohsen
+profile change --nickname aboo
+profile change --password --current wrong --new P:123456
+profile change --password --current abc123 --new abc123
+profile change --password --current abc123 --new P:123456
+menu exit

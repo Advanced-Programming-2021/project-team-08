@@ -19,6 +19,11 @@ public class User {
         allUser.add(this);
     }
 
+    public User(UserData data){
+        userData = data;
+        allUser.add(this);
+    }
+
     public static User getUserByUsername(String username) throws Exception {
         for (User user : allUser) {
             if (user.getUserData().getUsername().equals(username)) return user;
@@ -52,15 +57,11 @@ public class User {
     }
 
     public static boolean doesUsernameExists(String username) {
-        return allUser.stream().filter(c -> c.getUserData().getUsername().equals(username)).count() > 0;
+        return allUser.stream().anyMatch(c -> c.userData.getUsername().equals(username));
     }
 
     public static boolean doesNicknameExists(String nickname) {
-        return allUser.stream().filter(c -> c.getUserData().getNickname().equals(nickname)).count() > 0;
-    }
-
-    public static ArrayList<User> getAllUser() {
-        return allUser;
+        return allUser.stream().anyMatch(c -> c.getUserData().getNickname().equals(nickname));
     }
 
     public static void setAllUser(ArrayList<User> allUser) {
@@ -87,10 +88,6 @@ public class User {
 
     public ArrayList<Deck> getDecks() {
         return userData.getDecks();
-    }
-
-    public void setActiveDeckName(String activeDeckName) {
-        userData.setActiveDeckName(activeDeckName);
     }
 
     public String getUsername() {

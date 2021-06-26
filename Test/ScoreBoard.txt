@@ -1,0 +1,5 @@
+user login --password abc123 --username Abolfazl
+menu enter scoreboard
+menu show-current
+scoreboard show
+menu exit

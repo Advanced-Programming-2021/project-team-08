@@ -1,5 +1,6 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.ImportController;
 
 import java.util.regex.Matcher;
@@ -31,6 +32,7 @@ public class ImportScene extends Scene {
             System.out.println("import menu");
             return 1;
         } else if (Pattern.compile("^menu exit$").matcher(userInput).find()) {
+            ApplicationManger.goToScene(SceneName.MAIN_MENU);
             return 0;
         }
         System.out.println("invalid command.");

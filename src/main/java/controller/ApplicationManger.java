@@ -32,9 +32,11 @@ public class ApplicationManger {
             case SHOP_MENU:
                 currentScene = new ShopScene();
                 currentScene.start();
+                break;
             case PROFILE_MENU:
                 currentScene = new ProfileScene();
                 currentScene.start();
+                break;
             case SCOREBOARD_MENU:
                 currentScene = new ScoreboardMenu();
                 currentScene.start();
@@ -48,7 +50,6 @@ public class ApplicationManger {
                 currentScene.start();
                 break;
         }
-
     }
 
     public static void setLoggedInUser(User loggedInUser) {
@@ -63,8 +64,7 @@ public class ApplicationManger {
         loggedInUser = null;
     }
 
-    public static void modifyFile(String filePath, String oldString, String newString) {
-        System.out.println(filePath + "," + oldString + "," + newString);
+/*    public static void modifyFile(String filePath, String oldString, String newString) {
         File fileToBeModified = new File(filePath);
         String oldContent = "";
         BufferedReader reader = null;
@@ -89,5 +89,5 @@ public class ApplicationManger {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

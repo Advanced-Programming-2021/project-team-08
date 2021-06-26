@@ -3,6 +3,7 @@ package model.cards.data;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.annotations.Expose;
 import model.effectSystem.Effect;
 import model.enums.CardType;
 
@@ -18,7 +19,8 @@ public abstract class CardData {
     protected int cardId;
     protected int price;
     protected String cardDescription;
-    private ArrayList<Effect> effects = new ArrayList<>();
+    private String effectString;
+    @Expose protected ArrayList<Effect> effects = new ArrayList<>();
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
     public String getCardName() {
@@ -81,6 +83,7 @@ public abstract class CardData {
     }
 
     public void setEffect(String effectsJson){
+        effectString = effectsJson;
         Matcher matcher = Pattern.compile("\\{[^\\n]+?\\}").matcher(effectsJson);
         while (matcher.find()){
             Gson gson = new Gson();

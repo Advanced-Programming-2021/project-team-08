@@ -36,7 +36,7 @@ public class Deck {
         Deck deck = getDeckWithName(name);
         if (deck == null) return;
 
-        ApplicationManger.getLoggedInUser().getUserData().getDecks().remove(deck);
+        ApplicationManger.getLoggedInUser().getUserData().removeDeck(deck);
     }
 
     public static Deck getDeckWithName(String name) {

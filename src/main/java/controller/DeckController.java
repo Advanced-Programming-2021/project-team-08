@@ -38,17 +38,6 @@ public class DeckController {
             String username = ApplicationManger.getLoggedInUser().getUsername();
             Deck deck = new Deck(deckName, username);
             ApplicationManger.getLoggedInUser().addDeck(deck);
-
-            try {
-                File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                FileWriter writer1;
-                writer1 = new FileWriter(fileToBeModified1);
-                writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                writer1.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
@@ -57,25 +46,7 @@ public class DeckController {
             System.out.println("deck with name " + deckName + " does not exist");
         } else {
             System.out.println("deck deleted successfully");
-            /*if (Deck.getDeckWithName(deckName).getMainDeck() != null) {
-                for (CardData card : Deck.getDeckWithName(deckName).getMainDeck())
-                    ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardName());
-            }
-            if (Deck.getDeckWithName(deckName).getSideDeck() != null) {
-                for (CardData card : Deck.getDeckWithName(deckName).getSideDeck())
-                    ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(card.getCardName());
-            }*/
             Deck.removeADeck(deckName);
-
-            try {
-                File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                FileWriter writer1;
-                writer1 = new FileWriter(fileToBeModified1);
-                writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                writer1.close();
-            } catch (Exception e) {
-
-            }
         }
 
     }
@@ -84,17 +55,8 @@ public class DeckController {
         if (!Deck.isThereADeckWithThisName(deckName)) {
             System.out.println("deck with name " + deckName + " does not exist");
         } else {
-            System.out.println("deck activated successfully");
             ApplicationManger.getLoggedInUser().setActiveDeck(deckName);
-            try {
-                File fileToBeModified = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-                FileWriter writer;
-                writer = new FileWriter(fileToBeModified);
-                writer.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-                writer.close();
-            } catch (Exception e) {
-
-            }
+            System.out.println("deck activated successfully");
         }
     }
 
@@ -126,8 +88,7 @@ public class DeckController {
                     } else {
                         System.out.println("card added to deck successfully");
                         Deck.addCard(addCardCommand.getField("card"), addCardCommand.getField("deck"), "side");
-                        //ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(addCardCommand.getField("card"));
-                        writeToFile();
+                        ApplicationManger.getLoggedInUser().getUserData().save();
                     }
                 } else {
                     if (Deck.isMainDeckFull(addCardCommand.getField("deck"))) {
@@ -142,25 +103,12 @@ public class DeckController {
                         System.out.println("there are already one card with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
                     } else {
                         System.out.println("card added to deck successfully");
-                        Deck.addCard(addCardCommand.getField("card"), addCardCommand.getField("deck"), "main");
-                        //ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(addCardCommand.getField("card"));
-                        writeToFile();
+                        Deck.addCard(addCardCommand.getField("card"), addCardCommand.getField("deck"), "main");;
+                        ApplicationManger.getLoggedInUser().getUserData().save();
                     }
                 }
             }
         } catch (ParseCommandException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void writeToFile() {
-        try {
-            File fileToBeModified1 = new File("users/" + ApplicationManger.getLoggedInUser().getUsername() + ".json");
-            FileWriter writer1;
-            writer1 = new FileWriter(fileToBeModified1);
-            writer1.write(new Gson().toJson(User.getUserByUsername(ApplicationManger.getLoggedInUser().getUsername())));
-            writer1.close();
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -182,8 +130,7 @@ public class DeckController {
                     } else {
                         System.out.println("card removed form deck successfully");
                         Deck.removeCardFromDeck(removeCardCommand.getField("card"), removeCardCommand.getField("deck"), "side");
-                        //ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(removeCardCommand.getField("card"));
-                        writeToFile();
+                        ApplicationManger.getLoggedInUser().getUserData().save();
                     }
                 } else {
                     if (Deck.isThereThisCardInMainDeckOfThisDeck(removeCardCommand.getField("card"), removeCardCommand.getField("deck"))) {
@@ -191,8 +138,7 @@ public class DeckController {
                     } else {
                         System.out.println("card removed form deck successfully");
                         Deck.removeCardFromDeck(removeCardCommand.getField("card"), removeCardCommand.getField("deck"), "main");
-                        //ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(removeCardCommand.getField("card"));
-                        writeToFile();
+                        ApplicationManger.getLoggedInUser().getUserData().save();
                     }
                 }
             }
@@ -274,11 +220,5 @@ public class DeckController {
             System.out.println(card.getCardName() + ": " + card.getCardDescription());
         }
 
-    }
-
-    public static Object readJsonSimpleDemo(String filename) throws Exception {
-        FileReader reader = new FileReader(filename);
-        JSONParser jsonParser = new JSONParser();
-        return jsonParser.parse(reader);
     }
 }

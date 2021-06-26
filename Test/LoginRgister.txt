@@ -1,0 +1,6 @@
+user create --password a123 --nickname mohsen --username Mohsen
+user create --password a123 --nickname m --username Mohsen
+user create --password a123 --nickname mohsen --username Moh
+user login --username M --password a123
+user login --username Mohsen --password wrong
+user login --username Mohsen --password a123

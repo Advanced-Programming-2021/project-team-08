@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.User;
 import controller.ApplicationManger;
+import model.UserData;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 
@@ -34,9 +35,9 @@ public class Main {
         ArrayList<User> allOfUsers = new ArrayList<>();
         for (File file : filesList) {
             String stringOfUserFile = new String(Files.readAllBytes(Paths.get(file.toString())));
-            allOfUsers.add(new Gson().fromJson(stringOfUserFile,
-                    new TypeToken<User>() {
-                    }.getType()));
+            allOfUsers.add(new User(new Gson().fromJson(stringOfUserFile,
+                    new TypeToken<UserData>() {
+                    }.getType())));
         }
         User.setAllUser(allOfUsers);
     }

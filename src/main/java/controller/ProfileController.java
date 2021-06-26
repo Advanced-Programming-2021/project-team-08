@@ -28,9 +28,6 @@ public class ProfileController {
             if (User.doesNicknameExists(registerCommand.getField("nickname"))) {
                 profileScene.errorMessage(ProfileMessages.REPEATED_NICKNAME);
             } else {
-                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
-                        "\"nickname\":\"" + activeUser.getUserData().getNickname() + "\"",
-                        "\"nickname\":\"" + registerCommand.getField("nickname") + "\"");
                 activeUser.getUserData().setNickname(registerCommand.getField("nickname"));
                 profileScene.successMessage(ProfileMessages.NICKNAME_CHANGED);
             }
@@ -50,9 +47,6 @@ public class ProfileController {
             } else if (registerCommand.getField("new").equals(activeUser.getUserData().getPassword())) {
                 profileScene.errorMessage(ProfileMessages.REPEATED_PASSWORD);
             } else {
-                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
-                        "\"password\":\"" + activeUser.getUserData().getPassword() + "\"",
-                        "\"password\":\"" + registerCommand.getField("new") + "\"");
                 activeUser.getUserData().setPassword(registerCommand.getField("new"));
                 profileScene.successMessage(ProfileMessages.PASSWORD_CHANGED);
             }

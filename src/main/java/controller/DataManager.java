@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.UserData;
@@ -23,25 +24,29 @@ public class DataManager {
         return allCardData;
     }
 
-    public static void importCard(CardData cardData) {
-        FileWriter fileWriter;
-        String fileLocation = "cards/" + cardData.getCardName() + ".json";
+    public static void exportCard(CardData cardData) {
+        File exportDir = new File("exportedCards");
+        exportDir.mkdir();
+        String fileLocation = "exportedCards/" + cardData.getCardName() + ".json";
         try {
-            fileWriter = new FileWriter(fileLocation);
-            fileWriter.write(new Gson().toJson(cardData));
+            File file = new File(fileLocation);
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(fileLocation);
+            fileWriter.write(new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(cardData));
             fileWriter.close();
-            System.out.println("file imported successfully.");
+            System.out.println("card exported successfully.");
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("the file isn't saved yet.");
         }
     }
 
-    public static void exportCard(String cardName) {
-        FileReader fileReader;
-        String fileLocation = "cards/" + cardName + ".json";
+    public static void importCard(String cardName) {
+        File importDir = new File("importCards");
+        importDir.mkdir();
+        String fileLocation = "importCards/" + cardName + ".json";
         File file = new File(fileLocation);
         try {
-            fileReader = new FileReader(fileLocation);
+            FileReader fileReader = new FileReader(fileLocation);
             String fileData = new String(Files.readAllBytes(Paths.get(file.toString())));
             JsonObject jsonObject = JsonParser.parseReader(fileReader).getAsJsonObject();
             CardData cardData;
@@ -60,8 +65,9 @@ public class DataManager {
                     return;
             }
             System.out.println(cardData);
+            System.out.println("card imported successfully.");
         } catch (IOException e) {
-            System.out.println("the file isn't saved yet.");
+            System.out.println(e.getMessage());
         }
 
     }

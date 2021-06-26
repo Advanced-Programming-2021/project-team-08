@@ -1,5 +1,8 @@
 package model;
 
+import com.google.gson.Gson;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class UserData {
@@ -26,18 +29,26 @@ public class UserData {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+        save();
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
+        save();
     }
 
     public ArrayList<Deck> getDecks() {
         return decks;
+    }
+
+    public void removeDeck(Deck deck){
+        decks.add(deck);
+        save();
+    }
+
+    public void addDeck(Deck deck) {
+        decks.add(deck);
+        save();
     }
 
     public String getUsername() {
@@ -58,42 +69,49 @@ public class UserData {
 
     public void addPoint(int point) {
         this.point += point;
+        save();
     }
 
     public void setActiveDeckName(String activeDeckName) {
         this.activeDeckName = activeDeckName;
+        save();
     }
 
-    public String getActiveDeckName() {
-        return activeDeckName;
-    }
-
-    public Deck getActiveDeck(){
+    public Deck getActiveDeck() {
         return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
-    }
-
-    public void addDeck(Deck deck) {
-        decks.add(deck);
     }
 
     public int getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void addMoney(int amount) {
+        this.money += amount;
+        save();
     }
 
-    public void addMoney(int amount){
-        this.money += amount;
+    public void decreaseMoney(int amount) {
+        this.money -= amount;
+        save();
     }
 
     public void addCard(int id) {
         myCardsIds.add(id);
+        save();
     }
 
     public ArrayList<Integer> getMyCardsIds() {
         return myCardsIds;
+    }
+
+    public void save() {
+        try {
+            FileWriter userFile = new FileWriter("users/" + username + ".json");
+            userFile.write(new Gson().toJson(this));
+            userFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

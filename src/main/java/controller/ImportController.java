@@ -12,23 +12,17 @@ public class ImportController {
     }
 
     public void importCard(String cardName) {
-        CardData cardData = CardData.getCardByName(cardName);
-        if (cardData == null) {
-            importScene.printMessage("There is no card with this name.");
-        }
-        else {
-            DataManager.importCard(cardData);
-        }
+        DataManager.importCard(cardName);
     }
 
     public void exportCard(String cardName) {
         CardData cardData = CardData.getCardByName(cardName);
         if (cardData == null) {
             importScene.printMessage("There is no card with this name.");
+            return;
         }
-        else {
-            DataManager.exportCard(cardName);
-        }
+
+        DataManager.exportCard(cardData);
     }
 
 }
