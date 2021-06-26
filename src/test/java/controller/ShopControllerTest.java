@@ -1,12 +1,13 @@
 package controller;
 
+import com.google.gson.Gson;
 import model.cards.data.ReadSpellTrapCardsData;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.ShopScene;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,6 +23,14 @@ public class ShopControllerTest {
     private void setUser() {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
+        FileWriter userFile = null;
+        try {
+            userFile = new FileWriter("users/" + "test" + ".json");
+            userFile.write(new Gson().toJson(testUser));
+            userFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ApplicationManger applicationManger = new ApplicationManger();
         ApplicationManger.setLoggedInUser(testUser);
         shopScene = new ShopScene();
@@ -39,8 +48,8 @@ public class ShopControllerTest {
     public void notEnoughMoney() {
         testUser.getUserData().changeMoneyWithoutSave(-100000);
         shopController.buyCard("Monster Reborn");
-        testUser.getUserData().changeMoneyWithoutSave(100000);
         String output = "you have not enough money" + System.lineSeparator() + "your money is " + testUser.getUserData().getMoney()+ " card Price is " + "2500" + System.lineSeparator();
+        testUser.getUserData().changeMoneyWithoutSave(100000);
         assertEquals(output, outputStreamCaptor.toString());
     }
 
@@ -51,6 +60,12 @@ public class ShopControllerTest {
         assertEquals(output, outputStreamCaptor.toString());
         assertEquals(54, testUser.getCardsThatThereIsNotInAnyDeck().get(0));
         assertEquals(97500, testUser.getUserData().getMoney());
+    }
+
+    @AfterAll
+    public static void endWorks() {
+        File userFile = new File("users/" + "test" + ".json");
+        userFile.delete();
     }
 
 
