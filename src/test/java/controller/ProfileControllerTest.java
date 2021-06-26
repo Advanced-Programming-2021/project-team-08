@@ -24,7 +24,7 @@ public class ProfileControllerTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
         ApplicationManger.setLoggedInUser(testUser);
-        new User ("alaki", "abool", "abool123");
+        new User("alaki", "abool", "abool123");
         FileWriter userFile = null;
         try {
             userFile = new FileWriter("users/" + "test" + ".json");
@@ -43,50 +43,34 @@ public class ProfileControllerTest {
 
     @Test
     public void changeNicknameTest() {
-        String input  = "profile change --nickname abool";
-        Matcher matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(input);
-        if (matcher.find()) {
-            profileController.changeNickname(matcher.group());
-            String output = "this nickname is already used" + System.lineSeparator();
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        String input = "profile change --nickname abool";
+        profileController.changeNickname(input);
+        String output = "this nickname is already used" + System.lineSeparator();
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "profile change --nickname salam";
-        matcher = Pattern.compile("^profile change (--nickname[^\\n]+)$").matcher(input);
-        if (matcher.find()) {
-            profileController.changeNickname(matcher.group());
-            String output = "nickname changed successfully!" + System.lineSeparator();
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        profileController.changeNickname(input);
+        output = "nickname changed successfully!" + System.lineSeparator();
+        assertEquals(output, outputStreamCaptor.toString());
     }
 
     @Test
     public void changePasswordTest() {
         String input = "profile change --password --current test12 --new test";
-        Matcher matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(input);
-        if (matcher.find()) {
-            profileController.changePassword(matcher.group());
-            String output = "current password is invalid" + System.lineSeparator();
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        profileController.changePassword(input);
+        String output = "current password is invalid" + System.lineSeparator();
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "profile change --password --current test123 --new test123";
-        matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(input);
-        if (matcher.find()) {
-            profileController.changePassword(matcher.group());
-            String output = "please enter a new password" + System.lineSeparator();
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        profileController.changePassword(input);
+        output = "please enter a new password" + System.lineSeparator();
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "profile change --password --current test123 --new test";
-        matcher = Pattern.compile("^profile change --password ([^\\n]+)$").matcher(input);
-        if (matcher.find()) {
-            profileController.changePassword(matcher.group());
-            String output = "password changed successfully!" + System.lineSeparator();
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        profileController.changePassword(input);
+        output = "password changed successfully!" + System.lineSeparator();
+        assertEquals(output, outputStreamCaptor.toString());
     }
-
 
 
     @AfterAll

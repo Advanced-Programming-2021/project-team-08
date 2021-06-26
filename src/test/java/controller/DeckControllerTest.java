@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
- public class DeckControllerTest {
+public class DeckControllerTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private DeckController deckController;
@@ -26,10 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     private User testUser;
 
     @BeforeEach
-     void setup() {
+    void setup() {
         System.setOut(new PrintStream(outputStreamCaptor));
         testUser = new User("test", "testing", "test123");
-        new User ("alaki", "abool", "abool123");
+        new User("alaki", "abool", "abool123");
         ApplicationManger.setLoggedInUser(testUser);
         deckController = new DeckController(new DeckMenu());
         shopController = new ShopController(new ShopScene());
@@ -37,9 +37,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     }
 
     @Test
-    void deckCreate(){
+    void deckCreate() {
 
-        String input="deck create first";
+        String input = "deck create first";
         Matcher matcher = Pattern.compile("deck create ([^\\n]+)").matcher(input);
         if (matcher.find()) {
             String output = "deck created successfully!" + System.lineSeparator();
@@ -61,11 +61,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     }
 
     @Test
-     void deckDelete(){
+    void deckDelete() {
 
-        String input="deck delete first";
+        String input = "deck delete first";
         Matcher matcher = Pattern.compile("deck delete ([^\\n]+)").matcher(input);
-        if(matcher.find()) {
+        if (matcher.find()) {
             String output = "deck with name first does not exist" + System.lineSeparator();
             deckController.deckDelete(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
@@ -76,7 +76,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
 
-        if(matcher.find()) {
+        if (matcher.find()) {
             String output = "deck deleted successfully" + System.lineSeparator();
             deckController.deckDelete(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
@@ -84,11 +84,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     }
 
     @Test
-     void deckSetActive(){
-        String input="deck set-activate first";
+    void deckSetActive() {
+        String input = "deck set-activate first";
         Matcher matcher = Pattern.compile("deck set-activate ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="deck with name first does not exist"+System.lineSeparator();
+        if (matcher.find()) {
+            String output = "deck with name first does not exist" + System.lineSeparator();
             deckController.deckSetActive(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
@@ -98,84 +98,60 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
 
-        if (matcher.find()){
-            String output="deck activated successfully"+System.lineSeparator();
+        if (matcher.find()) {
+            String output = "deck activated successfully" + System.lineSeparator();
             deckController.deckSetActive(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
     }
 
     @Test
-     void addCard() throws ParseCommandException {
+    void addCard() throws ParseCommandException {
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
         shopController.buyCard("Monster Reborn");
 
-        String input="deck add-card --card cardName --deck first";
-        Matcher matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card with name cardName does not exist"+System.lineSeparator();
-            deckController.addCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        String input = "--card cardName --deck first";
+        String output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card with name cardName does not exist" + System.lineSeparator();
+        deckController.addCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
 
-        input="deck add-card --card Monster Reborn --deck second";
-        matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="deck with name second does not exist"+System.lineSeparator();
-            deckController.addCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        input = "--card Monster Reborn --deck second";
+        output = "deck with name second does not exist" + System.lineSeparator();
+        deckController.addCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
 
-        input="deck add-card --card Monster Reborn --deck first";
-        matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="card added to deck successfully"+System.lineSeparator();
-            deckController.addCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        input = "--card Monster Reborn --deck first";
+        output = "card added to deck successfully" + System.lineSeparator();
+        deckController.addCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
     }
 
     @Test
-     void removeCard() throws ParseCommandException {
+    void removeCard() throws ParseCommandException {
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
-        String input="deck add-card --card Monster Reborn --deck first";
-        Matcher matcher1 = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
+        String input = "--card Monster Reborn --deck first";
         shopController.buyCard("Monster Reborn");
-        matcher1.find();
-        deckController.addCard(matcher1.group(1));
-
-        input="deck rm-card --card Monster Reborn --deck second";
-        Matcher matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"deck with name second does not exist"+System.lineSeparator();
-            deckController.removeCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        deckController.addCard(input);
+        input = "--card Monster Reborn --deck second";
+        String output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "deck with name second does not exist" + System.lineSeparator();
+        deckController.removeCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
-
-        input="deck rm-card --card Name --deck first";
-        matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"card with name cardName does not exist in main deck"+System.lineSeparator();
-            deckController.removeCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        input = "--card Name --deck first";
+        output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "card with name cardName does not exist in main deck" + System.lineSeparator();
+        deckController.removeCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
-
-
-        input="deck rm-card --card Monster Reborn --deck first";
-        matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
-        if (matcher.find()){
-            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"card removed form deck successfully"+System.lineSeparator();
-            deckController.removeCard(matcher.group(1));
-            assertEquals(output, outputStreamCaptor.toString());
-        }
+        input = "--card Monster Reborn --deck first";
+        output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "card removed form deck successfully" + System.lineSeparator();
+        deckController.removeCard(input);
+        assertEquals(output, outputStreamCaptor.toString());
 
     }
 }
