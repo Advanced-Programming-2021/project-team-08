@@ -75,7 +75,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             deckController.deckDelete(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
-
     }
 
+    @Test
+     void deckSetActive(){
+        String input="deck set-activate first";
+        Matcher matcher = Pattern.compile("deck set-activate ([^\\n]+)").matcher(input);
+        if (matcher.find()){
+            String output="deck with name first does not exist"+System.lineSeparator();
+            deckController.deckSetActive(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+        String username = ApplicationManger.getLoggedInUser().getUsername();
+        Deck deck = new Deck("first", username);
+        ApplicationManger.getLoggedInUser().addDeck(deck);
+
+        if (matcher.find()){
+            String output="deck activated successfully"+System.lineSeparator();
+            deckController.deckSetActive(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+    }
 }
