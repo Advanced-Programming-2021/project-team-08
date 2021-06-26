@@ -117,9 +117,14 @@ public class Deck {
 
     public static boolean isThereThisCardInMainDeckOfThisDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
-        if (deck == null) return false;
-        else if (deck.mainDeck.contains(nameOfCard)) return true;
-        else return false;
+        try {
+            if (deck == null) return false;
+            else return deck.mainDeck.contains(Card.getCardIdByName(nameOfCard));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static void removeCardFromDeck(String nameOfCard, String nameOfDeck, String mainOrSide) {

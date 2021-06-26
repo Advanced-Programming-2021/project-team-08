@@ -2,11 +2,13 @@ package controller;
 
 import model.Deck;
 import model.cards.data.ReadMonsterCardsData;
+import model.cards.data.ReadSpellTrapCardsData;
 import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.DeckMenu;
 import view.menus.ImportScene;
+import view.menus.ShopScene;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private DeckController deckController;
+    private ShopController shopController;
     private User testUser;
 
     @BeforeEach
@@ -29,6 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         new User ("alaki", "abool", "abool123");
         ApplicationManger.setLoggedInUser(testUser);
         deckController = new DeckController(new DeckMenu());
+        shopController = new ShopController(new ShopScene());
+        new ReadSpellTrapCardsData().readSpellTrapData();
     }
 
     @Test
@@ -105,17 +110,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
+        shopController.buyCard("Monster Reborn");
 
         String input="deck add-card --card cardName --deck first";
         Matcher matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
         if (matcher.find()){
-            String output="card with name cardName does not exist"+System.lineSeparator();
+            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card with name cardName does not exist"+System.lineSeparator();
             deckController.addCard(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
         outputStreamCaptor.reset();
 
-        input="deck add-card --card Yomi Ship --deck second";
+        input="deck add-card --card Monster Reborn --deck second";
+        matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
         if (matcher.find()){
             String output="deck with name second does not exist"+System.lineSeparator();
             deckController.addCard(matcher.group(1));
@@ -123,10 +130,50 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         }
         outputStreamCaptor.reset();
 
-        input="deck add-card --card Yomi Ship --deck first";
+        input="deck add-card --card Monster Reborn --deck first";
+        matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
         if (matcher.find()){
             String output="card added to deck successfully"+System.lineSeparator();
             deckController.addCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+    }
+
+    @Test
+     void removeCard() throws ParseCommandException {
+        String username = ApplicationManger.getLoggedInUser().getUsername();
+        Deck deck = new Deck("first", username);
+        ApplicationManger.getLoggedInUser().addDeck(deck);
+        String input="deck add-card --card Monster Reborn --deck first";
+        Matcher matcher1 = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
+        shopController.buyCard("Monster Reborn");
+        matcher1.find();
+        deckController.addCard(matcher1.group(1));
+
+        input="deck rm-card --card Monster Reborn --deck second";
+        Matcher matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
+        if (matcher.find()){
+            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"deck with name second does not exist"+System.lineSeparator();
+            deckController.removeCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+        input="deck rm-card --card Name --deck first";
+        matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
+        if (matcher.find()){
+            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"card with name cardName does not exist in main deck"+System.lineSeparator();
+            deckController.removeCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+
+        input="deck rm-card --card Monster Reborn --deck first";
+        matcher = Pattern.compile("deck rm-card ([^\\n]+)").matcher(input);
+        if (matcher.find()){
+            String output="you bought Monster Reborn successfully."+System.lineSeparator()+"card added to deck successfully"+System.lineSeparator()+"card removed form deck successfully"+System.lineSeparator();
+            deckController.removeCard(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
 
