@@ -22,8 +22,8 @@ public class RegisterController {
             Command registerCommand = Command.parseCommand(userInput, fieldsOfRegisterUser);
             if (User.doesUsernameExists(registerCommand.getField("username")))
                 System.out.println("user with username " + registerCommand.getField("username") + " already exists");
-            else if (User.doesUsernameExists(registerCommand.getField("nickname")))
-                System.out.println("user with nickname <nickname> already exists");
+            else if (User.doesNicknameExists(registerCommand.getField("nickname")))
+                System.out.println("user with nickname "+ registerCommand.getField("nickname") +" already exists");
             else {
                 User user = new User(registerCommand.getField("username"), registerCommand.getField("nickname"), registerCommand.getField("password"));
                 System.out.println("user created successfully!");
@@ -45,14 +45,14 @@ public class RegisterController {
         try {
             Command loginCommand = Command.parseCommand(userInput, fieldsOfLoginUser);
             if (!User.doesUsernameExists(loginCommand.getField("username")))
-                System.out.println("Username and password didn't match!");
+                System.out.println("username and password didn't match");
             else {
                 if (User.loginUser(loginCommand.getField("username"), loginCommand.getField("password"))) {
                     System.out.println("user logged in successfully!");
                     ApplicationManger.goToScene(SceneName.MAIN_MENU);
                     return 0;
                 } else {
-                    System.out.println("Username and password didn't match!");
+                    System.out.println("username and password didn't match");
                 }
 
             }

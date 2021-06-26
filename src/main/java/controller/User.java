@@ -55,6 +55,10 @@ public class User {
         return allUser.stream().filter(c -> c.getUserData().getUsername().equals(username)).count() > 0;
     }
 
+    public static boolean doesNicknameExists(String nickname) {
+        return allUser.stream().filter(c -> c.getUserData().getNickname().equals(nickname)).count() > 0;
+    }
+
     public static ArrayList<User> getAllUser() {
         return allUser;
     }

@@ -25,14 +25,14 @@ public class ProfileController {
         fieldsOfRegisterUser.put("nickname", CommandFieldType.STRING);
         try {
             Command registerCommand = Command.parseCommand(command.group(), fieldsOfRegisterUser);
-            if (registerCommand.getField("nickname").equals(activeUser.getUserData().getNickname())) {
+            if (User.doesNicknameExists(registerCommand.getField("nickname"))) {
                 profileScene.errorMessage(ProfileMessages.REPEATED_NICKNAME);
             } else {
+                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
+                        "\"nickname\":\"" + activeUser.getUserData().getNickname() + "\"",
+                        "\"nickname\":\"" + registerCommand.getField("nickname") + "\"");
                 activeUser.getUserData().setNickname(registerCommand.getField("nickname"));
                 profileScene.successMessage(ProfileMessages.NICKNAME_CHANGED);
-                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
-                        "\"nickname\":" + activeUser.getUserData().getNickname(),
-                        "\"nickname\":" + registerCommand.getField("nickname"));
             }
         } catch (ParseCommandException e) {
             System.out.println("Invalid command");
@@ -50,11 +50,11 @@ public class ProfileController {
             } else if (registerCommand.getField("new").equals(activeUser.getUserData().getPassword())) {
                 profileScene.errorMessage(ProfileMessages.REPEATED_PASSWORD);
             } else {
+                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
+                        "\"password\":\"" + activeUser.getUserData().getPassword() + "\"",
+                        "\"password\":\"" + registerCommand.getField("new") + "\"");
                 activeUser.getUserData().setPassword(registerCommand.getField("new"));
                 profileScene.successMessage(ProfileMessages.PASSWORD_CHANGED);
-                ApplicationManger.modifyFile("users/" + activeUser.getUsername() + ".json",
-                        "\"password\":" + activeUser.getUserData().getPassword(),
-                        "\"password\":" + registerCommand.getField("new"));
             }
         } catch (ParseCommandException e) {
             System.out.println("Invalid command");

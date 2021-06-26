@@ -3,6 +3,7 @@ package controller;
 import view.menus.*;
 
 import java.io.*;
+import java.util.Locale;
 
 public class ApplicationManger {
     private static Scene currentScene;
@@ -14,6 +15,7 @@ public class ApplicationManger {
 
 
     public static void goToScene(SceneName sceneName) {
+        System.out.println("<<" + sceneName.name().replace("_", " ") + ">>");
         switch (sceneName) {
             case REGISTER_MENU:
                 currentScene = new RegisterScene();
@@ -62,6 +64,7 @@ public class ApplicationManger {
     }
 
     public static void modifyFile(String filePath, String oldString, String newString) {
+        System.out.println(filePath + "," + oldString + "," + newString);
         File fileToBeModified = new File(filePath);
         String oldContent = "";
         BufferedReader reader = null;

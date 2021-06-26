@@ -16,7 +16,7 @@ public class IncreaseLPOnSpellActivate extends ContinuousEffect {
     @Override
     public void setup() {
         super.setup();
-        gameManager.getOnAnSpellActivated().addListener(()->{
+        gameManager.getOnAnSpellActivated().addListener((card)->{
             if(isActive) card.getCardOwner().increaseLP(amount);
         });
     }
