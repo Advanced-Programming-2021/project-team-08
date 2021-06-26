@@ -4,16 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.UserData;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class DataManager {
 
@@ -28,7 +29,7 @@ public class DataManager {
             fileWriter.write(new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(cardData));
             fileWriter.close();
             System.out.println("card exported successfully.");
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("the file isn't saved yet.");
         }
     }
@@ -44,7 +45,7 @@ public class DataManager {
             JsonObject jsonObject = JsonParser.parseReader(fileReader).getAsJsonObject();
             CardData cardData;
             switch (jsonObject.get("cardType").toString().replaceAll("\"", "")) {
-                case "MONSTER" :
+                case "MONSTER":
                     cardData = new Gson().fromJson(fileData, MonsterCardData.class);
                     break;
                 case "SPELL":

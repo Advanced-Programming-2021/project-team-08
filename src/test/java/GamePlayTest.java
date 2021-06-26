@@ -5,7 +5,9 @@ import controller.User;
 import model.Deck;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import view.menus.GamePlayScene;
 
 import java.io.*;
@@ -45,7 +47,7 @@ public class GamePlayTest {
     }
 
     @Test
-    public void newDuel(){
+    public void newDuel() {
         Integer[] cards1 = {1, 1, 1};
         Integer[] cards2 = {31, 31, 31, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 12, 12, 12, 13};
 

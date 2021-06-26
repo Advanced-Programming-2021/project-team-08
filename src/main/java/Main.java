@@ -1,12 +1,13 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import controller.User;
 import controller.ApplicationManger;
+import controller.User;
 import model.UserData;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Main {
         ApplicationManger applicationManger = new ApplicationManger();
         try {
             firstSetup();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("ERROR: Couldn't load game!");
             System.exit(-1);
         }

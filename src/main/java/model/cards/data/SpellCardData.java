@@ -6,10 +6,12 @@ import model.enums.SpellTrapProperty;
 
 import java.util.ArrayList;
 
-public class SpellCardData extends CardData{
+public class SpellCardData extends CardData {
     private static ArrayList<SpellCardData> allSpellCard = new ArrayList<>();
-    @Expose private SpellTrapProperty spellProperty;
-    @Expose private boolean isLimited;
+    @Expose
+    private SpellTrapProperty spellProperty;
+    @Expose
+    private boolean isLimited;
 
     public SpellCardData() {
         CardData.addCardData(this);

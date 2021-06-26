@@ -1,7 +1,6 @@
 package model.effectSystem.effects;
 
 import model.cards.MonsterCard;
-import model.cards.TrapCard;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
 
@@ -27,7 +26,7 @@ public class DestroyCardOnFlip extends Effect {
         gameManager.getOnFlipSummon().addListener((summonCard) -> {
             if (card.getCardOwner().getTrapBanned() > 0) return;
             this.summonCard = (MonsterCard) summonCard;
-            if (((MonsterCardData)summonCard.getCardData()).getAttackPoints() >= minAttack) {
+            if (((MonsterCardData) summonCard.getCardData()).getAttackPoints() >= minAttack) {
                 trapActivateQuestion();
                 gameManager.getScene().log("now it will be " + gameManager.getCurrentTurnPlayer().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());

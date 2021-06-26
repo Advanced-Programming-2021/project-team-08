@@ -2,13 +2,11 @@ package controller;
 
 import model.Command;
 import model.enums.CommandFieldType;
+import model.enums.ProfileMessages;
 import model.exceptions.ParseCommandException;
 import view.menus.ProfileScene;
 
 import java.util.HashMap;
-import java.util.regex.Matcher;
-
-import model.enums.ProfileMessages;
 
 public class ProfileController {
 

@@ -14,11 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShopControllerTest {
 
-    private static  final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private static ShopController shopController;
     private static ShopScene shopScene;
-    private static   User testUser;
-
+    private static User testUser;
 
 
     @BeforeAll
@@ -40,7 +39,7 @@ public class ShopControllerTest {
     }
 
     @BeforeEach
-    private  void set() {
+    private void set() {
         outputStreamCaptor.reset();
     }
 
@@ -54,7 +53,7 @@ public class ShopControllerTest {
     public void notEnoughMoney() {
         testUser.getUserData().changeMoneyWithoutSave(-100000);
         shopController.buyCard("Monster Reborn");
-        String output = "you have not enough money" + System.lineSeparator() + "your money is " + testUser.getUserData().getMoney()+ " card Price is " + "2500" + System.lineSeparator();
+        String output = "you have not enough money" + System.lineSeparator() + "your money is " + testUser.getUserData().getMoney() + " card Price is " + "2500" + System.lineSeparator();
         testUser.getUserData().changeMoneyWithoutSave(100000);
         assertEquals(output, outputStreamCaptor.toString());
     }

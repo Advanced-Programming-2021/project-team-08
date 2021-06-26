@@ -1,8 +1,8 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import model.enums.ZoneType;
 import model.Deck;
+import model.enums.ZoneType;
 
 public class GameBoard {
     PlayerBoard player1Board, player2Board;
@@ -43,10 +43,10 @@ public class GameBoard {
             case FIELD:
                 return board.getFieldZone();
             case MONSTER:
-                if(number < 1 || number > 5) throw new Exception("number out of bounds");
+                if (number < 1 || number > 5) throw new Exception("number out of bounds");
                 return board.getMonsterZone().get(number - 1);
             case SPELL_AND_TRAP:
-                if(number < 1 || number > 5) throw new Exception("number out of bounds");
+                if (number < 1 || number > 5) throw new Exception("number out of bounds");
                 return board.getSpellAndTrapZone().get(number - 1);
         }
         return null;

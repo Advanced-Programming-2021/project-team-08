@@ -14,12 +14,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class CardData {
-    @Expose protected CardType cardType;
-    @Expose protected String cardName;
-    @Expose protected int cardId;
-    @Expose protected int price;
-    @Expose protected String cardDescription;
-    @Expose private String effectString;
+    @Expose
+    protected CardType cardType;
+    @Expose
+    protected String cardName;
+    @Expose
+    protected int cardId;
+    @Expose
+    protected int price;
+    @Expose
+    protected String cardDescription;
+    @Expose
+    private String effectString;
     protected ArrayList<Effect> effects = new ArrayList<>();
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
@@ -38,11 +44,11 @@ public abstract class CardData {
         return null;
     }
 
-    public int getPrice(){
-        return  price;
+    public int getPrice() {
+        return price;
     }
 
-    public int getCardId(){
+    public int getCardId() {
         return cardId;
     }
 
@@ -58,7 +64,7 @@ public abstract class CardData {
         return allCardData;
     }
 
-    public  String getName() {
+    public String getName() {
         return cardName;
     }
 
@@ -82,13 +88,13 @@ public abstract class CardData {
         this.cardId = id;
     }
 
-    public void setEffect(String effectsJson){
+    public void setEffect(String effectsJson) {
         effectString = effectsJson;
         Matcher matcher = Pattern.compile("\\{[^\\n]+?\\}").matcher(effectsJson);
-        while (matcher.find()){
+        while (matcher.find()) {
             Gson gson = new Gson();
             JsonObject jsonObject = JsonParser.parseString(matcher.group()).getAsJsonObject();
-            for (String effectName : jsonObject.keySet()){
+            for (String effectName : jsonObject.keySet()) {
                 try {
                     ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
                     effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
@@ -99,7 +105,7 @@ public abstract class CardData {
         }
     }
 
-    public void readEffectFromEffectString(){
+    public void readEffectFromEffectString() {
         setEffect(effectString);
     }
 }

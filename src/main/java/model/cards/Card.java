@@ -7,13 +7,9 @@ import model.cards.data.TrapCardData;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
-import model.enums.ZoneType;
-import model.event.Event;
 import model.event.EventNoParam;
 import model.gameplay.CardSlot;
 import model.gameplay.Player;
-
-import java.util.ArrayList;
 
 public abstract class Card {
     protected CardType cardType;
@@ -28,7 +24,7 @@ public abstract class Card {
     protected EventNoParam onDestroy = new EventNoParam();
 
 
-    public static Card getCardByCardData(CardData data){
+    public static Card getCardByCardData(CardData data) {
         Card card = null;
 
         switch (data.getCardType()) {
@@ -107,9 +103,9 @@ public abstract class Card {
         return cardType;
     }
 
-    public void setup(Player owner){
+    public void setup(Player owner) {
         cardOwner = owner;
-        for (Effect effect: cardData.getEffects()){
+        for (Effect effect : cardData.getEffects()) {
             effect.setup();
         }
     }

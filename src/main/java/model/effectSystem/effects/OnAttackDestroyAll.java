@@ -1,7 +1,6 @@
 package model.effectSystem.effects;
 
 import model.cards.MonsterCard;
-import model.cards.TrapCard;
 import model.effectSystem.Effect;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;

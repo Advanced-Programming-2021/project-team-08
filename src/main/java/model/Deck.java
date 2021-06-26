@@ -1,7 +1,6 @@
 package model;
 
 import controller.ApplicationManger;
-import controller.DataManager;
 import model.cards.Card;
 import model.cards.data.CardData;
 

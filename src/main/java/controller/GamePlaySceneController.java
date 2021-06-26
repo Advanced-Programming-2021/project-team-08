@@ -1,6 +1,5 @@
 package controller;
 
-import controller.gameplay.AI_Player;
 import controller.gameplay.GameManager;
 import model.Command;
 import model.Deck;

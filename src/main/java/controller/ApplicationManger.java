@@ -2,9 +2,6 @@ package controller;
 
 import view.menus.*;
 
-import java.io.*;
-import java.util.Locale;
-
 public class ApplicationManger {
     private static Scene currentScene;
     private static User loggedInUser;

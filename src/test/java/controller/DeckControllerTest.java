@@ -1,17 +1,14 @@
 package controller;
 
 import model.Deck;
-import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.DeckMenu;
-import view.menus.ImportScene;
 import view.menus.ShopScene;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

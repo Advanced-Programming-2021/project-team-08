@@ -13,7 +13,7 @@ public class BanOpponentTrapUse extends Effect {
     @Override
     public void setup() {
         super.setup();
-        card.getOnDestroyEvent().addListener(()->{
+        card.getOnDestroyEvent().addListener(() -> {
             Player opponentPlayer = getOpponentPlayer();
             opponentPlayer.setTrapBanned(opponentPlayer.getTrapBanned() - 1);
         });
@@ -26,7 +26,8 @@ public class BanOpponentTrapUse extends Effect {
     }
 
     private Player getOpponentPlayer() {
-        if (card.getCardOwner().equals(gameManager.getCurrentTurnPlayer())) return gameManager.getCurrentTurnOpponentPlayer();
+        if (card.getCardOwner().equals(gameManager.getCurrentTurnPlayer()))
+            return gameManager.getCurrentTurnOpponentPlayer();
         return gameManager.getCurrentTurnPlayer();
     }
 }

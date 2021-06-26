@@ -13,9 +13,9 @@ public class DestroyAllMonstersOnSummonAMonster extends Effect {
     }
 
     @Override
-    public void setup(){
+    public void setup() {
         super.setup();
-        gameManager.getOnSummonACard().addListener((summonCard)->{
+        gameManager.getOnSummonACard().addListener((summonCard) -> {
             if (gameManager.getScene().getActivateTrapCommand()) {
                 ((TrapCard) card).onActivate();
             }

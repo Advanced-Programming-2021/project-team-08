@@ -19,7 +19,7 @@ public class User {
         allUser.add(this);
     }
 
-    public User(UserData data){
+    public User(UserData data) {
         userData = data;
         allUser.add(this);
     }
@@ -82,7 +82,7 @@ public class User {
         userData.addDeck(deck);
     }
 
-    public Deck getActiveDeck(){
+    public Deck getActiveDeck() {
         return userData.getActiveDeck();
     }
 
@@ -94,7 +94,7 @@ public class User {
         return userData.getUsername();
     }
 
-    public boolean haveThisCardFree(String cardName){
+    public boolean haveThisCardFree(String cardName) {
         try {
             return getCardsThatThereIsNotInAnyDeck().contains(Card.getCardIdByName(cardName));
         } catch (Exception e) {
@@ -104,7 +104,7 @@ public class User {
 
     public ArrayList<Integer> getCardsThatThereIsNotInAnyDeck() {
         ArrayList<Integer> result = new ArrayList<>(userData.getMyCardsIds());
-        for (Deck deck : getDecks()){
+        for (Deck deck : getDecks()) {
             deck.getMainDeckIds().forEach(result::remove);
             deck.getSideDeckIds().forEach(result::remove);
         }
