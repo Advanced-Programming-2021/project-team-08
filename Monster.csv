@@ -1,7 +1,7 @@
 Name,Level,Attribute, Monster Type , Card Type ,Atk,Def,Description,Price,Id
 Battle OX,4,EARTH,Beast-Warrior,Normal,1700,1000,A monster with tremendous power comma it destroys enemies with a swing of its axe.,2900,1
 Axe Raider,4,EARTH,Warrior,Normal,1700,1150,An axe-wielding monster of tremendous strength and agility.,3100,2
-Yomi Ship,3,WATER,Aqua,Effect,800,1400,If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.,1700,3
+Yomi Ship,3,WATER,Aqua,Effect,800,1400,If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.,1700,3,{"DestroyAttacker":[]}
 Horn Imp,4,DARK,Fiend,Normal,1300,1000,A small fiend that dwells in the dark comma its single horn makes it a formidable opponent.,2500,4
 Silver Fang,3,EARTH,Beast,Normal,1200,800,A snow wolf that's beautiful to the eye comma but absolutely vicious in battle.,1700,5
 Suijin,7,WATER,Aqua,Effect,2500,2400,During damage calculation in your opponent's turn comma if this card is being attacked: You can target the attacking monster; make that target's ATK 0 during damage calculation only (this is a Quick Effect). This effect can only be used once while this card is face-up on the field.,8700,6
@@ -20,11 +20,11 @@ Crab Turtle,8,WATER,Aqua,Ritual,2550,2500,"This monster can only be Ritual Summo
 Skull Guardian,7,LIGHT,Warrior,Ritual,2050,2500,"This monster can only be Ritual Summoned with the Ritual Spell Card comma ""Novox's Prayer"". You must also offer monsters whose total Level Stars equal 7 or more as a Tribute from the field or your hand.",7900,19
 Slot Machine,7,DARK,Machine,Normal,2000,2300,The machine's ability is said to vary according to its slot results.,7500,20
 Haniwa,2,EARTH,Rock,Normal,500,500,An earthen figure that protects the tomb of an ancient ruler.,600,21
-Man-Eater Bug,2,EARTH,Insect,Effect,450,600,FLIP: Target 1 monster on the field; destroy that target.,600,22
+Man-Eater Bug,2,EARTH,Insect,Effect,450,600,FLIP: Target 1 monster on the field; destroy that target.,600,22,{"DestroyAnOpponentMonsterOnFaceUp":[]}
 Gate Guardian,11,DARK,Warrior,Effect,3750,3400,"Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 ""Sanga of the Thunder"" comma ""Kazejin"" comma and ""Suijin"".",20000,23
 Scanner,1,LIGHT,Machine,Effect,0,0,Once per turn comma you can select 1 of your opponent's monsters that is removed from play. Until the End Phase comma this card's name is treated as the selected monster's name comma and this card has the same Attribute comma Level comma ATK comma and DEF as the selected monster. If this card is removed from the field while this effect is applied comma remove it from play.,8000,24
 Bitron,2,EARTH,Cyberse,Normal,200,2000,A new species found in electronic space. There's not much information on it.,1000,25
-Marshmallon,3,LIGHT,Fairy,Effect,300,500,Cannot be destroyed by battle. After damage calculation comma if this card was attacked comma and was face-down at the start of the Damage Step: The attacking player takes 1000 damage.,700,26
+Marshmallon,3,LIGHT,Fairy,Effect,300,500,Cannot be destroyed by battle. After damage calculation comma if this card was attacked comma and was face-down at the start of the Damage Step: The attacking player takes 1000 damage.,700,26,{"DecreaseOwnerLPOnAttackAnOpponentMonster":[1000]}
 Beast King Barbaros,8,EARTH,Beast-Warrior,Effect,3000,1200,You can Normal Summon/Set this card without Tributing comma but its original ATK becomes 1900. You can Tribute 3 monsters to Tribute Summon (but not Set) this card. If Summoned this way: Destroy all cards your opponent controls.,9200,27
 Texchanger,1,DARK,Cyberse,Effect,100,100,Once per turn comma when your monster is targeted for an attack: You can negate that attack comma then Special Summon 1 Cyberse Normal Monster from your hand comma Deck comma or GY.,200,28
 Leotron ,4,EARTH,Cyberse,Normal,2000,0,A territorial electronic monster that guards its own domain.,2500,29
@@ -32,7 +32,7 @@ The Calculator,2,LIGHT,Thunder,Effect,0,0,The ATK of this card is the combined L
 Alexandrite Dragon,4,LIGHT,Dragon,Normal,2000,100,Many of the czars' lost jewels can be found in the scales of this priceless dragon. Its creator remains a mystery comma along with how they acquired the imperial treasures. But whosoever finds this dragon has hit the jackpot... whether they know it or not.,2600,31
 Mirage Dragon,4,LIGHT,Dragon,Effect,1600,600,Your opponent cannot activate Trap Cards during the Battle Phase.,2500,32, {"BanOpponentTrapUse" : []}
 Herald of Creation,4,LIGHT,Spellcaster,Effect,1800,600,Once per turn: You can discard 1 card comma then target 1 Level 7 or higher monster in your Graveyard; add that target to your hand.,2700,33
-Exploder Dragon,3,EARTH,Dragon,Effect,1000,0,If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that destroyed it. Neither player takes any battle damage from attacks involving this attacking card.,1000,34
+Exploder Dragon,3,EARTH,Dragon,Effect,1000,0,If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that destroyed it. Neither player takes any battle damage from attacks involving this attacking card.,1000,34,{"DestroyAttackerWithoutDecreaseLP", []}
 Warrior Dai Grepher,4,EARTH,Warrior,Normal,1700,1600,The warrior who can manipulate dragons. Nobody knows his mysterious past.,3400,35
 Dark Blade,4,DARK,Warrior,Normal,1800,1500,They say he is a dragon-manipulating warrior from the dark world. His attack is tremendous comma using his great swords with vicious power.,3500,36
 Wattaildragon,6,LIGHT,Dragon,Normal,2500,1000,"Capable of indefinite flight. Attacks by wrapping its body with electricity and ramming into opponents.(nextline)IMPORTANT: Capturing the ""Wattaildragon"" is forbidden by the Ancient Rules and is a Level 6 offense comma the minimum sentence for which is imprisonment for no less than 2500 heliocycles.",5800,37
