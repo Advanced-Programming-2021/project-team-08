@@ -131,12 +131,12 @@ public class DeckControllerTest {
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "--card Name --deck first";
-        output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "card with name cardName does not exist in main deck" + System.lineSeparator();
+        output = "card with name Name does not exist in main deck" + System.lineSeparator();
         deckController.removeCard(input);
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
         input = "--card Monster Reborn --deck first";
-        output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "card removed form deck successfully" + System.lineSeparator();
+        output = "card removed form deck successfully" + System.lineSeparator();
         deckController.removeCard(input);
         assertEquals(output, outputStreamCaptor.toString());
     }

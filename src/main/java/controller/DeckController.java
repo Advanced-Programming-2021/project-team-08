@@ -126,7 +126,7 @@ public class DeckController {
                         ApplicationManger.getLoggedInUser().getUserData().save();
                     }
                 } else {
-                    if (Deck.isThereThisCardInMainDeckOfThisDeck(removeCardCommand.getField("card"), removeCardCommand.getField("deck"))) {
+                    if (!Deck.isThereThisCardInMainDeckOfThisDeck(removeCardCommand.getField("card"), removeCardCommand.getField("deck"))) {
                         System.out.println("card with name " + removeCardCommand.getField("card") + " does not exist in main deck");
                     } else {
                         System.out.println("card removed form deck successfully");
