@@ -25,7 +25,7 @@ public class DeckController {
 
     public void deckCreate(String deckName) {
         if (Deck.isThereADeckWithThisName(deckName)) {
-            System.out.println("deck with name " + deckName + "already exists");
+            System.out.println("deck with name " + deckName + " already exists");
         } else {
             System.out.println("deck created successfully!");
             String username = ApplicationManger.getLoggedInUser().getUsername();
