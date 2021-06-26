@@ -2,9 +2,6 @@ package controller;
 
 import model.Command;
 import model.Deck;
-import model.cards.Card;
-import model.cards.SpellCard;
-import model.cards.TrapCard;
 import model.cards.data.CardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;

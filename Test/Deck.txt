@@ -10,8 +10,7 @@ deck set-activate test2
 deck set-activate wrong
 
 deck add-card --card Wrong Name --deck test2
-deck add-card --card Mirage Dragon Name --deck wrong
-
+deck add-card --card Mirage Dragon --deck wrong
 deck add-card --card Change of heart --deck test2
 
 deck add-card --card Mirage Dragon --deck test2

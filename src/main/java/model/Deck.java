@@ -60,7 +60,7 @@ public class Deck {
     public static boolean isThereAreThreeCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return false;
-        if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) == 3) {
+        if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) >= 3) {
             return true;
         } else return false;
     }
@@ -123,10 +123,15 @@ public class Deck {
     }
 
     public static void removeCardFromDeck(String nameOfCard, String nameOfDeck, String mainOrSide) {
-        if (mainOrSide.equals("main")) {
-            Deck.getDeckWithName(nameOfDeck).mainDeck.remove(nameOfCard);
-        } else if (mainOrSide.equals("side")) {
-            Deck.getDeckWithName(nameOfDeck).sideDeck.remove(nameOfCard);
+        try {
+            int cardId = Card.getCardIdByName(nameOfCard);
+            if (mainOrSide.equals("main")) {
+                Deck.getDeckWithName(nameOfDeck).mainDeck.remove(Integer.valueOf(cardId));
+            } else if (mainOrSide.equals("side")) {
+                Deck.getDeckWithName(nameOfDeck).sideDeck.remove(Integer.valueOf(cardId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

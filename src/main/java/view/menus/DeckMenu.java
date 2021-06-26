@@ -76,6 +76,12 @@ public class DeckMenu extends Scene {
             return 1;
         }
 
+        matcher=Pattern.compile("deck show --cards").matcher(userInput);
+        if (matcher.matches()){
+            deckController.deckShowCards();
+            return 1;
+        }
+
         matcher = Pattern.compile("deck show ([^\\n]+)").matcher(userInput);
         if (matcher.matches()){
             try {
@@ -83,12 +89,6 @@ public class DeckMenu extends Scene {
             } catch (ParseCommandException e) {
                 System.out.println("invalid command");
             }
-            return 1;
-        }
-
-        matcher=Pattern.compile("deck show --cards").matcher(userInput);
-        if (matcher.matches()){
-            deckController.deckShowCards();
             return 1;
         }
 

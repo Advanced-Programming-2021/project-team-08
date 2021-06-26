@@ -105,8 +105,8 @@ public class User {
     public ArrayList<Integer> getCardsThatThereIsNotInAnyDeck() {
         ArrayList<Integer> result = new ArrayList<>(userData.getMyCardsIds());
         for (Deck deck : getDecks()){
-            result.removeAll(deck.getMainDeckIds());
-            result.removeAll(deck.getSideDeckIds());
+            deck.getMainDeckIds().forEach(result::remove);
+            deck.getSideDeckIds().forEach(result::remove);
         }
 
         return result;
