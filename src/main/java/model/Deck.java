@@ -122,9 +122,8 @@ public class Deck {
             else return deck.mainDeck.contains(Card.getCardIdByName(nameOfCard));
         }
         catch (Exception e){
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public static void removeCardFromDeck(String nameOfCard, String nameOfDeck, String mainOrSide) {
