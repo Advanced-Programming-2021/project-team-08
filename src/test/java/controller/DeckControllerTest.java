@@ -2,6 +2,7 @@ package controller;
 
 import model.Deck;
 import model.cards.data.ReadMonsterCardsData;
+import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.DeckMenu;
@@ -97,5 +98,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             deckController.deckSetActive(matcher.group(1));
             assertEquals(output, outputStreamCaptor.toString());
         }
+    }
+
+    @Test
+     void addCard() throws ParseCommandException {
+        String username = ApplicationManger.getLoggedInUser().getUsername();
+        Deck deck = new Deck("first", username);
+        ApplicationManger.getLoggedInUser().addDeck(deck);
+
+        String input="deck add-card --card cardName --deck first";
+        Matcher matcher = Pattern.compile("deck add-card ([^\\n]+)").matcher(input);
+        if (matcher.find()){
+            String output="card with name cardName does not exist"+System.lineSeparator();
+            deckController.addCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+        input="deck add-card --card Yomi Ship --deck second";
+        if (matcher.find()){
+            String output="deck with name second does not exist"+System.lineSeparator();
+            deckController.addCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+        outputStreamCaptor.reset();
+
+        input="deck add-card --card Yomi Ship --deck first";
+        if (matcher.find()){
+            String output="card added to deck successfully"+System.lineSeparator();
+            deckController.addCard(matcher.group(1));
+            assertEquals(output, outputStreamCaptor.toString());
+        }
+
     }
 }
