@@ -18,17 +18,17 @@ public class DestroyCardOnFlip extends Effect {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
         gameManager.getOnFlipSummon().addListener((summonCard) -> {
             if (card.getCardOwner().getTrapBanned() > 0) return;
             this.summonCard = (MonsterCard) summonCard;
             if (((MonsterCardData)summonCard.getCardData()).getAttackPoints() >= minAttack) {
-                gameManager.temporaryChangeTurn();
-                gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");
-                gameManager.getScene().showBoard(gameManager.getGameBoardString());
-                if (gameManager.getScene().getActivateTrapCommand()) {
-                    ((TrapCard) card).onActivate();
-                }
-                gameManager.temporaryChangeTurn();
+                trapActivateQuestion();
                 gameManager.getScene().log("now it will be " + gameManager.getCurrentTurnPlayer().getUserData().getUsername() + "'s turn");
                 gameManager.getScene().showBoard(gameManager.getGameBoardString());
             }

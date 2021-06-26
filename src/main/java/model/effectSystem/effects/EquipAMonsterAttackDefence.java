@@ -16,10 +16,8 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
         super(args);
         changeAttack = Integer.parseInt(args.get(0));
         changeDefence = Integer.parseInt(args.get(1));
-        int i = 2;
-        while (args.get(i) != null) {
+        for (int i=2; i<args.size(); i++){
             monsterTypes.add(args.get(i));
-            i++;
         }
     }
 
