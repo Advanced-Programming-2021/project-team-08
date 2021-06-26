@@ -18,10 +18,12 @@ public class GamePlayScene extends Scene {
         this.waitForAI = waitForAI;
     }
 
-    @Override
-    public void start() {
+    public GamePlaySceneController getSceneController() {
+        return sceneController;
+    }
+
+    public GamePlayScene() {
         sceneController = new GamePlaySceneController(this);
-        super.start();
     }
 
     @Override
