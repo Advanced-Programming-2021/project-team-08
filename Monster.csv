@@ -1,4 +1,4 @@
-Name,Level,Attribute, Monster Type , Card Type ,Atk,Def,Description,Price,Id
+Name,Level,Attribute, Monster Type , Card Type ,Atk,Def,Description,Price,Id,Effect
 Battle OX,4,EARTH,Beast-Warrior,Normal,1700,1000,A monster with tremendous power comma it destroys enemies with a swing of its axe.,2900,1
 Axe Raider,4,EARTH,Warrior,Normal,1700,1150,An axe-wielding monster of tremendous strength and agility.,3100,2
 Yomi Ship,3,WATER,Aqua,Effect,800,1400,If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.,1700,3,{"DestroyAttacker":[]}
@@ -32,7 +32,7 @@ The Calculator,2,LIGHT,Thunder,Effect,0,0,The ATK of this card is the combined L
 Alexandrite Dragon,4,LIGHT,Dragon,Normal,2000,100,Many of the czars' lost jewels can be found in the scales of this priceless dragon. Its creator remains a mystery comma along with how they acquired the imperial treasures. But whosoever finds this dragon has hit the jackpot... whether they know it or not.,2600,31
 Mirage Dragon,4,LIGHT,Dragon,Effect,1600,600,Your opponent cannot activate Trap Cards during the Battle Phase.,2500,32, {"BanOpponentTrapUse" : []}
 Herald of Creation,4,LIGHT,Spellcaster,Effect,1800,600,Once per turn: You can discard 1 card comma then target 1 Level 7 or higher monster in your Graveyard; add that target to your hand.,2700,33
-Exploder Dragon,3,EARTH,Dragon,Effect,1000,0,If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that destroyed it. Neither player takes any battle damage from attacks involving this attacking card.,1000,34,{"DestroyAttackerWithoutDecreaseLP", []}
+Exploder Dragon,3,EARTH,Dragon,Effect,1000,0,If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that destroyed it. Neither player takes any battle damage from attacks involving this attacking card.,1000,34,{"DestroyAttackerWithoutDecreaseLP": []}
 Warrior Dai Grepher,4,EARTH,Warrior,Normal,1700,1600,The warrior who can manipulate dragons. Nobody knows his mysterious past.,3400,35
 Dark Blade,4,DARK,Warrior,Normal,1800,1500,They say he is a dragon-manipulating warrior from the dark world. His attack is tremendous comma using his great swords with vicious power.,3500,36
 Wattaildragon,6,LIGHT,Dragon,Normal,2500,1000,"Capable of indefinite flight. Attacks by wrapping its body with electricity and ramming into opponents.(nextline)IMPORTANT: Capturing the ""Wattaildragon"" is forbidden by the Ancient Rules and is a Level 6 offense comma the minimum sentence for which is imprisonment for no less than 2500 heliocycles.",5800,37
