@@ -30,10 +30,10 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
     }
 
     @Override
-    public boolean entryCondition(Player player) {
+    public boolean entryCondition() {
         if (monsterTypes.size() == 0) return true;
         for (int i = 0; i < 5; i++) {
-            MonsterCardData monsterCardData = (MonsterCardData)player.getPlayerBoard().getMonsterZone().get(i).getCard().getCardData();
+            MonsterCardData monsterCardData = (MonsterCardData)card.getCardOwner().getPlayerBoard().getMonsterZone().get(i).getCard().getCardData();
             if (monsterCardData != null) if (hasMonsterWithTheType(monsterCardData)) return true;
         }
         return false;
