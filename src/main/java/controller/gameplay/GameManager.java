@@ -50,7 +50,7 @@ public class GameManager {
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
     private EventNoParam onChangeTurn = new EventNoParam();
-    protected Event<AttackResult> destroyAMonster=new Event<>();
+    protected Event<AttackResult> destroyAMonster = new Event<>();
 
 
     private boolean canAttack = true;
@@ -190,7 +190,7 @@ public class GameManager {
         if (turn > 2) {
             if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
                 getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
-            }else {
+            } else {
                 getCurrentTurnPlayer().drawCard();
             }
         }
@@ -319,6 +319,10 @@ public class GameManager {
     }
 
     public void flipSummonCard() {
+        if (currentSelectedCardAddress.forOpponent) {
+            scene.showError("it is not your card");
+            return;
+        }
         try {
             getCurrentTurnPlayer().flipSummonCard(currentSelectedCard);
             scene.log("flip summoned successfully");
@@ -340,10 +344,14 @@ public class GameManager {
     }
 
     public void attack(int number) {
+        if (currentSelectedCardAddress.forOpponent) {
+            scene.showError("it is not your card");
+            return;
+        }
         try {
             AttackResult attackResult = getCurrentTurnPlayer().attack(false, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number));
             onWantAttack.invoke(attackResult);
-             applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
+            applyAttackResult(attackResult, currentSelectedCard, gameBoard.getCardSlot(true, ZoneType.MONSTER, number).getCard());
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
             destroyAMonster.invoke(attackResult);
             onCardActionDone();
@@ -353,8 +361,12 @@ public class GameManager {
     }
 
     public void attackDirect() {
+        if (currentSelectedCardAddress.forOpponent) {
+            scene.showError("it is not your card");
+            return;
+        }
         try {
-            AttackResult attackResult =getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
+            AttackResult attackResult = getCurrentTurnPlayer().attack(true, currentSelectedCard, null);
             onWantAttack.invoke(attackResult);
             applyDirectAttack(attackResult);
             ((MonsterCard) currentSelectedCard).setAttackedThisTurn(true);
@@ -365,6 +377,10 @@ public class GameManager {
     }
 
     public void setPosition(String toPos) {
+        if(currentSelectedCardAddress.forOpponent){
+            scene.showError("it is not your card");
+            return;
+        }
         try {
             getCurrentTurnPlayer().setPosition(currentSelectedCard, toPos);
             scene.log("monster card position changed successfully");
@@ -375,6 +391,10 @@ public class GameManager {
     }
 
     public void activateCard() {
+        if(currentSelectedCardAddress.forOpponent){
+            scene.showError("it is not your card");
+            return;
+        }
         try {
             getCurrentTurnPlayer().activateSpellCard(currentSelectedCard);
             scene.log("spell activated");
@@ -391,7 +411,7 @@ public class GameManager {
     }
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
-        if(result.isCanceled()) return;
+        if (result.isCanceled()) return;
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         if (result.isDestroyCard1()) {
@@ -404,7 +424,7 @@ public class GameManager {
     }
 
     public void applyDirectAttack(AttackResult result) {
-        if(result.isCanceled()) return;
+        if (result.isCanceled()) return;
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         scene.log(result.getResultMessage());
     }
@@ -443,7 +463,7 @@ public class GameManager {
 
         if (currentSelectedCardAddress != null) {
             if (currentSelectedCard.getCardStatus() == CardStatus.TO_BACK && currentSelectedCardAddress.forOpponent) {
-                scene.showError("no card is selected yet");
+                scene.showError("card is not visible");
                 return;
             }
         }
@@ -522,8 +542,8 @@ public class GameManager {
         FIELD
     }
 
-    public  Event<Card> getRotate() {
-        return ((MonsterCard)currentSelectedCard).getFaceUp();
+    public Event<Card> getRotate() {
+        return ((MonsterCard) currentSelectedCard).getFaceUp();
     }
 
     //// Cheat codes
