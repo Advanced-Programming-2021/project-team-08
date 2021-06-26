@@ -3,9 +3,7 @@ package model.effectSystem.effects;
 import model.cards.MonsterCard;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
-import model.enums.ZoneType;
 import model.gameplay.AttackResult;
-import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
 
@@ -17,14 +15,16 @@ public class DecreaseOwnerLPOnAttackAnOpponentMonster extends Effect {
         super(args);
         amount = Integer.parseInt(args.get(0));
     }
+
     @Override
-    public void setup(){
+    public void setup() {
         super.setup();
         ((MonsterCard) card).getOnAttacked().addListener((attackResult) -> {
             this.attackResult = attackResult;
             activate();
         });
     }
+
     @Override
     public void activate() {
         if (attackResult.isDestroyCard2()) {

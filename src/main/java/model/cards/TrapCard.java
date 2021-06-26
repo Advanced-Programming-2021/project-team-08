@@ -17,8 +17,8 @@ public class TrapCard extends Card {
         return (TrapCardData) cardData;
     }
 
-    public void activateEffect(){
-        for(Effect effect: cardData.getEffects()){
+    public void activateEffect() {
+        for (Effect effect : cardData.getEffects()) {
             effect.activate();
         }
         activated = true;

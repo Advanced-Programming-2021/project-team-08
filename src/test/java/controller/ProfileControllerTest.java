@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import view.menus.ProfileScene;
 
 import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

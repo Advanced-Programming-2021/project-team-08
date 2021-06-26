@@ -48,7 +48,7 @@ public class ClosedForestEffect extends FieldEffect {
             setAllOwnCardsChangedAttackDefence(false);
         });
         gameManager.getOnSummonACard().addListener((summonerCard) -> {
-            if (summonerCard.getCardType().equals(CardType.MONSTER)  && summonerCard.getCardOwner().equals(card.getCardOwner())) {
+            if (summonerCard.getCardType().equals(CardType.MONSTER) && summonerCard.getCardOwner().equals(card.getCardOwner())) {
                 MonsterCardData monsterCardData = (MonsterCardData) summonerCard.getCardData();
                 changeCardAttackDefence(monsterCardData, 1);
             }
@@ -65,7 +65,7 @@ public class ClosedForestEffect extends FieldEffect {
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(forOpponent, ZoneType.MONSTER, i);
                 if (!cardSlot.isEmpty()) {
-                    MonsterCardData monsterCardData = (MonsterCardData)cardSlot.getCard().getCardData();
+                    MonsterCardData monsterCardData = (MonsterCardData) cardSlot.getCard().getCardData();
                     changeCardAttackDefence(monsterCardData, sign);
                 }
             } catch (Exception e) {

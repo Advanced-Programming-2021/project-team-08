@@ -28,7 +28,7 @@ public class ControlAMonster extends Effect {
             getControlledCard = originalPosition.getCard();
             card.getCardOwner().getPlayerBoard().addMonsterCardToZone(getControlledCard);
             originalPosition.removeCard();
-            gameManager.getOnChangeTurn().addListener(()->{
+            gameManager.getOnChangeTurn().addListener(() -> {
                 try {
                     card.getCardSlot().removeCard();
                     originalPosition.setCard(card);

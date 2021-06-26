@@ -1,12 +1,12 @@
 package model.gameplay;
 
+import model.Deck;
 import model.cards.Card;
 import model.cards.data.CardData;
 import model.enums.CardType;
 import model.enums.MonsterAttribute;
 import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
-import model.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;

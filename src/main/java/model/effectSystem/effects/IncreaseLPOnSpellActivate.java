@@ -1,7 +1,6 @@
 package model.effectSystem.effects;
 
 import model.effectSystem.ContinuousEffect;
-import model.effectSystem.Effect;
 
 import java.util.ArrayList;
 
@@ -16,8 +15,8 @@ public class IncreaseLPOnSpellActivate extends ContinuousEffect {
     @Override
     public void setup() {
         super.setup();
-        gameManager.getOnAnSpellActivated().addListener((card)->{
-            if(isActive) card.getCardOwner().increaseLP(amount);
+        gameManager.getOnAnSpellActivated().addListener((card) -> {
+            if (isActive) card.getCardOwner().increaseLP(amount);
         });
     }
 

@@ -20,13 +20,13 @@ public class DrawSpellTrapCardFromDeck extends Effect {
         number = Integer.parseInt(args.get(0));
         try {
             cardType = CardType.valueOf(args.get(1));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             cardType = null;
         }
         try {
             spellProperty = SpellTrapProperty.valueOf(args.get(2));
-        }catch (Exception e) {
+        } catch (Exception e) {
             spellProperty = null;
         }
     }

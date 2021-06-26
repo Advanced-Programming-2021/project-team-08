@@ -1,17 +1,14 @@
 package controller;
 
 import model.Deck;
-import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.DeckMenu;
-import view.menus.ImportScene;
 import view.menus.ShopScene;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +35,6 @@ public class DeckControllerTest {
 
     @Test
     void deckCreate() {
-
         String input = "deck create first";
         Matcher matcher = Pattern.compile("deck create ([^\\n]+)").matcher(input);
         if (matcher.find()) {
@@ -47,11 +43,9 @@ public class DeckControllerTest {
             assertEquals(output, outputStreamCaptor.toString());
         }
         outputStreamCaptor.reset();
-
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
-
         if (matcher.find()) {
             String output = "deck with name first already exists" + System.lineSeparator();
             deckController.deckCreate(matcher.group(1));
@@ -62,7 +56,6 @@ public class DeckControllerTest {
 
     @Test
     void deckDelete() {
-
         String input = "deck delete first";
         Matcher matcher = Pattern.compile("deck delete ([^\\n]+)").matcher(input);
         if (matcher.find()) {
@@ -71,7 +64,6 @@ public class DeckControllerTest {
             assertEquals(output, outputStreamCaptor.toString());
         }
         outputStreamCaptor.reset();
-
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
@@ -93,11 +85,9 @@ public class DeckControllerTest {
             assertEquals(output, outputStreamCaptor.toString());
         }
         outputStreamCaptor.reset();
-
         String username = ApplicationManger.getLoggedInUser().getUsername();
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
-
         if (matcher.find()) {
             String output = "deck activated successfully" + System.lineSeparator();
             deckController.deckSetActive(matcher.group(1));
@@ -111,19 +101,16 @@ public class DeckControllerTest {
         Deck deck = new Deck("first", username);
         ApplicationManger.getLoggedInUser().addDeck(deck);
         shopController.buyCard("Monster Reborn");
-
         String input = "--card cardName --deck first";
         String output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card with name cardName does not exist" + System.lineSeparator();
         deckController.addCard(input);
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
-
         input = "--card Monster Reborn --deck second";
         output = "deck with name second does not exist" + System.lineSeparator();
         deckController.addCard(input);
         assertEquals(output, outputStreamCaptor.toString());
         outputStreamCaptor.reset();
-
         input = "--card Monster Reborn --deck first";
         output = "card added to deck successfully" + System.lineSeparator();
         deckController.addCard(input);
@@ -152,6 +139,5 @@ public class DeckControllerTest {
         output = "you bought Monster Reborn successfully." + System.lineSeparator() + "card added to deck successfully" + System.lineSeparator() + "card removed form deck successfully" + System.lineSeparator();
         deckController.removeCard(input);
         assertEquals(output, outputStreamCaptor.toString());
-
     }
 }

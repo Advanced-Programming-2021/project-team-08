@@ -1,9 +1,9 @@
 package model.cards;
 
-import model.event.Event;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
+import model.event.Event;
 import model.gameplay.AttackResult;
 import model.gameplay.Player;
 
@@ -60,7 +60,8 @@ public class MonsterCard extends Card {
         isAttackPosition = true;
 
     }
-    public  Event<Card> getFaceUp() {
+
+    public Event<Card> getFaceUp() {
         return faceUp;
     }
 

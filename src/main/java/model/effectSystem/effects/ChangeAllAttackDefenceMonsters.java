@@ -8,21 +8,22 @@ import model.gameplay.CardSlot;
 
 import java.util.ArrayList;
 
-public class ChangeAllAttackDefenceMonsters extends FieldEffect{
+public class ChangeAllAttackDefenceMonsters extends FieldEffect {
 
     private int changedAttack;
     private int changedDefence;
 
     private ArrayList<String> monsterTypes = new ArrayList<>();
+
     public ChangeAllAttackDefenceMonsters(ArrayList<String> args) {
         super(args);
         try {
             changedAttack = Integer.parseInt(args.get(0).trim());
             changedDefence = Integer.parseInt(args.get(1).trim());
-            for(int i=2;i<args.size(); i++){
+            for (int i = 2; i < args.size(); i++) {
                 monsterTypes.add(args.get(i).trim());
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -69,8 +70,8 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
             CardSlot cardSlot = null;
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
-                if (!cardSlot.isEmpty() ) {
-                    MonsterCardData monsterCardData = (MonsterCardData)cardSlot.getCard().getCardData();
+                if (!cardSlot.isEmpty()) {
+                    MonsterCardData monsterCardData = (MonsterCardData) cardSlot.getCard().getCardData();
                     changeCardAttackDefence(monsterCardData, sign);
                 }
             } catch (Exception e) {
@@ -82,7 +83,7 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect{
             try {
                 cardSlot = gameManager.getGameBoard().getCardSlot(false, ZoneType.MONSTER, i);
                 if (!cardSlot.isEmpty()) {
-                    MonsterCardData monsterCardData = (MonsterCardData)cardSlot.getCard().getCardData();
+                    MonsterCardData monsterCardData = (MonsterCardData) cardSlot.getCard().getCardData();
                     changeCardAttackDefence(monsterCardData, sign);
                 }
             } catch (Exception e) {

@@ -1,8 +1,8 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.DeckController;
 import controller.User;
-import controller.ApplicationManger;
 import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
 
@@ -14,8 +14,8 @@ public class DeckMenu extends Scene {
     private User activeUser;
     private DeckController deckController;
 
-    public DeckMenu(){
-        this.activeUser=ApplicationManger.getLoggedInUser();
+    public DeckMenu() {
+        this.activeUser = ApplicationManger.getLoggedInUser();
         deckController = new DeckController(this);
     }
 
@@ -28,7 +28,7 @@ public class DeckMenu extends Scene {
             System.out.println("menu navigation is not possible");
             return 1;
         }
-        if(userInput.equals("menu show-current")){
+        if (userInput.equals("menu show-current")) {
             System.out.println("Deck Menu");
             return 1;
         }
@@ -76,14 +76,14 @@ public class DeckMenu extends Scene {
             return 1;
         }
 
-        matcher=Pattern.compile("deck show --cards").matcher(userInput);
-        if (matcher.matches()){
+        matcher = Pattern.compile("deck show --cards").matcher(userInput);
+        if (matcher.matches()) {
             deckController.deckShowCards();
             return 1;
         }
 
         matcher = Pattern.compile("deck show ([^\\n]+)").matcher(userInput);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             try {
                 deckController.showDeck(matcher.group(1));
             } catch (ParseCommandException e) {

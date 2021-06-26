@@ -2,7 +2,8 @@ package model;
 
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserData {
@@ -41,7 +42,7 @@ public class UserData {
         return decks;
     }
 
-    public void removeDeck(Deck deck){
+    public void removeDeck(Deck deck) {
         decks.remove(deck);
         save();
     }

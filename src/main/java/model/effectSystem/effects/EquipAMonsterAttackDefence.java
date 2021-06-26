@@ -1,10 +1,7 @@
 package model.effectSystem.effects;
 
-import model.cards.Card;
-import model.cards.MonsterCard;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
-import model.gameplay.Player;
 
 import java.util.ArrayList;
 
@@ -12,11 +9,12 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
     private int changeAttack;
     private int changeDefence;
     ArrayList<String> monsterTypes = new ArrayList<>();
+
     public EquipAMonsterAttackDefence(ArrayList<String> args) {
         super(args);
         changeAttack = Integer.parseInt(args.get(0));
         changeDefence = Integer.parseInt(args.get(1));
-        for (int i=2; i<args.size(); i++){
+        for (int i = 2; i < args.size(); i++) {
             monsterTypes.add(args.get(i));
         }
     }
@@ -31,7 +29,7 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
     public boolean entryCondition() {
         if (monsterTypes.size() == 0) return true;
         for (int i = 0; i < 5; i++) {
-            MonsterCardData monsterCardData = (MonsterCardData)card.getCardOwner().getPlayerBoard().getMonsterZone().get(i).getCard().getCardData();
+            MonsterCardData monsterCardData = (MonsterCardData) card.getCardOwner().getPlayerBoard().getMonsterZone().get(i).getCard().getCardData();
             if (monsterCardData != null) if (hasMonsterWithTheType(monsterCardData)) return true;
         }
         return false;
@@ -41,7 +39,7 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
     public void setup() {
         super.setup();
         card.getOnDestroyEvent().addListener(() -> {
-           setChangeAttackDefence(-1);
+            setChangeAttackDefence(-1);
         });
         selectedMonster.getOnDestroyEvent().addListener(() -> {
             card.moveToGraveyard();
@@ -61,7 +59,7 @@ public class EquipAMonsterAttackDefence extends EquipEffect {
     }
 
     private void setChangeAttackDefence(int sign) {
-        ((MonsterCardData)selectedMonster.getCardData()).setChangedAttack(sign * changeAttack);
-        ((MonsterCardData)selectedMonster.getCardData()).setChangedDefence(sign * changeDefence);
+        ((MonsterCardData) selectedMonster.getCardData()).setChangedAttack(sign * changeAttack);
+        ((MonsterCardData) selectedMonster.getCardData()).setChangedDefence(sign * changeDefence);
     }
 }

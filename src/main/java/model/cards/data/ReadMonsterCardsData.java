@@ -1,7 +1,6 @@
 package model.cards.data;
 
 import model.enums.MonsterAttribute;
-import model.enums.SpellTrapProperty;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +15,7 @@ public class ReadMonsterCardsData {
             csvReader.readLine();
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                if (data.length == 10|| data.length == 11) {
+                if (data.length == 10 || data.length == 11) {
                     readACardData(data);
                 } else System.out.println("couldn't parse a row from monster.csv file");
             }
@@ -38,7 +37,7 @@ public class ReadMonsterCardsData {
         setMonsterDescription(rowData[7].trim().replaceAll(" comma", ",").replaceAll("\\(nextline\\)", "\n"), monsterCardData);
         setMonsterPrice(rowData[8].trim(), monsterCardData);
         setMonsterId(rowData[9].trim(), monsterCardData);
-        if(rowData.length == 11) monsterCardData.setEffect(rowData[7].replace(" comma", ",").trim());
+        if (rowData.length == 11) monsterCardData.setEffect(rowData[7].replace(" comma", ",").trim());
     }
 
     private void setMonsterName(String name, MonsterCardData monsterCardData) {
@@ -117,7 +116,7 @@ public class ReadMonsterCardsData {
     private void setMonsterId(String id, MonsterCardData monsterCardData) {
         try {
             monsterCardData.setId(Integer.parseInt(id));
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("setting id failed");
         }
     }

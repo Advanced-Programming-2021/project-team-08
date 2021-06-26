@@ -9,7 +9,9 @@ import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 import model.enums.Phase;
 import model.gameplay.PlayerBoard;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import view.menus.GamePlayScene;
 
 import java.io.*;
@@ -63,12 +65,12 @@ public class EffectsTest {
     @Test
     public void checkEffect() throws Exception {
         GameManager gameManager = sceneController.getGameManager();
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Card card = Card.createCardByName("Fireyarou");
             card.setup(gameManager.getCurrentTurnPlayer());
             gameManager.getGameBoard().getPlayer1Board().addMonsterCardToZone(card);
         }
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Card card = Card.createCardByName("Fireyarou");
             card.setup(gameManager.getCurrentTurnOpponentPlayer());
             gameManager.getGameBoard().getPlayer2Board().addMonsterCardToZone(card);

@@ -1,7 +1,6 @@
 package model;
 
 import controller.ApplicationManger;
-import controller.DataManager;
 import model.cards.Card;
 import model.cards.data.CardData;
 
@@ -78,7 +77,7 @@ public class Deck {
         CardData temp;
         for (Integer id : cardIds) {
             temp = CardData.getAllCardData().stream().filter(c -> c.getCardId() == id).findFirst().orElse(null);
-            if(temp != null) result.add(temp);
+            if (temp != null) result.add(temp);
         }
         return result;
     }
@@ -120,8 +119,7 @@ public class Deck {
         try {
             if (deck == null) return false;
             else return deck.mainDeck.contains(Card.getCardIdByName(nameOfCard));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

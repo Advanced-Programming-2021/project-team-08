@@ -15,7 +15,7 @@ public class GetCardFromDeck extends Effect {
 
     @Override
     public void activate() {
-        for (int i=0; i<n; i++){
+        for (int i = 0; i < n; i++) {
             card.getCardOwner().drawCard();
         }
         System.out.println("getCardFromDeck " + n);

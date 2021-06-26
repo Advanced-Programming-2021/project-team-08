@@ -1,11 +1,8 @@
 package model.effectSystem.effects;
 
-import model.cards.Card;
-import model.cards.TrapCard;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
 import model.gameplay.AttackResult;
-import model.gameplay.Player;
 
 import java.util.ArrayList;
 

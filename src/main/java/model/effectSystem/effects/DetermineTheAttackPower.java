@@ -1,15 +1,12 @@
 package model.effectSystem.effects;
 
-import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
-import model.gameplay.Player;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class DetermineTheAttackPower extends Effect {

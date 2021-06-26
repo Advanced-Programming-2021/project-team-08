@@ -1,6 +1,5 @@
 package controller;
 
-import model.UserData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RegisterControllerTest {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -20,7 +19,7 @@ class RegisterControllerTest {
     }
 
     @BeforeEach
-     void setUp() {
+    void setUp() {
         outputStreamCaptor.reset();
     }
 

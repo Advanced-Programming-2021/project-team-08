@@ -3,7 +3,6 @@ package model.effectSystem;
 import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.cards.TrapCard;
-import model.gameplay.Player;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
@@ -13,12 +12,13 @@ public abstract class Effect {
     protected static GameManager gameManager;
     protected Card card;
     private static Set<Class<? extends Effect>> allEffects;
+
     static {
         Reflections r = new Reflections("model.effectSystem.effects");
         allEffects = r.getSubTypesOf(Effect.class);
     }
 
-    public static Class<? extends Effect> getEffectClass(String className){
+    public static Class<? extends Effect> getEffectClass(String className) {
         return allEffects.stream().filter(c -> c.getSimpleName().equals(className)).findFirst().orElse(null);
     }
 
@@ -30,11 +30,11 @@ public abstract class Effect {
         this.card = card;
     }
 
-    public void setup(){
+    public void setup() {
 
     }
 
-    protected void trapActivateQuestion(){
+    protected void trapActivateQuestion() {
         if (card.getCardOwner().getTrapBanned() > 0) return;
         gameManager.temporaryChangeTurn();
         gameManager.getScene().log("now it will be " + card.getCardOwner().getUserData().getUsername() + "'s turn");

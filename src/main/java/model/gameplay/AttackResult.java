@@ -4,7 +4,6 @@ import model.cards.Card;
 import model.cards.MonsterCard;
 import model.enums.CardStatus;
 import model.enums.CardType;
-import model.event.Event;
 
 public class AttackResult {
     //1 for attacker
@@ -15,8 +14,8 @@ public class AttackResult {
     private int player2LPDecrease = 0;
     private boolean destroyCard1 = false;
     private boolean destroyCard2 = false;
-    private int destroyMonsterCard1=0;
-    private int destroyMonsterCard2=0;
+    private int destroyMonsterCard1 = 0;
+    private int destroyMonsterCard2 = 0;
 
     private String resultMessage = "";
     private Card attacker;

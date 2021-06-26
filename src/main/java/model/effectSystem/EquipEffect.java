@@ -1,6 +1,5 @@
 package model.effectSystem;
 
-import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.data.MonsterCardData;
 

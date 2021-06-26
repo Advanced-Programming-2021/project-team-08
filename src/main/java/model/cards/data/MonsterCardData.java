@@ -9,13 +9,18 @@ import java.util.function.Supplier;
 
 public class MonsterCardData extends CardData {
 
-    @Expose private int level;
+    @Expose
+    private int level;
 
-    @Expose private MonsterAttribute attribute;
-    @Expose private String type;
-    @Expose private String monsterType;
+    @Expose
+    private MonsterAttribute attribute;
+    @Expose
+    private String type;
+    @Expose
+    private String monsterType;
 
-    @Expose private int attackPoints, defencePoints;
+    @Expose
+    private int attackPoints, defencePoints;
     private int changedAttack = 0;
     private int changedDefence = 0;
 
@@ -71,7 +76,7 @@ public class MonsterCardData extends CardData {
     }
 
     public int getAttackPoints() {
-        if(calculatedAttackPoint){
+        if (calculatedAttackPoint) {
             return calculateAttackMethod.get();
         }
         return attackPoints + changedAttack;

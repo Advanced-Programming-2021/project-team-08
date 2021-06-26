@@ -33,13 +33,13 @@ public class ReadSpellTrapCardsData {
             TrapCardData trapCardData = new TrapCardData();
             trapCardData = (TrapCardData) setSpellTrapData(data, trapCardData);
             trapCardData.setLimited(data[4].trim().equals("Limited"));
-            trapCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-","_")));
-        }else if (data[1].equals("Spell")) {
+            trapCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-", "_")));
+        } else if (data[1].equals("Spell")) {
             SpellCardData spellCardData = new SpellCardData();
             spellCardData = (SpellCardData) setSpellTrapData(data, spellCardData);
             spellCardData.setLimited(data[4].trim().equals("Limited"));
-            spellCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-","_")));
-        }else {
+            spellCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-", "_")));
+        } else {
             System.out.println("the card type is wrong");
         }
     }
@@ -50,8 +50,8 @@ public class ReadSpellTrapCardsData {
             cardData.setCardDescription(data[3].replace(" comma", ",").trim());
             cardData.setPrice(Integer.parseInt(data[5].trim()));
             cardData.setId(Integer.parseInt(data[6].trim()));
-            if(data.length == 8) cardData.setEffect(data[7].replace(" comma", ",").trim());
-        }catch (Exception e) {
+            if (data.length == 8) cardData.setEffect(data[7].replace(" comma", ",").trim());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return cardData;

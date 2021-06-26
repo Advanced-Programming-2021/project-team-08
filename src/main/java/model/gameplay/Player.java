@@ -123,9 +123,9 @@ public class Player {
                 }
 
                 ArrayList<Integer> tributes;
-                if(args.length < tributeNumber){
+                if (args.length < tributeNumber) {
                     tributes = gameManager.getTribute(tributeNumber);
-                }else {
+                } else {
                     tributes = new ArrayList<>(Arrays.asList(args));
                 }
                 for (int n : tributes) {
@@ -194,7 +194,7 @@ public class Player {
             throw new Exception("action not allowed in this phase");
         }
         MonsterCard monsterCard = (MonsterCard) myCard;
-        if(monsterCard.isAttackedThisTurn()){
+        if (monsterCard.isAttackedThisTurn()) {
             throw new Exception("this card already attacked");
         }
 
@@ -239,7 +239,7 @@ public class Player {
         if (spellCard.isActivated()) {
             throw new Exception("you have already activated this card");
         }
-        for (Effect effect : myCard.getCardData().getEffects()){
+        for (Effect effect : myCard.getCardData().getEffects()) {
             if (!effect.entryCondition()) throw new Exception("preparations of this spell are not done yet");
         }
         if (spellCard.getData().getSpellProperty() == SpellTrapProperty.FIELD) {
@@ -259,9 +259,9 @@ public class Player {
                 playerBoard.addSpellTrapCardToZone(myCard);
             }
         }
-        if (((SpellCardData)spellCard.getCardData()).getSpellProperty().equals(SpellTrapProperty.EQUIP)) {
+        if (((SpellCardData) spellCard.getCardData()).getSpellProperty().equals(SpellTrapProperty.EQUIP)) {
             Card card = gameManager.getScene().getSelectedMonsterCard((EquipEffect) spellCard.getCardData().getEffects().get(0), this);
-            for (Effect equipEffect :  spellCard.getCardData().getEffects()) {
+            for (Effect equipEffect : spellCard.getCardData().getEffects()) {
                 ((EquipEffect) equipEffect).setSelectedMonster((MonsterCard) card);
             }
         }

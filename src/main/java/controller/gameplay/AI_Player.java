@@ -78,12 +78,12 @@ public class AI_Player {
         }
     }
 
-    private void activateSpells(){
+    private void activateSpells() {
         if (board.isSpellTrapZoneFull()) return;
         ArrayList<Card> spellCards = new ArrayList<>();
         spellCards.addAll(board.getHand().getAllCards().stream().filter(c -> c.getCardType() == CardType.SPELL).collect(Collectors.toList()));
         ArrayList<Card> fieldCards = new ArrayList<>();
-        fieldCards.addAll(spellCards.stream().filter(c -> ((SpellCard)c).getData().getSpellProperty() == SpellTrapProperty.FIELD).collect(Collectors.toList()));
+        fieldCards.addAll(spellCards.stream().filter(c -> ((SpellCard) c).getData().getSpellProperty() == SpellTrapProperty.FIELD).collect(Collectors.toList()));
         spellCards.removeAll(fieldCards);
 
         while (!board.isSpellTrapZoneFull() && spellCards.size() > 0) {
@@ -101,7 +101,7 @@ public class AI_Player {
             }
         }
 
-        if(fieldCards.size() > 0){
+        if (fieldCards.size() > 0) {
             try {
                 gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(fieldCards.get(0)) + 1));
                 gameManager.activateCard();
@@ -139,12 +139,12 @@ public class AI_Player {
         }
     }
 
-    private ArrayList<Integer> chooseTribute(int n){
+    private ArrayList<Integer> chooseTribute(int n) {
         ArrayList<CardSlot> myMonsters = new ArrayList<>(board.getMonsterZone().stream().filter(c -> !c.isEmpty()).collect(Collectors.toList()));
-        myMonsters.sort(Comparator.comparing(c -> ((MonsterCard)c.getCard()).getData().getLevel()));
+        myMonsters.sort(Comparator.comparing(c -> ((MonsterCard) c.getCard()).getData().getLevel()));
 
         ArrayList<Integer> result = new ArrayList<>();
-        for(int i=0; i<n; i++){
+        for (int i = 0; i < n; i++) {
             result.add(board.getMonsterZone().indexOf(myMonsters.get(i)) + 1);
         }
 
@@ -167,11 +167,11 @@ public class AI_Player {
             System.out.println(a);
         }*/
 
-        for(int i=0; i<attacks.size(); i++){
+        for (int i = 0; i < attacks.size(); i++) {
             AttackResultCalculated attack = attacks.get(i);
-            if(attack.attacker.isAttackedThisTurn()) continue;
-            if(attack.attackValue() <= 0) break;
-            if(attack.attacked.getCardSlot().getZoneType() != ZoneType.MONSTER) continue;
+            if (attack.attacker.isAttackedThisTurn()) continue;
+            if (attack.attackValue() <= 0) break;
+            if (attack.attacked.getCardSlot().getZoneType() != ZoneType.MONSTER) continue;
 
             try {
                 gameManager.selectCard("--monster " + (board.getMonsterZone().indexOf(attack.attacker.getCardSlot()) + 1));
@@ -181,10 +181,10 @@ public class AI_Player {
             }
         }
 
-        if(opponent.getPlayerBoard().numberOfMonstersInZone() == 0){
-            for (CardSlot cardSlot : myMonsters){
-                if(!cardSlot.isEmpty()){
-                    if(!((MonsterCard)cardSlot.getCard()).isAttackedThisTurn()){
+        if (opponent.getPlayerBoard().numberOfMonstersInZone() == 0) {
+            for (CardSlot cardSlot : myMonsters) {
+                if (!cardSlot.isEmpty()) {
+                    if (!((MonsterCard) cardSlot.getCard()).isAttackedThisTurn()) {
                         try {
                             gameManager.selectCard("--monster " + (board.getMonsterZone().indexOf(cardSlot) + 1));
                             gameManager.attackDirect();
@@ -238,7 +238,7 @@ public class AI_Player {
             }
         }
 
-        public int attackValue(){
+        public int attackValue() {
             return player2LPDecrease - player1LPDecrease + (destroyCard2 ? 1 : 0) - (destroyCard1 ? 1 : 0);
         }
     }

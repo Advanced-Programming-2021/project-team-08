@@ -1,7 +1,6 @@
 package view.menus;
 
 import controller.ApplicationManger;
-import controller.MainMenuController;
 import controller.ShopController;
 import controller.User;
 import model.cards.data.CardData;
@@ -32,8 +31,8 @@ public class ShopScene extends Scene {
             System.out.println("menu navigation is not possible");
             return 1;
         }
-        if(userInput.equals("show my balance")){
-            System.out.println("your balance is: "+ activeUser.getUserData().getMoney());
+        if (userInput.equals("show my balance")) {
+            System.out.println("your balance is: " + activeUser.getUserData().getMoney());
             return 1;
         }
         if ((matcher = Pattern.compile("^card show ([^\n]+)$").matcher(userInput)).find()) {
