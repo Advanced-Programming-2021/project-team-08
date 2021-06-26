@@ -1,6 +1,5 @@
 package model.gameplay;
 
-import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -31,6 +30,15 @@ public class CardSlot {
                 break;
         }
     }
+
+    /*public static void moveACard(CardSlot from, CardSlot to){
+        try {
+            to.setCard(from.getCard());
+            from.removeCard();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     public ZoneType getZoneType() {
         return zoneType;
