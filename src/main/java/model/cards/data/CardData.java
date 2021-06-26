@@ -14,13 +14,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class CardData {
-    protected CardType cardType;
-    protected String cardName;
-    protected int cardId;
-    protected int price;
-    protected String cardDescription;
-    private String effectString;
-    @Expose protected ArrayList<Effect> effects = new ArrayList<>();
+    @Expose protected CardType cardType;
+    @Expose protected String cardName;
+    @Expose protected int cardId;
+    @Expose protected int price;
+    @Expose protected String cardDescription;
+    @Expose private String effectString;
+    protected ArrayList<Effect> effects = new ArrayList<>();
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
     public String getCardName() {
@@ -97,7 +97,9 @@ public abstract class CardData {
                 }
             }
         }
+    }
 
-
+    public void readEffectFromEffectString(){
+        setEffect(effectString);
     }
 }

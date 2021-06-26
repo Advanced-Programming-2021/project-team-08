@@ -1,5 +1,6 @@
 package model.cards.data;
 
+import com.google.gson.annotations.Expose;
 import model.enums.CardType;
 import model.enums.MonsterAttribute;
 
@@ -8,13 +9,13 @@ import java.util.function.Supplier;
 
 public class MonsterCardData extends CardData {
 
-    private int level;
+    @Expose private int level;
 
-    private MonsterAttribute attribute;
-    private String type;
-    private String monsterType;
+    @Expose private MonsterAttribute attribute;
+    @Expose private String type;
+    @Expose private String monsterType;
 
-    private int attackPoints, defencePoints;
+    @Expose private int attackPoints, defencePoints;
     private int changedAttack = 0;
     private int changedDefence = 0;
 

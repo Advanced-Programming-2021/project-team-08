@@ -64,6 +64,7 @@ public class DataManager {
                     System.out.println("couldn't find card type");
                     return;
             }
+            cardData.readEffectFromEffectString();
             System.out.println(cardData);
             System.out.println("card imported successfully.");
         } catch (IOException e) {

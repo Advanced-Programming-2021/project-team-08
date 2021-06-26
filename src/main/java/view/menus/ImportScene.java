@@ -22,10 +22,10 @@ public class ImportScene extends Scene {
             System.out.println("menu navigation is not possible");
             return 1;
         }
-        if ((matcher = Pattern.compile("^import card ([a-zA-Z ]+)$").matcher(userInput)).find()) {
+        if ((matcher = Pattern.compile("^import card ([^\\n]+)$").matcher(userInput)).find()) {
             importController.importCard(matcher.group(1).trim());
             return 1;
-        } else if ((matcher = Pattern.compile("^export card ([a-zA-Z ]+)$").matcher(userInput)).find()) {
+        } else if ((matcher = Pattern.compile("^export card ([^\\n]+)$").matcher(userInput)).find()) {
             importController.exportCard(matcher.group(1).trim());
             return 1;
         } else if (Pattern.compile("^menu show-current$").matcher(userInput).find()) {

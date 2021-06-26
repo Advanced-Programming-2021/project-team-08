@@ -1,5 +1,6 @@
 package model.cards.data;
 
+import com.google.gson.annotations.Expose;
 import model.enums.CardType;
 import model.enums.SpellTrapProperty;
 
@@ -7,8 +8,8 @@ import java.util.ArrayList;
 
 public class TrapCardData extends CardData{
     private static ArrayList<TrapCardData> allTraps = new ArrayList<>();
-    private SpellTrapProperty trapProperty;
-    private boolean isLimited;
+    @Expose private SpellTrapProperty trapProperty;
+    @Expose private boolean isLimited;
 
     public TrapCardData() {
         CardData.addCardData(this);
