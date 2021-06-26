@@ -1,22 +1,18 @@
 package controller;
 
-import com.google.gson.Gson;
 import model.Command;
 import model.Deck;
 import model.cards.Card;
 import model.cards.SpellCard;
 import model.cards.TrapCard;
 import model.cards.data.CardData;
-import model.cards.data.MonsterCardData;
+import model.cards.data.SpellCardData;
+import model.cards.data.TrapCardData;
 import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
-import org.json.simple.parser.JSONParser;
 import view.menus.DeckMenu;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -60,56 +56,56 @@ public class DeckController {
         }
     }
 
-    public void addCard(String userInput) {
+    public void addCard(String userInput) throws ParseCommandException {
         HashMap<String, CommandFieldType> fieldsOfAddCard = new HashMap<>();
         fieldsOfAddCard.put("card", CommandFieldType.STRING);
         fieldsOfAddCard.put("deck", CommandFieldType.STRING);
         fieldsOfAddCard.put("side", CommandFieldType.BOOLEAN);
-        try {
-            Command addCardCommand = Command.parseCommand(userInput, fieldsOfAddCard);
-            if (!ApplicationManger.getLoggedInUser().haveThisCardFree(addCardCommand.getField("card"))) {
-                System.out.println("card with name " + addCardCommand.getField("card") + " does not exist");
-            } else if (!Deck.isThereADeckWithThisName(addCardCommand.getField("deck"))) {
-                System.out.println("deck with name " + addCardCommand.getField("deck") + " does not exist");
-            } else {
-                CardData cardData = CardData.getCardByName(addCardCommand.getField("card"));
-                Card card = Card.getCardByCardData(cardData);
-                if (Boolean.parseBoolean(addCardCommand.getField("side"))) {
-                    if (Deck.isSideDeckFull(addCardCommand.getField("deck"))) {
-                        System.out.println("side deck is full");
-                    } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already three cards with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else if (card.getCardType().equals(CardType.SPELL) && ((SpellCard) card).getData().isLimited() &&
-                            Deck.isThereAreOneCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already one card with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else if (card.getCardType().equals(CardType.TRAP) && ((TrapCard) card).getData().isLimited() &&
-                            Deck.isThereAreOneCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already one card with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else {
-                        System.out.println("card added to deck successfully");
-                        Deck.addCard(addCardCommand.getField("card"), addCardCommand.getField("deck"), "side");
-                        ApplicationManger.getLoggedInUser().getUserData().save();
-                    }
+
+        Command addCardCommand = Command.parseCommand(userInput, fieldsOfAddCard);
+        String cardName = addCardCommand.getField("card");
+        String deckName = addCardCommand.getField("deck");
+        boolean isSide = Boolean.parseBoolean(addCardCommand.getField("side"));
+
+        if (!ApplicationManger.getLoggedInUser().haveThisCardFree(cardName)) {
+            System.out.println("card with name " + cardName + " does not exist");
+        } else if (!Deck.isThereADeckWithThisName(deckName)) {
+            System.out.println("deck with name " + deckName + " does not exist");
+        } else {
+            CardData cardData = CardData.getCardByName(cardName);
+            if (isSide) {
+                if (Deck.isSideDeckFull(deckName)) {
+                    System.out.println("side deck is full");
+                } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already three cards with name " + cardName + " in deck " + deckName);
+                } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
+                        Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already one card with name " + cardName + " in deck " + deckName);
+                } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
+                        Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already one card with name " + cardName + " in deck " + deckName);
                 } else {
-                    if (Deck.isMainDeckFull(addCardCommand.getField("deck"))) {
-                        System.out.println("main deck is full");
-                    } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already three cards with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else if (card.getCardType().equals(CardType.SPELL) && ((SpellCard) card).getData().isLimited() &&
-                            Deck.isThereAreOneCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already one card with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else if (card.getCardType().equals(CardType.TRAP) && ((TrapCard) card).getData().isLimited() &&
-                            Deck.isThereAreOneCardsOfThisCardInDeck(addCardCommand.getField("card"), addCardCommand.getField("deck"))) {
-                        System.out.println("there are already one card with name " + addCardCommand.getField("card") + " in deck " + addCardCommand.getField("deck"));
-                    } else {
-                        System.out.println("card added to deck successfully");
-                        Deck.addCard(addCardCommand.getField("card"), addCardCommand.getField("deck"), "main");;
-                        ApplicationManger.getLoggedInUser().getUserData().save();
-                    }
+                    System.out.println("card added to deck successfully");
+                    Deck.addCard(cardName, deckName, "side");
+                    ApplicationManger.getLoggedInUser().getUserData().save();
+                }
+            } else {
+                if (Deck.isMainDeckFull(deckName)) {
+                    System.out.println("main deck is full");
+                } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already three cards with name " + cardName + " in deck " + deckName);
+                } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
+                        Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already one card with name " + cardName + " in deck " + deckName);
+                } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
+                        Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                    System.out.println("there are already one card with name " + cardName + " in deck " + deckName);
+                } else {
+                    System.out.println("card added to deck successfully");
+                    Deck.addCard(cardName, deckName, "main");
+                    ApplicationManger.getLoggedInUser().getUserData().save();
                 }
             }
-        } catch (ParseCommandException e) {
-            e.printStackTrace();
         }
     }
 
@@ -171,44 +167,44 @@ public class DeckController {
         }
     }
 
-    public void showDeck(String deckName, String userInput) {
-        ArrayList<CardData> cards = new ArrayList<>();
-        ArrayList<String> monstersCardName = new ArrayList<>();
-        ArrayList<String> spellsOrTrapsCardName = new ArrayList<>();
+    public void showDeck(String userCommand) throws ParseCommandException {
+        HashMap<String, CommandFieldType> showADeck = new HashMap<>();
+        showADeck.put("deck-name", CommandFieldType.STRING);
+        showADeck.put("side", CommandFieldType.BOOLEAN);
+
+        Command command = Command.parseCommand(userCommand, showADeck);
+        String deckName = command.getField("deck-name");
+        Boolean isSide = Boolean.parseBoolean(command.getField("side"));
+
+        ArrayList<CardData> cards;
+        ArrayList<CardData> monstersCardName = new ArrayList<>();
+        ArrayList<CardData> spellsOrTrapsCardName = new ArrayList<>();
+
         if (!Deck.isThereADeckWithThisName(deckName))
             System.out.println("deck with name " + deckName + " does not exist");
         else {
             System.out.println("Deck: " + deckName);
-            if (userInput.contains("side")) {
+            if (isSide) {
                 System.out.println("Side deck:");
                 cards = Deck.getDeckWithName(deckName).getSideDeck();
-            } else if (userInput.contains("main")) {
+            } else {
                 System.out.println("Main deck:");
                 cards = Deck.getDeckWithName(deckName).getMainDeck();
             }
             for (CardData card : cards) {
                 if (card.getCardType().equals(CardType.MONSTER))
-                    monstersCardName.add(card.getCardName());
-                else spellsOrTrapsCardName.add(card.getCardName());
+                    monstersCardName.add(card);
+                else spellsOrTrapsCardName.add(card);
             }
-            monstersCardName.sort(Comparator.naturalOrder());
-            spellsOrTrapsCardName.sort(Comparator.naturalOrder());
+            monstersCardName.sort(Comparator.comparing(CardData::getCardName));
+            spellsOrTrapsCardName.sort(Comparator.comparing(CardData::getCardName));
             System.out.println("Monsters:");
-            for (String cardName : monstersCardName) {
-                System.out.println(cardName + ": " + MonsterCardData.getCardByName(cardName).getCardDescription());
+            for (CardData card : monstersCardName) {
+                System.out.println(card.getCardName() + ": " + card.getCardDescription());
             }
             System.out.println("Spell and Traps:");
-            for (String cardName:spellsOrTrapsCardName){
-                CardData cardData = CardData.getCardByName(cardName);
-                Card card = Card.getCardByCardData(cardData);
-                if (card.getCardType().equals(CardType.SPELL)){
-                    String description=((SpellCard)card).getData().getCardDescription();
-                    System.out.println(cardName + ": " + description);
-                }
-                else if (card.getCardType().equals(CardType.TRAP)){
-                    String description=((TrapCard)card).getData().getCardDescription();
-                    System.out.println(cardName + ": " + description);
-                }
+            for (CardData card : spellsOrTrapsCardName) {
+                System.out.println(card.getCardName() + ": " + card.getCardDescription());
             }
         }
     }

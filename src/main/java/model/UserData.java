@@ -42,7 +42,7 @@ public class UserData {
     }
 
     public void removeDeck(Deck deck){
-        decks.add(deck);
+        decks.remove(deck);
         save();
     }
 

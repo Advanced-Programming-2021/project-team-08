@@ -1,0 +1,31 @@
+user login --password abc123 --username Abolfazl
+menu enter deck
+menu show-current
+deck create test
+deck create test2
+deck create test3
+deck delete test3
+deck delete test3
+deck set-activate test2
+deck set-activate wrong
+
+deck add-card --card Wrong Name --deck test2
+deck add-card --card Mirage Dragon Name --deck wrong
+
+deck add-card --card Change of heart --deck test2
+
+deck add-card --card Mirage Dragon --deck test2
+deck add-card --side --card Mirage Dragon --deck test2
+
+deck add-card --card Alexandrite Dragon --deck test
+deck add-card --side --card Alexandrite Dragon --deck test
+
+deck rm-card --card Mirage Dragon --deck test2
+deck rm-card --side --card Mirage Dragon --deck test2
+
+deck show --all
+deck show --deck-name test
+deck show --deck-name test2 --side
+deck show --cards
+
+menu exit
