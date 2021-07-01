@@ -17,7 +17,7 @@ public class ApplicationManger extends Application {
     private static Stage mainStage;
 
     public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
-        String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/java/view/fxml/";
+        String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         try {
             put(SceneName.FIRST_SCENE, new URL(rootPath + "firstScene.fxml"));
             put(SceneName.REGISTER_MENU, new URL(rootPath + "firstScene.fxml"));
