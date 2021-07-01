@@ -8,9 +8,8 @@ public class ShopController {
     private User activeUser;
     private ShopScene shopScene;
 
-    public ShopController(ShopScene shopScene) {
+    public ShopController() {
         this.activeUser = ApplicationManger.getLoggedInUser();
-        this.shopScene = shopScene;
     }
 
     public void buyCard(String cardName) {

@@ -21,6 +21,7 @@ public class ApplicationManger extends Application {
         try {
             put(SceneName.FIRST_SCENE, new URL(rootPath + "firstScene.fxml"));
             put(SceneName.REGISTER_MENU, new URL(rootPath + "firstScene.fxml"));
+            put(SceneName.SHOP_MENU, new URL(rootPath + "shopScene.fxml"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,6 @@ public class ApplicationManger extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-
         goToScene1(SceneName.FIRST_SCENE, false);
     }
 

@@ -34,7 +34,7 @@ public class ShopControllerTest {
         }
         ApplicationManger.setLoggedInUser(testUser);
         shopScene = new ShopScene();
-        shopController = new ShopController(shopScene);
+        shopController = new ShopController();
         new ReadSpellTrapCardsData().readSpellTrapData();
     }
 

@@ -17,7 +17,7 @@ public class ShopScene extends Scene {
 
     public ShopScene() {
         this.activeUser = ApplicationManger.getLoggedInUser();
-        shopController = new ShopController(this);
+        shopController = new ShopController();
     }
 
     @Override

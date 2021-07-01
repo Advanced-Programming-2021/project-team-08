@@ -6,7 +6,6 @@ import model.exceptions.ParseCommandException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.menus.DeckMenu;
-import view.menus.ShopScene;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -29,7 +28,7 @@ public class DeckControllerTest {
         new User("alaki", "abool", "abool123");
         ApplicationManger.setLoggedInUser(testUser);
         deckController = new DeckController(new DeckMenu());
-        shopController = new ShopController(new ShopScene());
+        shopController = new ShopController();
         new ReadSpellTrapCardsData().readSpellTrapData();
     }
 
