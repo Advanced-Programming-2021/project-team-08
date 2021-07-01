@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.ApplicationManger;
 import controller.User;
+import javafx.application.Application;
 import model.UserData;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
@@ -21,7 +22,7 @@ public class Main {
             System.out.println("ERROR: Couldn't load game!");
             System.exit(-1);
         }
-        applicationManger.run();
+        applicationManger.run(args);
     }
 
     public static void firstSetup() throws IOException {

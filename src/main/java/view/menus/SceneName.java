@@ -1,6 +1,7 @@
 package view.menus;
 
 public enum SceneName {
+    FIRST_SCENE,
     REGISTER_MENU,
     MAIN_MENU,
     SHOP_MENU,
