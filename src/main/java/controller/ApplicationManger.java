@@ -1,13 +1,42 @@
 package controller;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import view.menus.*;
 
-public class ApplicationManger {
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+
+public class ApplicationManger extends Application {
     private static Scene currentScene;
     private static User loggedInUser;
+    private static Stage mainStage;
 
-    public void run() {
-        goToScene(SceneName.REGISTER_MENU, false);
+    public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
+        String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/java/view/fxml/";
+        try {
+            put(SceneName.FIRST_SCENE, new URL(rootPath + "firstScene.fxml"));
+            put(SceneName.REGISTER_MENU, new URL(rootPath + "firstScene.fxml"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }};
+
+    public void run(String[] args) {
+        //goToScene(SceneName.REGISTER_MENU, false);
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        mainStage = primaryStage;
+        primaryStage.setTitle("Yu-Gi-Oh");
+
+        goToScene1(SceneName.FIRST_SCENE, false);
     }
 
 
@@ -47,6 +76,19 @@ public class ApplicationManger {
                 currentScene = new GamePlayScene();
                 currentScene.start();
                 break;
+        }
+    }
+
+    public static void goToScene1(SceneName sceneName, boolean isTest) {
+        if (isTest) return;
+        try {
+            FXMLLoader loader = new FXMLLoader(fxmlAddresses.get(sceneName));
+            AnchorPane root = loader.load();
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            mainStage.setScene(scene);
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
