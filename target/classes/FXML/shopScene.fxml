@@ -6,17 +6,19 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="shopBackground" stylesheets="@../CSS/MenuStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShopController">
    <children>
-      <Pane layoutX="550" layoutY="50" prefHeight="200.0" prefWidth="500.0" styleClass="shopBox" />
-      <Label layoutX="700" layoutY="135" styleClass="shopText" text="card-shop" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="36.0" />
-         </font>
-      </Label>
-      <TextField layoutX="191.0" layoutY="336.0" />
-      <Pane layoutX="550" layoutY="800" prefHeight="80.0" prefWidth="500.0" styleClass="shopMessageBox">
+      <Pane layoutX="550.0" layoutY="14.0" prefHeight="199.0" prefWidth="514.0" styleClass="shopBox">
          <children>
-            <Label fx:id="buyMessageLabel" layoutX="19.0" layoutY="16.0" prefHeight="45.0" prefWidth="458.0" styleClass="shopMessageLabel"/>
+            <Label layoutX="135.0" layoutY="80.0" prefHeight="70.0" prefWidth="250.0" styleClass="shopText" text="card-shop" textFill="WHITE">
+               <font>
+                  <Font name="Harrington" size="36.0" />
+               </font>
+            </Label>
          </children></Pane>
-      <Pane layoutX="1100" layoutY="250" prefHeight="614.0" prefWidth="421.0" styleClass="shopCard" />
+      <Pane layoutX="550" layoutY="800" prefHeight="80.0" prefWidth="500.0" styleClass="shopMessageBox" />
+      <ScrollPane id="scrollBar" layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="1200.0" styleClass="scroll-pane" hbarPolicy="NEVER">
+        <content>
+          <AnchorPane  minHeight="200.0" minWidth="1200.0" prefHeight="1000.0" prefWidth="1200"  styleClass="scroll-pane"/>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

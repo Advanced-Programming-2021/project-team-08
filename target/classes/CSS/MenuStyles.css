@@ -31,3 +31,11 @@
     -fx-font-size: 25.0 px;
     -fx-text-alignment: left;
 }
+
+.button {
+
+}
+
+.scroll-pane {
+    -fx-background-image: url("../asset/shopMenu/classic_shadowrealm.jpg");
+}

@@ -35,3 +35,7 @@
 .button {
 
 }
+
+.scroll-pane {
+    -fx-background-image: url("../asset/shopMenu/classic_shadowrealm.jpg");
+}
