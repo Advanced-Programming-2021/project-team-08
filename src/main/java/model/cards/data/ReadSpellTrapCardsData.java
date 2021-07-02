@@ -1,9 +1,12 @@
 package model.cards.data;
 
+import javafx.scene.image.Image;
 import model.enums.SpellTrapProperty;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Locale;
 
 public class ReadSpellTrapCardsData {
@@ -51,10 +54,30 @@ public class ReadSpellTrapCardsData {
             cardData.setPrice(Integer.parseInt(data[5].trim()));
             cardData.setId(Integer.parseInt(data[6].trim()));
             if (data.length == 8) cardData.setEffect(data[7].replace(" comma", ",").trim());
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return cardData;
+    }
+
+    public void setGraphic() {
+        for (CardData cardData : SpellCardData.getAllCardData()) {
+            if (!(cardData instanceof MonsterCardData)) {
+                setACardImage(cardData);
+            }
+        }
+    }
+
+    private void setACardImage(CardData cardData) {
+        String path;
+        String cardName = cardData.getCardName().replaceAll(" ", "");
+        path = "/src/main/resources/asset/Cards/SpellTrap/" + cardName + ".jpg";
+        try {
+            cardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

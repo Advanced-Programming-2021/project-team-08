@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.annotations.Expose;
+import javafx.scene.image.Image;
 import model.effectSystem.Effect;
 import model.enums.CardType;
 
@@ -26,6 +27,7 @@ public abstract class CardData {
     protected String cardDescription;
     @Expose
     private String effectString;
+    private Image cardImage;
     protected ArrayList<Effect> effects = new ArrayList<>();
     private static ArrayList<CardData> allCardData = new ArrayList<>();
 
@@ -86,6 +88,14 @@ public abstract class CardData {
 
     public void setId(int id) {
         this.cardId = id;
+    }
+
+    public void setCardImage(Image cardImage) {
+        this.cardImage = cardImage;
+    }
+
+    public Image getCardImage() {
+        return cardImage;
     }
 
     public void setEffect(String effectsJson) {

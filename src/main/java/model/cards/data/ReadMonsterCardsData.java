@@ -1,9 +1,15 @@
 package model.cards.data;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.enums.MonsterAttribute;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.URL;
 
 
 public class ReadMonsterCardsData {
@@ -121,8 +127,32 @@ public class ReadMonsterCardsData {
         }
     }
 
+    private void setImage(CardData monsterCardData) {
+        String path;
+        String cardName = monsterCardData.getCardName().replaceAll(" ", "");
+        path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
+        try {
+           monsterCardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setGraphic() {
+        try {
+            for (CardData monsterCardData : MonsterCardData.getAllCardData()) {
+                if (monsterCardData instanceof MonsterCardData) {
+                    setImage(monsterCardData);
+                }
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         new ReadMonsterCardsData().readCardsData();
+        new ReadMonsterCardsData().setGraphic();
         new ReadSpellTrapCardsData().readSpellTrapData();
         MonsterCardData.printAllMonsterCard();
         SpellCardData.printAllTraps();

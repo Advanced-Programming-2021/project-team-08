@@ -92,21 +92,7 @@ public class ShopScene extends Scene {
     }
 
     private ImageView cardImage(CardData cardData, int index) {
-        String path;
-        String cardName = cardData.getCardName().replaceAll(" ", "");
-        if (cardData instanceof MonsterCardData) {
-            path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
-            if (new File(path).exists()) System.out.println("the fucking file is exist");
-        }else {
-            path = "/src/main/resources/asset/Cards/SpellTrap/" + cardName + ".jpg";
-        }
-        ImageView cardImage = new ImageView();
-        try {
-            cardImage.setImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        ImageView cardImage = new ImageView(cardData.getCardImage());
         cardImage.setFitHeight(425);
         cardImage.setFitWidth(240);
         int x = (index % 5) * (260) + 20;
@@ -117,8 +103,8 @@ public class ShopScene extends Scene {
         cardImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                cardImage.setFitHeight(425 * 2);
-                cardImage.setFitWidth(240 * 2);
+                cardImage.setFitHeight(425 * 1.4);
+                cardImage.setFitWidth(240 * 1.4);
             }
         });
         cardImage.setOnMouseExited(new EventHandler<MouseEvent>() {

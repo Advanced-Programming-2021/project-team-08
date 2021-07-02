@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.cards.data.ReadMonsterCardsData;
+import model.cards.data.ReadSpellTrapCardsData;
 import view.menus.*;
 
 import java.io.IOException;
@@ -34,6 +36,8 @@ public class ApplicationManger extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        new ReadMonsterCardsData().setGraphic();
+        new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
         goToScene1(SceneName.SHOP_MENU, false);
