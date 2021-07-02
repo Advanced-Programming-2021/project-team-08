@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import model.enums.SpellTrapProperty;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -72,8 +73,11 @@ public class ReadSpellTrapCardsData {
     private void setACardImage(CardData cardData) {
         String path;
         String cardName = cardData.getCardName().replaceAll(" ", "");
-        path = "/src/main/resources/asset/Cards/SpellTrap/" + cardName + ".jpg";
-        try {
+            path = "/src/main/resources/asset/Cards/SpellTrap/" + cardName + ".jpg";
+        if (!new File("src/main/resources/asset/Cards/SpellTrap/" + cardName + ".jpg").exists()) {
+            System.out.println("the file with this path didn't load: " + path);
+        }
+            try {
             cardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
         } catch (MalformedURLException e) {
             e.printStackTrace();

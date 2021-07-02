@@ -7,7 +7,7 @@ Torrential Tribute,Trap,Normal,When a monster(s) is Summoned: Destroy all monste
 Time Seal,Trap,Normal,Skip the Draw Phase of your opponent's next turn.,Limited,2000,47, {"BanOpponentFromGetCard" : ["1"]}
 Negate Attack,Trap,Counter,When an opponent's monster declares an attack: Target the attacking monster; negate the attack comma then end the Battle Phase.,Unlimited,3000,48, {"CancelAttackAndEndTurn" : []}
 Solemn Warning,Trap,Counter,When a monster(s) would be Summoned comma OR when a Spell/Trap Card comma or monster effect comma is activated that includes an effect that Special Summons a monster(s): Pay 2000 LP; negate the Summon or activation comma and if you do comma destroy it.,Unlimited,3000,49,
-Magic Jamamer,Trap,Counter,When a Spell Card is activated: Discard 1 card; negate the activation camma and if you do camma destroy it.,Unlimited,3000,50,
+Magic Jammer,Trap,Counter,When a Spell Card is activated: Discard 1 card; negate the activation camma and if you do camma destroy it.,Unlimited,3000,50,
 Call Of The Haunted,Trap,Continuous,Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position. When this card leaves the field comma destroy that monster. When that monster is destroyed comma destroy this card.,Unlimited,3500,51,{"SummonACardFromGraveyard":[]}
 Vanity's Emptiness,Trap,Continuous,Neither player can Special Summon monsters. If a card is sent from the Deck or the field to your Graveyard: Destroy this card.,Limited,3500,52,
 Wall Of Revealing Light,Trap,Continuous,Activate by paying any multiple of 1000 Life Points. Monsters your opponent controls cannot attack if their ATK is less than or equal to the amount you paid.,Limited,3500,53,

@@ -131,6 +131,9 @@ public class ReadMonsterCardsData {
         String path;
         String cardName = monsterCardData.getCardName().replaceAll(" ", "");
         path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
+        if (!new File("src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg").exists()) {
+            System.out.println("the file with this path didn't load: " + path);
+        }
         try {
            monsterCardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
         } catch (MalformedURLException e) {
