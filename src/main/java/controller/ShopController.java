@@ -1,10 +1,13 @@
 package controller;
 
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import model.cards.data.CardData;
 import view.menus.ShopScene;
 
 public class ShopController {
 
+    public Label buyMessageLabel;
     private User activeUser;
     private ShopScene shopScene;
 
@@ -25,4 +28,12 @@ public class ShopController {
             shopScene.printMessage("you bought " + cardName + " successfully.");
         }
     }
+
+    public void setLabelMessage(String message, boolean isSuccessful) {
+        buyMessageLabel.setText(message);
+        if (isSuccessful) buyMessageLabel.setTextFill(Color.GREEN);
+        else buyMessageLabel.setTextFill(Color.RED);
+    }
+
+
 }
