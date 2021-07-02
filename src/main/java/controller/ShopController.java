@@ -1,12 +1,10 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import model.cards.Card;
 import model.cards.data.CardData;
 import view.menus.ShopScene;
 
@@ -46,11 +44,11 @@ public class ShopController {
     }
 
 
-    public void setSearchedImage(ActionEvent actionEvent) {
+    public void setSearchedImage(KeyEvent actionEvent) {
         shopScene = new ShopScene();
         ArrayList<CardData> showingCard = new ArrayList<>();
         for (CardData cardData : CardData.getAllCardData()) {
-            if (cardData.getName().toLowerCase(Locale.ROOT).startsWith(searchedString.getText())) {
+            if (cardData.getName().toLowerCase(Locale.ROOT).startsWith(searchedString.getText().toLowerCase(Locale.ROOT))) {
                 showingCard.add(cardData);
             }
         }
