@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="root" stylesheets="@../CSS/MenuStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShopController">
-
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="shopBackground" stylesheets="@../CSS/MenuStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShopController">
+   <children>
+      <Pane layoutX="550" layoutY="30" prefHeight="200.0" prefWidth="500.0" styleClass="shopBox" />
+      <Label layoutX="700" layoutY="115" styleClass="shopText" text="card-shop" textFill="WHITE">
+         <font>
+            <Font name="Harrington" size="36.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

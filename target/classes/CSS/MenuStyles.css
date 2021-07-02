@@ -1,6 +1,20 @@
-.root{
-    -fx-background-image: URL("https://wallpapercave.com/w/wp2310990");
-    -fx-background-repeat: stretch;
-    -fx-background-size: 900 506;
-    -fx-background-position: center center;
+.shopBackground {
+    -fx-background-image: url("../asset/shopMenu/shopBackground.jpg");
+
+}
+
+.shopBox {
+    -fx-background-image: url("../asset/shopMenu/UserDetailBG_02.dds.png");
+}
+
+@font-face {
+    -fx-font-family: 'Heebeo';
+    -fx-font-size: 40;
+    src: url("../asset/font/Heebeo.ttf");
+}
+
+.shopText {
+    -fx-alignment: center;
+    -fx-font-family: 'Heebeo';
+    -fx-font-size: 40.0 px;
 }

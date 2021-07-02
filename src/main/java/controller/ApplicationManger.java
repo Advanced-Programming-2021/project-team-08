@@ -36,7 +36,7 @@ public class ApplicationManger extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        goToScene1(SceneName.FIRST_SCENE, false);
+        goToScene1(SceneName.SHOP_MENU, false);
     }
 
 
