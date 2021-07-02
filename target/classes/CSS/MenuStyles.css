@@ -32,10 +32,12 @@
     -fx-text-alignment: left;
 }
 
-.button {
-
+.searchTextBar {
+    -fx-background-image: url("../asset/shopMenu/classic_shadowrealm.jpg");
+    -fx-text-fill: white;
 }
 
 .scroll-pane {
     -fx-background-image: url("../asset/shopMenu/classic_shadowrealm.jpg");
 }
+

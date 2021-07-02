@@ -1,13 +1,23 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import model.cards.Card;
 import model.cards.data.CardData;
 import view.menus.ShopScene;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class ShopController {
 
     public Label buyMessageLabel;
+    public TextField searchedString;
+    public AnchorPane scrollPane;
     private User activeUser;
     private ShopScene shopScene;
 
@@ -36,4 +46,16 @@ public class ShopController {
     }
 
 
+    public void setSearchedImage(ActionEvent actionEvent) {
+        shopScene = new ShopScene();
+        ArrayList<CardData> showingCard = new ArrayList<>();
+        for (CardData cardData : CardData.getAllCardData()) {
+            if (cardData.getName().toLowerCase(Locale.ROOT).startsWith(searchedString.getText())) {
+                showingCard.add(cardData);
+            }
+        }
+        System.out.println("the size is : " + showingCard.size());
+        scrollPane.getChildren().clear();
+        shopScene.setCards(scrollPane, showingCard);
+    }
 }

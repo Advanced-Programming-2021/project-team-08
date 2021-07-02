@@ -15,10 +15,11 @@
             </Label>
          </children></Pane>
       <Pane layoutX="550" layoutY="800" prefHeight="80.0" prefWidth="500.0" styleClass="shopMessageBox" />
-      <ScrollPane id="scrollBar" layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="1200.0" styleClass="scroll-pane" hbarPolicy="NEVER">
+      <ScrollPane id="scrollBar" hbarPolicy="NEVER" layoutX="150.0" layoutY="300.0" prefHeight="500.0" prefWidth="1340.0" styleClass="scroll-pane">
         <content>
-          <AnchorPane  minHeight="200.0" minWidth="1200.0" prefHeight="1000.0" prefWidth="1200"  styleClass="scroll-pane"/>
+          <AnchorPane fx:id="scrollPane" minHeight="200.0" minWidth="1200.0" prefHeight="7140.0" prefWidth="1340" styleClass="scroll-pane" />
         </content>
       </ScrollPane>
+      <TextField layoutX="558.0" layoutY="266.0" prefHeight="26.0" prefWidth="272.0" styleClass="searchTextBar" fx:id="searchedString" onAction="#setSearchedImage"/>
    </children>
 </AnchorPane>
