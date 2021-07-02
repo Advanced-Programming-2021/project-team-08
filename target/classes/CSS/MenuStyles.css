@@ -9,7 +9,6 @@
 
 @font-face {
     -fx-font-family: 'Heebeo';
-    -fx-font-size: 40;
     src: url("../asset/font/Heebeo.ttf");
 }
 
@@ -17,4 +16,18 @@
     -fx-alignment: center;
     -fx-font-family: 'Heebeo';
     -fx-font-size: 40.0 px;
+}
+
+.shopMessageBox {
+    -fx-background-image: url("../asset/shopMenu/GUI_T_ShopButton1LL_3.dds.png");
+}
+
+.shopCard {
+    -fx-background-image: url("../asset/Cards/Monsters/0000.png");
+}
+
+.shopMessageLabel {
+    -fx-font-family: 'Heebeo';
+    -fx-font-size: 25.0 px;
+    -fx-text-alignment: left;
 }
