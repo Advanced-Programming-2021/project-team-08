@@ -66,9 +66,21 @@ public class RegisterController {
     public void backToFirstScene(ActionEvent actionEvent) {
     }
 
-    public void useernameOfsignup(ActionEvent actionEvent) {
+    public void usernameOfSignup(ActionEvent actionEvent) {
     }
 
-    public void passwordOfsignup(ActionEvent actionEvent) {
+    public void passwordOfSignup(ActionEvent actionEvent) {
+    }
+
+    public void nextOfSignup(ActionEvent actionEvent) {
+    }
+
+    public void usernameOfLogin(ActionEvent actionEvent) {
+    }
+
+    public void passwordOfLogin(ActionEvent actionEvent) {
+    }
+
+    public void nextOfLogin(ActionEvent actionEvent) {
     }
 }
