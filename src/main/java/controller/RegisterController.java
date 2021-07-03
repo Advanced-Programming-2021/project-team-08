@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import javafx.event.ActionEvent;
 import model.Command;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
@@ -60,5 +61,14 @@ public class RegisterController {
             System.out.println("Invalid command");
         }
         return 1;
+    }
+
+    public void backToFirstScene(ActionEvent actionEvent) {
+    }
+
+    public void useernameOfsignup(ActionEvent actionEvent) {
+    }
+
+    public void passwordOfsignup(ActionEvent actionEvent) {
     }
 }
