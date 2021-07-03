@@ -4,12 +4,20 @@ import controller.ApplicationManger;
 import controller.ShopController;
 import controller.User;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import model.cards.data.CardData;
 
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.regex.Matcher;
@@ -19,11 +27,21 @@ public class ShopScene extends Scene {
 
     private User activeUser;
     private ShopController shopController;
+    private Label cardPrice;
+    private Label userMoney;
 
     public ShopScene() {
         this.activeUser = ApplicationManger.getLoggedInUser();
         shopController = new ShopController();
     }
+
+    public ShopScene(ShopController shopController, User user) {
+        this.activeUser = user;
+        this.shopController = shopController;
+        cardPrice = shopController.getCardPrice();
+        userMoney = shopController.getUserMoney();
+    }
+
 
     @Override
     protected int getUserCommand() {
@@ -79,7 +97,6 @@ public class ShopScene extends Scene {
     }
 
     public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards) {
-
         int size = cards.size();
         if (size == 0) anchorPane.setPrefHeight(600);
         else if (size % 5 == 0) anchorPane.setPrefHeight((double) (cards.size() / 5) * 445 + 180);
@@ -90,7 +107,6 @@ public class ShopScene extends Scene {
     }
 
     private void  addCardImage(AnchorPane anchorPane, CardData cardData, int index) {
-        System.out.println("the real index is : " + index + " but must be " + anchorPane.getChildren().size());
         ImageView cardImage = new ImageView(cardData.getCardImage());
         anchorPane.getChildren().add(index, cardImage);
         cardImage.setFitHeight(425);
@@ -100,15 +116,47 @@ public class ShopScene extends Scene {
         cardImage.setX(x);
         cardImage.setY(y);
         cardImage.setOnMouseEntered(event -> {
-            cardImage.setFitHeight(425 * 1.4);
-            cardImage.setFitWidth(240 * 1.4);
+            cardImage.setFitHeight(cardImage.getFitHeight() * 1.4);
+            cardImage.setFitWidth(cardImage.getFitWidth() * 1.4);
             cardImage.toFront();
+            shopController.updateCardPrice(cardData.getPrice());
         });
         cardImage.setOnMouseExited(event -> {
-            cardImage.setFitHeight(425);
-            cardImage.setFitWidth(240);
+            cardImage.setFitHeight(cardImage.getFitHeight() / 1.4);
+            cardImage.setFitWidth(cardImage.getFitWidth() / 1.4);
             cardImage.toBack();
         });
+        cardImage.setOnMouseClicked(event -> {
+            if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
+                notEnoughMoneyAction();
+            }else buyCard(cardData);
+        });
+    }
+
+    private void notEnoughMoneyAction() {
+        userMoney.setTextFill(Color.RED);
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        userMoney.setTextFill(Color.WHITE);
+                    }
+                },
+                1000
+        );
+    }
+
+    private void buyCard(CardData cardData) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete "  + " ?", ButtonType.YES, ButtonType.NO);
+        alert.setContentText("Do you really want to buy " + cardData.getCardName() + "?");
+        ImageView imageView = new ImageView();
+        imageView.setImage(cardData.getCardImage());
+        alert.setGraphic(new ImageView());
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            shopController.buyACard(cardData);
+            System.out.println("you bought the card :)");
+        }
     }
 
     public void printMessage(String message) {
@@ -121,11 +169,4 @@ public class ShopScene extends Scene {
         }
     }
 
-    private void setOnBack(AnchorPane anchorPane, int index) {
-        try {
-            anchorPane.getChildren().get(index).toBack();
-        }catch (Exception e) {
-
-        }
-    }
 }

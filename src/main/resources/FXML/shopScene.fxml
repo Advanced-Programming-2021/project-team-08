@@ -24,5 +24,9 @@
          <font>
             <Font size="20.0" />
          </font></TextField>
+      <Pane layoutX="50.0" layoutY="10.0" prefHeight="128.0" prefWidth="128.0" styleClass="coin" />
+      <Label fx:id="cardPrice" layoutX="200" layoutY="50" prefHeight="70" prefWidth="200" styleClass="number" text="0"/>
+      <Pane layoutX="1270.0" layoutY="10.0" prefHeight="128.0" prefWidth="128.0" styleClass="coin" />
+      <Label fx:id="userMoney" layoutX="1400" layoutY="50" prefHeight="70" prefWidth="200" styleClass="number" text="10000"/>
    </children>
 </AnchorPane>

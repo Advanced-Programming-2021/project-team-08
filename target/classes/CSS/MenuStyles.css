@@ -41,3 +41,12 @@
     -fx-background-image: url("../asset/shopMenu/classic_shadowrealm.jpg");
 }
 
+.coin {
+    -fx-background-image: url("../asset/shopMenu/ItemA0002.dds.png");
+}
+
+.number {
+    -fx-text-fill: white;
+    -fx-font-size: 40.0 px;
+    -fx-font-weight: bold;
+}
