@@ -2,6 +2,7 @@ package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.cards.data.ReadMonsterCardsData;
@@ -30,6 +31,10 @@ public class ApplicationManger extends Application {
         }
     }};
 
+    public static Stage getMainStage() {
+        return mainStage;
+    }
+
     public void run(String[] args) {
         //goToScene(SceneName.REGISTER_MENU, false);
         launch(args);
@@ -41,7 +46,8 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        goToScene1(SceneName.PROFILE_MENU, false);
+        goToScene("gamePlayScene.fxml");
+        //goToScene1(SceneName.PROFILE_MENU, false);
     }
 
 
@@ -90,6 +96,21 @@ public class ApplicationManger extends Application {
             FXMLLoader loader = new FXMLLoader(fxmlAddresses.get(sceneName));
             AnchorPane root = loader.load();
             javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            //scene.setCamera(new PerspectiveCamera());
+            mainStage.setScene(scene);
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void goToScene(String url) {
+        String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
+        try {
+            FXMLLoader loader = new FXMLLoader(new URL(rootPath + url));
+            AnchorPane root = loader.load();
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            scene.setCamera(new PerspectiveCamera());
             mainStage.setScene(scene);
             mainStage.show();
         } catch (IOException e) {

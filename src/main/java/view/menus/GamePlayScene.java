@@ -1,6 +1,9 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.GamePlaySceneController;
+import javafx.fxml.FXML;
+import javafx.scene.PerspectiveCamera;
 import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
@@ -24,6 +27,11 @@ public class GamePlayScene extends Scene {
 
     public GamePlayScene() {
         sceneController = new GamePlaySceneController(this);
+    }
+
+    @FXML
+    public void initialize(){
+        System.out.println("hello");
     }
 
     @Override
