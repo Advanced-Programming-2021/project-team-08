@@ -1,6 +1,8 @@
 package controller.gameplay;
 
+import controller.ApplicationManger;
 import controller.GamePlaySceneController;
+import javafx.scene.layout.AnchorPane;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
@@ -39,6 +41,11 @@ public class GameManager {
         put("hand", CommandFieldType.INT);
     }};
 
+    private static GameManager instance;
+    public static GameManager getInstance() {
+        return instance;
+    }
+
     private Player player1, player2;
     private int turn, currentPlayerTurn;
     private Phase currentPhase;
@@ -65,21 +72,25 @@ public class GameManager {
     private AI_Player ai;
 
     public GameManager(boolean isPlayer, UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
+        instance = this;
+        this.scene = scene;
+        this.sceneController = gamePlaySceneController;
+
         isAI = !isPlayer;
         if (isAI) {
             ai = new AI_Player(this);
-            gameBoard = new GameBoard(user1.getActiveDeck(), ai.getAIUserData().getActiveDeck(), this);
+            gameBoard = new GameBoard(user1.getActiveDeck(), ai.getAIUserData().getActiveDeck(), this, scene.board);
+
             this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
             this.player2 = new Player(ai.getAIUserData(), gameBoard.getPlayer2Board(), this);
             ai.setup(player2, player1);
         } else {
-            gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
+            gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this, scene.board);
+
             this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
             this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
         }
 
-        this.scene = scene;
-        this.sceneController = gamePlaySceneController;
         Effect.setGameManager(this);
 
         firstSetup();

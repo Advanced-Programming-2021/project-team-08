@@ -1,5 +1,8 @@
 package model.cards;
 
+import controller.gameplay.GameManager;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
@@ -23,6 +26,9 @@ public abstract class Card {
 
     protected EventNoParam onDestroy = new EventNoParam();
 
+    private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
+
+    private ImageView shape;
 
     public static Card getCardByCardData(CardData data) {
         Card card = null;
@@ -84,6 +90,9 @@ public abstract class Card {
         for (Effect effect : cardData.getEffects()) {
             effect.setCard(this);
         }
+        shape = new ImageView(cardBackImage);
+        shape.setFitWidth(80);
+        shape.setFitHeight(120);
     }
 
     public Player getCardOwner() {
@@ -101,6 +110,10 @@ public abstract class Card {
 
     public CardType getCardType() {
         return cardType;
+    }
+
+    public ImageView getShape() {
+        return shape;
     }
 
     public void setup(Player owner) {

@@ -1,5 +1,6 @@
 package model.gameplay;
 
+import javafx.scene.image.ImageView;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -16,6 +17,8 @@ public class CardSlot {
     private ArrayList<Card> cards = new ArrayList<>();
     private boolean isSingular;
 
+    private ImageView slotView;
+
     public CardSlot(ZoneType zoneType) {
         this.zoneType = zoneType;
         switch (zoneType) {
@@ -31,14 +34,13 @@ public class CardSlot {
         }
     }
 
-    /*public static void moveACard(CardSlot from, CardSlot to){
-        try {
-            to.setCard(from.getCard());
-            from.removeCard();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+    public static void moveCard(CardSlot from, CardSlot to){
+
+    }
+
+    public void setSlotView(ImageView slotView) {
+        this.slotView = slotView;
+    }
 
     public ZoneType getZoneType() {
         return zoneType;
@@ -89,6 +91,10 @@ public class CardSlot {
     public void appendCard(Card card) {
         cards.add(card);
         card.setCardSlot(this);
+        System.out.println(slotView.getX() + "," + slotView.getLayoutX() + "," + slotView.getTranslateX());
+        card.getShape().setTranslateX(slotView.getLayoutX() + 8);
+        card.getShape().setTranslateY(slotView.getLayoutY() + 5);
+        card.getShape().setTranslateZ(cards.size()/4);
     }
 
     public Card drawTopCard() throws Exception {

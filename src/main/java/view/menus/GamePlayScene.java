@@ -1,9 +1,13 @@
 package view.menus;
 
 import controller.GamePlaySceneController;
+import controller.User;
+import controller.gameplay.GameManager;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
@@ -20,6 +24,8 @@ public class GamePlayScene extends Scene {
     public Label player2Nickname_T;
     public Label player1LP_T;
     public Label player2LP_T;
+    public AnchorPane board;
+    public AnchorPane root;
 
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
@@ -34,7 +40,17 @@ public class GamePlayScene extends Scene {
     @FXML
     public void initialize(){
         sceneController = new GamePlaySceneController(this);
-        firstSetupUI();
+        //firstSetupUI();
+
+        try {
+            new GameManager(true, User.getUserByUsername("Abolfazl").getUserData(), User.getUserByUsername("Ali").getUserData(), this, sceneController);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public GamePlayScene() {
+        //sceneController = new GamePlaySceneController(this);
     }
 
     private void firstSetupUI(){

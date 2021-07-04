@@ -1,5 +1,9 @@
 package model.gameplay;
 
+import controller.ApplicationManger;
+import controller.gameplay.GameManager;
+import javafx.scene.Group;
+import javafx.scene.image.ImageView;
 import model.Deck;
 import model.cards.Card;
 import model.cards.data.CardData;
@@ -7,6 +11,7 @@ import model.enums.CardType;
 import model.enums.MonsterAttribute;
 import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
+import view.menus.GamePlayScene;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,11 +28,18 @@ public class PlayerBoard {
     }};
     private CardSlot hand = new CardSlot(ZoneType.HAND);
 
-    public PlayerBoard(Deck playerDeck) {
+    private int playerNumber;
+
+    public PlayerBoard(Deck playerDeck, int playerNumber, Group group) {
+        this.playerNumber = playerNumber;
+        setGraphic(group);
+
         ArrayList<CardData> deck = playerDeck.getMainDeck();
         Collections.shuffle(deck);
         for (CardData data : deck) {
-            deckZone.appendCard(Card.createCardByCardData(data));
+            Card c = Card.createCardByCardData(data);
+            group.getChildren().add(c.getShape());
+            deckZone.appendCard(c);
         }
     }
 
@@ -163,5 +175,11 @@ public class PlayerBoard {
             }
         }
         return null;
+    }
+
+    public void setGraphic(Group group) {
+        deckZone.setSlotView((ImageView) group.lookup("#deck" + playerNumber));
+        hand.setSlotView((ImageView) group.lookup("#Field" + playerNumber));
+
     }
 }

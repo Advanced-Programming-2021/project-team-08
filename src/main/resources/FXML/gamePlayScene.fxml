@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
+<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
    <children>
       <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,158 +29,176 @@
             <Image url="@../../../../../Screenshot%202021-07-03%20183219.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
+      <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
          <children>
-            <GridPane alignment="CENTER" layoutX="520.0" layoutY="470.0" prefHeight="310.0" prefWidth="560.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <Group fx:id="player1Board" layoutX="390.0" layoutY="450.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <GridPane fx:id="mainZone1" alignment="CENTER" layoutX="130.0" layoutY="20.0" prefHeight="310.0" prefWidth="560.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="Field1" fitHeight="130.0" fitWidth="130.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
+                        <Image url="@../asset/gameplay/Field-1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="GY1" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
+                        <Image url="@../asset/gameplay/GY-1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <ImageView fx:id="deck1" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asset/gameplay/default-1.png" />
                      </image>
                   </ImageView>
                </children>
-            </GridPane>
-            <GridPane alignment="CENTER" layoutX="522.0" layoutY="102.0" prefHeight="310.0" prefWidth="560.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            </Group>
+            <Group fx:id="player2Board" layoutX="390.0" layoutY="102.0" rotate="180.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <GridPane fx:id="mainZone2" alignment="CENTER" layoutX="132.0" prefHeight="310.0" prefWidth="560.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="Field2" fitHeight="130.0" fitWidth="130.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
+                        <Image url="@../asset/gameplay/Field-2.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="GY2" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
+                        <Image url="@../asset/gameplay/GY-2.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../asset/gameplay/default-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <ImageView fx:id="deck2" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asset/gameplay/default-2.png" />
                      </image>
                   </ImageView>
                </children>
-            </GridPane>
-            <ImageView fx:id="Field1" fitHeight="150.0" fitWidth="200.0" layoutX="390.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/gameplay/Field-1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="Field2" fitHeight="150.0" fitWidth="200.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/gameplay/Field-2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="GY1" fitHeight="150.0" fitWidth="200.0" layoutX="1100.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/gameplay/GY-1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="GY2" fitHeight="150.0" fitWidth="200.0" layoutX="390.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/gameplay/GY-2.png" />
-               </image>
-            </ImageView>
+            </Group>
          </children>
          <rotationAxis>
             <Point3D x="1.0" />

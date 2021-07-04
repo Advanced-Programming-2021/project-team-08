@@ -1,5 +1,6 @@
 package controller;
 
+import controller.gameplay.GameManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.PerspectiveCamera;
@@ -46,8 +47,8 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        goToScene("gamePlayScene.fxml");
-        //goToScene1(SceneName.PROFILE_MENU, false);
+        //goToScene(SceneName.REGISTER_MENU, false);
+        ApplicationManger.goToScene("gamePlayScene.fxml");
     }
 
 

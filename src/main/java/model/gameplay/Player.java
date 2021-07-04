@@ -1,6 +1,8 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
@@ -37,7 +39,7 @@ public class Player {
 
         for (int i = 0; i < 5; i++) {
             try {
-                playerBoard.getHand().appendCard(playerBoard.drawCardFromDeck());
+                drawCard();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -92,8 +94,25 @@ public class Player {
 
     public void drawCard() {
         try {
+
             Card c = playerBoard.drawCardFromDeck();
             playerBoard.getHand().appendCard(c);
+
+            /*//Creating Translate Transition
+            TranslateTransition translateTransition = new TranslateTransition();
+
+            //Setting the duration of the transition
+            translateTransition.setDuration(Duration.millis(1000));
+
+            //Setting the node for the transition
+            translateTransition.setNode(c.getShape());
+
+            //Setting the value of the transition along the x axis.
+            translateTransition.setByX(300);
+
+            //Playing the animation
+            translateTransition.play();*/
+
             System.out.println("new card added to the hand: " + c.getCardData().getCardName());
         } catch (Exception e) {
             gameManager.finishGame(gameManager.getCurrentPlayerTurn() == 1 ? 2 : 1);
