@@ -40,6 +40,7 @@ public class ShopController {
     @FXML
     void initialize() {
         updateUserMoney();
+        setSearchedImage(null);
     }
 
     public void buyCard(String cardName) {

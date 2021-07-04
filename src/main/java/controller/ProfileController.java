@@ -15,6 +15,7 @@ public class ProfileController {
 
     public ProfileController(ProfileScene profileScene) {
         this.activeUser = ApplicationManger.getLoggedInUser();
+        if (activeUser == null) activeUser = new User("test", "test", "test");
         this.profileScene = profileScene;
     }
 
@@ -31,6 +32,26 @@ public class ProfileController {
             }
         } catch (ParseCommandException e) {
             System.out.println("Invalid command");
+        }
+    }
+
+    public void changeNickname1(String newNickname) {
+        if (User.doesNicknameExists(newNickname)) {
+            profileScene.setNicknameChangeMessage("this nickname is already used.", true);
+        }else {
+            activeUser.getUserData().setNickname(newNickname);
+            profileScene.setNicknameChangeMessage("nickname changed successfully", false);
+        }
+    }
+
+    public void changePassword1(String oldPass, String newPass) {
+        if (!oldPass.equals(activeUser.getUserData().getPassword())) {
+            profileScene.setPasswordChangeMessage("old message is wrong", true);
+        }else if (newPass.equals(activeUser.getUserData().getPassword())) {
+            profileScene.setPasswordChangeMessage("please enter a new password", true);
+        }else {
+            activeUser.getUserData().setPassword(newPass);
+            profileScene.setPasswordChangeMessage("password changed successfully", false);
         }
     }
 

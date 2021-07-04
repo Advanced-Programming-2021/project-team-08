@@ -1,0 +1,54 @@
+.background {
+    -fx-background-image: url("../asset/profileMenu/backgroundImge.jpg");
+}
+
+.menu-item {
+    -fx-pref-height: 100;
+    -fx-pref-width: 500;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+    -fx-font: 30px arial ;
+}
+
+.menu-item:hover {
+    -fx-background-color: rgb(22, 15, 146);
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-pref-height: 50;
+    -fx-pref-width: 200;
+    -fx-text-fill: black;
+    -fx-font: 20px Arial;
+}
+
+.change-label {
+    -fx-pref-height: 50;
+    -fx-pref-width: 200;
+    -fx-text-fill: white;
+    -fx-font: 28px Arial;
+}
+
+.message-label {
+    -fx-pref-height: 50;
+    -fx-pref-width: 370;
+    -fx-font: 28px Arial;
+}
+
+.change-button {
+    -fx-pref-width: 100;
+    -fx-pref-height: 50;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+    -fx-font: 20px arial ;
+}
+
+.change-button:hover {
+    -fx-background-color: rgb(22, 15, 146);
+    -fx-cursor: hand;
+}
+
+.change-menu {
+    -fx-background-color: rgb(15, 126, 146);
+}

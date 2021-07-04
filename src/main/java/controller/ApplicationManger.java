@@ -24,6 +24,7 @@ public class ApplicationManger extends Application {
             put(SceneName.FIRST_SCENE, new URL(rootPath + "firstScene.fxml"));
             put(SceneName.REGISTER_MENU, new URL(rootPath + "firstScene.fxml"));
             put(SceneName.SHOP_MENU, new URL(rootPath + "shopScene.fxml"));
+            put(SceneName.PROFILE_MENU, new URL(rootPath + "profileScene.fxml"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -40,7 +41,7 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        goToScene1(SceneName.SHOP_MENU, false);
+        goToScene1(SceneName.PROFILE_MENU, false);
     }
 
 

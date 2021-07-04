@@ -2,6 +2,11 @@ package view.menus;
 
 import controller.ApplicationManger;
 import controller.ProfileController;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import model.enums.ProfileMessages;
 
 import java.util.regex.Matcher;
@@ -9,6 +14,13 @@ import java.util.regex.Pattern;
 
 public class ProfileScene extends Scene {
     private final ProfileController profileController;
+    public Label nicknameChangeMessage;
+    public Label passwordChangeMessage;
+    public Pane changeNicknamePane;
+    public Pane changePasswordPane;
+    public TextField oldPassField;
+    public TextField newPassField;
+    public TextField newNicknameField;
 
     public ProfileScene() {
         profileController = new ProfileController(this);
@@ -60,4 +72,44 @@ public class ProfileScene extends Scene {
         }
     }
 
+    public void setNicknameChangeMenu(ActionEvent actionEvent) {
+        changeNicknamePane.setVisible(!changeNicknamePane.isVisible());
+        resetNicknameChangeMenu();
+    }
+
+    public void setPasswordChangeMenu(ActionEvent actionEvent) {
+        changePasswordPane.setVisible(!changePasswordPane.isVisible());
+        resetPasswordChangeMenu();
+    }
+
+    public void changeNickname(ActionEvent actionEvent) {
+        profileController.changeNickname1(newNicknameField.getText());
+    }
+
+    public void changePassword(ActionEvent actionEvent) {
+        profileController.changePassword1(oldPassField.getText(), newPassField.getText());
+    }
+
+    public void setNicknameChangeMessage (String message, boolean hasError) {
+        nicknameChangeMessage.setText(message);
+        if (hasError) nicknameChangeMessage.setTextFill(Color.RED);
+        else nicknameChangeMessage.setTextFill(Color.GREEN);
+    }
+
+    public void setPasswordChangeMessage (String message, boolean hasError) {
+        passwordChangeMessage.setText(message);
+        if (hasError) passwordChangeMessage.setTextFill(Color.RED);
+        else passwordChangeMessage.setTextFill(Color.GREEN);
+    }
+
+    private void resetPasswordChangeMenu() {
+        oldPassField.setText("");
+        newPassField.setText("");
+        passwordChangeMessage.setText("");
+    }
+
+    private void resetNicknameChangeMenu() {
+        nicknameChangeMessage.setText("");
+        newNicknameField.setText("");
+    }
 }
