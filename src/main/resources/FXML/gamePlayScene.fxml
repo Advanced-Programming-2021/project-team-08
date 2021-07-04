@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
    <children>
       <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/gameplay/board.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
+      <ImageView fitHeight="900.0" fitWidth="1600.0" visible="false">
+         <image>
+            <Image url="@../../../../../Screenshot%202021-07-03%20183219.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
          <children>
             <GridPane alignment="CENTER" layoutX="520.0" layoutY="470.0" prefHeight="310.0" prefWidth="560.0">
               <columnConstraints>
@@ -172,5 +186,123 @@
             <Point3D x="1.0" />
          </rotationAxis>
       </AnchorPane>
+      <Group layoutX="80.0" layoutY="640.0">
+         <children>
+            <Pane layoutX="80.0">
+               <children>
+                  <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/avatar-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Avatar" fitHeight="120.0" fitWidth="120.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane layoutY="135.0" prefHeight="38.0" prefWidth="290.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#1f93ffc9" height="38.0" stroke="#4208e1" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <ImageView fitHeight="32.0" fitWidth="284.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/LP_FILL.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1LP_T" alignment="CENTER" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="LP      8000" textAlignment="CENTER" textFill="#efff00">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="175.0" prefHeight="38.0" prefWidth="370.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" height="38.0" stroke="#4208e1" strokeType="INSIDE" strokeWidth="3.0" width="370.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.014035088010132313" green="0.18000000715255737" blue="0.31578946113586426" opacity="0.7900000214576721" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.31929823756217957" green="0.5489473938941956" blue="0.7368420958518982" opacity="0.5600000023841858" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <Label fx:id="player1Nickname_T" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="nickname" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Group>
+      <Group layoutX="1150.0" layoutY="51.0">
+         <children>
+            <Pane layoutX="160.0" layoutY="80.0">
+               <children>
+                  <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/avatar-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player2Avatar" fitHeight="120.0" fitWidth="120.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane layoutX="80.0" layoutY="40.0" prefHeight="38.0" prefWidth="290.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ff2121c9" height="38.0" stroke="#b40000" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <ImageView fitHeight="32.0" fitWidth="284.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/LP_FILL.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2LP_T" alignment="CENTER" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="LP      8000" textAlignment="CENTER" textFill="#efff00">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="38.0" prefWidth="370.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" height="38.0" stroke="#b40000" strokeType="INSIDE" strokeWidth="3.0" width="370.0">
+                     <fill>
+                        <LinearGradient endX="0.7824427917713427" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9157894849777222" green="0.2849122881889343" blue="0.2849122881889343" opacity="0.25999999046325684" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.6299999952316284" green="0.03779999911785126" blue="0.03779999911785126" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <Label fx:id="player2Nickname_T" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="370.0" style="-fx-font-family: &quot;heebeo&quot;;" text="nickname" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Group>
    </children>
 </AnchorPane>

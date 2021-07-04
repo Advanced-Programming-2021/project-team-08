@@ -35,7 +35,7 @@ public class Player {
             card.setup(this);
         }
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 playerBoard.getHand().appendCard(playerBoard.drawCardFromDeck());
             } catch (Exception e) {
@@ -74,6 +74,7 @@ public class Player {
 
     public void decreaseLP(int amount) {
         LP -= amount;
+        gameManager.getScene().updateUI();
         if (LP <= 0) {
             LP = 0;
             gameManager.checkGameOver();
@@ -82,6 +83,7 @@ public class Player {
 
     public void increaseLP(int amount) {
         LP += amount;
+        gameManager.getScene().updateUI();
     }
 
     public PlayerBoard getPlayerBoard() {

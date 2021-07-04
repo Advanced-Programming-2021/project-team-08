@@ -140,6 +140,14 @@ public class GameManager {
         return onWantAttack;
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
     public void firstSetup() {
         turn = 1;
         currentPlayerTurn = 1;
@@ -196,12 +204,10 @@ public class GameManager {
 
     private void startDrawPhase() {
         currentPhase = Phase.DRAW;
-        if (turn > 2) {
-            if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
-                getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
-            } else {
-                getCurrentTurnPlayer().drawCard();
-            }
+        if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
+            getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
+        } else {
+            getCurrentTurnPlayer().drawCard();
         }
         scene.showPhase("Draw");
         onCardActionDone();

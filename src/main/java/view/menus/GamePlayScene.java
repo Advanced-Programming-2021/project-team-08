@@ -1,9 +1,9 @@
 package view.menus;
 
-import controller.ApplicationManger;
 import controller.GamePlaySceneController;
 import javafx.fxml.FXML;
-import javafx.scene.PerspectiveCamera;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
@@ -14,24 +14,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GamePlayScene extends Scene {
+    public ImageView player1Avatar;
+    public ImageView player2Avatar;
+    public Label player1Nickname_T;
+    public Label player2Nickname_T;
+    public Label player1LP_T;
+    public Label player2LP_T;
+
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
 
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
     }
-
     public GamePlaySceneController getSceneController() {
         return sceneController;
     }
 
-    public GamePlayScene() {
-        sceneController = new GamePlaySceneController(this);
-    }
-
     @FXML
     public void initialize(){
-        System.out.println("hello");
+        sceneController = new GamePlaySceneController(this);
+        firstSetupUI();
+    }
+
+    private void firstSetupUI(){
+        player1Nickname_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer1().getUserData().getNickname());
+        player2Nickname_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer2().getUserData().getNickname());
+    }
+
+    public void updateUI(){
+        player1LP_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer1().getLP());
+        player2LP_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer2().getLP());
     }
 
     @Override
@@ -249,7 +262,6 @@ public class GamePlayScene extends Scene {
             return getSelectedMonsterCard(equipEffect, player);
         }
     }
-
 
     public boolean getDestroyingAMonsterCommand() {
         System.out.println("do you want to destroy an opponent monster?");
