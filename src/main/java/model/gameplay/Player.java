@@ -114,7 +114,7 @@ public class Player {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 + 6);
+        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 -154);
         thisCard.setToY(playerBoard.getHand().getSlotView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();

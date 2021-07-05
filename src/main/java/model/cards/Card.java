@@ -1,6 +1,7 @@
 package model.cards;
 
 import controller.gameplay.GameManager;
+import javafx.geometry.Point3D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.cards.data.CardData;
@@ -93,6 +94,7 @@ public abstract class Card {
         shape = new ImageView(cardBackImage);
         shape.setFitWidth(80);
         shape.setFitHeight(120);
+        shape.setScaleX(-1);
 
         shape.setOnMouseEntered(event -> onMouseEnter());
         shape.setOnMouseExited(event -> onMouseExit());
@@ -150,7 +152,7 @@ public abstract class Card {
         switch (cardSlot.getZoneType()){
             case HAND:
                 if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
-                shape.setLayoutY(shape.getLayoutY() - 24);
+                shape.setLayoutY(shape.getLayoutY() - 30);
                 shape.toFront();
                 break;
         }
@@ -160,7 +162,7 @@ public abstract class Card {
         switch (cardSlot.getZoneType()){
             case HAND:
                 if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
-                shape.setLayoutY(shape.getLayoutY() + 24);
+                shape.setLayoutY(shape.getLayoutY() + 30);
                 shape.toBack();
                 break;
         }

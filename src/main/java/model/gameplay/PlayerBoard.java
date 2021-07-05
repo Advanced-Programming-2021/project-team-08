@@ -38,7 +38,7 @@ public class PlayerBoard {
             deckZone.appendCard(c);
             c.getShape().setTranslateX(deckZone.getSlotView().getLayoutX() + 8);
             c.getShape().setTranslateY(deckZone.getSlotView().getLayoutY() + 5);
-            c.getShape().setTranslateZ(-(double) deckZone.getAllCards().size() / 4);
+            c.getShape().setTranslateZ(-(double) deckZone.getAllCards().size() / 3);
         }
     }
 
