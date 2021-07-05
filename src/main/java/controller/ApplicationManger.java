@@ -49,7 +49,8 @@ public class ApplicationManger extends Application {
         primaryStage.setTitle("Yu-Gi-Oh");
 
         loggedInUser = User.getUserByUsername("Abolfazl");
-        goToScene("duelScene.fxml");
+        //goToScene("duelScene.fxml");
+        goToScene("mainScene.fxml");
         //goToScene1(SceneName.PROFILE_MENU, false);
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@../CSS/MainMenuStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.MainScene">
+   <children>
+      <Button layoutX="400" layoutY="100" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
+      <Button layoutX="400" layoutY="220" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
+      <Button layoutX="400" layoutY="340" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
+      <Button layoutX="400" layoutY="460" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
+      <ImageView  fx:id="imageView" >
+
+      </ImageView>
+
+   </children>
+</AnchorPane>

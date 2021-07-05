@@ -9,6 +9,7 @@ public class DuelController {
 
     public DuelController() {
         activeUser = ApplicationManger.getLoggedInUser();
+        if (activeUser == null) ApplicationManger.setLoggedInUser(new User("text", "test", "test"));
         if (activeUser == null) activeUser = new User("test", "test", "test");
     }
 

@@ -1,0 +1,9 @@
+.background {
+
+}
+
+.menu-item {
+    -fx-background-image: url("../asset/mainMenu/ds_btn_active.png");
+    -fx-pref-height: 100;
+    -fx-pref-width: 630;
+}
