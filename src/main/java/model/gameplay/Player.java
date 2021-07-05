@@ -1,11 +1,13 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import javafx.animation.*;
-import javafx.event.ActionEvent;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Point3D;
 import javafx.util.Duration;
 import model.UserData;
+import model.animation.FlipCardAnimation;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -39,13 +41,7 @@ public class Player {
             card.setup(this);
         }
 
-        for (int i = 0; i < 5; i++) {
-            try {
-                drawCard();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        drawCard(5);
     }
 
     public UserData getUserData() {
@@ -94,33 +90,50 @@ public class Player {
         return playerBoard;
     }
 
-    public void drawCard() {
+    public void drawCard(int n) {
+        if (n == 0) return;
+        Card c;
         try {
-
-            Card c = playerBoard.drawCardFromDeck();
-            playerBoard.getHand().appendCard(c);
-
-            TranslateTransition translateTransition = new TranslateTransition();
-            translateTransition.setDuration(Duration.millis(1000));
-            translateTransition.setNode(c.getShape());
-            translateTransition.setByX(500);
-
-            RotateTransition rotateTransition = new RotateTransition();
-            rotateTransition.setDuration(Duration.millis(1000));
-            rotateTransition.setNode(c.getShape());
-            rotateTransition.setAxis(new Point3D(0, 1, 0));
-            rotateTransition.setToAngle(180);
-
-            ParallelTransition parallelTransition = new ParallelTransition();
-            parallelTransition.getChildren().add(translateTransition);
-            parallelTransition.getChildren().add(rotateTransition);
-
-            parallelTransition.play();
-
-            System.out.println("new card added to the hand: " + c.getCardData().getCardName());
+            c = playerBoard.drawCardFromDeck();
         } catch (Exception e) {
             gameManager.finishGame(gameManager.getCurrentPlayerTurn() == 1 ? 2 : 1);
+            return;
         }
+
+        ArrayList<Card> pre = playerBoard.getHand().getAllCards();
+        playerBoard.getHand().appendCard(c);
+
+        for (Card card : pre) {
+            TranslateTransition previousCards = new TranslateTransition();
+            previousCards.setDuration(Duration.millis(400));
+            previousCards.setNode(card.getShape());
+            previousCards.setByX(-30);
+            previousCards.play();
+        }
+
+        TranslateTransition thisCard = new TranslateTransition();
+        thisCard.setDuration(Duration.millis(800));
+        thisCard.setNode(c.getShape());
+        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 30 + 20);
+        thisCard.setToY(playerBoard.getHand().getSlotView().getLayoutY());
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(800));
+        rotateTransition.setNode(c.getShape());
+        rotateTransition.setAxis(new Point3D(1, 0, 0));
+        rotateTransition.setToAngle(45);
+
+        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().add(thisCard);
+        parallelTransition.getChildren().add(rotateTransition);
+        parallelTransition.getChildren().add(flipCardAnimation);
+
+        parallelTransition.play();
+        parallelTransition.setOnFinished(event -> drawCard(n - 1));
+
+        System.out.println("new card added to the hand: " + c.getCardData().getCardName());
     }
 
     public Card getCardFromHand(int number) throws Exception {

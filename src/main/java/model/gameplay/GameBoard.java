@@ -11,8 +11,8 @@ public class GameBoard {
     GameManager gameManager;
 
     public GameBoard(Deck user1Deck, Deck user2Deck, GameManager gameManager, AnchorPane board) {
-        player1Board = new PlayerBoard(user1Deck, 1, (Group) board.lookup("#player1Board"));
-        player2Board = new PlayerBoard(user2Deck, 2, (Group) board.lookup("#player2Board"));
+        player1Board = new PlayerBoard(user1Deck, 1, (AnchorPane) board.lookup("#player1Board"));
+        player2Board = new PlayerBoard(user2Deck, 2, (AnchorPane) board.lookup("#player2Board"));
         this.gameManager = gameManager;
     }
 

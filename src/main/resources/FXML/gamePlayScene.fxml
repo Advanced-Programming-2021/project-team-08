@@ -31,7 +31,7 @@
       </ImageView>
       <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
          <children>
-            <Group fx:id="player1Board" layoutX="390.0" layoutY="450.0">
+            <AnchorPane fx:id="player1Board" layoutX="390.0" layoutY="450.0" prefWidth="790.0">
                <children>
                   <GridPane fx:id="mainZone1" alignment="CENTER" layoutX="130.0" layoutY="20.0" prefHeight="310.0" prefWidth="560.0">
                     <columnConstraints>
@@ -113,9 +113,10 @@
                         <Image url="@../asset/gameplay/default-1.png" />
                      </image>
                   </ImageView>
+                  <Group fx:id="hand1" layoutX="400.0" layoutY="370.0" />
                </children>
-            </Group>
-            <Group fx:id="player2Board" layoutX="390.0" layoutY="102.0" rotate="180.0">
+            </AnchorPane>
+            <AnchorPane fx:id="player2Board" layoutX="400.0" layoutY="50.0" prefWidth="790.0" rotate="180.0">
                <children>
                   <GridPane fx:id="mainZone2" alignment="CENTER" layoutX="132.0" prefHeight="310.0" prefWidth="560.0">
                      <columnConstraints>
@@ -197,8 +198,9 @@
                         <Image url="@../asset/gameplay/default-2.png" />
                      </image>
                   </ImageView>
+                  <Group fx:id="hand2" layoutX="400.0" layoutY="380.0" />
                </children>
-            </Group>
+            </AnchorPane>
          </children>
          <rotationAxis>
             <Point3D x="1.0" />

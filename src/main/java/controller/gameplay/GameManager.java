@@ -162,7 +162,6 @@ public class GameManager {
     public void firstSetup() {
         turn = 1;
         currentPlayerTurn = 1;
-        startDrawPhase();
     }
 
     public void goToNextPhase() {
@@ -218,7 +217,7 @@ public class GameManager {
         if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
             getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
         } else {
-            getCurrentTurnPlayer().drawCard();
+            getCurrentTurnPlayer().drawCard(1);
         }
         scene.showPhase("Draw");
         onCardActionDone();

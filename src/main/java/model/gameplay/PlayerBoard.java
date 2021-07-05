@@ -1,9 +1,6 @@
 package model.gameplay;
 
-import controller.ApplicationManger;
-import controller.gameplay.GameManager;
-import javafx.scene.Group;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.cards.Card;
 import model.cards.data.CardData;
@@ -11,7 +8,6 @@ import model.enums.CardType;
 import model.enums.MonsterAttribute;
 import model.enums.SpellTrapProperty;
 import model.enums.ZoneType;
-import view.menus.GamePlayScene;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +26,7 @@ public class PlayerBoard {
 
     private int playerNumber;
 
-    public PlayerBoard(Deck playerDeck, int playerNumber, Group group) {
+    public PlayerBoard(Deck playerDeck, int playerNumber, AnchorPane group) {
         this.playerNumber = playerNumber;
         setGraphic(group);
 
@@ -40,6 +36,9 @@ public class PlayerBoard {
             Card c = Card.createCardByCardData(data);
             group.getChildren().add(c.getShape());
             deckZone.appendCard(c);
+            c.getShape().setTranslateX(deckZone.getSlotView().getLayoutX() + 8);
+            c.getShape().setTranslateY(deckZone.getSlotView().getLayoutY() + 5);
+            c.getShape().setTranslateZ(-(double) deckZone.getAllCards().size() / 4);
         }
     }
 
@@ -177,9 +176,9 @@ public class PlayerBoard {
         return null;
     }
 
-    public void setGraphic(Group group) {
-        deckZone.setSlotView((ImageView) group.lookup("#deck" + playerNumber));
-        hand.setSlotView((ImageView) group.lookup("#Field" + playerNumber));
+    public void setGraphic(AnchorPane group) {
+        deckZone.setSlotView(group.lookup("#deck" + playerNumber));
+        hand.setSlotView(group.lookup("#hand" + playerNumber));
 
     }
 }
