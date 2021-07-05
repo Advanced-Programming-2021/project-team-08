@@ -1,0 +1,26 @@
+.main-pane {
+    -fx-background-image: url("../asset/duel/685927.jpg");
+}
+
+.check-box {
+
+}
+
+.duel-message {
+    -fx-font: 20px default;
+    -fx-text-fill: white;
+    -fx-pref-width: 300;
+    -fx-pref-height: 70;
+}
+
+.start-button {
+
+}
+
+.text-field {
+
+}
+
+.single-multi-button {
+
+}

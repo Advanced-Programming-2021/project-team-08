@@ -103,7 +103,7 @@ public class GamePlaySceneController {
         }
     }
 
-    private void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
+    public void startDuel(int rounds, boolean isPlayer, UserData secondPlayer) {
         currentDuelData = new DuelData(rounds, isPlayer, ApplicationManger.getLoggedInUser().getUserData(), secondPlayer);
         currentRound = 1;
         System.out.println("Round " + currentRound);

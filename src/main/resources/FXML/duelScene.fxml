@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="main-pane" stylesheets="@../CSS/DuelStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.DuelScene">
+   <children>
+      
+      <Pane fx:id="duelPane" layoutX="100" layoutY="100" prefHeight="600.0" prefWidth="1000.0" visible="false">
+         <children>
+            <Button layoutX="300" layoutY="100" mnemonicParsing="false" onAction="#startDuel" styleClass="start-button" text="DUEL" />
+            <Label fx:id="duelMessage" layoutX="200" layoutY="200" styleClass="duel-message" text="Label" />
+            <TextField fx:id="playerName" layoutX="1" layoutY="1" styleClass="text-field" />
+            <CheckBox fx:id="threeRound" layoutX="100" layoutY="100" mnemonicParsing="false" onAction="#threeRoundsAction" styleClass="check-box" text="3 rounds" />
+            <CheckBox fx:id="oneRound" layoutX="1" layoutY="100" mnemonicParsing="false" onAction="#oneRoundAction" styleClass="check-box" text="1 round" />
+         </children></Pane>
+      <Button layoutX="1200" layoutY="100" mnemonicParsing="false" text="singlePlayer" styleClass="single-multi-button" onAction="#singlePlayMenu"/>
+      <Button layoutX="1200" layoutY="400" mnemonicParsing="false" text="multiplayer" styleClass="single-multi-button" onAction="#multiPlayMenu"/>
+
+
+   </children>
+</AnchorPane>
