@@ -23,7 +23,9 @@ public class ApplicationManger extends Application {
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         try {
             put(SceneName.FIRST_SCENE, new URL(rootPath + "firstScene.fxml"));
-            put(SceneName.REGISTER_MENU, new URL(rootPath + "firstScene.fxml"));
+            put(SceneName.REGISTER_MENU, new URL(rootPath + "registerScene.fxml"));
+            put(SceneName.LOGIN_MENU, new URL(rootPath + "loginScene.fxml"));
+            put(SceneName.MAIN_MENU, new URL(rootPath + "mainScene.fxml"));
             put(SceneName.SHOP_MENU, new URL(rootPath + "shopScene.fxml"));
             put(SceneName.PROFILE_MENU, new URL(rootPath + "profileScene.fxml"));
             put(SceneName.DUEL_SCENE, new URL(rootPath + "singleDuelScene.fxml"));
@@ -47,10 +49,8 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-
-        loggedInUser = User.getUserByUsername("Abolfazl");
         //goToScene("duelScene.fxml");
-        goToScene("mainScene.fxml");
+        goToScene("firstScene.fxml");
         //goToScene1(SceneName.PROFILE_MENU, false);
     }
 

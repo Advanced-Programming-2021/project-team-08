@@ -2,6 +2,9 @@ package controller;
 
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import model.Command;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
@@ -12,6 +15,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class RegisterController {
+    public TextField usernameOfSignup;
+    public TextField passwordOfSignup;
+    public TextField nicknameOfSignup;
+    public TextField usernameOfLogin;
+    public TextField passwordOfLogin;
+    public Label errorOfSignup;
+    public Label successOfSignup;
+    public Label errorOfLogin;
+    public Label successOfLogin;
 
 
     public static int registerUser(String userInput) {
@@ -38,7 +50,6 @@ public class RegisterController {
         return 1;
     }
 
-
     public static int loginUser(String userInput, boolean isTest) {
         HashMap<String, CommandFieldType> fieldsOfLoginUser = new HashMap<>();
         fieldsOfLoginUser.put("username", CommandFieldType.STRING);
@@ -64,23 +75,52 @@ public class RegisterController {
     }
 
     public void backToFirstScene(ActionEvent actionEvent) {
-    }
-
-    public void usernameOfSignup(ActionEvent actionEvent) {
-    }
-
-    public void passwordOfSignup(ActionEvent actionEvent) {
+        ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
     }
 
     public void nextOfSignup(ActionEvent actionEvent) {
-    }
-
-    public void usernameOfLogin(ActionEvent actionEvent) {
-    }
-
-    public void passwordOfLogin(ActionEvent actionEvent) {
+        try {
+            if (User.doesUsernameExists(usernameOfSignup.getText())) {
+                errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
+                errorOfSignup.setTextFill(Color.RED);
+            }
+            else if (User.doesNicknameExists(nicknameOfSignup.getText())) {
+                errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
+                errorOfSignup.setTextFill(Color.RED);
+            }
+            else {
+                User user = new User(usernameOfSignup.getText(), nicknameOfSignup.getText(), passwordOfSignup.getText());
+                successOfSignup.setText("user created successfully!");
+                successOfSignup.setTextFill(Color.GREEN);
+                FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
+                userFile.write(new Gson().toJson(user));
+                userFile.close();
+            }
+        } catch (IOException e) {
+            errorOfSignup.setText("Invalid command");
+            errorOfSignup.setTextFill(Color.RED);
+        }
     }
 
     public void nextOfLogin(ActionEvent actionEvent) {
+        try {
+            if (!User.doesUsernameExists(usernameOfLogin.getText())) {
+                errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
+                errorOfLogin.setTextFill(Color.RED);
+            }
+            else {
+                if (User.loginUser(usernameOfLogin.getText(), passwordOfLogin.getText())) {
+                     ApplicationManger.goToScene1(SceneName.MAIN_MENU,false);
+//                    if (!isTest) ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
+                } else {
+                    errorOfLogin.setText("username and password didn't match");
+                    errorOfLogin.setTextFill(Color.RED);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorOfLogin.setText("Invalid command");
+            errorOfLogin.setTextFill(Color.RED);
+        }
     }
 }

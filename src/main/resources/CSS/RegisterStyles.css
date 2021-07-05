@@ -1,0 +1,10 @@
+
+.registerBackground {
+    -fx-background-image: url("../asset/register/classic_shadowrealm.jpg");
+
+}
+
+.registerButton {
+    -fx-background-image: url("../asset/register/GUI_T_ShopButton1LL_3.dds.png");
+
+}
