@@ -93,6 +93,9 @@ public abstract class Card {
         shape = new ImageView(cardBackImage);
         shape.setFitWidth(80);
         shape.setFitHeight(120);
+
+        shape.setOnMouseEntered(event -> onMouseEnter());
+        shape.setOnMouseExited(event -> onMouseExit());
     }
 
     public Player getCardOwner() {
@@ -102,7 +105,6 @@ public abstract class Card {
     public CardStatus getCardStatus() {
         return cardStatus;
     }
-
 
     public CardData getCardData() {
         return cardData;
@@ -142,6 +144,26 @@ public abstract class Card {
         onDestroy.invoke();
         cardSlot.removeCard();
         graveyard.appendCard(this);
+    }
+
+    public void onMouseEnter(){
+        switch (cardSlot.getZoneType()){
+            case HAND:
+                if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
+                shape.setLayoutY(shape.getLayoutY() - 24);
+                shape.toFront();
+                break;
+        }
+    }
+
+    public void onMouseExit(){
+        switch (cardSlot.getZoneType()){
+            case HAND:
+                if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
+                shape.setLayoutY(shape.getLayoutY() + 24);
+                shape.toBack();
+                break;
+        }
     }
 
     @Override

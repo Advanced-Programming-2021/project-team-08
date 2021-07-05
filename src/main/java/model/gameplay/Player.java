@@ -107,14 +107,14 @@ public class Player {
             TranslateTransition previousCards = new TranslateTransition();
             previousCards.setDuration(Duration.millis(400));
             previousCards.setNode(card.getShape());
-            previousCards.setByX(-30);
+            previousCards.setByX(-42);
             previousCards.play();
         }
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 30 + 20);
+        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 + 6);
         thisCard.setToY(playerBoard.getHand().getSlotView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();
