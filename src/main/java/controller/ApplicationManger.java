@@ -47,6 +47,8 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
+
+        loggedInUser = User.getUserByUsername("Abolfazl");
         goToScene("duelScene.fxml");
         //goToScene1(SceneName.PROFILE_MENU, false);
     }

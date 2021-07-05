@@ -1,7 +1,9 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
+import javafx.event.ActionEvent;
+import javafx.geometry.Point3D;
 import javafx.util.Duration;
 import model.UserData;
 import model.cards.Card;
@@ -98,20 +100,22 @@ public class Player {
             Card c = playerBoard.drawCardFromDeck();
             playerBoard.getHand().appendCard(c);
 
-            /*//Creating Translate Transition
             TranslateTransition translateTransition = new TranslateTransition();
-
-            //Setting the duration of the transition
             translateTransition.setDuration(Duration.millis(1000));
-
-            //Setting the node for the transition
             translateTransition.setNode(c.getShape());
+            translateTransition.setByX(500);
 
-            //Setting the value of the transition along the x axis.
-            translateTransition.setByX(300);
+            RotateTransition rotateTransition = new RotateTransition();
+            rotateTransition.setDuration(Duration.millis(1000));
+            rotateTransition.setNode(c.getShape());
+            rotateTransition.setAxis(new Point3D(0, 1, 0));
+            rotateTransition.setToAngle(180);
 
-            //Playing the animation
-            translateTransition.play();*/
+            ParallelTransition parallelTransition = new ParallelTransition();
+            parallelTransition.getChildren().add(translateTransition);
+            parallelTransition.getChildren().add(rotateTransition);
+
+            parallelTransition.play();
 
             System.out.println("new card added to the hand: " + c.getCardData().getCardName());
         } catch (Exception e) {

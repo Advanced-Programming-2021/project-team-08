@@ -6,7 +6,6 @@ import view.menus.GamePlayScene;
 public class DuelController {
 
     private User activeUser;
-    private GamePlaySceneController gamePlaySceneController;
 
     public DuelController() {
         activeUser = ApplicationManger.getLoggedInUser();
@@ -46,11 +45,13 @@ public class DuelController {
                 return secondUser.getUsername() + "'s deck is invalid";
             }
         }
-        gamePlaySceneController = new GamePlaySceneController(new GamePlayScene());
+
         if (isPlayer) {
-            gamePlaySceneController.startDuel(rounds, true, secondUser.getUserData());
+            //gamePlaySceneController.startDuel(rounds, true, secondUser.getUserData());
+            ApplicationManger.goToScene("gameplayScene.fxml");
         } else {
-            gamePlaySceneController.startDuel(rounds, false, null);
+            //gamePlaySceneController.startDuel(rounds, false, null);
+            ApplicationManger.goToScene("gameplayScene.fxml");
         }
         return "";
     }
