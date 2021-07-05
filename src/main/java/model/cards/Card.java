@@ -1,9 +1,13 @@
 package model.cards;
 
+import controller.ApplicationManger;
 import controller.gameplay.GameManager;
-import javafx.geometry.Point3D;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
@@ -98,6 +102,7 @@ public abstract class Card {
 
         shape.setOnMouseEntered(event -> onMouseEnter());
         shape.setOnMouseExited(event -> onMouseExit());
+        shape.setOnMouseClicked(event -> onClick(event));
     }
 
     public Player getCardOwner() {
@@ -148,22 +153,68 @@ public abstract class Card {
         graveyard.appendCard(this);
     }
 
-    public void onMouseEnter(){
-        switch (cardSlot.getZoneType()){
+    public void onMouseEnter() {
+        switch (cardSlot.getZoneType()) {
             case HAND:
-                if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
+                if (GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
                 shape.setLayoutY(shape.getLayoutY() - 30);
                 shape.toFront();
                 break;
         }
     }
 
-    public void onMouseExit(){
-        switch (cardSlot.getZoneType()){
+    public void onMouseExit() {
+        switch (cardSlot.getZoneType()) {
             case HAND:
-                if(GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
+                if (GameManager.getInstance().getCurrentTurnPlayer() != cardOwner) return;
                 shape.setLayoutY(shape.getLayoutY() + 30);
                 shape.toBack();
+                break;
+        }
+    }
+
+    private void onClick(MouseEvent event) {
+        switch (cardSlot.getZoneType()) {
+            case GRAVEYARD:
+                break;
+            case DECK:
+                break;
+            case FIELD:
+                break;
+            case MONSTER:
+                break;
+            case SPELL_AND_TRAP:
+                break;
+            case HAND:
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem menuItem1;
+                MenuItem menuItem2;
+                switch (cardType){
+                    case MONSTER:
+                        menuItem1 = new MenuItem("Summon");
+                        menuItem1.setOnAction(e -> System.out.println("summon"));
+                        menuItem2 = new MenuItem("Set");
+                        menuItem2.setOnAction(e -> System.out.println("set"));
+                        contextMenu.getItems().addAll(menuItem1,menuItem2);
+                        break;
+                    case SPELL:
+                        menuItem1 = new MenuItem("Activate");
+                        menuItem1.setOnAction(e -> System.out.println("activate"));
+                        menuItem2 = new MenuItem("Set");
+                        menuItem2.setOnAction(e -> System.out.println("set"));
+                        contextMenu.getItems().addAll(menuItem1,menuItem2);
+                        break;
+                    case TRAP:
+                        menuItem1 = new MenuItem("Set");
+                        menuItem1.setOnAction(e -> System.out.println("set"));
+                        contextMenu.getItems().addAll(menuItem1);
+                        break;
+                }
+
+                contextMenu.setX(event.getScreenX());
+                contextMenu.setY(event.getScreenY());
+
+                contextMenu.show(ApplicationManger.getMainStage());
                 break;
         }
     }
