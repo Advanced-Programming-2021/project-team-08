@@ -33,7 +33,7 @@ public abstract class Card {
 
     private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
 
-    private ImageView shape;
+    protected ImageView shape;
 
     public static Card getCardByCardData(CardData data) {
         Card card = null;
@@ -192,7 +192,10 @@ public abstract class Card {
                 switch (cardType){
                     case MONSTER:
                         menuItem1 = new MenuItem("Summon");
-                        menuItem1.setOnAction(e -> System.out.println("summon"));
+                        menuItem1.setOnAction(e -> {
+                            System.out.println("summon");
+                            GameManager.getInstance().summonCard(this);
+                        });
                         menuItem2 = new MenuItem("Set");
                         menuItem2.setOnAction(e -> System.out.println("set"));
                         contextMenu.getItems().addAll(menuItem1,menuItem2);

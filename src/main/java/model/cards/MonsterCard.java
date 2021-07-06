@@ -1,5 +1,11 @@
 package model.cards;
 
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Point3D;
+import javafx.util.Duration;
+import model.animation.FlipCardAnimation;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
@@ -55,10 +61,30 @@ public class MonsterCard extends Card {
     }
 
     public void onSummon() {
+        TranslateTransition thisCard = new TranslateTransition();
+        thisCard.setDuration(Duration.millis(800));
+        thisCard.setNode(shape);
+        thisCard.setToX(cardSlot.getSlotView().getLayoutX());
+        thisCard.setToY(cardSlot.getSlotView().getLayoutY());
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(800));
+        rotateTransition.setNode(shape);
+        rotateTransition.setAxis(new Point3D(1, 0, 0));
+        rotateTransition.setToAngle(0);
+
+        //FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().add(thisCard);
+        parallelTransition.getChildren().add(rotateTransition);
+        //parallelTransition.getChildren().add(flipCardAnimation);
+
+        parallelTransition.play();
+
         cardStatus = CardStatus.FACE_UP;
         faceUp.invoke(this);
         isAttackPosition = true;
-
     }
 
     public Event<Card> getFaceUp() {

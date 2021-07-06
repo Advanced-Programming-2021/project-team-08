@@ -1,6 +1,7 @@
 package model.gameplay;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import model.Deck;
 import model.cards.Card;
 import model.cards.data.CardData;
@@ -179,6 +180,6 @@ public class PlayerBoard {
     public void setGraphic(AnchorPane group) {
         deckZone.setSlotView(group.lookup("#deck" + playerNumber));
         hand.setSlotView(group.lookup("#hand" + playerNumber));
-
+        monsterZone.get(0).setSlotView(((GridPane)group.lookup("#mainZone" + playerNumber)).getChildren().get(0));
     }
 }

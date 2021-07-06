@@ -41,7 +41,9 @@ public class Player {
             card.setup(this);
         }
 
-        drawCard(5);
+        EventNoParam e = new EventNoParam();
+        e.addListener(gameManager::firstSetup);
+        drawCard(5, e);
     }
 
     public UserData getUserData() {
@@ -90,8 +92,11 @@ public class Player {
         return playerBoard;
     }
 
-    public void drawCard(int n) {
-        if (n == 0) return;
+    public void drawCard(int n, EventNoParam onEnd) {
+        if (n == 0) {
+            if(onEnd != null) onEnd.invoke();
+            return;
+        }
         Card c;
         try {
             c = playerBoard.drawCardFromDeck();
@@ -114,7 +119,7 @@ public class Player {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 -154);
+        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 - 154);
         thisCard.setToY(playerBoard.getHand().getSlotView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();
@@ -131,7 +136,7 @@ public class Player {
         parallelTransition.getChildren().add(flipCardAnimation);
 
         parallelTransition.play();
-        parallelTransition.setOnFinished(event -> drawCard(n - 1));
+        parallelTransition.setOnFinished(event -> drawCard(n - 1, onEnd));
 
         System.out.println("new card added to the hand: " + c.getCardData().getCardName());
     }
@@ -171,7 +176,6 @@ public class Player {
                 }
             }
             playerBoard.getHand().removeACard(card);
-            playerBoard.addMonsterCardToZone(card);
             ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
         }

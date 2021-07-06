@@ -64,6 +64,7 @@ public class GameManager {
     private EventNoParam onChangeTurn = new EventNoParam();
     protected Event<AttackResult> destroyAMonster = new Event<>();
 
+    private boolean isFirstSetup = false;
 
     private boolean canAttack = true;
 
@@ -92,8 +93,6 @@ public class GameManager {
         }
 
         Effect.setGameManager(this);
-
-        firstSetup();
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -159,9 +158,13 @@ public class GameManager {
         return player2;
     }
 
-    public void firstSetup() {
+    public synchronized void firstSetup() {
+        if(isFirstSetup) return;
+        System.out.println("HHHHHHHHHHHHH");
+
         turn = 1;
         currentPlayerTurn = 1;
+        startDrawPhase();
     }
 
     public void goToNextPhase() {
@@ -217,7 +220,7 @@ public class GameManager {
         if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
             getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
         } else {
-            getCurrentTurnPlayer().drawCard(1);
+            getCurrentTurnPlayer().drawCard(1, null);
         }
         scene.showPhase("Draw");
         onCardActionDone();
@@ -340,6 +343,17 @@ public class GameManager {
             onCardActionDone();
             onSummonACard.invoke(currentSelectedCard);
         } catch (Exception e) {
+            scene.showError(e.getMessage());
+        }
+    }
+    public void summonCard(Card card, Integer... args) {
+        try {
+            getCurrentTurnPlayer().summonCard(card, args);
+            scene.log("summoned successfully");
+            onCardActionDone();
+            onSummonACard.invoke(currentSelectedCard);
+        } catch (Exception e) {
+            e.printStackTrace();
             scene.showError(e.getMessage());
         }
     }

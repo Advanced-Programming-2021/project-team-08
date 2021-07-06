@@ -43,7 +43,7 @@ public class GamePlayScene extends Scene {
         //firstSetupUI();
 
         try {
-            new GameManager(true, User.getUserByUsername("Abolfazl").getUserData(), User.getUserByUsername("Ali").getUserData(), this, sceneController);
+            new GameManager(false, User.getUserByUsername("Abolfazl").getUserData(), null, this, sceneController);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -320,5 +320,9 @@ public class GamePlayScene extends Scene {
             matcher = Pattern.compile("([\\d]+)").matcher(input);
         }
         return Integer.parseInt(matcher.group(1));
+    }
+
+    public void nextPhase(){
+        GameManager.getInstance().goToNextPhase();
     }
 }
