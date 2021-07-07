@@ -1,7 +1,7 @@
 package model.gameplay;
 
+import controller.gameplay.GameManager;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import model.Deck;
 import model.cards.Card;
 import model.cards.data.CardData;
@@ -27,6 +27,10 @@ public class PlayerBoard {
 
     private int playerNumber;
 
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
     public PlayerBoard(Deck playerDeck, int playerNumber, AnchorPane group) {
         this.playerNumber = playerNumber;
         setGraphic(group);
@@ -35,12 +39,9 @@ public class PlayerBoard {
         Collections.shuffle(deck);
         for (CardData data : deck) {
             Card c = Card.createCardByCardData(data);
-            group.getChildren().add(c.getShape());
             deckZone.appendCard(c);
-            c.getShape().setTranslateX(deckZone.getSlotView().getLayoutX() + 8);
-            c.getShape().setTranslateY(deckZone.getSlotView().getLayoutY() + 5);
-            c.getShape().setTranslateZ(-(double) deckZone.getAllCards().size() / 3);
         }
+        GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckZone.getAllCards());
     }
 
     public ArrayList<CardSlot> getMonsterZone() {
@@ -180,6 +181,8 @@ public class PlayerBoard {
     public void setGraphic(AnchorPane group) {
         deckZone.setSlotView(group.lookup("#deck" + playerNumber));
         hand.setSlotView(group.lookup("#hand" + playerNumber));
-        monsterZone.get(0).setSlotView(((GridPane)group.lookup("#mainZone" + playerNumber)).getChildren().get(0));
+        for (int i = 0; i < 5; i++) {
+            monsterZone.get(i).setSlotView(group.lookup("#monster" + playerNumber + "" + i));
+        }
     }
 }

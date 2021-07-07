@@ -105,10 +105,11 @@ public class Player {
             return;
         }
 
-        ArrayList<Card> pre = playerBoard.getHand().getAllCards();
+        //ArrayList<Card> pre = playerBoard.getHand().getAllCards();
         playerBoard.getHand().appendCard(c);
+        gameManager.getScene().draw(playerBoard.getPlayerNumber(), 0, event-> drawCard(n - 1, onEnd));
 
-        for (Card card : pre) {
+        /*for (Card card : pre) {
             TranslateTransition previousCards = new TranslateTransition();
             previousCards.setDuration(Duration.millis(400));
             previousCards.setNode(card.getShape());
@@ -128,15 +129,15 @@ public class Player {
         rotateTransition.setAxis(new Point3D(1, 0, 0));
         rotateTransition.setToAngle(45);
 
-        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
+        //FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
 
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().add(thisCard);
         parallelTransition.getChildren().add(rotateTransition);
-        parallelTransition.getChildren().add(flipCardAnimation);
+        //parallelTransition.getChildren().add(flipCardAnimation);
 
-        parallelTransition.play();
-        parallelTransition.setOnFinished(event -> drawCard(n - 1, onEnd));
+        parallelTransition.play();*/
+        //parallelTransition.setOnFinished(event -> drawCard(n - 1, onEnd));
 
         System.out.println("new card added to the hand: " + c.getCardData().getCardName());
     }
@@ -176,6 +177,7 @@ public class Player {
                 }
             }
             playerBoard.getHand().removeACard(card);
+            CardSlot s = playerBoard.addMonsterCardToZone(card);
             ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
         }

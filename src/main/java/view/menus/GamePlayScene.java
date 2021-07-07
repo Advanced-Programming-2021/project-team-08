@@ -3,15 +3,24 @@ package view.menus;
 import controller.GamePlaySceneController;
 import controller.User;
 import controller.gameplay.GameManager;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+import javafx.geometry.Point3D;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import model.animation.FlipCardAnimation;
 import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.gameplay.Player;
+import model.graphic.GraphicCard;
+import model.graphic.graphicBoard;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -27,20 +36,25 @@ public class GamePlayScene extends Scene {
     public AnchorPane board;
     public AnchorPane root;
 
+    private graphicBoard gBoard;
+
+
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
 
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
     }
+
     public GamePlaySceneController getSceneController() {
         return sceneController;
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         sceneController = new GamePlaySceneController(this);
         //firstSetupUI();
+        gBoard = new graphicBoard(board);
 
         try {
             new GameManager(false, User.getUserByUsername("Abolfazl").getUserData(), null, this, sceneController);
@@ -53,14 +67,14 @@ public class GamePlayScene extends Scene {
         //sceneController = new GamePlaySceneController(this);
     }
 
-    private void firstSetupUI(){
-        player1Nickname_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer1().getUserData().getNickname());
-        player2Nickname_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer2().getUserData().getNickname());
+    private void firstSetupUI() {
+        player1Nickname_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer1().getUserData().getNickname());
+        player2Nickname_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer2().getUserData().getNickname());
     }
 
-    public void updateUI(){
-        player1LP_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer1().getLP());
-        player2LP_T.setText("LP\t\t"+ sceneController.getGameManager().getPlayer2().getLP());
+    public void updateUI() {
+        player1LP_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer1().getLP());
+        player2LP_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer2().getLP());
     }
 
     @Override
@@ -248,7 +262,6 @@ public class GamePlayScene extends Scene {
         return Integer.parseInt(input);
     }
 
-
     public boolean getActivateTrapCommand() {
         System.out.println("do you want to activate your trap and spell?");
         String input = scanner.nextLine();
@@ -322,7 +335,60 @@ public class GamePlayScene extends Scene {
         return Integer.parseInt(matcher.group(1));
     }
 
-    public void nextPhase(){
+    public void nextPhase() {
         GameManager.getInstance().goToNextPhase();
+    }
+
+    public void firstSetupBoardGraphic(int playerNumber, ArrayList<Card> cards) {
+        int i = 0;
+        for (Card c : cards) {
+            GraphicCard gc = new GraphicCard(c.getCardData().getCardImage());
+            gBoard.getPlayerBoard(playerNumber).getDeckCards().add(gc);
+            gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
+            gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getLayoutX() + 8);
+            gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getLayoutY() + 5);
+            gc.getShape().setTranslateZ(-(double) i / 3);
+            i++;
+        }
+    }
+
+    public void draw(int playerNumber, int deckCardNumber, EventHandler<ActionEvent> onEnd){
+        graphicBoard.GraphicPlayerBoard playerBoard =gBoard.getPlayerBoard(playerNumber);
+        GraphicCard c = playerBoard.getDeckCards().get(deckCardNumber);
+
+        ArrayList<GraphicCard> pre = playerBoard.getHandCards();
+
+        playerBoard.getDeckCards().remove(deckCardNumber);
+        playerBoard.getHandCards().add(c);
+
+        for (GraphicCard card : pre) {
+            TranslateTransition previousCards = new TranslateTransition();
+            previousCards.setDuration(Duration.millis(400));
+            previousCards.setNode(card.getShape());
+            previousCards.setByX(-42);
+            previousCards.play();
+        }
+
+        TranslateTransition thisCard = new TranslateTransition();
+        thisCard.setDuration(Duration.millis(800));
+        thisCard.setNode(c.getShape());
+        thisCard.setToX(playerBoard.getHand().getLayoutX() + pre.size() * 42 - 154);
+        thisCard.setToY(playerBoard.getHand().getLayoutY());
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(800));
+        rotateTransition.setNode(c.getShape());
+        rotateTransition.setAxis(new Point3D(1, 0, 0));
+        rotateTransition.setToAngle(45);
+
+        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().add(thisCard);
+        parallelTransition.getChildren().add(rotateTransition);
+        parallelTransition.getChildren().add(flipCardAnimation);
+
+        parallelTransition.setOnFinished(onEnd);
+        parallelTransition.play();
     }
 }

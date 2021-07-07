@@ -7,15 +7,16 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import model.cards.Card;
+import model.graphic.GraphicCard;
 
 public class FlipCardAnimation extends Transition {
-    private Card card;
+    private GraphicCard card;
     private int duration;
     private boolean flipped = false;
 
     private final DoubleProperty angleY = new SimpleDoubleProperty(0);
 
-    public FlipCardAnimation(Card card, int duration) {
+    public FlipCardAnimation(GraphicCard card, int duration) {
         this.card = card;
         this.duration = duration;
         setCycleDuration(Duration.millis(duration));
@@ -34,7 +35,7 @@ public class FlipCardAnimation extends Transition {
             return;
         }
         if (nowRotation >= 90 && !flipped) {
-            card.getShape().setImage(card.getCardData().getCardImage());
+            card.getShape().setImage(card.getFace());
         }
 
         //card.getShape().setRotate(frac * 180);
