@@ -88,9 +88,10 @@ public class MainScene extends Scene {
         SequentialTransition menuItemInactiveTransition = setupInactiveAnimation(menuItem);
         menuItemActiveTransition.play();
         label.setOnMouseEntered(event -> {
-            menuItemInactiveTransition.stop();
             menuItem.setImage(menuHoverImage);
             menuItemActiveTransition.play();
+            menuItemInactiveTransition.pause();
+            menuItemInactiveTransition.stop();
             menuItem.setFitWidth(758.4);
             menuItem.setFitHeight(121.2);
             menuItem.setLayoutX(420.8);
@@ -98,9 +99,10 @@ public class MainScene extends Scene {
             label.setTextFill(Color.YELLOW);
         });
         label.setOnMouseExited(event -> {
-            menuItemActiveTransition.stop();
             menuItem.setImage(menuImage);
             menuItemInactiveTransition.play();
+            menuItemInactiveTransition.pause();
+            menuItemActiveTransition.stop();
             menuItem.setFitWidth(632);
             menuItem.setFitHeight(101);
             menuItem.setLayoutX(484);
