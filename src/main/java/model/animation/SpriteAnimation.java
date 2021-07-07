@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
+import view.menus.MainScene;
 
 public class SpriteAnimation extends Transition {
 
@@ -15,7 +16,6 @@ public class SpriteAnimation extends Transition {
     private final int offsetY;
     private final int width;
     private final int height;
-
     private int lastIndex;
 
     public SpriteAnimation(
@@ -37,7 +37,6 @@ public class SpriteAnimation extends Transition {
 
     protected void interpolate(double k) {
         final int index = Math.min((int) (k * count), count - 1);
-        //System.out.println("index is : " + index + " k is : " + k + "  last index is :  " + lastIndex);
         if (index != lastIndex) {
             final int x;
             x = (index % columns) * width + offsetX;

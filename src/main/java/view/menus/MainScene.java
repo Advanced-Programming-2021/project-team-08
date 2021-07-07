@@ -42,6 +42,7 @@ public class MainScene extends Scene {
     private Image menuHoverImage;
     private Image menuImage;
 
+
     @Override
     protected int getUserCommand() {
         String userInput = scanner.nextLine().trim();
@@ -86,12 +87,11 @@ public class MainScene extends Scene {
     private void setMenuItemAnimation(ImageView menuItem, Label label) {
         SequentialTransition menuItemActiveTransition = setupActiveAnimation(menuItem);
         SequentialTransition menuItemInactiveTransition = setupInactiveAnimation(menuItem);
-        menuItemActiveTransition.play();
+        menuItemInactiveTransition.play();
         label.setOnMouseEntered(event -> {
             menuItem.setImage(menuHoverImage);
-            menuItemActiveTransition.play();
-            menuItemInactiveTransition.pause();
             menuItemInactiveTransition.stop();
+            menuItemActiveTransition.play();
             menuItem.setFitWidth(758.4);
             menuItem.setFitHeight(121.2);
             menuItem.setLayoutX(420.8);
@@ -100,9 +100,8 @@ public class MainScene extends Scene {
         });
         label.setOnMouseExited(event -> {
             menuItem.setImage(menuImage);
-            menuItemInactiveTransition.play();
-            menuItemInactiveTransition.pause();
             menuItemActiveTransition.stop();
+            menuItemInactiveTransition.play();
             menuItem.setFitWidth(632);
             menuItem.setFitHeight(101);
             menuItem.setLayoutX(484);
@@ -139,6 +138,13 @@ public class MainScene extends Scene {
         sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(3,5, imageView));
         sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(4,4, imageView));
         return sequentialTransition;
+    }
+
+    private void stop(SequentialTransition sequentialTransition) {
+        sequentialTransition.stop();
+        for (int i = 0; i < sequentialTransition.getChildren().size(); i++) {
+            sequentialTransition.getChildren().get(i).stop();
+        }
     }
 
     private SpriteAnimation setSpriteAnimation(int column, int count, ImageView imageView) {
