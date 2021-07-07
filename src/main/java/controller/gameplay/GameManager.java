@@ -283,7 +283,7 @@ public class GameManager {
             case HAND:
                 command = Command.parseCommand(address, selectHandCardCommand);
                 Card temp = getCurrentTurnPlayer().getCardFromHand(Integer.parseInt(command.getField("hand")));
-                currentSelectedCardAddress = new CardSlotAddress(false, ZoneType.HAND, 0);
+                currentSelectedCardAddress = new CardSlotAddress(false, ZoneType.HAND, Integer.parseInt(command.getField("hand")));
                 setCurrentSelectedCard(temp, currentSelectedCardAddress);
                 scene.log("card selected");
                 break;
@@ -338,7 +338,8 @@ public class GameManager {
 
     public void summonCard(Integer... args) {
         try {
-            getCurrentTurnPlayer().summonCard(currentSelectedCard, args);
+            CardSlot s = getCurrentTurnPlayer().summonCard(currentSelectedCard, args);
+            scene.summon(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
             scene.log("summoned successfully");
             onCardActionDone();
             onSummonACard.invoke(currentSelectedCard);

@@ -24,7 +24,7 @@ public class graphicBoard {
         private AnchorPane playerBoard;
         private GraphicCardSlot deck;
         private GraphicCardSlot hand;
-        private ArrayList<ImageView> monster = new ArrayList<>(5);
+        private ArrayList<GraphicCardSlot> monster = new ArrayList<>(5);
         private ArrayList<ImageView> spell = new ArrayList<>(5);
         private ImageView field;
         private ImageView graveyard;
@@ -34,9 +34,9 @@ public class graphicBoard {
             this.playerBoard = playerBoard;
             this.playerNumber = playerNumber;
             deck = new GraphicCardSlot(ZoneType.DECK, playerBoard.lookup("#deck" + playerNumber));
-            hand = new GraphicCardSlot(ZoneType.HAND, (Group) playerBoard.lookup("#hand" + playerNumber));
-            for (int i = 0; i < 5; i++) {
-                monster.add((ImageView) playerBoard.lookup("#monster" + playerNumber + "" + i));
+            hand = new GraphicCardSlot(ZoneType.HAND, playerBoard.lookup("#hand" + playerNumber));
+            for (int i = 1; i <= 5; i++) {
+                monster.add(new GraphicCardSlot(ZoneType.MONSTER, i, playerBoard.lookup("#monster" + playerNumber + "" + i)));
             }
         }
 
@@ -46,6 +46,10 @@ public class graphicBoard {
 
         public GraphicCardSlot getHand() {
             return hand;
+        }
+
+        public ArrayList<GraphicCardSlot> getMonster() {
+            return monster;
         }
 
         public AnchorPane getPlayerBoard() {

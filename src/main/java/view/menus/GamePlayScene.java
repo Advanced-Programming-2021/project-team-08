@@ -20,6 +20,7 @@ import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.gameplay.Player;
 import model.graphic.GraphicCard;
+import model.graphic.GraphicCardSlot;
 import model.graphic.graphicBoard;
 
 import java.util.ArrayList;
@@ -352,8 +353,8 @@ public class GamePlayScene extends Scene {
         }
     }
 
-    public void draw(int playerNumber, int deckCardNumber, EventHandler<ActionEvent> onEnd){
-        graphicBoard.GraphicPlayerBoard playerBoard =gBoard.getPlayerBoard(playerNumber);
+    public void draw(int playerNumber, int deckCardNumber, EventHandler<ActionEvent> onEnd) {
+        graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getDeck().getAllCards().get(deckCardNumber);
 
         ArrayList<GraphicCard> pre = playerBoard.getHand().getAllCards();
@@ -389,6 +390,30 @@ public class GamePlayScene extends Scene {
         parallelTransition.getChildren().add(flipCardAnimation);
 
         parallelTransition.setOnFinished(onEnd);
+        parallelTransition.play();
+    }
+
+    public void summon(int playerNumber, int handCardNumber, int toSlotNumber) {
+        graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
+        GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster().get(toSlotNumber - 1);
+
+        TranslateTransition thisCard = new TranslateTransition();
+        thisCard.setDuration(Duration.millis(800));
+        thisCard.setNode(c.getShape());
+        thisCard.setToX(slot.getImageView().getLayoutX() + 65);
+        thisCard.setToY(slot.getImageView().getLayoutY() + 45);
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(800));
+        rotateTransition.setNode(c.getShape());
+        rotateTransition.setAxis(new Point3D(1, 0, 0));
+        rotateTransition.setToAngle(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().add(thisCard);
+        parallelTransition.getChildren().add(rotateTransition);
+
         parallelTransition.play();
     }
 }

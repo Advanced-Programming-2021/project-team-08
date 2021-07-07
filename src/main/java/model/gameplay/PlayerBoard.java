@@ -18,10 +18,10 @@ public class PlayerBoard {
     private CardSlot deckZone = new CardSlot(ZoneType.DECK);
     private CardSlot fieldZone = new CardSlot(ZoneType.FIELD);
     private ArrayList<CardSlot> monsterZone = new ArrayList<CardSlot>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.MONSTER));
+        for (int i = 0; i < 5; i++) add(new CardSlot(i+1,ZoneType.MONSTER));
     }};
     private ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardSlot(ZoneType.SPELL_AND_TRAP));
+        for (int i = 0; i < 5; i++) add(new CardSlot(i+1, ZoneType.SPELL_AND_TRAP));
     }};
     private CardSlot hand = new CardSlot(ZoneType.HAND);
 

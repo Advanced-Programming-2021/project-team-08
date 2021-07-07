@@ -19,6 +19,7 @@ public class CardSlot {
     private boolean isSingular;
 
     private Node slotView;
+    private int number;
 
     public CardSlot(ZoneType zoneType) {
         this.zoneType = zoneType;
@@ -33,6 +34,26 @@ public class CardSlot {
                 isSingular = true;
                 break;
         }
+    }
+
+    public CardSlot(int number, ZoneType zoneType) {
+        this.number = number;
+        this.zoneType = zoneType;
+        switch (zoneType) {
+            case GRAVEYARD:
+            case DECK:
+                isSingular = false;
+                break;
+            case FIELD:
+            case MONSTER:
+            case SPELL_AND_TRAP:
+                isSingular = true;
+                break;
+        }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public static void moveCard(CardSlot from, CardSlot to){

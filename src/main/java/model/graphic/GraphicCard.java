@@ -48,22 +48,28 @@ public class GraphicCard {
                 ContextMenu contextMenu = new ContextMenu();
                 MenuItem menuItem1;
                 MenuItem menuItem2;
-                switch (data.getCardType()){
+                switch (data.getCardType()) {
                     case MONSTER:
                         menuItem1 = new MenuItem("Summon");
                         menuItem1.setOnAction(e -> {
                             System.out.println("summon");
+                            try {
+                                GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                            GameManager.getInstance().summonCard();
                         });
                         menuItem2 = new MenuItem("Set");
                         menuItem2.setOnAction(e -> System.out.println("set"));
-                        contextMenu.getItems().addAll(menuItem1,menuItem2);
+                        contextMenu.getItems().addAll(menuItem1, menuItem2);
                         break;
                     case SPELL:
                         menuItem1 = new MenuItem("Activate");
                         menuItem1.setOnAction(e -> System.out.println("activate"));
                         menuItem2 = new MenuItem("Set");
                         menuItem2.setOnAction(e -> System.out.println("set"));
-                        contextMenu.getItems().addAll(menuItem1,menuItem2);
+                        contextMenu.getItems().addAll(menuItem1, menuItem2);
                         break;
                     case TRAP:
                         menuItem1 = new MenuItem("Set");

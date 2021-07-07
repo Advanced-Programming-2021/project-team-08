@@ -9,10 +9,17 @@ import java.util.ArrayList;
 public class GraphicCardSlot {
     private ArrayList<GraphicCard> cards = new ArrayList<>();
     private ZoneType type;
+    private int number;
     private Node imageView;
 
     public GraphicCardSlot(ZoneType type, Node imageView) {
         this.type = type;
+        this.imageView = imageView;
+    }
+
+    public GraphicCardSlot(ZoneType type, int number, Node imageView) {
+        this.type = type;
+        this.number = number;
         this.imageView = imageView;
     }
 

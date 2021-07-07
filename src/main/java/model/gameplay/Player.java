@@ -148,7 +148,7 @@ public class Player {
         return playerBoard.getHand().getAllCards().get(number - 1);
     }
 
-    public void summonCard(Card card, Integer... args) throws Exception {
+    public CardSlot summonCard(Card card, Integer... args) throws Exception {
         checkCardSelected(card);
         if (card.getCardSlot().getZoneType() != ZoneType.HAND || card.getCardType() != CardType.MONSTER) {
             throw new Exception("you can't summon this card");
@@ -180,6 +180,7 @@ public class Player {
             CardSlot s = playerBoard.addMonsterCardToZone(card);
             ((MonsterCard) card).onSummon();
             summonOrSetInThisTurn = true;
+            return s;
         }
     }
 

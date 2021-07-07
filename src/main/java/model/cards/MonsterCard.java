@@ -61,24 +61,6 @@ public class MonsterCard extends Card {
 
     public void onSummon() {
         shape.toFront();
-        TranslateTransition thisCard = new TranslateTransition();
-        thisCard.setDuration(Duration.millis(800));
-        thisCard.setNode(shape);
-        thisCard.setToX(cardSlot.getSlotView().getLayoutX() + 65);
-        thisCard.setToY(cardSlot.getSlotView().getLayoutY() + 45);
-
-        RotateTransition rotateTransition = new RotateTransition();
-        rotateTransition.setDuration(Duration.millis(800));
-        rotateTransition.setNode(shape);
-        rotateTransition.setAxis(new Point3D(1, 0, 0));
-        rotateTransition.setToAngle(0);
-
-        ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().add(thisCard);
-        parallelTransition.getChildren().add(rotateTransition);
-
-        parallelTransition.play();
-
         cardStatus = CardStatus.FACE_UP;
         faceUp.invoke(this);
         isAttackPosition = true;
