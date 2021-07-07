@@ -1,0 +1,13 @@
+
+.deckBackground {
+    -fx-background-image: url("../asset/deckMenu/shopBackground.jpg");
+
+}
+
+.deckScrollbar {
+    -fx-background-image: url("../asset/deckMenu/classic_shadowrealm.jpg");
+}
+
+.deckSetting {
+    -fx-background-image: url("../asset/deckMenu/bg_vgs.jpg");
+}

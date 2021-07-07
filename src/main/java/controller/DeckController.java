@@ -1,5 +1,12 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import model.Command;
 import model.Deck;
 import model.cards.data.CardData;
@@ -9,6 +16,7 @@ import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.DeckMenu;
+import view.menus.ShopScene;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +26,32 @@ import java.util.regex.Pattern;
 
 public class DeckController {
     private DeckMenu deckMenu;
+    public TextField deckNameTextField;
+    public TextField cardNameTextField;
+    public Label deckNameLabel;
+    public Label cardNameLabel;
+    public AnchorPane scrollPane;
+    public AnchorPane listOfDecks;
+    public AnchorPane deckSetting;
+
+    @FXML
+    void initialize(){
+        if (deckMenu==null) deckMenu = new DeckMenu();
+        ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
+        listOfDecks.setLayoutX(0);
+        deckSetting.setLayoutX(1600);
+        scrollPane.getChildren().clear();
+        deckMenu.setDecks(scrollPane, showingDeck);
+    }
+
+
+    public AnchorPane getListOfDecks() {
+        return listOfDecks;
+    }
+
+    public AnchorPane getDeckSetting() {
+        return deckSetting;
+    }
 
     public DeckController(DeckMenu deckMenu) {
         this.deckMenu = deckMenu;
@@ -213,5 +247,46 @@ public class DeckController {
             System.out.println(card.getCardName() + ": " + card.getCardDescription());
         }
 
+    }
+
+    public void deckCreateGraphic(ActionEvent actionEvent) {
+            deckNameTextField.setOpacity(1);
+            deckNameLabel.setOpacity(1);
+    }
+
+    public void removeCardGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
+
+        cardNameLabel.setOpacity(1);
+        cardNameTextField.setOpacity(1);
+    }
+
+    public void addCardGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
+
+        cardNameLabel.setOpacity(1);
+        cardNameTextField.setOpacity(1);
+    }
+
+    public void deckSetActiveGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
+    }
+
+    public void deckDeleteGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
+    }
+
+    public void showDeckGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
+    }
+
+    public void deckShowCardsGraphic(ActionEvent actionEvent) {
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
     }
 }

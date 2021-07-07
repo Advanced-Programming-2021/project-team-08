@@ -1,6 +1,7 @@
 package view.menus;
 
 import controller.ApplicationManger;
+import controller.DeckController;
 import controller.MainMenuController;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Transition;
@@ -159,7 +160,7 @@ public class MainScene extends Scene {
     }
 
     public void deckRun(MouseEvent mouseEvent) {
-        //TODO: add deck
+        ApplicationManger.goToScene1(SceneName.DECK_MENU,false);
     }
 
     public void shopRun(MouseEvent mouseEvent) {

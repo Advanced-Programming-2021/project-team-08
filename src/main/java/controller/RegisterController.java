@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import model.Command;
@@ -123,4 +124,6 @@ public class RegisterController {
             errorOfLogin.setTextFill(Color.RED);
         }
     }
+
+
 }

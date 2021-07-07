@@ -29,6 +29,7 @@ public class ApplicationManger extends Application {
             put(SceneName.SHOP_MENU, new URL(rootPath + "shopScene.fxml"));
             put(SceneName.PROFILE_MENU, new URL(rootPath + "profileScene.fxml"));
             put(SceneName.DUEL_SCENE, new URL(rootPath + "singleDuelScene.fxml"));
+            put(SceneName.DECK_MENU, new URL(rootPath + "deckScene.fxml"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -50,8 +51,8 @@ public class ApplicationManger extends Application {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
 
-        loggedInUser = User.getUserByUsername("Abolfazl");
-        goToScene("mainScene.fxml");
+//        loggedInUser = User.getUserByUsername("Abolfazl");
+        goToScene("firstScene.fxml");
         //goToScene("firstScene.fxml");
         //goToScene1(SceneName.PROFILE_MENU, false);
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="10.0" layoutY="10.0">
+         <children>
+            <AnchorPane fx:id="listOfDecks" prefHeight="900.0" prefWidth="1600.0" styleClass="deckBackground" stylesheets="@../CSS/deckStyle.css">
+               <children>
+                  <ScrollPane layoutX="275.0" layoutY="263.0" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

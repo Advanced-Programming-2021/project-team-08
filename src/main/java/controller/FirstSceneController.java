@@ -1,5 +1,6 @@
 package controller;
 import javafx.event.ActionEvent;
+import view.menus.SceneName;
 
 public class FirstSceneController   {
 
@@ -8,11 +9,11 @@ public class FirstSceneController   {
     }
 
     public void register(ActionEvent actionEvent) {
-        ApplicationManger.goToScene("registerScene.fxml");
+        ApplicationManger.goToScene1(SceneName.REGISTER_MENU,false);
     }
 
     public void login(ActionEvent actionEvent) {
-        ApplicationManger.goToScene("loginScene.fxml");
+        ApplicationManger.goToScene1(SceneName.LOGIN_MENU,false);
     }
 
 }
