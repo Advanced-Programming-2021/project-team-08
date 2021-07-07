@@ -342,11 +342,11 @@ public class GamePlayScene extends Scene {
     public void firstSetupBoardGraphic(int playerNumber, ArrayList<Card> cards) {
         int i = 0;
         for (Card c : cards) {
-            GraphicCard gc = new GraphicCard(c.getCardData().getCardImage());
-            gBoard.getPlayerBoard(playerNumber).getDeckCards().add(gc);
+            GraphicCard gc = new GraphicCard(c);
+            gBoard.getPlayerBoard(playerNumber).getDeck().appendCard(gc);
             gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
-            gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getLayoutX() + 8);
-            gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getLayoutY() + 5);
+            gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutX() + 8);
+            gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutY() + 5);
             gc.getShape().setTranslateZ(-(double) i / 3);
             i++;
         }
@@ -354,12 +354,12 @@ public class GamePlayScene extends Scene {
 
     public void draw(int playerNumber, int deckCardNumber, EventHandler<ActionEvent> onEnd){
         graphicBoard.GraphicPlayerBoard playerBoard =gBoard.getPlayerBoard(playerNumber);
-        GraphicCard c = playerBoard.getDeckCards().get(deckCardNumber);
+        GraphicCard c = playerBoard.getDeck().getAllCards().get(deckCardNumber);
 
-        ArrayList<GraphicCard> pre = playerBoard.getHandCards();
+        ArrayList<GraphicCard> pre = playerBoard.getHand().getAllCards();
 
-        playerBoard.getDeckCards().remove(deckCardNumber);
-        playerBoard.getHandCards().add(c);
+        playerBoard.getDeck().getAllCards().remove(deckCardNumber);
+        playerBoard.getHand().appendCard(c);
 
         for (GraphicCard card : pre) {
             TranslateTransition previousCards = new TranslateTransition();
@@ -372,8 +372,8 @@ public class GamePlayScene extends Scene {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getLayoutX() + pre.size() * 42 - 154);
-        thisCard.setToY(playerBoard.getHand().getLayoutY());
+        thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 154);
+        thisCard.setToY(playerBoard.getHand().getImageView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();
         rotateTransition.setDuration(Duration.millis(800));
