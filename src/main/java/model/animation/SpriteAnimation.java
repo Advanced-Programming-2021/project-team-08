@@ -36,10 +36,13 @@ public class SpriteAnimation extends Transition {
     }
 
     protected void interpolate(double k) {
-        final int index = Math.min((int) Math.floor(k * count), count - 1);
+        final int index = Math.min((int) (k * count), count - 1);
+        //System.out.println("index is : " + index + " k is : " + k + "  last index is :  " + lastIndex);
         if (index != lastIndex) {
-            final int x = (index % columns) * width + offsetX;
+            final int x;
+            x = (index % columns) * width + offsetX;
             final int y = (index / columns) * height + offsetY;
+            //System.out.println("x is : " + x + " y is : " + y + "   index is : " + index);
             imageView.setViewport(new Rectangle2D(x, y, width, height));
             lastIndex = index;
         }
@@ -48,5 +51,10 @@ public class SpriteAnimation extends Transition {
     public void setOffsetX(int offsetX) {
         this.offsetX = offsetX;
     }
+
+    public void setLastIndex(int lastIndex) {
+        this.lastIndex = lastIndex;
+    }
+
 }
 

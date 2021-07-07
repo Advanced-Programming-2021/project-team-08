@@ -5,15 +5,19 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@../CSS/MainMenuStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.MainScene">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0"  stylesheets="@../CSS/MainMenuStyle.css" styleClass="background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.MainScene">
    <children>
-      <Button layoutX="400" layoutY="100" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
-      <Button layoutX="400" layoutY="220" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
-      <Button layoutX="400" layoutY="340" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
-      <Button layoutX="400" layoutY="460" mnemonicParsing="false" text="Button" styleClass="menu-item"/>
-      <ImageView  fx:id="imageView" >
-
-      </ImageView>
-
+      <ImageView fx:id="menuName" layoutX="450" layoutY="50" fitWidth="700" fitHeight="150" styleClass="menu-name"/>
+      <Label text = "main menu"   layoutX="670" layoutY="100"  styleClass="name-label" />
+      <ImageView fx:id="duel"     layoutX="484" layoutY="220"  styleClass="menu-item" />
+      <Label fx:id="duelLabel"    layoutX="484" layoutY="220"  styleClass="menu-label" text = "duel" onMouseClicked="#duelRun"/>
+      <ImageView fx:id="deck"     layoutX="484" layoutY="320"  styleClass="menu-item"/>
+      <Label fx:id="deckLabel"   layoutX="484" layoutY="320"  styleClass="menu-label" text = "deck editor" onMouseClicked="#deckRun"/>
+      <ImageView fx:id="shop"     layoutX="484" layoutY="420"  styleClass="menu-item"/>
+      <Label fx:id="shopLabel"    layoutX="484" layoutY="420"  styleClass="menu-label" text = "shop" onMouseClicked="#shopRun"/>
+      <ImageView fx:id="profile"  layoutX="484" layoutY="520"  styleClass="menu-item"/>
+      <Label fx:id="profileLabel"    layoutX="484" layoutY="520"  styleClass="menu-label" text = "profile" onMouseClicked="#profileRun"/>
+      <ImageView fx:id="exit"     layoutX="484" layoutY="620"  styleClass="menu-item"/>
+      <Label fx:id="exitLabel"    layoutX="484" layoutY="620"  styleClass="menu-label" text = "exit" onMouseClicked="#exitGame"/>
    </children>
 </AnchorPane>
