@@ -22,6 +22,7 @@ public class DeckMenu extends Scene {
         for (int i = 0; i < decks.size(); i++) {
             Button deckButton=new Button();
             Deck deck=decks.get(i);
+            System.out.println(deck.getName());
             if (Deck.isThisDeckValid(deck)) {
                 deckButton.setText(deck.getName() + " / valid \nnumber of cards of main deck: " + deck.getMainDeck().size()+"\n number of cards of side deck: " + deck.getSideDeck().size() );
             }
@@ -31,6 +32,10 @@ public class DeckMenu extends Scene {
             scrollPane.getChildren().add(i, deckButton);
             deckButton.setPrefHeight(100);
             deckButton.setPrefWidth(1000);
+            double x = (i % 5) * (260) + 20;
+            double y = (i / 5) * (445) + 20;
+            deckButton.setLayoutX(x);
+            deckButton.setLayoutY(y);
             deckButton.setOnMouseEntered(event -> {
                 deckButton.setPrefHeight(deckButton.getHeight() * 1.4);
                 deckButton.setPrefWidth(deckButton.getWidth() * 1.4);
@@ -52,7 +57,7 @@ public class DeckMenu extends Scene {
 
     public DeckMenu() {
         this.activeUser = ApplicationManger.getLoggedInUser();
-        deckController = new DeckController(this);
+        this.deckController =new DeckController();
     }
 
     @Override

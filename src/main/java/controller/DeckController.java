@@ -53,8 +53,8 @@ public class DeckController {
         return deckSetting;
     }
 
-    public DeckController(DeckMenu deckMenu) {
-        this.deckMenu = deckMenu;
+    public DeckController() {
+
     }
 
     public void deckCreate(String deckName) {

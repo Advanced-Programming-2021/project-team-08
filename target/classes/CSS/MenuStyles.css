@@ -4,7 +4,7 @@
 }
 
 .shopBox {
-    -fx-background-image: url("../asset/shopMenu/UserDetailBG_02.dds.png");
+    -fx-image: url("../asset/mainMenu/doShared.png")
 }
 
 @font-face {
@@ -15,7 +15,9 @@
 .shopText {
     -fx-alignment: center;
     -fx-font-family: 'Heebeo';
-    -fx-font-size: 40.0 px;
+    -fx-font-size: 50.0 px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }
 
 .shopMessageBox {
@@ -30,6 +32,7 @@
     -fx-font-family: 'Heebeo';
     -fx-font-size: 25.0 px;
     -fx-text-alignment: left;
+    -fx-text-fill: white;
 }
 
 .searchTextBar {
@@ -49,4 +52,16 @@
     -fx-text-fill: white;
     -fx-font-size: 40.0 px;
     -fx-font-weight: bold;
+}
+
+.back {
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+    -fx-font: 30px arial ;
+}
+
+.back:hover {
+    -fx-background-color: rgb(22, 15, 146);
+    -fx-cursor: hand;
 }
