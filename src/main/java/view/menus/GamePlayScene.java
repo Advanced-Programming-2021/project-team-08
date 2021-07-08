@@ -22,6 +22,7 @@ import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.enums.CardStatus;
+import model.gameplay.AttackResult;
 import model.gameplay.Player;
 import model.graphic.GraphicCard;
 import model.graphic.GraphicCardSlot;
@@ -73,8 +74,8 @@ public class GamePlayScene extends Scene {
     }
 
     private void firstSetupUI() {
-        player1Nickname_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer1().getUserData().getNickname());
-        player2Nickname_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer2().getUserData().getNickname());
+        player1Nickname_T.setText(sceneController.getGameManager().getPlayer1().getUserData().getNickname());
+        player2Nickname_T.setText(sceneController.getGameManager().getPlayer2().getUserData().getNickname());
     }
 
     public void updateUI() {
@@ -353,7 +354,7 @@ public class GamePlayScene extends Scene {
             gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
             gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutX() + 8);
             gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutY() + 5);
-            gc.getShape().setTranslateZ(-(double) i * 3);
+            gc.getShape().setTranslateZ(-(double) i / 3);
             i++;
         }
     }
@@ -401,7 +402,7 @@ public class GamePlayScene extends Scene {
     public void summon(int playerNumber, int handCardNumber, int toSlotNumber) {
         graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
-        GraphicCardSlot slot = playerBoard.getMonster().get(toSlotNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber - 1);
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
@@ -422,10 +423,10 @@ public class GamePlayScene extends Scene {
         parallelTransition.play();
     }
 
-    public void set(int playerNumber, int handCardNumber, int toSlotNumber) {
+    public void setMonster(int playerNumber, int handCardNumber, int toSlotNumber) {
         graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
-        GraphicCardSlot slot = playerBoard.getMonster().get(toSlotNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber - 1);
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
@@ -449,5 +450,22 @@ public class GamePlayScene extends Scene {
         s.getChildren().add(parallelTransition);
 
         s.play();
+    }
+
+    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attacker, int defender) {
+        //getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
+        //getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
+        //player1LP_T.setText("LP\t\t"+result.getAttackerPlayer().getLP());
+        //player2LP_T.setText("LP\t\t"+result.getLP());
+
+        graphicBoard.GraphicPlayerBoard attackerBoard = gBoard.getPlayerBoard(playerNumber);
+        graphicBoard.GraphicPlayerBoard defenderBoard = gBoard.getPlayerBoard(playerNumber == 1 ? 2 : 1);
+
+        if (result.isDestroyCard1()) {
+            attackerBoard.moveToGraveyard(attacker);
+        }
+        if (result.isDestroyCard2()) {
+            defenderBoard.moveToGraveyard(defender);
+        }
     }
 }

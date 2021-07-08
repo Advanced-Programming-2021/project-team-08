@@ -40,6 +40,7 @@ public class FlipCardAnimation extends Transition {
         }
         if (nowRotation >= 90 && !flipped) {
             card.getShape().setImage(toStatus == CardStatus.TO_BACK ? GraphicCard.getBack() : card.getFace());
+            card.setStatus(toStatus);
         }
         angleY.set(frac * 180);
     }

@@ -1,17 +1,12 @@
 package controller.gameplay;
 
-import controller.ApplicationManger;
 import controller.GamePlaySceneController;
-import javafx.scene.layout.AnchorPane;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.effectSystem.Effect;
-import model.enums.CardStatus;
-import model.enums.CommandFieldType;
-import model.enums.Phase;
-import model.enums.ZoneType;
+import model.enums.*;
 import model.event.Event;
 import model.event.EventNoParam;
 import model.exceptions.ParseCommandException;
@@ -42,6 +37,7 @@ public class GameManager {
     }};
 
     private static GameManager instance;
+
     public static GameManager getInstance() {
         return instance;
     }
@@ -159,7 +155,7 @@ public class GameManager {
     }
 
     public synchronized void firstSetup() {
-        if(isFirstSetup) return;
+        if (isFirstSetup) return;
         System.out.println("HHHHHHHHHHHHH");
 
         turn = 1;
@@ -347,6 +343,7 @@ public class GameManager {
             scene.showError(e.getMessage());
         }
     }
+
     public void summonCard(Card card, Integer... args) {
         try {
             getCurrentTurnPlayer().summonCard(card, args);
@@ -377,7 +374,8 @@ public class GameManager {
     public void setCard() {
         try {
             CardSlot s = getCurrentTurnPlayer().setCard(currentSelectedCard);
-            scene.set(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
+            if (currentSelectedCard.getCardType() == CardType.MONSTER)
+                scene.setMonster(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
             scene.log("set successfully");
             onCardActionDone();
         } catch (Exception e) {
@@ -454,6 +452,9 @@ public class GameManager {
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         if (result.isCanceled()) return;
+        int a = attacker.getCardSlot().getNumber();
+        int b = attacked.getCardSlot().getNumber();
+
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         if (result.isDestroyCard1()) {
@@ -463,6 +464,7 @@ public class GameManager {
             attacked.moveToGraveyard();
         }
         scene.log(result.getResultMessage());
+        scene.applyAttackResultGraphic(result, currentPlayerTurn, a, b);
     }
 
     public void applyDirectAttack(AttackResult result) {

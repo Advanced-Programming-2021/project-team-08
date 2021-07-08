@@ -30,7 +30,6 @@ public class Player {
         this.playerBoard = playerBoard;
         this.gameManager = gameManager;
 
-
         for (Card card : playerBoard.getDeckZone().getAllCards()) {
             card.setup(this);
         }
@@ -88,7 +87,7 @@ public class Player {
 
     public void drawCard(int n, EventNoParam onEnd) {
         if (n == 0) {
-            if(onEnd != null) onEnd.invoke();
+            if (onEnd != null) onEnd.invoke();
             return;
         }
         Card c;
@@ -101,7 +100,7 @@ public class Player {
 
         //ArrayList<Card> pre = playerBoard.getHand().getAllCards();
         playerBoard.getHand().appendCard(c);
-        gameManager.getScene().draw(playerBoard.getPlayerNumber(), 0, event-> drawCard(n - 1, onEnd));
+        gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
 
         /*for (Card card : pre) {
             TranslateTransition previousCards = new TranslateTransition();

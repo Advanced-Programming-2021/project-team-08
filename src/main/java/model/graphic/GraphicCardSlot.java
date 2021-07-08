@@ -39,6 +39,10 @@ public class GraphicCardSlot {
         cards.set(0, card);
     }
 
+    public void removeCard(GraphicCard card){
+        cards.remove(card);
+    }
+
     public ArrayList<GraphicCard> getAllCards() {
         return cards;
     }

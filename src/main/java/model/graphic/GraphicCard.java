@@ -27,8 +27,24 @@ public class GraphicCard {
         shape.setFitHeight(110);
         shape.setScaleX(-1);
 
-        shape.setOnMouseClicked(event -> onClick(event));
+        shape.setOnMouseClicked(event -> {
+            switch (GameManager.getInstance().getCurrentPhase()){
+                case DRAW:
+                    break;
+                case STANDBY:
+                    break;
+                case MAIN:
+                    onClickMain(event);
+                    break;
+                case BATTLE:
+                    onClickBattle(event);
+                    break;
+                case END:
+                    break;
+            }
+            });
     }
+
 
     public static Image getBack() {
         return back;
@@ -46,7 +62,10 @@ public class GraphicCard {
         this.status = status;
     }
 
-    private void onClick(MouseEvent event) {
+    private void onClickMain(MouseEvent event) {
+        ContextMenu contextMenu;
+        MenuItem menuItem1;
+        MenuItem menuItem2;
         switch (slot.getType()) {
             case GRAVEYARD:
                 break;
@@ -59,9 +78,7 @@ public class GraphicCard {
             case SPELL_AND_TRAP:
                 break;
             case HAND:
-                ContextMenu contextMenu = new ContextMenu();
-                MenuItem menuItem1;
-                MenuItem menuItem2;
+                contextMenu = new ContextMenu();
                 switch (data.getCardType()) {
                     case MONSTER:
                         menuItem1 = new MenuItem("Summon");
@@ -104,6 +121,31 @@ public class GraphicCard {
                 contextMenu.setY(event.getScreenY());
 
                 contextMenu.show(ApplicationManger.getMainStage());
+                break;
+        }
+    }
+
+
+    private void onClickBattle(MouseEvent event) {
+        ContextMenu contextMenu;
+        MenuItem menuItem1;
+        MenuItem menuItem2;
+        switch (slot.getType()) {
+            case GRAVEYARD:
+                break;
+            case DECK:
+                break;
+            case FIELD:
+                break;
+            case MONSTER:
+                contextMenu = new ContextMenu();
+                menuItem1 = new MenuItem("Set");
+                menuItem1.setOnAction(e -> System.out.println("set"));
+                contextMenu.getItems().addAll(menuItem1);
+                break;
+            case SPELL_AND_TRAP:
+                break;
+            case HAND:
                 break;
         }
     }
