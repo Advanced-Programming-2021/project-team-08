@@ -26,7 +26,7 @@ public class FlipCardAnimation extends Transition {
 
         Rotate yRotate = new Rotate(0, Rotate.Y_AXIS);
         yRotate.setPivotX(40);
-        yRotate.setPivotY(60);
+        yRotate.setPivotY(55);
         card.getShape().getTransforms().add(yRotate);
         yRotate.angleProperty().bind(angleY);
     }

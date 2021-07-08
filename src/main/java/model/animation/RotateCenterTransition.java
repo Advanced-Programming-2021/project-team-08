@@ -27,7 +27,7 @@ public class RotateCenterTransition extends Transition {
 
         Rotate rotate = new Rotate(0, axis);
         rotate.setPivotX(40);
-        rotate.setPivotY(60);
+        rotate.setPivotY(55);
         node.getTransforms().add(rotate);
         rotate.angleProperty().bind(angleY);
     }

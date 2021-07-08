@@ -24,7 +24,7 @@ public class GraphicCard {
         this.face = card.getCardData().getCardImage();
         shape = new ImageView(back);
         shape.setFitWidth(80);
-        shape.setFitHeight(120);
+        shape.setFitHeight(110);
         shape.setScaleX(-1);
 
         shape.setOnMouseClicked(event -> onClick(event));

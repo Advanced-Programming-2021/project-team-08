@@ -346,13 +346,14 @@ public class GamePlayScene extends Scene {
 
     public void firstSetupBoardGraphic(int playerNumber, ArrayList<Card> cards) {
         int i = 0;
+        double z = cards.size();
         for (Card c : cards) {
             GraphicCard gc = new GraphicCard(c);
             gBoard.getPlayerBoard(playerNumber).getDeck().appendCard(gc);
             gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
             gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutX() + 8);
             gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutY() + 5);
-            gc.getShape().setTranslateZ(-(double) i / 3);
+            gc.getShape().setTranslateZ(-(double) i * 3);
             i++;
         }
     }
@@ -377,7 +378,7 @@ public class GamePlayScene extends Scene {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 154);
+        thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 70);
         thisCard.setToY(playerBoard.getHand().getImageView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();
@@ -405,7 +406,7 @@ public class GamePlayScene extends Scene {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(slot.getImageView().getLayoutX() + 65);
+        thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         thisCard.setToY(slot.getImageView().getLayoutY() + 45);
 
         RotateTransition rotateTransition = new RotateTransition();
@@ -429,12 +430,12 @@ public class GamePlayScene extends Scene {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(slot.getImageView().getLayoutX());
-        thisCard.setToY(slot.getImageView().getLayoutY());
+        thisCard.setToX(slot.getImageView().getLayoutX() + 144);
+        thisCard.setToY(slot.getImageView().getLayoutY() + 30);
 
-        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, -45, Rotate.X_AXIS);
+        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
 
-        RotateCenterTransition rotateTransition1 = new RotateCenterTransition(c.getShape(), 800, 90, Rotate.Z_AXIS);
+        RotateCenterTransition rotateTransition1 = new RotateCenterTransition(c.getShape(), 800, -90, Rotate.Z_AXIS);
 
         FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.TO_BACK);
 
@@ -443,7 +444,7 @@ public class GamePlayScene extends Scene {
         parallelTransition.getChildren().add(rotateTransition);
         parallelTransition.getChildren().add(rotateTransition1);
 
-        SequentialTransition s =new SequentialTransition();
+        SequentialTransition s = new SequentialTransition();
         s.getChildren().add(flipCardAnimation);
         s.getChildren().add(parallelTransition);
 
