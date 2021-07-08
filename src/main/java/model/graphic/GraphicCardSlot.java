@@ -1,7 +1,6 @@
 package model.graphic;
 
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import model.enums.ZoneType;
 
 import java.util.ArrayList;

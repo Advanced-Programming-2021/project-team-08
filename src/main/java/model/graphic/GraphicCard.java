@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.cards.Card;
 import model.cards.data.CardData;
+import model.enums.CardStatus;
 
 public class GraphicCard {
     private static Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
@@ -16,6 +17,7 @@ public class GraphicCard {
     private ImageView shape;
     private CardData data;
     private GraphicCardSlot slot;
+    private CardStatus status = CardStatus.TO_BACK;
 
     public GraphicCard(Card card) {
         this.data = card.getCardData();
@@ -28,8 +30,20 @@ public class GraphicCard {
         shape.setOnMouseClicked(event -> onClick(event));
     }
 
+    public static Image getBack() {
+        return back;
+    }
+
     public void setSlot(GraphicCardSlot slot) {
         this.slot = slot;
+    }
+
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
     }
 
     private void onClick(MouseEvent event) {
@@ -61,7 +75,15 @@ public class GraphicCard {
                             GameManager.getInstance().summonCard();
                         });
                         menuItem2 = new MenuItem("Set");
-                        menuItem2.setOnAction(e -> System.out.println("set"));
+                        menuItem2.setOnAction(e -> {
+                            System.out.println("set");
+                            try {
+                                GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                            GameManager.getInstance().setCard();
+                        });
                         contextMenu.getItems().addAll(menuItem1, menuItem2);
                         break;
                     case SPELL:

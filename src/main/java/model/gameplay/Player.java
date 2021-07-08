@@ -1,13 +1,7 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Point3D;
-import javafx.util.Duration;
 import model.UserData;
-import model.animation.FlipCardAnimation;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -199,7 +193,7 @@ public class Player {
         ((MonsterCard) card).onSummon();
     }
 
-    public void setCard(Card card) throws Exception {
+    public CardSlot setCard(Card card) throws Exception {
         checkCardSelected(card);
         if (card.getCardSlot().getZoneType() != ZoneType.HAND) {
             throw new Exception("you can't set this card");
@@ -214,19 +208,20 @@ public class Player {
                 throw new Exception("you already summon/set in this turn");
             } else {
                 playerBoard.getHand().removeACard(card);
-                playerBoard.addMonsterCardToZone(card);
+                CardSlot cardSlot = playerBoard.addMonsterCardToZone(card);
                 card.onSet();
                 summonOrSetInThisTurn = true;
+                return cardSlot;
             }
         } else {
             if (playerBoard.isSpellTrapZoneFull()) {
                 throw new Exception("spell/trap card zone is full");
             }
             playerBoard.getHand().removeACard(card);
-            playerBoard.addSpellTrapCardToZone(card);
+            CardSlot cardSlot = playerBoard.addSpellTrapCardToZone(card);
             card.onSet();
+            return cardSlot;
         }
-
         // TODO: ۲۳/۰۶/۲۰۲۱ get tribute
     }
 

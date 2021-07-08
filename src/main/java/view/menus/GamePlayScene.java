@@ -5,6 +5,7 @@ import controller.User;
 import controller.gameplay.GameManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,11 +14,14 @@ import javafx.geometry.Point3D;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import model.animation.FlipCardAnimation;
+import model.animation.RotateCenterTransition;
 import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
+import model.enums.CardStatus;
 import model.gameplay.Player;
 import model.graphic.GraphicCard;
 import model.graphic.GraphicCardSlot;
@@ -382,7 +386,7 @@ public class GamePlayScene extends Scene {
         rotateTransition.setAxis(new Point3D(1, 0, 0));
         rotateTransition.setToAngle(45);
 
-        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
+        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
 
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().add(thisCard);
@@ -415,5 +419,34 @@ public class GamePlayScene extends Scene {
         parallelTransition.getChildren().add(rotateTransition);
 
         parallelTransition.play();
+    }
+
+    public void set(int playerNumber, int handCardNumber, int toSlotNumber) {
+        graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
+        GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster().get(toSlotNumber - 1);
+
+        TranslateTransition thisCard = new TranslateTransition();
+        thisCard.setDuration(Duration.millis(800));
+        thisCard.setNode(c.getShape());
+        thisCard.setToX(slot.getImageView().getLayoutX());
+        thisCard.setToY(slot.getImageView().getLayoutY());
+
+        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, -45, Rotate.X_AXIS);
+
+        RotateCenterTransition rotateTransition1 = new RotateCenterTransition(c.getShape(), 800, 90, Rotate.Z_AXIS);
+
+        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.TO_BACK);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().add(thisCard);
+        parallelTransition.getChildren().add(rotateTransition);
+        parallelTransition.getChildren().add(rotateTransition1);
+
+        SequentialTransition s =new SequentialTransition();
+        s.getChildren().add(flipCardAnimation);
+        s.getChildren().add(parallelTransition);
+
+        s.play();
     }
 }
