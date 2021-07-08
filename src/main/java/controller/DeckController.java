@@ -2,11 +2,15 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import model.Command;
 import model.Deck;
 import model.cards.data.CardData;
@@ -30,9 +34,11 @@ public class DeckController {
     public TextField cardNameTextField;
     public Label deckNameLabel;
     public Label cardNameLabel;
-    public AnchorPane scrollPane;
+    public VBox scrollPane;
     public AnchorPane listOfDecks;
     public AnchorPane deckSetting;
+    public Button nextDeckCreate;
+    public Label message;
 
     @FXML
     void initialize(){
@@ -41,10 +47,94 @@ public class DeckController {
         listOfDecks.setLayoutX(0);
         deckSetting.setLayoutX(1600);
         scrollPane.getChildren().clear();
-        deckMenu.setDecks(scrollPane, showingDeck);
+        setDecks(scrollPane, showingDeck);
+    }
+
+    public void setDecks(VBox scrollPane, ArrayList<Deck> decks) {
+        for (int i = 0; i < decks.size(); i++) {
+            Button deckButton = new Button();
+            Button deleteButton = new Button();
+            deleteButton.setText("Delete");
+            Button setActiveButton = new Button();
+            setActiveButton.setText("set active");
+            deckButton.setPrefWidth(5000);
+            Deck deck = decks.get(i);
+            HBox hBox = new HBox();
+            hBox.getChildren().add(0, deckButton);
+            hBox.getChildren().add(1, deleteButton);
+            hBox.getChildren().add(2, setActiveButton);
+            System.out.println(deck.getName());
+            if (Deck.isThisDeckValid(deck))
+                deckButton.setText(deck.getName() + " / valid \nnumber of cards of main deck: " + deck.getMainDeck().size() + "\n number of cards of side deck: " + deck.getSideDeck().size());
+            else
+                deckButton.setText(deck.getName() + " / invalid \nnumber of cards of main deck: " + deck.getMainDeck().size() + "\n number of cards of side deck: " + deck.getSideDeck().size());
+            scrollPane.getChildren().add(i, hBox);
+            deckButton.setPrefHeight(100);
+            deleteButton.setPrefHeight(100);
+            setActiveButton.setPrefHeight(100);
+            deckButton.setPrefWidth(700);
+            deleteButton.setPrefWidth(500);
+            setActiveButton.setPrefWidth(500);
+            double x = (i % 5) * (260) + 20;
+            double y = (i / 5) * (445) + 20;
+            deckButton.setLayoutX(x);
+            deckButton.setLayoutY(y);
+            deckButton.setOnMouseClicked(event -> {
+                deckSetting.setLayoutX(0.0);
+                listOfDecks.setLayoutX(1600.0);
+
+            });
+            setActiveButton.setOnMouseClicked(event -> {
+                ApplicationManger.getLoggedInUser().setActiveDeck(deck.getName());
+                message.setTextFill(Color.GREEN);
+                message.setText("deck activated successful");
+                message.setOpacity(1);
+                scrollPane.getChildren().clear();
+                setDecks(scrollPane,decks);
+            });
+            deleteButton.setOnMouseClicked(event -> {
+                Deck.removeADeck(deck.getName());
+                message.setTextFill(Color.GREEN);
+                message.setText("deck deleted successfully");
+                message.setOpacity(1);
+                scrollPane.getChildren().clear();
+                setDecks(scrollPane,decks);
+            });
+        }
     }
 
 
+    public void deckCreate(){
+        deckNameTextField.clear();
+        deckNameLabel.setOpacity(1);
+        deckNameTextField.setOpacity(1);
+        nextDeckCreate.setOpacity(1);
+
+    }
+
+    public  Label getMessage() {
+        return message;
+    }
+
+    public void nextDeckCreate(){
+        String deckName=deckNameTextField.getText();
+        if (Deck.isThereADeckWithThisName(deckName)) {
+            message.setTextFill(Color.RED);
+            message.setOpacity(1);
+            message.setText("deck with name " + deckName + " already exists");
+        } else {
+            String username = ApplicationManger.getLoggedInUser().getUsername();
+            Deck deck = new Deck(deckName, username);
+            ApplicationManger.getLoggedInUser().addDeck(deck);
+            message.setTextFill(Color.GREEN);
+            message.setOpacity(1);
+            message.setText("deck created successfully!");
+            ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
+            scrollPane.getChildren().clear();
+            setDecks(scrollPane,showingDeck);
+
+        }
+    }
     public AnchorPane getListOfDecks() {
         return listOfDecks;
     }

@@ -1,20 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controller.DeckController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeckController">
    <children>
       <Group layoutX="10.0" layoutY="10.0">
          <children>
             <AnchorPane fx:id="listOfDecks" prefHeight="900.0" prefWidth="1600.0" styleClass="deckBackground" stylesheets="@../CSS/deckStyle.css">
                <children>
-                  <ScrollPane layoutX="473.0" layoutY="222.0" prefHeight="332.0" prefWidth="668.0">
+                  <ScrollPane layoutX="473.0" layoutY="48.0" prefHeight="332.0" prefWidth="532.0">
                      <content>
-                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="968.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="968.0">
+                           <children>
+                              <VBox fx:id="scrollPane" layoutX="21.0" layoutY="24.0" prefHeight="236.0" prefWidth="453.0" spacing="10.0">
+                                 <children>
+                                    <HBox fx:id="deckHBox" prefHeight="186.0" prefWidth="453.0" spacing="10.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
                      </content>
                   </ScrollPane>
+                  <Label fx:id="message" layoutX="516.0" layoutY="727.0" opacity="0.0" prefHeight="55.0" prefWidth="448.0" style="-fx-background-color: white;" />
+                  <Button layoutX="698.0" layoutY="414.0" mnemonicParsing="false" onAction="#deckCreate" prefHeight="65.0" prefWidth="83.0" text="+">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="deckNameTextField" layoutX="615.0" layoutY="564.0" opacity="0.0" prefHeight="77.0" prefWidth="250.0" />
+                  <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="575.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" text="deckName">
+                     <font>
+                        <Font name="Harrington" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="nextDeckCreate" layoutX="991.0" layoutY="575.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" text="next" />
+                  <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css" />
