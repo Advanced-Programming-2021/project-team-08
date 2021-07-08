@@ -376,7 +376,8 @@ public class GameManager {
 
     public void setCard() {
         try {
-            getCurrentTurnPlayer().setCard(currentSelectedCard);
+            CardSlot s = getCurrentTurnPlayer().setCard(currentSelectedCard);
+            scene.set(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
             scene.log("set successfully");
             onCardActionDone();
         } catch (Exception e) {

@@ -6,24 +6,28 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import model.cards.Card;
+import model.enums.CardStatus;
 import model.graphic.GraphicCard;
 
 public class FlipCardAnimation extends Transition {
     private GraphicCard card;
     private int duration;
     private boolean flipped = false;
+    private CardStatus toStatus;
 
     private final DoubleProperty angleY = new SimpleDoubleProperty(0);
 
-    public FlipCardAnimation(GraphicCard card, int duration) {
+    public FlipCardAnimation(GraphicCard card, int duration, CardStatus to) {
+        toStatus = to;
         this.card = card;
         this.duration = duration;
         setCycleDuration(Duration.millis(duration));
         setInterpolator(Interpolator.LINEAR);
 
-        Rotate yRotate;
-        card.getShape().getTransforms().add(yRotate = new Rotate(0, Rotate.Y_AXIS));
+        Rotate yRotate = new Rotate(0, Rotate.Y_AXIS);
+        yRotate.setPivotX(40);
+        yRotate.setPivotY(55);
+        card.getShape().getTransforms().add(yRotate);
         yRotate.angleProperty().bind(angleY);
     }
 
@@ -35,12 +39,8 @@ public class FlipCardAnimation extends Transition {
             return;
         }
         if (nowRotation >= 90 && !flipped) {
-            card.getShape().setImage(card.getFace());
+            card.getShape().setImage(toStatus == CardStatus.TO_BACK ? GraphicCard.getBack() : card.getFace());
         }
-
-        //card.getShape().setRotate(frac * 180);
-        //card.getShape().getTransforms().add(new Rotate(frac * 180, Rotate.Y_AXIS));
-
         angleY.set(frac * 180);
     }
 }
