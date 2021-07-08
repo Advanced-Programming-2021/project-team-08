@@ -1,9 +1,12 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.cards.data.CardData;
@@ -21,6 +24,7 @@ public class ShopController {
     public AnchorPane scrollPane;
     public Label cardPrice;
     public Label userMoney;
+    public ImageView menuName;
     private User activeUser;
     private ShopScene shopScene;
 
@@ -41,6 +45,7 @@ public class ShopController {
     void initialize() {
         updateUserMoney();
         setSearchedImage(null);
+        menuName.setViewport(new Rectangle2D(0, 745, 960, 133));
     }
 
     public void buyCard(String cardName) {
@@ -89,5 +94,13 @@ public class ShopController {
         activeUser.getUserData().decreaseMoney(cardData.getPrice());
         activeUser.getUserData().addCard(cardData.getCardId());
         updateUserMoney();
+    }
+
+    public Label getMessageLabel() {
+        return buyMessageLabel;
+    }
+
+    public void back(MouseEvent mouseEvent) {
+        ApplicationManger.goToScene("mainScene.fxml");
     }
 }

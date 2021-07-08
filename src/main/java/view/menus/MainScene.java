@@ -5,15 +5,13 @@ import controller.DeckController;
 import controller.MainMenuController;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Transition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.animation.SpriteAnimation;
@@ -111,6 +109,8 @@ public class MainScene extends Scene {
         });
     }
 
+
+
     public int logout() {
         System.out.println("user logged out successfully!");
         ApplicationManger.logoutCurrentUser();
@@ -122,34 +122,28 @@ public class MainScene extends Scene {
     private SequentialTransition setupInactiveAnimation(ImageView imageView) {
         SequentialTransition sequentialTransition = new SequentialTransition();
         sequentialTransition.setCycleCount(-1);
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(1,10, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(2,10, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(3,10, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(4,10, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(5,9, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(6,8, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(1, 10, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(2, 10, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(3, 10, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(4, 10, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(5, 9, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(6, 8, imageView));
         return sequentialTransition;
     }
 
     private SequentialTransition setupActiveAnimation(ImageView imageView) {
         SequentialTransition sequentialTransition = new SequentialTransition();
         sequentialTransition.setCycleCount(-1);
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(1,5, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(2,5, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(3,5, imageView));
-        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(4,4, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(1, 5, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(2, 5, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(3, 5, imageView));
+        sequentialTransition.getChildren().add(sequentialTransition.getChildren().size(), setSpriteAnimation(4, 4, imageView));
         return sequentialTransition;
     }
 
-    private void stop(SequentialTransition sequentialTransition) {
-        sequentialTransition.stop();
-        for (int i = 0; i < sequentialTransition.getChildren().size(); i++) {
-            sequentialTransition.getChildren().get(i).stop();
-        }
-    }
 
     private SpriteAnimation setSpriteAnimation(int column, int count, ImageView imageView) {
-        SpriteAnimation animation = new SpriteAnimation(imageView, Duration.millis(1000), count, 1,0,0,632,101);
+        SpriteAnimation animation = new SpriteAnimation(imageView, Duration.millis(1000), count, 1, 0, 0, 632, 101);
         animation.setOffsetX((column - 1) * 632);
         animation.setLastIndex(count - 1);
         return animation;
@@ -179,21 +173,23 @@ public class MainScene extends Scene {
 class SeriesAnimation {
     ArrayList<Transition> transitions = new ArrayList<>();
     private ImageView imageView;
+
     SeriesAnimation(ImageView imageView) {
         this.imageView = imageView;
-        transitions.add(0,setSpriteAnimation(1, 10));
-        transitions.add(1,setSpriteAnimation(2, 10));
-        transitions.add(2,setSpriteAnimation(3, 10));
-        transitions.add(3,setSpriteAnimation(4, 10));
-        transitions.add(4,setSpriteAnimation(5, 9));
-        transitions.add(5,setSpriteAnimation(6, 8));
+        transitions.add(0, setSpriteAnimation(1, 10));
+        transitions.add(1, setSpriteAnimation(2, 10));
+        transitions.add(2, setSpriteAnimation(3, 10));
+        transitions.add(3, setSpriteAnimation(4, 10));
+        transitions.add(4, setSpriteAnimation(5, 9));
+        transitions.add(5, setSpriteAnimation(6, 8));
     }
 
     private SpriteAnimation setSpriteAnimation(int column, int count) {
-        SpriteAnimation animation = new SpriteAnimation(imageView, Duration.millis(1000), count, 1,0,0,632,101);
+        SpriteAnimation animation = new SpriteAnimation(imageView, Duration.millis(1000), count, 1, 0, 0, 632, 101);
         animation.setOffsetX((column - 1) * 632);
         animation.setLastIndex(count - 1);
-        return animation;    }
+        return animation;
+    }
 
     public void play() {
         transitions.get(0).setOnFinished(event -> {
@@ -216,7 +212,6 @@ class SeriesAnimation {
         });
         transitions.get(0).play();
     }
-
 
 
 }

@@ -3,7 +3,12 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.ShopController;
 import controller.User;
+import javafx.animation.FadeTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -13,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import model.cards.data.CardData;
 
 
@@ -29,6 +35,7 @@ public class ShopScene extends Scene {
     private ShopController shopController;
     private Label cardPrice;
     private Label userMoney;
+    private Label message;
 
     public ShopScene() {
         this.activeUser = ApplicationManger.getLoggedInUser();
@@ -40,6 +47,7 @@ public class ShopScene extends Scene {
         this.shopController = shopController;
         cardPrice = shopController.getCardPrice();
         userMoney = shopController.getUserMoney();
+        message = shopController.getMessageLabel();
     }
 
 
@@ -131,10 +139,17 @@ public class ShopScene extends Scene {
                 notEnoughMoneyAction();
             }else buyCard(cardData);
         });
+        cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                cardImage.setCursor(Cursor.HAND);
+            }
+        });
     }
 
     private void notEnoughMoneyAction() {
         userMoney.setTextFill(Color.RED);
+        message.setText("not enough money.");
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
@@ -155,7 +170,7 @@ public class ShopScene extends Scene {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             shopController.buyACard(cardData);
-            System.out.println("you bought the card :)");
+            message.setText("you bought the card :)");
         }
     }
 

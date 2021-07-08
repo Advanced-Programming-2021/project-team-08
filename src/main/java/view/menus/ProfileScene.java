@@ -112,4 +112,8 @@ public class ProfileScene extends Scene {
         nicknameChangeMessage.setText("");
         newNicknameField.setText("");
     }
+
+    public void back(ActionEvent actionEvent) {
+        ApplicationManger.goToScene("mainScene.fxml");
+    }
 }
