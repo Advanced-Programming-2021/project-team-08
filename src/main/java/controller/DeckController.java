@@ -52,17 +52,32 @@ public class DeckController {
 
     public void setDecks(VBox scrollPane, ArrayList<Deck> decks) {
         for (int i = 0; i < decks.size(); i++) {
+            Deck deck = decks.get(i);
+            HBox hBox = new HBox();
             Button deckButton = new Button();
             Button deleteButton = new Button();
             deleteButton.setText("Delete");
             Button setActiveButton = new Button();
-            setActiveButton.setText("set active");
-            deckButton.setPrefWidth(5000);
-            Deck deck = decks.get(i);
-            HBox hBox = new HBox();
             hBox.getChildren().add(0, deckButton);
             hBox.getChildren().add(1, deleteButton);
-            hBox.getChildren().add(2, setActiveButton);
+            if (ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())){
+                Label setActiveLabel = new Label();
+                setActiveLabel.setText("  active");
+                hBox.getChildren().add(2, setActiveLabel);
+                setActiveLabel.setPrefHeight(100);
+                setActiveLabel.setPrefWidth(500);
+
+            }
+            else {
+                setActiveButton.setText("set active");
+                hBox.getChildren().add(2, setActiveButton);
+                setActiveButton.setPrefHeight(100);
+                setActiveButton.setPrefWidth(500);
+
+            }
+            deckButton.setPrefWidth(5000);
+
+
             System.out.println(deck.getName());
             if (Deck.isThisDeckValid(deck))
                 deckButton.setText(deck.getName() + " / valid \nnumber of cards of main deck: " + deck.getMainDeck().size() + "\n number of cards of side deck: " + deck.getSideDeck().size());
@@ -71,10 +86,9 @@ public class DeckController {
             scrollPane.getChildren().add(i, hBox);
             deckButton.setPrefHeight(100);
             deleteButton.setPrefHeight(100);
-            setActiveButton.setPrefHeight(100);
+
             deckButton.setPrefWidth(700);
             deleteButton.setPrefWidth(500);
-            setActiveButton.setPrefWidth(500);
             double x = (i % 5) * (260) + 20;
             double y = (i / 5) * (445) + 20;
             deckButton.setLayoutX(x);
@@ -134,13 +148,6 @@ public class DeckController {
             setDecks(scrollPane,showingDeck);
 
         }
-    }
-    public AnchorPane getListOfDecks() {
-        return listOfDecks;
-    }
-
-    public AnchorPane getDeckSetting() {
-        return deckSetting;
     }
 
     public DeckController() {
