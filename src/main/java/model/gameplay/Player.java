@@ -36,7 +36,6 @@ public class Player {
 
         EventNoParam e = new EventNoParam();
         e.addListener(gameManager::firstSetup);
-        drawCard(5, e);
     }
 
     public UserData getUserData() {
@@ -69,7 +68,6 @@ public class Player {
 
     public void decreaseLP(int amount) {
         LP -= amount;
-        gameManager.getScene().updateUI();
         if (LP <= 0) {
             LP = 0;
             gameManager.checkGameOver();
@@ -78,7 +76,6 @@ public class Player {
 
     public void increaseLP(int amount) {
         LP += amount;
-        gameManager.getScene().updateUI();
     }
 
     public PlayerBoard getPlayerBoard() {
