@@ -11,3 +11,8 @@
 .deckSetting {
     -fx-background-image: url("../asset/deckMenu/bg_vgs.jpg");
 }
+
+.addOrDeleteButton{
+    -fx-font-size: 50;
+    -fx-text-origin: center;
+}
