@@ -7,25 +7,28 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class SoundManager extends Application {
+public class SoundManager {
 
     MediaPlayer mediaPlayer;
 
     public void playSound(String location) {
-        if (new File(location).exists()) System.out.println("file is here");
+        Media hit = new Media(new File(location).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
+    }
+
+    public void playMusic(String location) {
         Media hit = new Media(new File(location).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.play();
-
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public void playBackgroundSound() {
+        Media hit = new Media(new File("musics/ForestWalk.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.play();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        playSound("musics/ForestWalk.mp3");
-    }
 }
