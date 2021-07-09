@@ -34,11 +34,13 @@ public class CardCreatorScene extends Scene {
     public Label effectLabel;
     public ScrollPane effectScroll;
     public Label message;
+    public Label cardPrice;
+    public ChoiceBox monsterCardType;
     private CardCreatorController controller;
     private HashMap<CardData, Effect> effects = new HashMap<>();
 
     public CardCreatorScene() {
-        this.controller = new CardCreatorController();
+        this.controller = new CardCreatorController(this);
     }
 
     @Override
@@ -89,6 +91,7 @@ public class CardCreatorScene extends Scene {
             label.setDisable(true);
             effects.put(cardData, effect);
             effectLabel.setText(effectLabel.getText() + "\n " + effect.getClass().getSimpleName());
+            updateCost(null);
         });
         return label;
     }
@@ -98,15 +101,36 @@ public class CardCreatorScene extends Scene {
             if (!newValue.matches("\\d*")) {
                 textField.setText(newValue.replaceAll("[^\\d]", ""));
             }
+            if (newValue.length() > 4) {
+                textField.setText(newValue.substring(0,4));
+                message.setText("maximum number of attack and defence is 4999");
+            }
+            if (newValue.length() == 4 && !newValue.matches("[01234]\\d\\d\\d")) {
+                textField.setText(newValue.substring(0,3));
+                message.setText("maximum number of attack and defence is 4999");
+            }
         });
     }
 
 
     public void createCard(ActionEvent actionEvent) {
+        controller.createCard(defenceField.getText(), attackField.getText(), effects, nameField.getText(), cardDescription.getText(), (String)cardAttribute.getValue(), (String)cardType.getValue(), (String)monsterCardType.getValue());
+        try {
+            System.out.println("attack is : " + attackField.getText() + "  defence is : " + defenceField.getText() + " card name is: " +nameField.getText());
+            System.out.println("attribute is : " + cardAttribute.getValue() + " card type is : " + cardType.getValue());
+            System.out.println("description is : " + cardDescription.getText());
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
+
     public void updateCost(KeyEvent keyEvent) {
-        //int cost = controller.getCost()
+        int cost = controller.getCost(defenceField.getText(), attackField.getText(), effects);
+        int level = controller.levelCalculator(defenceField.getText(), attackField.getText());
+        cardPrice.setText(String.valueOf(cost));
+        this.level.setText(String.valueOf(level));
     }
 
     public void back(ActionEvent actionEvent) {
@@ -119,5 +143,9 @@ public class CardCreatorScene extends Scene {
 
     public void cancelEffect(ActionEvent actionEvent) {
         effectScroll.setVisible(false);
+    }
+
+    public void setMessage (String message) {
+        this.message.setText(message);
     }
 }

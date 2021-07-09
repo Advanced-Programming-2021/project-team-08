@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@../CSS/CardCreatingStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.CardCreatorScene">
@@ -12,9 +13,9 @@
        <Label layoutX="50" layoutY="140" prefHeight="70" prefWidth="150" styleClass="label1" text="name" />
        <TextField fx:id="nameField" layoutX="250" layoutY="150" styleClass="text-field" />
        <Label layoutX="50" layoutY="240" prefHeight="70" prefWidth="150" styleClass="label1" text="attack" />
-       <TextField fx:id="attackField" layoutX="250" layoutY="250" onKeyReleased="#updateCost" styleClass="text-field" />
+       <TextField fx:id="attackField" layoutX="250" layoutY="250" onKeyReleased="#updateCost" styleClass="text-field" text="0" />
        <Label layoutX="50" layoutY="340" prefHeight="70" prefWidth="150" styleClass="label1" text="defence" />
-       <TextField fx:id="defenceField" layoutX="250" layoutY="350" onKeyReleased="#updateCost" styleClass="text-field" />
+       <TextField fx:id="defenceField" layoutX="250" layoutY="350" onKeyReleased="#updateCost" styleClass="text-field" text="0" />
        <Label layoutX="50" layoutY="440" prefHeight="70" prefWidth="150" styleClass="label1" text="attribute" />
       <ChoiceBox fx:id="cardAttribute" layoutX="250" layoutY="450" prefWidth="150.0">
           <items>
@@ -38,20 +39,48 @@
                </FXCollections>
            </items>
        </ChoiceBox>
+       <Label layoutX="50" layoutY="630" prefHeight="70" prefWidth="200" styleClass="label1" text="Monster-type" />
+       <ChoiceBox fx:id="monsterCardType" layoutX="280" layoutY="640" prefWidth="150.0" styleClass="choice-box">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="Beast-Warrior" />
+                   <String fx:value="Warrior" />
+                   <String fx:value="Aqua" />
+                   <String fx:value="Fiend" />
+                   <String fx:value="Beast" />
+                   <String fx:value="Pyro" />
+                   <String fx:value="Spellcaster" />
+                   <String fx:value="Thunder" />
+                   <String fx:value="Dragon" />
+                   <String fx:value="Machine" />
+                   <String fx:value="Rock" />
+                   <String fx:value="Cyberse" />
+                   <String fx:value="Fairy" />
+                   <String fx:value="Sea Serpent" />
+               </FXCollections>
+           </items>
+       </ChoiceBox>
        <Label layoutX="850" layoutY="100" prefHeight="70" prefWidth="150" styleClass="label1" text="description" />
       <TextArea fx:id="cardDescription" layoutX="850" layoutY="170" prefHeight="200.0" prefWidth="400.0" styleClass="text-area1" />
        <Label layoutX="850" layoutY="400" prefHeight="70" prefWidth="150" styleClass="label1" text="effects:" />
        <Button layoutX="1320" layoutY="480" mnemonicParsing="false" onAction="#addEffect" text="add" />
        <Label fx:id="effectLabel" alignment="TOP_LEFT" layoutX="850" layoutY="480" prefHeight="70" prefWidth="450" styleClass="label2" wrapText="true" />
-       <ScrollPane fx:id="effectScroll" id="scrollBar" hbarPolicy="NEVER" layoutX="850.0" layoutY="700.0" prefHeight="150.0" prefWidth="520.0" visible="false">
+       <ScrollPane id="scrollBar" fx:id="effectScroll" hbarPolicy="NEVER" layoutX="850.0" layoutY="700.0" prefHeight="150.0" prefWidth="520.0" visible="false">
            <content>
                <AnchorPane fx:id="effectPane" minHeight="200.0" minWidth="1200.0" prefHeight="600.0" prefWidth="520" />
            </content>
        </ScrollPane>
-       <Button layoutX="1320" layoutY="550" mnemonicParsing="false" cancelButton="true" onAction="#cancelEffect" text="cancel"/>
+       <Button cancelButton="true" layoutX="1320" layoutY="550" mnemonicParsing="false" onAction="#cancelEffect" text="cancel" />
 
-       <Label fx:id="message" layoutX="400" layoutY="750" prefWidth="600" prefHeight="70" styleClass="label2" />
+       <Label fx:id="message" layoutX="300" layoutY="750" prefHeight="70" prefWidth="500" styleClass="label2" />
        <Button layoutX="1400" layoutY="800" mnemonicParsing="false" onAction="#createCard" text="create" />
        <Button layoutX="50" layoutY="800" mnemonicParsing="false" onAction="#back" text="Back" />
+
+       <Label fx:id="cardPrice" layoutX="1300" layoutY="50" prefHeight="70" prefWidth="200" styleClass="label3" text="0"/>
+       <ImageView layoutX="1500" layoutY="50" fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/cardCreating/Gold_21.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
