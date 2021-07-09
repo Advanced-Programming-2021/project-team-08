@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.CardOptionsScene"
+            stylesheets="@../CSS/CardCreatingOptionsStyle.css" styleClass="background">
+    <children>
+        <Button layoutX="1100" layoutY="100" mnemonicParsing="false" text="create card" onAction="#cardCreatorRun" styleClass="menu-option"/>
+        <Button layoutX="1100" layoutY="300"  mnemonicParsing="false" text="import card" onAction="#importCardRun" styleClass="menu-option"/>
+        <Button layoutX="1100" layoutY="500"  mnemonicParsing="false" text="export card" onAction="#exportCardRun" styleClass="menu-option"/>
+        <Button layoutX="100" layoutY="800"  mnemonicParsing="false" text="back" onAction="#back" styleClass="back"/>
+    </children>
+</AnchorPane>

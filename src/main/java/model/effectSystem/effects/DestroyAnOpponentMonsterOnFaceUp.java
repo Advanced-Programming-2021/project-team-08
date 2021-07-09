@@ -11,6 +11,7 @@ public class DestroyAnOpponentMonsterOnFaceUp extends Effect {
 
     public DestroyAnOpponentMonsterOnFaceUp(ArrayList<String> args) {
         super(args);
+        price = 500;
     }
 
     @Override

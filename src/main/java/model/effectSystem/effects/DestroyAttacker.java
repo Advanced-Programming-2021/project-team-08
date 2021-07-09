@@ -11,6 +11,7 @@ public class DestroyAttacker extends Effect {
 
     public DestroyAttacker(ArrayList<String> args) {
         super(args);
+        price = 500;
     }
 
     @Override

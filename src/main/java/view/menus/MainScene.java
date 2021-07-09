@@ -38,6 +38,8 @@ public class MainScene extends Scene {
     public Label shopLabel;
     public Label profileLabel;
     public Label exitLabel;
+    public ImageView card;
+    public Label cardLabel;
     private Image menuHoverImage;
     private Image menuImage;
 
@@ -75,6 +77,7 @@ public class MainScene extends Scene {
         setMenuItemAnimation(duel, duelLabel);
         setMenuItemAnimation(deck, deckLabel);
         setMenuItemAnimation(shop, shopLabel);
+        setMenuItemAnimation(card, cardLabel);
         setMenuItemAnimation(profile, profileLabel);
         setMenuItemAnimation(exit, exitLabel);
     }
@@ -167,6 +170,10 @@ public class MainScene extends Scene {
 
     public void exitGame(MouseEvent mouseEvent) {
         System.exit(0);
+    }
+
+    public void card(MouseEvent mouseEvent) {
+        goToScene("cardCreatingOptions.fxml");
     }
 }
 

@@ -13,6 +13,7 @@ public class DecreaseOwnerLPOnAttackAnOpponentMonster extends Effect {
 
     public DecreaseOwnerLPOnAttackAnOpponentMonster(ArrayList<String> args) {
         super(args);
+        price = 600;
         amount = Integer.parseInt(args.get(0));
     }
 

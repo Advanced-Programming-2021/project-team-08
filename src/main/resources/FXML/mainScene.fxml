@@ -15,9 +15,11 @@
       <Label fx:id="deckLabel"   layoutX="484" layoutY="320"  styleClass="menu-label" text = "deck editor" onMouseClicked="#deckRun"/>
       <ImageView fx:id="shop"     layoutX="484" layoutY="420"  styleClass="menu-item"/>
       <Label fx:id="shopLabel"    layoutX="484" layoutY="420"  styleClass="menu-label" text = "shop" onMouseClicked="#shopRun"/>
-      <ImageView fx:id="profile"  layoutX="484" layoutY="520"  styleClass="menu-item"/>
-      <Label fx:id="profileLabel"    layoutX="484" layoutY="520"  styleClass="menu-label" text = "profile" onMouseClicked="#profileRun"/>
-      <ImageView fx:id="exit"     layoutX="484" layoutY="620"  styleClass="menu-item"/>
-      <Label fx:id="exitLabel"    layoutX="484" layoutY="620"  styleClass="menu-label" text = "exit" onMouseClicked="#exitGame"/>
+      <ImageView fx:id="card"     layoutX="484" layoutY="520"  styleClass="menu-item"/>
+      <Label fx:id="cardLabel"    layoutX="484" layoutY="520"  styleClass="menu-label" text = "card" onMouseClicked="#card"/>
+      <ImageView fx:id="profile"  layoutX="484" layoutY="620"  styleClass="menu-item"/>
+      <Label fx:id="profileLabel"    layoutX="484" layoutY="620"  styleClass="menu-label" text = "profile" onMouseClicked="#profileRun"/>
+      <ImageView fx:id="exit"     layoutX="484" layoutY="720"  styleClass="menu-item"/>
+      <Label fx:id="exitLabel"    layoutX="484" layoutY="720"  styleClass="menu-label" text = "exit" onMouseClicked="#exitGame"/>
    </children>
 </AnchorPane>

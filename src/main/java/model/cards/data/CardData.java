@@ -100,7 +100,7 @@ public abstract class CardData {
 
     public void setEffect(String effectsJson) {
         effectString = effectsJson;
-        Matcher matcher = Pattern.compile("\\{[^\\n]+?\\}").matcher(effectsJson);
+        Matcher matcher = Pattern.compile("\\{[^\\n]+?}").matcher(effectsJson);
         while (matcher.find()) {
             Gson gson = new Gson();
             JsonObject jsonObject = JsonParser.parseString(matcher.group()).getAsJsonObject();

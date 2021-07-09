@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class BanOpponentTrapUse extends Effect {
     public BanOpponentTrapUse(ArrayList<String> args) {
         super(args);
+        price = 600;
     }
 
     @Override

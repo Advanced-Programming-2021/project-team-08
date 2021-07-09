@@ -11,6 +11,7 @@ public class DestroyAttackerWithoutDecreaseLP extends Effect {
 
     public DestroyAttackerWithoutDecreaseLP(ArrayList<String> args) {
         super(args);
+        price = 450;
     }
 
     @Override

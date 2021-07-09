@@ -1,0 +1,30 @@
+.background {
+    -fx-background-image: url("../asset/cardCreating/3622360.jpg");
+}
+
+.menu-option {
+    -fx-pref-width: 400;
+    -fx-pref-height: 100;
+    -fx-background-color: #061466;
+    -fx-font: 40px Arial;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.menu-option:hover {
+    -fx-background-color: #1851de;
+    -fx-cursor: hand;
+}
+
+.back {
+    -fx-pref-width: 200;
+    -fx-pref-height: 60;
+    -fx-background-color: #061466;
+    -fx-font: 40px Arial;
+    -fx-text-fill: white;
+}
+
+.back:hover {
+    -fx-background-color: #1851de;
+    -fx-cursor: hand;
+}

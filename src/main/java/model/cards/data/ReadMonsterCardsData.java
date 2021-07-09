@@ -43,7 +43,9 @@ public class ReadMonsterCardsData {
         setMonsterDescription(rowData[7].trim().replaceAll(" comma", ",").replaceAll("\\(nextline\\)", "\n"), monsterCardData);
         setMonsterPrice(rowData[8].trim(), monsterCardData);
         setMonsterId(rowData[9].trim(), monsterCardData);
-        if (rowData.length == 11) monsterCardData.setEffect(rowData[7].replace(" comma", ",").trim());
+        if (rowData.length == 11) {
+            monsterCardData.setEffect(rowData[10].replace(" comma", ",").trim());
+        }
     }
 
     private void setMonsterName(String name, MonsterCardData monsterCardData) {

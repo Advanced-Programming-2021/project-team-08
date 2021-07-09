@@ -11,7 +11,9 @@ import java.util.Set;
 public abstract class Effect {
     protected static GameManager gameManager;
     protected Card card;
+    protected int price;
     private static Set<Class<? extends Effect>> allEffects;
+    private static ArrayList<Effect> effects = new ArrayList<>();
 
     static {
         Reflections r = new Reflections("model.effectSystem.effects");
@@ -46,6 +48,7 @@ public abstract class Effect {
     }
 
     public Effect(ArrayList<String> args) {
+        effects.add(this);
     }
 
     public boolean entryCondition() {
@@ -55,5 +58,19 @@ public abstract class Effect {
 
     public abstract void activate();
 
+    public static Set<Class<? extends Effect>> getAllEffects() {
+        return allEffects;
+    }
 
+    public static ArrayList<Effect> getEffects() {
+        return effects;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Card getCard() {
+        return card;
+    }
 }

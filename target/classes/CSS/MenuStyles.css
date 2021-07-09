@@ -65,3 +65,15 @@
     -fx-background-color: rgb(22, 15, 146);
     -fx-cursor: hand;
 }
+
+.back {
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+    -fx-font: 30px arial ;
+}
+
+.back:hover {
+    -fx-background-color: rgb(22, 15, 146);
+    -fx-cursor: hand;
+}
