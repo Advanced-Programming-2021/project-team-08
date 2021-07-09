@@ -1,7 +1,7 @@
 package view.menus;
 
+import controller.DuelController;
 import controller.GamePlaySceneController;
-import controller.User;
 import controller.gameplay.GameManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
@@ -59,11 +59,13 @@ public class GamePlayScene extends Scene {
     @FXML
     public void initialize() {
         sceneController = new GamePlaySceneController(this);
-        //firstSetupUI();
         gBoard = new graphicBoard(board);
+        GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
 
         try {
-            new GameManager(false, User.getUserByUsername("Abolfazl").getUserData(), null, this, sceneController);
+            //new GameManager(false, User.getUserByUsername("Abolfazl").getUserData(), null, this, sceneController);
+            new GameManager(data, this);
+            firstSetupUI(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,9 +75,9 @@ public class GamePlayScene extends Scene {
         //sceneController = new GamePlaySceneController(this);
     }
 
-    private void firstSetupUI() {
-        player1Nickname_T.setText(sceneController.getGameManager().getPlayer1().getUserData().getNickname());
-        player2Nickname_T.setText(sceneController.getGameManager().getPlayer2().getUserData().getNickname());
+    private void firstSetupUI(GamePlaySceneController.DuelData data) {
+        player1Nickname_T.setText(data.getFirstPlayer().getNickname());
+        player2Nickname_T.setText(data.getSecondPlayer().getNickname());
     }
 
     public void updateUI() {
@@ -379,7 +381,7 @@ public class GamePlayScene extends Scene {
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 70);
+        thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 73);
         thisCard.setToY(playerBoard.getHand().getImageView().getLayoutY());
 
         RotateTransition rotateTransition = new RotateTransition();
@@ -402,7 +404,10 @@ public class GamePlayScene extends Scene {
     public void summon(int playerNumber, int handCardNumber, int toSlotNumber) {
         graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
-        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber);
+
+        playerBoard.getHand().getAllCards().remove(c);
+        playerBoard.getMonster(toSlotNumber).setCard(c);
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
@@ -426,13 +431,16 @@ public class GamePlayScene extends Scene {
     public void setMonster(int playerNumber, int handCardNumber, int toSlotNumber) {
         graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
-        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber - 1);
+        GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber);
+
+        playerBoard.getHand().getAllCards().remove(c);
+        playerBoard.getMonster(toSlotNumber).setCard(c);
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
-        thisCard.setToY(slot.getImageView().getLayoutY() + 30);
+        thisCard.setToY(slot.getImageView().getLayoutY() + 35);
 
         RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
 

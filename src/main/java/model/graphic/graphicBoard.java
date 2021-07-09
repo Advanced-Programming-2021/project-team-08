@@ -67,8 +67,8 @@ public class graphicBoard {
             TranslateTransition move = new TranslateTransition();
             move.setDuration(Duration.millis(800));
             move.setNode(c.getShape());
-            move.setToX(graveyard.getImageView().getLayoutX() + 144);
-            move.setToY(graveyard.getImageView().getLayoutY() + 30);
+            move.setToX(graveyard.getImageView().getLayoutX() + 5);
+            move.setToY(graveyard.getImageView().getLayoutY() + 25);
             move.play();
         }
     }

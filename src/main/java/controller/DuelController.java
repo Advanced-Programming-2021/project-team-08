@@ -1,11 +1,17 @@
 package controller;
 
+import controller.gameplay.AI_Player;
 import model.Deck;
 import view.menus.GamePlayScene;
 
 public class DuelController {
 
     private User activeUser;
+    private static GamePlaySceneController.DuelData currentDuelData;
+
+    public static GamePlaySceneController.DuelData getCurrentDuelData() {
+        return currentDuelData;
+    }
 
     public DuelController() {
         activeUser = ApplicationManger.getLoggedInUser();
@@ -48,12 +54,11 @@ public class DuelController {
         }
 
         if (isPlayer) {
-            //gamePlaySceneController.startDuel(rounds, true, secondUser.getUserData());
-            ApplicationManger.goToScene("gameplayScene.fxml");
+            currentDuelData = new GamePlaySceneController.DuelData(rounds, true, activeUser.getUserData(), secondUser.getUserData());
         } else {
-            //gamePlaySceneController.startDuel(rounds, false, null);
-            ApplicationManger.goToScene("gameplayScene.fxml");
+            currentDuelData = new GamePlaySceneController.DuelData(rounds, false, activeUser.getUserData(), AI_Player.getAIUserData());
         }
+        ApplicationManger.goToScene("gameplayScene.fxml");
         return "";
     }
 }
