@@ -12,9 +12,17 @@
 }
 
 .label2 {
+    -fx-alignment: center;
     -fx-background-color: lightblue;
     -fx-background-radius: 10;
     -fx-font: 20px Arial;
+}
+
+.label3 {
+    -fx-background-color: lightblue;
+    -fx-background-radius: 10;
+    -fx-font: 40px Arial;
+    -fx-alignment: center;
 }
 
 .text-field {

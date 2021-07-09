@@ -1,36 +1,36 @@
 Name,Type ,Icon (Property),Description,Status,Price,Id,Effect
-Trap Hole,Trap,Normal,When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.,Unlimited,2000,42,{"DestroyCardOnFlip" : ["1000"]}
-Mirror Force,Trap,Normal,When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.,Unlimited,2000,43,{"OnAttackDestroyAll":[]}
-Magic Cylinder,Trap,Normal,When an opponent's monster declares an attack: Target the attacking monster; negate the attack comma and if you do comma inflict damage to your opponent equal to its ATK.,Unlimited,2000,44, {"CancelAttackAndCounterAttack" : []}
-Mind Crush,Trap,Normal,Declare 1 card name; if that card is in your opponent's hand comma they must discard all copies of it comma otherwise you discard 1 random card.,Unlimited,2000,45,
-Torrential Tribute,Trap,Normal,When a monster(s) is Summoned: Destroy all monsters on the field.,Unlimited,2000,46,{"DestroyAllMonstersOnSummonAMonster" : []}
-Time Seal,Trap,Normal,Skip the Draw Phase of your opponent's next turn.,Limited,2000,47, {"BanOpponentFromGetCard" : ["1"]}
-Negate Attack,Trap,Counter,When an opponent's monster declares an attack: Target the attacking monster; negate the attack comma then end the Battle Phase.,Unlimited,3000,48, {"CancelAttackAndEndTurn" : []}
-Solemn Warning,Trap,Counter,When a monster(s) would be Summoned comma OR when a Spell/Trap Card comma or monster effect comma is activated that includes an effect that Special Summons a monster(s): Pay 2000 LP; negate the Summon or activation comma and if you do comma destroy it.,Unlimited,3000,49,
-Magic Jammer,Trap,Counter,When a Spell Card is activated: Discard 1 card; negate the activation camma and if you do camma destroy it.,Unlimited,3000,50,
-Call Of The Haunted,Trap,Continuous,Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position. When this card leaves the field comma destroy that monster. When that monster is destroyed comma destroy this card.,Unlimited,3500,51,{"SummonACardFromGraveyard":[]}
-Vanity's Emptiness,Trap,Continuous,Neither player can Special Summon monsters. If a card is sent from the Deck or the field to your Graveyard: Destroy this card.,Limited,3500,52,
-Wall Of Revealing Light,Trap,Continuous,Activate by paying any multiple of 1000 Life Points. Monsters your opponent controls cannot attack if their ATK is less than or equal to the amount you paid.,Limited,3500,53,
-Monster Reborn,Spell,Normal,Target 1 monster in either GY; Special Summon it.,Limited,2500,54,
-Terraforming,Spell,Normal,Add 1 Field Spell from your Deck to your hand.,Limited,2500,55,
-Pot Of Greed,Spell,Normal,Draw 2 cards.,Limited,2500,56,
-Raigeki,Spell,Normal,Destroy all monsters your opponent controls.,Limited,2500,57,{"DestroyAllOpponentMonsters":[]}
-Change Of Heart,Spell,Normal,Target 1 monster your opponent controls; take control of it until the End Phase.,Limited,2500,58,{"ControlAMonster" : []}
-Swords Of Revealing Light,Spell,Normal,After this card's activation comma it remains on the field comma but destroy it during the End Phase of your opponent's 3rd turn. When this card is activated: If your opponent controls a face-down monster comma flip all monsters they control face-up. While this card is face-up on the field comma your opponent's monsters cannot declare an attack.,Unlimited,2500,59,
-Harpie's Feather Duster,Spell,Normal,Destroy all Spells and Traps your opponent controls.,Limited,2500,60,{"DestroyAllOpponentSpellTrap" : []}
-Dark Hole,Spell,Normal,Destroy all monsters on the field.,Unlimited,2500,61,{"DestroyAllMonsters":[]}
-Supply Squad,Spell,Continuous,Once per turn comma if a monster(s) you control is destroyed by battle or card effect: Draw 1 card.,Unlimited,4000,62,{"DrawACardFromDeckOnDestroyAtLeastOneMonster":[]}
-Spell Absorption,Spell,Continuous,Each time a Spell Card is activated comma gain 500 Life Points immediately after it resolves.,Unlimited,4000,63, {"IncreaseLPOnSpellActivate" : [500]}
-Messenger Of Peace,Spell,Continuous,Monsters with 1500 or more ATK cannot declare an attack. Once per turn comma during your Standby Phase comma pay 100 LP or destroy this card.,Unlimited,4000,64,
-Twin Twisters,Spell,Quick-play,Discard 1 card comma then target up to 2 Spells/Traps on the field; destroy them.,Unlimited,3500,65,
-Mystical Space Typhoon,Spell,Quick-play,Target 1 Spell/Trap on the field; destroy that target.,Unlimited,3500,66,
-Ring Of Defense,Spell,Quick-play,When a Trap effect that inflicts damage is activated: Make that effect damage 0.,Unlimited,3500,67,
-Yami,Spell,Field,All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF comma also all Fairy monsters on the field lose 200 ATK/DEF.,Unlimited,4300,68,{ChangeAllAttackDefenceMonsters: [200 comma 200 comma "Spellcaster" comma "Fiend"]} comma {ChangeAllAttackDefenceMonsters: [-200 comma -200 comma "Fairy"]}
-Forest,Spell,Field,All Insect comma Beast comma Plant comma and Beast-Warrior monsters on the field gain 200 ATK/DEF.,Unlimited,4300,69,{"ChangeAllAttackDefenceMonsters" : [200 comma 200 comma Insect comma Beast comma Beast_Warrior]}
-Closed Forest,Spell,Field,All Beast-Type monsters you control gain 100 ATK for each monster in your Graveyard. Field Spell Cards cannot be activated. Field Spell Cards cannot be activated during the turn this card is destroyed.,Unlimited,4300,70,{"ClosedForestEffect" : []}
-Umiiruka,Spell,Field,Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.,Unlimited,4300,71,{"ChangeAllAttackDefenceMonsters" : [500 comma -400 comma "Aqua"]}
-Sword Of Dark Destruction,Spell,Equip,A DARK monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.,Unlimited,4300,72, {"EquipAMonsterAttackDefence" : ["400" comma "-200" comma "Spellcaster" comma "Fiend"]}
-Black Pendant,Spell,Equip,The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.,Unlimited,4300,73, {"EquipAMonsterAttackDefence" : ["500" comma "0"]}
-United We Stand,Spell,Equip,The equipped monster gains 800 ATK/DEF for each face-up monster you control.,Unlimited,4300,74,
-Magnum Shield,Spell,Equip,Equip only to a Warrior-Type monster. Apply this effect comma depending on its battle position.\n● Attack Position: It gains ATK equal to its original DEF.\n● Defense Position: It gains DEF equal to its original ATK.,Unlimited,4300,75,
-Advanced Ritual Art,Spell,Ritual,This card can be used to Ritual Summon any 1 Ritual Monster. You must also send Normal Monsters from your Deck to the Graveyard whose total Levels equal the Level of that Ritual Monster.,Unlimited,3000,76,
+Trap Hole,Trap,Normal,When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.,Unlimited,2000,1042,{"DestroyCardOnFlip" : ["1000"]}
+Mirror Force,Trap,Normal,When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.,Unlimited,2000,1043,{"OnAttackDestroyAll":[]}
+Magic Cylinder,Trap,Normal,When an opponent's monster declares an attack: Target the attacking monster; negate the attack comma and if you do comma inflict damage to your opponent equal to its ATK.,Unlimited,2000,1044, {"CancelAttackAndCounterAttack" : []}
+Mind Crush,Trap,Normal,Declare 1 card name; if that card is in your opponent's hand comma they must discard all copies of it comma otherwise you discard 1 random card.,Unlimited,2000,1045,
+Torrential Tribute,Trap,Normal,When a monster(s) is Summoned: Destroy all monsters on the field.,Unlimited,2000,1046,{"DestroyAllMonstersOnSummonAMonster" : []}
+Time Seal,Trap,Normal,Skip the Draw Phase of your opponent's next turn.,Limited,2000,1047, {"BanOpponentFromGetCard" : ["1"]}
+Negate Attack,Trap,Counter,When an opponent's monster declares an attack: Target the attacking monster; negate the attack comma then end the Battle Phase.,Unlimited,3000,1048, {"CancelAttackAndEndTurn" : []}
+Solemn Warning,Trap,Counter,When a monster(s) would be Summoned comma OR when a Spell/Trap Card comma or monster effect comma is activated that includes an effect that Special Summons a monster(s): Pay 2000 LP; negate the Summon or activation comma and if you do comma destroy it.,Unlimited,3000,1049,
+Magic Jammer,Trap,Counter,When a Spell Card is activated: Discard 1 card; negate the activation camma and if you do camma destroy it.,Unlimited,3000,1050,
+Call Of The Haunted,Trap,Continuous,Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position. When this card leaves the field comma destroy that monster. When that monster is destroyed comma destroy this card.,Unlimited,3500,1051,{"SummonACardFromGraveyard":[]}
+Vanity's Emptiness,Trap,Continuous,Neither player can Special Summon monsters. If a card is sent from the Deck or the field to your Graveyard: Destroy this card.,Limited,3500,1052,
+Wall Of Revealing Light,Trap,Continuous,Activate by paying any multiple of 1000 Life Points. Monsters your opponent controls cannot attack if their ATK is less than or equal to the amount you paid.,Limited,3500,1053,
+Monster Reborn,Spell,Normal,Target 1 monster in either GY; Special Summon it.,Limited,2500,1054,
+Terraforming,Spell,Normal,Add 1 Field Spell from your Deck to your hand.,Limited,2500,1055,
+Pot Of Greed,Spell,Normal,Draw 2 cards.,Limited,2500,1056,
+Raigeki,Spell,Normal,Destroy all monsters your opponent controls.,Limited,2500,1057,{"DestroyAllOpponentMonsters":[]}
+Change Of Heart,Spell,Normal,Target 1 monster your opponent controls; take control of it until the End Phase.,Limited,2500,1058,{"ControlAMonster" : []}
+Swords Of Revealing Light,Spell,Normal,After this card's activation comma it remains on the field comma but destroy it during the End Phase of your opponent's 3rd turn. When this card is activated: If your opponent controls a face-down monster comma flip all monsters they control face-up. While this card is face-up on the field comma your opponent's monsters cannot declare an attack.,Unlimited,2500,1059,
+Harpie's Feather Duster,Spell,Normal,Destroy all Spells and Traps your opponent controls.,Limited,2500,1060,{"DestroyAllOpponentSpellTrap" : []}
+Dark Hole,Spell,Normal,Destroy all monsters on the field.,Unlimited,2500,1061,{"DestroyAllMonsters":[]}
+Supply Squad,Spell,Continuous,Once per turn comma if a monster(s) you control is destroyed by battle or card effect: Draw 1 card.,Unlimited,4000,1062,{"DrawACardFromDeckOnDestroyAtLeastOneMonster":[]}
+Spell Absorption,Spell,Continuous,Each time a Spell Card is activated comma gain 500 Life Points immediately after it resolves.,Unlimited,4000,1063, {"IncreaseLPOnSpellActivate" : [500]}
+Messenger Of Peace,Spell,Continuous,Monsters with 1500 or more ATK cannot declare an attack. Once per turn comma during your Standby Phase comma pay 100 LP or destroy this card.,Unlimited,4000,1064,
+Twin Twisters,Spell,Quick-play,Discard 1 card comma then target up to 2 Spells/Traps on the field; destroy them.,Unlimited,3500,1065,
+Mystical Space Typhoon,Spell,Quick-play,Target 1 Spell/Trap on the field; destroy that target.,Unlimited,3500,1066,
+Ring Of Defense,Spell,Quick-play,When a Trap effect that inflicts damage is activated: Make that effect damage 0.,Unlimited,3500,1067,
+Yami,Spell,Field,All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF comma also all Fairy monsters on the field lose 200 ATK/DEF.,Unlimited,4300,1068,{ChangeAllAttackDefenceMonsters: [200 comma 200 comma "Spellcaster" comma "Fiend"]} comma {ChangeAllAttackDefenceMonsters: [-200 comma -200 comma "Fairy"]}
+Forest,Spell,Field,All Insect comma Beast comma Plant comma and Beast-Warrior monsters on the field gain 200 ATK/DEF.,Unlimited,4300,1069,{"ChangeAllAttackDefenceMonsters" : [200 comma 200 comma Insect comma Beast comma Beast_Warrior]}
+Closed Forest,Spell,Field,All Beast-Type monsters you control gain 100 ATK for each monster in your Graveyard. Field Spell Cards cannot be activated. Field Spell Cards cannot be activated during the turn this card is destroyed.,Unlimited,4300,1070,{"ClosedForestEffect" : []}
+Umiiruka,Spell,Field,Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.,Unlimited,4300,1071,{"ChangeAllAttackDefenceMonsters" : [500 comma -400 comma "Aqua"]}
+Sword Of Dark Destruction,Spell,Equip,A DARK monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.,Unlimited,4300,1072, {"EquipAMonsterAttackDefence" : ["400" comma "-200" comma "Spellcaster" comma "Fiend"]}
+Black Pendant,Spell,Equip,The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.,Unlimited,4300,1073, {"EquipAMonsterAttackDefence" : ["500" comma "0"]}
+United We Stand,Spell,Equip,The equipped monster gains 800 ATK/DEF for each face-up monster you control.,Unlimited,4300,1074,
+Magnum Shield,Spell,Equip,Equip only to a Warrior-Type monster. Apply this effect comma depending on its battle position.\n● Attack Position: It gains ATK equal to its original DEF.\n● Defense Position: It gains DEF equal to its original ATK.,Unlimited,4300,1075,
+Advanced Ritual Art,Spell,Ritual,This card can be used to Ritual Summon any 1 Ritual Monster. You must also send Normal Monsters from your Deck to the Graveyard whose total Levels equal the Level of that Ritual Monster.,Unlimited,3000,1076,

@@ -30,13 +30,18 @@ public class GraphicCardSlot {
         return type;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public void appendCard(GraphicCard card){
         card.setSlot(this);
         cards.add(card);
     }
     public void setCard(GraphicCard card){
         card.setSlot(this);
-        cards.set(0, card);
+        cards.clear();
+        cards.add(card);
     }
 
     public void removeCard(GraphicCard card){

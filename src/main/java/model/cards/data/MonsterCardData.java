@@ -151,4 +151,9 @@ public class MonsterCardData extends CardData {
                 "\nDEF: " + defencePoints +
                 "\nDescription: " + cardDescription;
     }
+
+    public static ArrayList<MonsterCardData> getAllMonsterCardData() {
+        return allMonsterCardData;
+    }
+
 }

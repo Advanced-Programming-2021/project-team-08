@@ -1,14 +1,12 @@
 package model.cards.data;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import model.enums.MonsterAttribute;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 
 
@@ -23,7 +21,7 @@ public class ReadMonsterCardsData {
                 String[] data = row.split(",");
                 if (data.length == 10 || data.length == 11) {
                     readACardData(data);
-                } else System.out.println("couldn't parse a row from monster.csv file");
+                } else System.out.println("the size of data was " + data.length + " so couldn't parse it");
             }
             csvReader.close();
         } catch (Exception e) {
@@ -132,8 +130,12 @@ public class ReadMonsterCardsData {
     private void setImage(CardData monsterCardData) {
         String path;
         String cardName = monsterCardData.getCardName().replaceAll(" ", "");
-        path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
-        if (!new File("src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg").exists()) {
+        if (monsterCardData.getCardId() < 42) {
+            path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
+        }else {
+            path = "/src/main/resources/asset/cardCreating/card.png";
+        }
+        if (!new File(path.substring(1)).exists()) {
             System.out.println("the file with this path didn't load: " + path);
         }
         try {

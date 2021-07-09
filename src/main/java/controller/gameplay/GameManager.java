@@ -89,6 +89,12 @@ public class GameManager {
         }
 
         Effect.setGameManager(this);
+
+        firstSetup();
+    }
+
+    public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene){
+        this(duelData.isPlayer(), duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -154,10 +160,13 @@ public class GameManager {
         return player2;
     }
 
-    public synchronized void firstSetup() {
-        if (isFirstSetup) return;
-        System.out.println("HHHHHHHHHHHHH");
-
+    public void firstSetup() {
+        player1.drawCard(5, null);
+        EventNoParam e = new EventNoParam();
+        e.addListener(this::firstSetupAfterFirstDraw);
+        player2.drawCard(5, e);
+    }
+    public void firstSetupAfterFirstDraw(){
         turn = 1;
         currentPlayerTurn = 1;
         startDrawPhase();
@@ -396,6 +405,7 @@ public class GameManager {
             destroyAMonster.invoke(attackResult);
             onCardActionDone();
         } catch (Exception e) {
+            e.printStackTrace();
             scene.showError(e.getMessage());
         }
     }

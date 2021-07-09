@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class AI_Player {
     private Deck deck = new Deck("myDeck", "AI");
-    private UserData data = new UserData("AI", "AI", "@A@I@");
+    private static UserData data = new UserData("AI", "AI", "@A@I@");
     private Player playerObject;
     private Player opponent;
     private PlayerBoard board;
@@ -37,7 +37,7 @@ public class AI_Player {
         this.gameManager = gameManager;
     }
 
-    public UserData getAIUserData() {
+    public static UserData getAIUserData() {
         return data;
     }
 

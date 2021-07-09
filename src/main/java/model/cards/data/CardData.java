@@ -118,4 +118,5 @@ public abstract class CardData {
     public void readEffectFromEffectString() {
         setEffect(effectString);
     }
+
 }

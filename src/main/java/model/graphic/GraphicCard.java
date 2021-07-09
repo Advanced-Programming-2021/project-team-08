@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import model.cards.Card;
 import model.cards.data.CardData;
 import model.enums.CardStatus;
+import model.enums.ZoneType;
+import model.gameplay.CardSlot;
 
 public class GraphicCard {
     private static Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
@@ -27,8 +29,11 @@ public class GraphicCard {
         shape.setFitHeight(110);
         shape.setScaleX(-1);
 
+        shape.setOnMouseEntered(event -> onMouseEnter());
+        shape.setOnMouseExited(event -> onMouseExit());
+
         shape.setOnMouseClicked(event -> {
-            switch (GameManager.getInstance().getCurrentPhase()){
+            switch (GameManager.getInstance().getCurrentPhase()) {
                 case DRAW:
                     break;
                 case STANDBY:
@@ -42,7 +47,7 @@ public class GraphicCard {
                 case END:
                     break;
             }
-            });
+        });
     }
 
 
@@ -127,9 +132,7 @@ public class GraphicCard {
 
 
     private void onClickBattle(MouseEvent event) {
-        ContextMenu contextMenu;
-        MenuItem menuItem1;
-        MenuItem menuItem2;
+        ContextMenu contextMenu = new ContextMenu();
         switch (slot.getType()) {
             case GRAVEYARD:
                 break;
@@ -139,13 +142,51 @@ public class GraphicCard {
                 break;
             case MONSTER:
                 contextMenu = new ContextMenu();
-                menuItem1 = new MenuItem("Set");
-                menuItem1.setOnAction(e -> System.out.println("set"));
-                contextMenu.getItems().addAll(menuItem1);
+                for (int i = 1; i <= 5; i++) {
+                    try {
+                        CardSlot cs = GameManager.getInstance().getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
+                        if (!cs.isEmpty()) {
+                            MenuItem m = new MenuItem("Attack " + i);
+                            int finalI = i;
+                            m.setOnAction(e -> {
+                                System.out.println("attack ");
+                                try {
+                                    GameManager.getInstance().selectCard("--monster " + slot.getNumber());
+                                    GameManager.getInstance().attack(finalI);
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }
+                            });
+                            contextMenu.getItems().add(m);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             case SPELL_AND_TRAP:
                 break;
             case HAND:
+                break;
+        }
+        contextMenu.setX(event.getScreenX());
+        contextMenu.setY(event.getScreenY());
+
+        contextMenu.show(ApplicationManger.getMainStage());
+    }
+
+    public void onMouseEnter() {
+        switch (slot.getType()) {
+            case HAND:
+                shape.setLayoutY(shape.getLayoutY() - 30);
+                break;
+        }
+    }
+
+    public void onMouseExit() {
+        switch (slot.getType()) {
+            case HAND:
+                shape.setLayoutY(shape.getLayoutY() + 30);
                 break;
         }
     }
