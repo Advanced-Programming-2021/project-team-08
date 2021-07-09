@@ -50,10 +50,9 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-
-//        loggedInUser = User.getUserByUsername("Abolfazl");
+        new SoundManager().playSound("musics/ForestWalk.mp3");
+        //loggedInUser = User.getUserByUsername("Abolfazl");
         goToScene("firstScene.fxml");
-        //goToScene("firstScene.fxml");
         //goToScene1(SceneName.PROFILE_MENU, false);
     }
 
