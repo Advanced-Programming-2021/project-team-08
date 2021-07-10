@@ -6,9 +6,10 @@
     -fx-image: url("../asset/mainMenu/ds_btn_inactive.png");
 }
 
-.menu-item:hover{
+.menu-item:hover {
     -fx-image: url("../asset/mainMenu/ds_btn_active.png");
 }
+
 .menu-name {
     -fx-image: url("../asset/mainMenu/doShared.png");
 }

@@ -8,12 +8,11 @@ import model.gameplay.CardSlot;
 import java.util.ArrayList;
 
 public class ControlAMonster extends Effect {
+    private CardSlot originalPosition;
+    private Card getControlledCard;
     public ControlAMonster(ArrayList<String> args) {
         super(args);
     }
-
-    private CardSlot originalPosition;
-    private Card getControlledCard;
 
     @Override
     public boolean entryCondition() {

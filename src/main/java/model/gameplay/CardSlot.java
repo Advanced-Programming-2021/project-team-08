@@ -1,7 +1,6 @@
 package model.gameplay;
 
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import model.cards.Card;
 import model.cards.MonsterCard;
 import model.cards.SpellCard;
@@ -52,24 +51,33 @@ public class CardSlot {
         }
     }
 
+    public static void moveCard(CardSlot from, CardSlot to) {
+
+    }
+
     public int getNumber() {
         return number;
-    }
-
-    public static void moveCard(CardSlot from, CardSlot to){
-
-    }
-
-    public void setSlotView(Node slotView) {
-        this.slotView = slotView;
     }
 
     public Node getSlotView() {
         return slotView;
     }
 
+    public void setSlotView(Node slotView) {
+        this.slotView = slotView;
+    }
+
     public ZoneType getZoneType() {
         return zoneType;
+    }
+
+    public boolean isEmpty() {
+        return (cards.size() == 0);
+    }
+
+    //for singular zone
+    public Card getCard() {
+        return cards.get(0);
     }
 
     public void setCard(Card card) throws Exception {
@@ -82,15 +90,6 @@ public class CardSlot {
             }
             return;
         }
-    }
-
-    public boolean isEmpty() {
-        return (cards.size() == 0);
-    }
-
-    //for singular zone
-    public Card getCard() {
-        return cards.get(0);
     }
 
     public Card getAParticularCard(int number) {

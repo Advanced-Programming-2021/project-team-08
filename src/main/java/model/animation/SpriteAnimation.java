@@ -1,21 +1,20 @@
 package model.animation;
 
+import javafx.animation.Interpolator;
+import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import javafx.animation.Interpolator;
-import javafx.animation.Transition;
-import view.menus.MainScene;
 
 public class SpriteAnimation extends Transition {
 
     private final ImageView imageView;
     private final int count;
     private final int columns;
-    private int offsetX;
     private final int offsetY;
     private final int width;
     private final int height;
+    private int offsetX;
     private int lastIndex;
 
     public SpriteAnimation(

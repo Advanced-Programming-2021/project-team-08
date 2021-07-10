@@ -21,14 +21,11 @@ public class GamePlaySceneController {
         put("ai", CommandFieldType.BOOLEAN);
         put("rounds", CommandFieldType.INT);
     }};
-
-
+    private static int currentRound;
     private boolean isDuelStarted = false;
     private GamePlayScene scene;
     private GameManager gameManager;
-
     private DuelData currentDuelData;
-    private static int currentRound;
 
     public GamePlaySceneController(GamePlayScene scene) {
         this.scene = scene;

@@ -1,24 +1,20 @@
 package view.menus;
 
 import controller.ApplicationManger;
-import controller.DeckController;
 import controller.MainMenuController;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Transition;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.animation.SpriteAnimation;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -113,7 +109,6 @@ public class MainScene extends Scene {
     }
 
 
-
     public int logout() {
         System.out.println("user logged out successfully!");
         ApplicationManger.logoutCurrentUser();
@@ -157,7 +152,7 @@ public class MainScene extends Scene {
     }
 
     public void deckRun(MouseEvent mouseEvent) {
-        ApplicationManger.goToScene1(SceneName.DECK_MENU,false);
+        ApplicationManger.goToScene1(SceneName.DECK_MENU, false);
     }
 
     public void shopRun(MouseEvent mouseEvent) {

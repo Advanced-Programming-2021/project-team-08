@@ -38,6 +38,13 @@ public class ShopControllerTest {
         new ReadSpellTrapCardsData().readSpellTrapData();
     }
 
+    @AfterAll
+    public static void endWorks() {
+        File userFile = new File("users/" + "test" + ".json");
+        userFile.delete();
+        User.deleteAccount(testUser);
+    }
+
     @BeforeEach
     private void set() {
         outputStreamCaptor.reset();
@@ -65,13 +72,6 @@ public class ShopControllerTest {
         assertEquals(output, outputStreamCaptor.toString());
         assertEquals(54, testUser.getCardsThatThereIsNotInAnyDeck().get(0));
         assertEquals(97500, testUser.getUserData().getMoney());
-    }
-
-    @AfterAll
-    public static void endWorks() {
-        File userFile = new File("users/" + "test" + ".json");
-        userFile.delete();
-        User.deleteAccount(testUser);
     }
 
 

@@ -12,7 +12,7 @@
     -fx-background-image: url("../asset/deckMenu/bg_vgs.jpg");
 }
 
-.addOrDeleteButton{
+.addOrDeleteButton {
     -fx-font-size: 50;
     -fx-text-origin: center;
 }

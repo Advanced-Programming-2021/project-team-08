@@ -12,6 +12,15 @@ import java.net.URL;
 
 public class ReadMonsterCardsData {
 
+    public static void main(String[] args) {
+        new ReadMonsterCardsData().readCardsData();
+        new ReadMonsterCardsData().setGraphic();
+        new ReadSpellTrapCardsData().readSpellTrapData();
+        MonsterCardData.printAllMonsterCard();
+        SpellCardData.printAllTraps();
+        TrapCardData.printAllTraps();
+    }
+
     public void readCardsData() {
         try {
             BufferedReader csvReader = new BufferedReader(new FileReader("Monster.csv"));
@@ -132,14 +141,14 @@ public class ReadMonsterCardsData {
         String cardName = monsterCardData.getCardName().replaceAll(" ", "");
         if (monsterCardData.getCardId() < 42) {
             path = "/src/main/resources/asset/Cards/Monsters/" + cardName + ".jpg";
-        }else {
+        } else {
             path = "/src/main/resources/asset/cardCreating/card.png";
         }
         if (!new File(path.substring(1)).exists()) {
             System.out.println("the file with this path didn't load: " + path);
         }
         try {
-           monsterCardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
+            monsterCardData.setCardImage(new Image(new URL("file:" + System.getProperty("user.dir") + path).toExternalForm()));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -152,17 +161,8 @@ public class ReadMonsterCardsData {
                     setImage(monsterCardData);
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new ReadMonsterCardsData().readCardsData();
-        new ReadMonsterCardsData().setGraphic();
-        new ReadSpellTrapCardsData().readSpellTrapData();
-        MonsterCardData.printAllMonsterCard();
-        SpellCardData.printAllTraps();
-        TrapCardData.printAllTraps();
     }
 }

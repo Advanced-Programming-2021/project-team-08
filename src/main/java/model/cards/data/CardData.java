@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class CardData {
+    private static ArrayList<CardData> allCardData = new ArrayList<>();
     @Expose
     protected CardType cardType;
     @Expose
@@ -25,11 +26,25 @@ public abstract class CardData {
     protected int price;
     @Expose
     protected String cardDescription;
+    protected ArrayList<Effect> effects = new ArrayList<>();
     @Expose
     private String effectString;
     private Image cardImage;
-    protected ArrayList<Effect> effects = new ArrayList<>();
-    private static ArrayList<CardData> allCardData = new ArrayList<>();
+
+    public static CardData getCardByName(String cardName) {
+        for (CardData cardData : allCardData) {
+            if (cardData.getName().equals(cardName)) return cardData;
+        }
+        return null;
+    }
+
+    public static void addCardData(CardData cardData) {
+        allCardData.add(cardData);
+    }
+
+    public static ArrayList<CardData> getAllCardData() {
+        return allCardData;
+    }
 
     public String getCardName() {
         return cardName;
@@ -39,15 +54,12 @@ public abstract class CardData {
         return cardType;
     }
 
-    public static CardData getCardByName(String cardName) {
-        for (CardData cardData : allCardData) {
-            if (cardData.getName().equals(cardName)) return cardData;
-        }
-        return null;
-    }
-
     public int getPrice() {
         return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getCardId() {
@@ -56,14 +68,6 @@ public abstract class CardData {
 
     public ArrayList<Effect> getEffects() {
         return effects;
-    }
-
-    public static void addCardData(CardData cardData) {
-        allCardData.add(cardData);
-    }
-
-    public static ArrayList<CardData> getAllCardData() {
-        return allCardData;
     }
 
     public String getName() {
@@ -82,20 +86,16 @@ public abstract class CardData {
         this.cardDescription = cardDescription;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public void setId(int id) {
         this.cardId = id;
     }
 
-    public void setCardImage(Image cardImage) {
-        this.cardImage = cardImage;
-    }
-
     public Image getCardImage() {
         return cardImage;
+    }
+
+    public void setCardImage(Image cardImage) {
+        this.cardImage = cardImage;
     }
 
     public void setEffect(String effectsJson) {

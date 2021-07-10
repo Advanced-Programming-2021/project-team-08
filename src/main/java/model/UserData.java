@@ -1,7 +1,6 @@
 package model;
 
 import com.google.gson.Gson;
-import javafx.scene.image.Image;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,20 +32,6 @@ public class UserData {
         }
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-        save();
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-        save();
-    }
-
     public ArrayList<Deck> getDecks() {
         return decks;
     }
@@ -65,12 +50,26 @@ public class UserData {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getNickname() {
         return nickname;
     }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        save();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        save();
     }
 
     public int getPoint() {
@@ -128,12 +127,12 @@ public class UserData {
         }
     }
 
-    public void setProfileImageUrl(String url) {
-        this.profileImageUrl = url;
-    }
-
     public String getProfileImageUrl() {
         return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String url) {
+        this.profileImageUrl = url;
     }
 }
 

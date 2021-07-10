@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,7 +18,6 @@ import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.DeckMenu;
-import view.menus.ShopScene;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -29,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeckController {
-    private DeckMenu deckMenu;
     public TextField deckNameTextField;
     public TextField cardNameTextField;
     public Label deckNameLabel;
@@ -42,10 +38,15 @@ public class DeckController {
     public AnchorPane scrollMainDeck;
     public AnchorPane scrollSideDeck;
     public AnchorPane scrollHandCards;
+    private DeckMenu deckMenu;
+
+    public DeckController() {
+
+    }
 
     @FXML
-    void initialize(){
-        if (deckMenu==null) deckMenu = new DeckMenu();
+    void initialize() {
+        if (deckMenu == null) deckMenu = new DeckMenu();
         ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
         listOfDecks.setLayoutX(0);
         deckSetting.setLayoutX(1600);
@@ -60,20 +61,19 @@ public class DeckController {
             hBox.setPrefWidth(1000);
             Button deckButton = new Button();
             Button deleteButton = new Button();
-            Button editDeck=new Button();
+            Button editDeck = new Button();
             editDeck.setText("edit");
             deleteButton.setText("Delete");
             Button setActiveButton = new Button();
             hBox.getChildren().add(0, deckButton);
             hBox.getChildren().add(1, deleteButton);
-            if (ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())){
+            if (ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())) {
                 Label setActiveLabel = new Label();
                 setActiveLabel.setText("     active");
                 hBox.getChildren().add(2, setActiveLabel);
                 setActiveLabel.setPrefHeight(100);
                 setActiveLabel.setPrefWidth(500);
-            }
-            else {
+            } else {
                 setActiveButton.setText("set active");
                 hBox.getChildren().add(2, setActiveButton);
                 setActiveButton.setPrefHeight(100);
@@ -111,7 +111,7 @@ public class DeckController {
                 message.setText("deck activated successful");
                 message.setOpacity(1);
                 scrollPane.getChildren().clear();
-                setDecks(scrollPane,decks);
+                setDecks(scrollPane, decks);
             });
             deleteButton.setOnMouseClicked(event -> {
                 Deck.removeADeck(deck.getName());
@@ -119,7 +119,7 @@ public class DeckController {
                 message.setText("deck deleted successfully");
                 message.setOpacity(1);
                 scrollPane.getChildren().clear();
-                setDecks(scrollPane,decks);
+                setDecks(scrollPane, decks);
             });
             editDeck.setOnMouseClicked(event -> {
 
@@ -127,21 +127,21 @@ public class DeckController {
         }
     }
 
-    public void AddOrDeleteCard(Deck deck){
-        ArrayList<CardData> mainDeckCards=deck.getMainDeck();
-        ArrayList<CardData> sideDeckCards=deck.getSideDeck();
-        ArrayList<CardData> handCards=Deck.getCardDataArrayFromIdArray(
+    public void AddOrDeleteCard(Deck deck) {
+        ArrayList<CardData> mainDeckCards = deck.getMainDeck();
+        ArrayList<CardData> sideDeckCards = deck.getSideDeck();
+        ArrayList<CardData> handCards = Deck.getCardDataArrayFromIdArray(
                 ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck());
         scrollMainDeck.getChildren().clear();
         scrollSideDeck.getChildren().clear();
         scrollHandCards.getChildren().clear();
-        deckMenu.setCards(scrollMainDeck, mainDeckCards,"main",deck.getName());
-        deckMenu.setCards(scrollSideDeck, sideDeckCards,"side",deck.getName());
-        deckMenu.setCards(scrollHandCards, handCards,"hand",deck.getName());
+        deckMenu.setCards(scrollMainDeck, mainDeckCards, "main", deck.getName());
+        deckMenu.setCards(scrollSideDeck, sideDeckCards, "side", deck.getName());
+        deckMenu.setCards(scrollHandCards, handCards, "hand", deck.getName());
 
     }
 
-    public void deckCreate(){
+    public void deckCreate() {
         deckNameTextField.clear();
         deckNameLabel.setOpacity(1);
         deckNameTextField.setOpacity(1);
@@ -149,12 +149,12 @@ public class DeckController {
 
     }
 
-    public  Label getMessage() {
+    public Label getMessage() {
         return message;
     }
 
-    public void nextDeckCreate(){
-        String deckName=deckNameTextField.getText();
+    public void nextDeckCreate() {
+        String deckName = deckNameTextField.getText();
         if (Deck.isThereADeckWithThisName(deckName)) {
             message.setTextFill(Color.RED);
             message.setOpacity(1);
@@ -168,13 +168,9 @@ public class DeckController {
             message.setText("deck created successfully!");
             ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
             scrollPane.getChildren().clear();
-            setDecks(scrollPane,showingDeck);
+            setDecks(scrollPane, showingDeck);
 
         }
-    }
-
-    public DeckController() {
-
     }
 
     public void deckCreate(String deckName) {
@@ -370,8 +366,8 @@ public class DeckController {
     }
 
     public void deckCreateGraphic(ActionEvent actionEvent) {
-            deckNameTextField.setOpacity(1);
-            deckNameLabel.setOpacity(1);
+        deckNameTextField.setOpacity(1);
+        deckNameLabel.setOpacity(1);
     }
 
     public void removeCardGraphic(ActionEvent actionEvent) {

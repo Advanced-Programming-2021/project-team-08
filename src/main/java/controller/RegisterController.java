@@ -3,7 +3,6 @@ package controller;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import model.Command;
@@ -76,7 +75,7 @@ public class RegisterController {
     }
 
     public void backToFirstScene(ActionEvent actionEvent) {
-        ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
+        ApplicationManger.goToScene1(SceneName.FIRST_SCENE, false);
     }
 
     public void nextOfSignup(ActionEvent actionEvent) {
@@ -84,12 +83,10 @@ public class RegisterController {
             if (User.doesUsernameExists(usernameOfSignup.getText())) {
                 errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
                 errorOfSignup.setTextFill(Color.RED);
-            }
-            else if (User.doesNicknameExists(nicknameOfSignup.getText())) {
+            } else if (User.doesNicknameExists(nicknameOfSignup.getText())) {
                 errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
                 errorOfSignup.setTextFill(Color.RED);
-            }
-            else {
+            } else {
                 User user = new User(usernameOfSignup.getText(), nicknameOfSignup.getText(), passwordOfSignup.getText());
                 successOfSignup.setText("user created successfully!");
                 successOfSignup.setTextFill(Color.GREEN);
@@ -108,10 +105,9 @@ public class RegisterController {
             if (!User.doesUsernameExists(usernameOfLogin.getText())) {
                 errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
                 errorOfLogin.setTextFill(Color.RED);
-            }
-            else {
+            } else {
                 if (User.loginUser(usernameOfLogin.getText(), passwordOfLogin.getText())) {
-                     ApplicationManger.goToScene1(SceneName.MAIN_MENU,false);
+                    ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
 //                    if (!isTest) ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
                 } else {
                     errorOfLogin.setText("username and password didn't match");

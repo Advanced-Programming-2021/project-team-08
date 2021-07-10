@@ -9,56 +9,68 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FirstSceneController">
-   <children>
-      <Button layoutX="448.0" layoutY="779.0" mnemonicParsing="false" onAction="#exit" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/RegisterStyles.css" text="exit" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="39.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="448.0" layoutY="565.0" mnemonicParsing="false" onAction="#register" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/RegisterStyles.css" text="register" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="39.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="441.0" layoutY="668.0" mnemonicParsing="false" onAction="#login" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/RegisterStyles.css" text="login" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="39.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-      </Button>
-      <ImageView fitHeight="261.0" fitWidth="229.0" layoutX="502.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/firstScene/adriangecko_neutral.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="280.0" fitWidth="321.0" layoutX="651.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/firstScene/alito_barian_neutral.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="160.0" fitWidth="165.0" layoutX="505.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/firstScene/amnael_neutral.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="207.0" fitWidth="207.0" layoutX="630.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/firstScene/andre_neutral.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="564.0" layoutY="80.0" text="yu gi oh" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="74.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="900.0" prefWidth="1600.0"
+            styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.FirstSceneController">
+    <children>
+        <Button layoutX="448.0" layoutY="779.0" mnemonicParsing="false" onAction="#exit" prefHeight="82.0"
+                prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton"
+                stylesheets="@../CSS/RegisterStyles.css" text="exit" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="39.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND"/>
+            </cursor>
+        </Button>
+        <Button layoutX="448.0" layoutY="565.0" mnemonicParsing="false" onAction="#register" prefHeight="82.0"
+                prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton"
+                stylesheets="@../CSS/RegisterStyles.css" text="register" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="39.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND"/>
+            </cursor>
+        </Button>
+        <Button layoutX="441.0" layoutY="668.0" mnemonicParsing="false" onAction="#login" prefHeight="82.0"
+                prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton"
+                stylesheets="@../CSS/RegisterStyles.css" text="login" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="39.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND"/>
+            </cursor>
+        </Button>
+        <ImageView fitHeight="261.0" fitWidth="229.0" layoutX="502.0" layoutY="246.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../asset/firstScene/adriangecko_neutral.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="280.0" fitWidth="321.0" layoutX="651.0" layoutY="209.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../asset/firstScene/alito_barian_neutral.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="160.0" fitWidth="165.0" layoutX="505.0" layoutY="378.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../asset/firstScene/amnael_neutral.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="207.0" fitWidth="207.0" layoutX="630.0" layoutY="330.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../asset/firstScene/andre_neutral.png"/>
+            </image>
+        </ImageView>
+        <Label layoutX="564.0" layoutY="80.0" text="yu gi oh" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="74.0"/>
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

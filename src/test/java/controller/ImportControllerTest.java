@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ImportControllerTest {
 
-    private ImportController importController;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private ImportController importController;
 
     @BeforeEach
     void setup() {

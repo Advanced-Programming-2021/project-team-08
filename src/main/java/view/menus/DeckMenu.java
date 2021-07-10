@@ -7,13 +7,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import model.Deck;
 import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
 
@@ -26,18 +21,24 @@ public class DeckMenu extends Scene {
     private User activeUser;
     private DeckController deckController;
 
-    public void setCards(AnchorPane anchorPane,ArrayList<CardData> cards,String scrollPaneType,String deckName){
+    public DeckMenu() {
+        this.activeUser = ApplicationManger.getLoggedInUser();
+        this.deckController = new DeckController();
+    }
+
+    public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards, String scrollPaneType, String deckName) {
         int size = cards.size();
         if (size == 0) anchorPane.setPrefHeight(600);
         else if (size % 3 == 0) anchorPane.setPrefHeight((double) (cards.size() / 3) * 445 + 180);
         else anchorPane.setPrefHeight((double) (cards.size() / 3 + 1) * 445 + 180);
         for (int i = 0; i < cards.size(); i++) {
-            addCardImage(anchorPane, cards.get(i), i,scrollPaneType,deckName);
+            addCardImage(anchorPane, cards.get(i), i, scrollPaneType, deckName);
         }
     }
-    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index,String scrollPaneType,String deckName){
+
+    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index, String scrollPaneType, String deckName) {
         ImageView cardImage = new ImageView(cardData.getCardImage());
-        Button addOrDelete=new Button();
+        Button addOrDelete = new Button();
         addOrDelete.setOpacity(0);
         anchorPane.getChildren().add(index, addOrDelete);
         anchorPane.getChildren().add(index, cardImage);
@@ -59,10 +60,9 @@ public class DeckMenu extends Scene {
             addOrDelete.setOpacity(0.5);
         });
         addOrDelete.setOnMouseClicked(event -> {
-            if(scrollPaneType.equals("hand")){
+            if (scrollPaneType.equals("hand")) {
 
-            }
-            else{
+            } else {
 //                deckController.removeCardGraphic(cardData.getCardName(),scrollPaneType,deckName);
             }
 
@@ -77,12 +77,6 @@ public class DeckMenu extends Scene {
                 cardImage.setCursor(Cursor.HAND);
             }
         });
-    }
-
-
-    public DeckMenu() {
-        this.activeUser = ApplicationManger.getLoggedInUser();
-        this.deckController = new DeckController();
     }
 
     @Override

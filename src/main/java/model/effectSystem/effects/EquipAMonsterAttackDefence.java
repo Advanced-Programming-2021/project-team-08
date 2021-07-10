@@ -6,9 +6,9 @@ import model.effectSystem.EquipEffect;
 import java.util.ArrayList;
 
 public class EquipAMonsterAttackDefence extends EquipEffect {
+    ArrayList<String> monsterTypes = new ArrayList<>();
     private int changeAttack;
     private int changeDefence;
-    ArrayList<String> monsterTypes = new ArrayList<>();
 
     public EquipAMonsterAttackDefence(ArrayList<String> args) {
         super(args);

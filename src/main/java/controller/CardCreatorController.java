@@ -6,7 +6,10 @@ import model.effectSystem.Effect;
 import model.enums.MonsterAttribute;
 import view.menus.CardCreatorScene;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class CardCreatorController {
@@ -95,7 +98,7 @@ public class CardCreatorController {
 
     private String createEffectJson(HashMap<CardData, Effect> effects) {
         StringBuilder json = new StringBuilder();
-        for (CardData cardData :effects.keySet()) {
+        for (CardData cardData : effects.keySet()) {
             try {
                 BufferedReader csvReader = new BufferedReader(new FileReader("Monster.csv"));
                 String row;

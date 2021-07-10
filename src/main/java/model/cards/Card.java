@@ -1,13 +1,7 @@
 package model.cards;
 
-import controller.ApplicationManger;
-import controller.gameplay.GameManager;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Popup;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;
@@ -20,20 +14,25 @@ import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
 public abstract class Card {
+    private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
     protected CardType cardType;
     protected CardData cardData;
-
     protected CardSlot cardSlot;
-
     protected CardStatus cardStatus;
-
     protected Player cardOwner;
-
     protected EventNoParam onDestroy = new EventNoParam();
-
-    private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
-
     protected ImageView shape;
+
+    public Card(CardData cardData) {
+        this.cardData = cardData;
+        for (Effect effect : cardData.getEffects()) {
+            effect.setCard(this);
+        }
+        shape = new ImageView(cardBackImage);
+        shape.setFitWidth(80);
+        shape.setFitHeight(120);
+        shape.setScaleX(-1);
+    }
 
     public static Card getCardByCardData(CardData data) {
         Card card = null;
@@ -88,17 +87,6 @@ public abstract class Card {
         } else {
             return data.getCardId();
         }
-    }
-
-    public Card(CardData cardData) {
-        this.cardData = cardData;
-        for (Effect effect : cardData.getEffects()) {
-            effect.setCard(this);
-        }
-        shape = new ImageView(cardBackImage);
-        shape.setFitWidth(80);
-        shape.setFitHeight(120);
-        shape.setScaleX(-1);
     }
 
     public Player getCardOwner() {

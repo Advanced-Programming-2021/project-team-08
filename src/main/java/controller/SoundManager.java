@@ -1,9 +1,7 @@
 package controller;
 
-import javafx.application.Application;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -29,6 +27,12 @@ public class SoundManager {
         mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                playBackgroundSound();
+            }
+        });
     }
 
 }

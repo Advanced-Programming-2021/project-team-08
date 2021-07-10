@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class DuelScene extends Scene{
+public class DuelScene extends Scene {
 
     public Label duelMessage;
     public CheckBox threeRound;
@@ -16,15 +16,15 @@ public class DuelScene extends Scene{
     public boolean isSinglePlayer;
     public Pane duelPane;
     DuelController duelController;
-    @Override
-    protected int getUserCommand() {
-        return 0;
-    }
 
     public DuelScene() {
         duelController = new DuelController();
     }
 
+    @Override
+    protected int getUserCommand() {
+        return 0;
+    }
 
     public void threeRoundsAction(ActionEvent actionEvent) {
         oneRound.setSelected(false);
@@ -42,7 +42,7 @@ public class DuelScene extends Scene{
         else rounds = 1;
         if (isSinglePlayer) {
             duelMessage.setText(duelController.duelSinglePlayer(rounds));
-        }else {
+        } else {
             duelMessage.setText(duelController.duelMultiplayer(rounds, playerName.getText()));
         }
     }

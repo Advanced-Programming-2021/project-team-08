@@ -62,6 +62,14 @@ public class EffectsTest {
         sceneController.duel("--new --second-player test2 --rounds 1");
     }
 
+    @AfterAll
+    static void afterAll() {
+        File userFile = new File("users/" + "test1" + ".json");
+        userFile.delete();
+        userFile = new File("users/" + "test2" + ".json");
+        userFile.delete();
+    }
+
     @Test
     public void checkEffect() throws Exception {
         GameManager gameManager = sceneController.getGameManager();
@@ -83,13 +91,5 @@ public class EffectsTest {
         gameManager.activateCard();
 
         assertEquals(0, gameManager.getCurrentTurnOpponentPlayer().getPlayerBoard().numberOfMonstersInZone());
-    }
-
-    @AfterAll
-    static void afterAll() {
-        File userFile = new File("users/" + "test1" + ".json");
-        userFile.delete();
-        userFile = new File("users/" + "test2" + ".json");
-        userFile.delete();
     }
 }

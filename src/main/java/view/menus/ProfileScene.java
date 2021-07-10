@@ -90,13 +90,13 @@ public class ProfileScene extends Scene {
         profileController.changePassword1(oldPassField.getText(), newPassField.getText());
     }
 
-    public void setNicknameChangeMessage (String message, boolean hasError) {
+    public void setNicknameChangeMessage(String message, boolean hasError) {
         nicknameChangeMessage.setText(message);
         if (hasError) nicknameChangeMessage.setTextFill(Color.RED);
         else nicknameChangeMessage.setTextFill(Color.GREEN);
     }
 
-    public void setPasswordChangeMessage (String message, boolean hasError) {
+    public void setPasswordChangeMessage(String message, boolean hasError) {
         passwordChangeMessage.setText(message);
         if (hasError) passwordChangeMessage.setTextFill(Color.RED);
         else passwordChangeMessage.setTextFill(Color.GREEN);

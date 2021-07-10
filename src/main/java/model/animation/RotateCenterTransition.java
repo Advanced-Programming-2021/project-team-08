@@ -8,15 +8,12 @@ import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import model.enums.CardStatus;
-import model.graphic.GraphicCard;
 
 public class RotateCenterTransition extends Transition {
+    private final DoubleProperty angleY = new SimpleDoubleProperty(0);
     private Node node;
     private int duration;
     private double to;
-
-    private final DoubleProperty angleY = new SimpleDoubleProperty(0);
 
     public RotateCenterTransition(Node node, int duration, double toAngle, Point3D axis) {
         to = toAngle;
@@ -35,7 +32,7 @@ public class RotateCenterTransition extends Transition {
     @Override
     protected void interpolate(double frac) {
         double nowRotation = angleY.get();
-        if (Math.abs(nowRotation-to) <= 0.1) {
+        if (Math.abs(nowRotation - to) <= 0.1) {
             angleY.set(to);
             return;
         }

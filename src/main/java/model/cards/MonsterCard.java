@@ -1,10 +1,5 @@
 package model.cards;
 
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Point3D;
-import javafx.util.Duration;
 import model.cards.data.MonsterCardData;
 import model.enums.CardStatus;
 import model.enums.CardType;
@@ -13,11 +8,9 @@ import model.gameplay.AttackResult;
 import model.gameplay.Player;
 
 public class MonsterCard extends Card {
+    protected Event<Card> faceUp = new Event<>();
     private boolean isAttackPosition;
     private boolean attackedThisTurn;
-
-    protected Event<Card> faceUp = new Event<>();
-
     private Event<AttackResult> onAttacked = new Event<>();
 
     public MonsterCard(MonsterCardData data) {
@@ -47,12 +40,12 @@ public class MonsterCard extends Card {
         }
     }
 
-    public void setAttackedThisTurn(boolean attackedThisTurn) {
-        this.attackedThisTurn = attackedThisTurn;
-    }
-
     public boolean isAttackedThisTurn() {
         return attackedThisTurn;
+    }
+
+    public void setAttackedThisTurn(boolean attackedThisTurn) {
+        this.attackedThisTurn = attackedThisTurn;
     }
 
     public void changePosition(boolean toAttack) {

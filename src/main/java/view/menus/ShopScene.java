@@ -3,27 +3,17 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.ShopController;
 import controller.User;
-import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import model.cards.data.CardData;
 
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.regex.Matcher;
@@ -114,7 +104,7 @@ public class ShopScene extends Scene {
         }
     }
 
-    private void  addCardImage(AnchorPane anchorPane, CardData cardData, int index) {
+    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index) {
         ImageView cardImage = new ImageView(cardData.getCardImage());
         anchorPane.getChildren().add(index, cardImage);
         cardImage.setFitHeight(425);
@@ -137,7 +127,7 @@ public class ShopScene extends Scene {
         cardImage.setOnMouseClicked(event -> {
             if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
                 notEnoughMoneyAction();
-            }else buyCard(cardData);
+            } else buyCard(cardData);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -162,7 +152,7 @@ public class ShopScene extends Scene {
     }
 
     private void buyCard(CardData cardData) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete "  + " ?", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " + " ?", ButtonType.YES, ButtonType.NO);
         alert.setContentText("Do you really want to buy " + cardData.getCardName() + "?");
         ImageView imageView = new ImageView();
         imageView.setImage(cardData.getCardImage());

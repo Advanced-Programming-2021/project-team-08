@@ -19,6 +19,16 @@ public class SpellCardData extends CardData {
         cardType = CardType.SPELL;
     }
 
+    public static void printAllTraps() {
+        for (SpellCardData spellCardData : allSpellCard) {
+            System.out.println("spell name is : " + spellCardData.cardName + " spell id is: " + spellCardData.getCardId());
+            System.out.println("spell price is : " + spellCardData.getPrice());
+            System.out.println("spell property is : " + spellCardData.getSpellProperty());
+            System.out.println("spell description is : " + spellCardData.getCardDescription());
+            System.out.println();
+        }
+    }
+
     public SpellTrapProperty getSpellProperty() {
         return spellProperty;
     }
@@ -33,16 +43,6 @@ public class SpellCardData extends CardData {
 
     public void setTrapProperty(SpellTrapProperty spellProperty) {
         this.spellProperty = spellProperty;
-    }
-
-    public static void printAllTraps() {
-        for (SpellCardData spellCardData : allSpellCard) {
-            System.out.println("spell name is : " + spellCardData.cardName + " spell id is: " + spellCardData.getCardId());
-            System.out.println("spell price is : " + spellCardData.getPrice());
-            System.out.println("spell property is : " + spellCardData.getSpellProperty());
-            System.out.println("spell description is : " + spellCardData.getCardDescription());
-            System.out.println();
-        }
     }
 
     @Override

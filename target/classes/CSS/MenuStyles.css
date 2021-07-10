@@ -15,7 +15,7 @@
 .shopText {
     -fx-alignment: center;
     -fx-font-family: 'Heebeo';
-    -fx-font-size: 50.0 px;
+    -fx-font-size: 50.0px;
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
@@ -30,7 +30,7 @@
 
 .shopMessageLabel {
     -fx-font-family: 'Heebeo';
-    -fx-font-size: 25.0 px;
+    -fx-font-size: 25.0px;
     -fx-text-alignment: left;
     -fx-text-fill: white;
 }
@@ -50,7 +50,7 @@
 
 .number {
     -fx-text-fill: white;
-    -fx-font-size: 40.0 px;
+    -fx-font-size: 40.0px;
     -fx-font-weight: bold;
 }
 
@@ -58,7 +58,7 @@
     -fx-background-radius: 30;
     -fx-text-fill: white;
     -fx-background-color: rgb(0, 12, 65);
-    -fx-font: 30px arial ;
+    -fx-font: 30px arial;
 }
 
 .back:hover {

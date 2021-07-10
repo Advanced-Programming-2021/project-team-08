@@ -46,6 +46,14 @@ public class GamePlayTest {
         sceneController = scene.getSceneController();
     }
 
+    @AfterAll
+    static void afterAll() {
+        File userFile = new File("users/" + "test1" + ".json");
+        userFile.delete();
+        userFile = new File("users/" + "test2" + ".json");
+        userFile.delete();
+    }
+
     @Test
     public void newDuel() {
         Integer[] cards1 = {1, 1, 1};
@@ -85,13 +93,5 @@ public class GamePlayTest {
         sceneController.duel("--new --second-player test2 --rounds 1");
         assertEquals("Round 1", outputStreamCaptor.toString().split(System.lineSeparator())[0]);
         outputStreamCaptor.reset();
-    }
-
-    @AfterAll
-    static void afterAll() {
-        File userFile = new File("users/" + "test1" + ".json");
-        userFile.delete();
-        userFile = new File("users/" + "test2" + ".json");
-        userFile.delete();
     }
 }

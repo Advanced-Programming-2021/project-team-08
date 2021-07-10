@@ -48,6 +48,10 @@ public class GamePlayScene extends Scene {
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
 
+    public GamePlayScene() {
+        //sceneController = new GamePlaySceneController(this);
+    }
+
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
     }
@@ -69,10 +73,6 @@ public class GamePlayScene extends Scene {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public GamePlayScene() {
-        //sceneController = new GamePlaySceneController(this);
     }
 
     private void firstSetupUI(GamePlaySceneController.DuelData data) {

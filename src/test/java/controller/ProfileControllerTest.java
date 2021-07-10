@@ -34,6 +34,13 @@ public class ProfileControllerTest {
         profileController = new ProfileController(new ProfileScene());
     }
 
+    @AfterAll
+    public static void endWorks() {
+        File userFile = new File("users/" + "test" + ".json");
+        userFile.delete();
+        User.deleteAccount(testUser);
+    }
+
     @BeforeEach
     public void setup() {
         outputStreamCaptor.reset();
@@ -68,13 +75,5 @@ public class ProfileControllerTest {
         profileController.changePassword(input);
         output = "password changed successfully!" + System.lineSeparator();
         assertEquals(output, outputStreamCaptor.toString());
-    }
-
-
-    @AfterAll
-    public static void endWorks() {
-        File userFile = new File("users/" + "test" + ".json");
-        userFile.delete();
-        User.deleteAccount(testUser);
     }
 }

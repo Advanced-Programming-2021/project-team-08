@@ -34,24 +34,26 @@ public class GraphicCardSlot {
         return number;
     }
 
-    public void appendCard(GraphicCard card){
+    public void appendCard(GraphicCard card) {
         card.setSlot(this);
-        cards.add(card);
-    }
-    public void setCard(GraphicCard card){
-        card.setSlot(this);
-        cards.clear();
         cards.add(card);
     }
 
-    public void removeCard(GraphicCard card){
+    public void removeCard(GraphicCard card) {
         cards.remove(card);
     }
 
     public ArrayList<GraphicCard> getAllCards() {
         return cards;
     }
-    public GraphicCard getCard(){
+
+    public GraphicCard getCard() {
         return cards.get(0);
+    }
+
+    public void setCard(GraphicCard card) {
+        card.setSlot(this);
+        cards.clear();
+        cards.add(card);
     }
 }

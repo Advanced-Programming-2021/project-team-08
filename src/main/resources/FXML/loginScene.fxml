@@ -7,57 +7,67 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
-   <children>
-      <Label layoutX="482.0" layoutY="334.0" prefHeight="79.0" prefWidth="176.0" text="username" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="37.0" />
-         </font>
-      </Label>
-      <Label layoutX="474.0" layoutY="450.0" prefHeight="79.0" prefWidth="176.0" text="password" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="37.0" />
-         </font>
-      </Label>
-      <TextField fx:id="usernameOfLogin" layoutX="698.0" layoutY="347.0" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <font>
-            <Font name="Harrington" size="31.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="passwordOfLogin" layoutX="698.0" layoutY="463.0" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <font>
-            <Font size="31.0" />
-         </font>
-      </TextField>
-      <Button layoutX="78.0" layoutY="764.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="back" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="36.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
-         <font>
-            <Font name="Harrington" size="36.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-      </Button>
-      <Label fx:id="errorOfLogin" layoutX="493.0" layoutY="588.0" prefHeight="61.0" prefWidth="595.0">
-         <font>
-            <Font size="30.0" />
-         </font></Label>
-      <Label fx:id="successOfLogin" layoutX="543.0" layoutY="673.0" prefHeight="61.0" prefWidth="551.0">
-         <font>
-            <Font name="Harrington" size="30.0" />
-         </font></Label>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="900.0" prefWidth="1600.0"
+            styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.RegisterController">
+    <children>
+        <Label layoutX="482.0" layoutY="334.0" prefHeight="79.0" prefWidth="176.0" text="username" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="37.0"/>
+            </font>
+        </Label>
+        <Label layoutX="474.0" layoutY="450.0" prefHeight="79.0" prefWidth="176.0" text="password" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="37.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="usernameOfLogin" layoutX="698.0" layoutY="347.0" prefHeight="79.0" prefWidth="504.0"
+                   style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
+            <cursor>
+                <Cursor fx:constant="TEXT"/>
+            </cursor>
+            <font>
+                <Font name="Harrington" size="31.0"/>
+            </font>
+        </TextField>
+        <TextField fx:id="passwordOfLogin" layoutX="698.0" layoutY="463.0" prefHeight="79.0" prefWidth="504.0"
+                   style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
+            <cursor>
+                <Cursor fx:constant="TEXT"/>
+            </cursor>
+            <font>
+                <Font size="31.0"/>
+            </font>
+        </TextField>
+        <Button layoutX="78.0" layoutY="764.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="79.0"
+                prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton"
+                stylesheets="@../CSS/MenuStyles.css" text="back" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="36.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND"/>
+            </cursor>
+        </Button>
+        <Button layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0"
+                prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton"
+                stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
+            <font>
+                <Font name="Harrington" size="36.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND"/>
+            </cursor>
+        </Button>
+        <Label fx:id="errorOfLogin" layoutX="493.0" layoutY="588.0" prefHeight="61.0" prefWidth="595.0">
+            <font>
+                <Font size="30.0"/>
+            </font>
+        </Label>
+        <Label fx:id="successOfLogin" layoutX="543.0" layoutY="673.0" prefHeight="61.0" prefWidth="551.0">
+            <font>
+                <Font name="Harrington" size="30.0"/>
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

@@ -19,22 +19,6 @@ public class TrapCardData extends CardData {
         allTraps.add(this);
     }
 
-    public SpellTrapProperty getTrapProperty() {
-        return trapProperty;
-    }
-
-    public boolean isLimited() {
-        return isLimited;
-    }
-
-    public void setLimited(boolean limited) {
-        isLimited = limited;
-    }
-
-    public void setTrapProperty(SpellTrapProperty trapProperty) {
-        this.trapProperty = trapProperty;
-    }
-
     public static void printAllTraps() {
         for (TrapCardData trapCardData : allTraps) {
             System.out.println("trap name is : " + trapCardData.cardName + " trap id is: " + trapCardData.getCardId());
@@ -43,6 +27,22 @@ public class TrapCardData extends CardData {
             System.out.println("trap description is : " + trapCardData.getCardDescription());
             System.out.println();
         }
+    }
+
+    public SpellTrapProperty getTrapProperty() {
+        return trapProperty;
+    }
+
+    public void setTrapProperty(SpellTrapProperty trapProperty) {
+        this.trapProperty = trapProperty;
+    }
+
+    public boolean isLimited() {
+        return isLimited;
+    }
+
+    public void setLimited(boolean limited) {
+        isLimited = limited;
     }
 
     @Override

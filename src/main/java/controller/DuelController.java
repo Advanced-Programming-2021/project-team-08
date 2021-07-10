@@ -2,21 +2,20 @@ package controller;
 
 import controller.gameplay.AI_Player;
 import model.Deck;
-import view.menus.GamePlayScene;
 
 public class DuelController {
 
-    private User activeUser;
     private static GamePlaySceneController.DuelData currentDuelData;
-
-    public static GamePlaySceneController.DuelData getCurrentDuelData() {
-        return currentDuelData;
-    }
+    private User activeUser;
 
     public DuelController() {
         activeUser = ApplicationManger.getLoggedInUser();
         if (activeUser == null) ApplicationManger.setLoggedInUser(new User("text", "test", "test"));
         if (activeUser == null) activeUser = new User("test", "test", "test");
+    }
+
+    public static GamePlaySceneController.DuelData getCurrentDuelData() {
+        return currentDuelData;
     }
 
     public String duelMultiplayer(int rounds, String secondPlayerName) {

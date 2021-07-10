@@ -12,13 +12,12 @@ import javafx.scene.paint.Color;
 import model.cards.data.CardData;
 import view.menus.ShopScene;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class ShopController {
 
+    private static int i = 0;
     public Label buyMessageLabel;
     public TextField searchedString;
     public AnchorPane scrollPane;
@@ -27,8 +26,6 @@ public class ShopController {
     public ImageView menuName;
     private User activeUser;
     private ShopScene shopScene;
-
-    private static int i = 0;
 
     public ShopController() {
         i++;
@@ -75,7 +72,7 @@ public class ShopController {
     public void updateUserMoney() {
         int userMoney = activeUser.getUserData().getMoney();
         if (userMoney < 100000) this.userMoney.setText(String.valueOf(userMoney));
-        else this.userMoney.setText(userMoney/1000 + "K");
+        else this.userMoney.setText(userMoney / 1000 + "K");
     }
 
     public void updateCardPrice(int price) {

@@ -8,8 +8,8 @@ import model.gameplay.AttackResult;
 import java.util.ArrayList;
 
 public class DecreaseOwnerLPOnAttackAnOpponentMonster extends Effect {
-    private AttackResult attackResult;
     int amount;
+    private AttackResult attackResult;
 
     public DecreaseOwnerLPOnAttackAnOpponentMonster(ArrayList<String> args) {
         super(args);

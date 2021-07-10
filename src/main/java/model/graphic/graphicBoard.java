@@ -1,8 +1,6 @@
 package model.graphic;
 
 import javafx.animation.TranslateTransition;
-import javafx.scene.Group;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import model.enums.ZoneType;
@@ -40,7 +38,8 @@ public class graphicBoard {
             for (int i = 1; i <= 5; i++) {
                 monster.add(new GraphicCardSlot(ZoneType.MONSTER, i, playerBoard.lookup("#monster" + playerNumber + "" + i)));
             }
-            graveyard = new GraphicCardSlot(ZoneType.GRAVEYARD, playerBoard.lookup("#GY" + playerNumber));;
+            graveyard = new GraphicCardSlot(ZoneType.GRAVEYARD, playerBoard.lookup("#GY" + playerNumber));
+            ;
         }
 
         public GraphicCardSlot getDeck() {

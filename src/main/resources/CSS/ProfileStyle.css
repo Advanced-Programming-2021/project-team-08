@@ -8,7 +8,7 @@
     -fx-background-radius: 30;
     -fx-text-fill: white;
     -fx-background-color: rgb(0, 12, 65);
-    -fx-font: 30px arial ;
+    -fx-font: 30px arial;
 }
 
 .menu-item:hover {
@@ -22,7 +22,7 @@
     -fx-background-radius: 30;
     -fx-text-fill: white;
     -fx-background-color: rgb(0, 12, 65);
-    -fx-font: 30px arial ;
+    -fx-font: 30px arial;
 }
 
 .back:hover {
@@ -55,7 +55,7 @@
     -fx-pref-height: 50;
     -fx-text-fill: white;
     -fx-background-color: rgb(0, 12, 65);
-    -fx-font: 20px arial ;
+    -fx-font: 20px arial;
 }
 
 .change-button:hover {

@@ -2,8 +2,6 @@ package view.menus;
 
 import controller.ApplicationManger;
 import controller.CardCreatorController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -12,14 +10,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import model.cards.Card;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.Effect;
-import model.enums.CardType;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class CardCreatorScene extends Scene {
@@ -58,18 +52,18 @@ public class CardCreatorScene extends Scene {
 
     private void setEffects() {
         int index = 0;
-        for (CardData cardData :  CardData.getAllCardData()) {
+        for (CardData cardData : CardData.getAllCardData()) {
             if (cardData.getEffects().size() > 0 && cardData instanceof MonsterCardData) {
                 System.out.println("card name is :" + cardData.getName() + " card type is : " + cardData.getCardType());
                 for (Effect effect : cardData.getEffects()) {
                     System.out.println(effect.getClass().getSimpleName());
-                    effectPane.getChildren().add(effectPane.getChildren().size(), setEffectLabel(effect, cardData,index));
+                    effectPane.getChildren().add(effectPane.getChildren().size(), setEffectLabel(effect, cardData, index));
                     index++;
                 }
                 System.out.println("---------------------------");
             }
         }
-        effectPane.setPrefHeight(index * 60 );
+        effectPane.setPrefHeight(index * 60);
     }
 
     private Label setEffectLabel(Effect effect, CardData cardData, int index) {
@@ -102,11 +96,11 @@ public class CardCreatorScene extends Scene {
                 textField.setText(newValue.replaceAll("[^\\d]", ""));
             }
             if (newValue.length() > 4) {
-                textField.setText(newValue.substring(0,4));
+                textField.setText(newValue.substring(0, 4));
                 message.setText("maximum number of attack and defence is 4999");
             }
             if (newValue.length() == 4 && !newValue.matches("[01234]\\d\\d\\d")) {
-                textField.setText(newValue.substring(0,3));
+                textField.setText(newValue.substring(0, 3));
                 message.setText("maximum number of attack and defence is 4999");
             }
         });
@@ -114,12 +108,12 @@ public class CardCreatorScene extends Scene {
 
 
     public void createCard(ActionEvent actionEvent) {
-        controller.createCard(defenceField.getText(), attackField.getText(), effects, nameField.getText(), cardDescription.getText(), (String)cardAttribute.getValue(), (String)cardType.getValue(), (String)monsterCardType.getValue());
+        controller.createCard(defenceField.getText(), attackField.getText(), effects, nameField.getText(), cardDescription.getText(), (String) cardAttribute.getValue(), (String) cardType.getValue(), (String) monsterCardType.getValue());
         try {
-            System.out.println("attack is : " + attackField.getText() + "  defence is : " + defenceField.getText() + " card name is: " +nameField.getText());
+            System.out.println("attack is : " + attackField.getText() + "  defence is : " + defenceField.getText() + " card name is: " + nameField.getText());
             System.out.println("attribute is : " + cardAttribute.getValue() + " card type is : " + cardType.getValue());
             System.out.println("description is : " + cardDescription.getText());
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -145,7 +139,7 @@ public class CardCreatorScene extends Scene {
         effectScroll.setVisible(false);
     }
 
-    public void setMessage (String message) {
+    public void setMessage(String message) {
         this.message.setText(message);
     }
 }

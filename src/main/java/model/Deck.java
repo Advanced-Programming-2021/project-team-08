@@ -27,10 +27,6 @@ public class Deck {
         return false;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public static void removeADeck(String name) {
         Deck deck = getDeckWithName(name);
         if (deck == null) return;
@@ -80,25 +76,6 @@ public class Deck {
             if (temp != null) result.add(temp);
         }
         return result;
-    }
-
-    public int numberOfThisCardInMainDeck(String nameOfCard, String nameOfDeck) {
-        Deck deck = getDeckWithName(nameOfDeck);
-        if (deck == null) return 0;
-        try {
-            return Collections.frequency(deck.mainDeck, Card.getCardIdByName(nameOfCard));
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    public int numberOfThisCardInSideDeck(String nameOfCard, String nameOfDeck) {
-        Deck deck = getDeckWithName(nameOfDeck);
-        try {
-            return Collections.frequency(deck.sideDeck, Card.getCardIdByName(nameOfCard));
-        } catch (Exception e) {
-            return 0;
-        }
     }
 
     public static void addCard(String nameOfCard, String nameOfDeck, String mainOrSide) {
@@ -157,6 +134,29 @@ public class Deck {
     public static int numberOfSideDeckCards(String name) {
         if (Deck.getDeckWithName(name) == null) return 0;
         return Deck.getDeckWithName(name).sideDeck.size();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int numberOfThisCardInMainDeck(String nameOfCard, String nameOfDeck) {
+        Deck deck = getDeckWithName(nameOfDeck);
+        if (deck == null) return 0;
+        try {
+            return Collections.frequency(deck.mainDeck, Card.getCardIdByName(nameOfCard));
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public int numberOfThisCardInSideDeck(String nameOfCard, String nameOfDeck) {
+        Deck deck = getDeckWithName(nameOfDeck);
+        try {
+            return Collections.frequency(deck.sideDeck, Card.getCardIdByName(nameOfCard));
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public ArrayList<CardData> getMainDeck() {

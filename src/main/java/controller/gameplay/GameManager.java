@@ -37,11 +37,7 @@ public class GameManager {
     }};
 
     private static GameManager instance;
-
-    public static GameManager getInstance() {
-        return instance;
-    }
-
+    protected Event<AttackResult> destroyAMonster = new Event<>();
     private Player player1, player2;
     private int turn, currentPlayerTurn;
     private Phase currentPhase;
@@ -58,16 +54,10 @@ public class GameManager {
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
     private EventNoParam onChangeTurn = new EventNoParam();
-    protected Event<AttackResult> destroyAMonster = new Event<>();
-
     private boolean isFirstSetup = false;
-
     private boolean canAttack = true;
-
-
     private boolean isAI;
     private AI_Player ai;
-
     public GameManager(boolean isPlayer, UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         instance = this;
         this.scene = scene;
@@ -93,8 +83,12 @@ public class GameManager {
         firstSetup();
     }
 
-    public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene){
+    public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene) {
         this(duelData.isPlayer(), duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
+    }
+
+    public static GameManager getInstance() {
+        return instance;
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -140,6 +134,10 @@ public class GameManager {
         return currentPhase;
     }
 
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
     public int getCurrentPlayerTurn() {
         return currentPlayerTurn;
     }
@@ -166,7 +164,8 @@ public class GameManager {
         e.addListener(this::firstSetupAfterFirstDraw);
         player2.drawCard(5, e);
     }
-    public void firstSetupAfterFirstDraw(){
+
+    public void firstSetupAfterFirstDraw() {
         turn = 1;
         currentPlayerTurn = 1;
         startDrawPhase();
@@ -193,10 +192,6 @@ public class GameManager {
             case END:
                 break;
         }
-    }
-
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
     }
 
     private void changeTurn() {
@@ -559,6 +554,42 @@ public class GameManager {
         scene.log("Game Over");
     }
 
+    public Event<Card> getRotate() {
+        return ((MonsterCard) currentSelectedCard).getFaceUp();
+    }
+
+    public void addCard_C(String cardName) {
+        try {
+            Card card = Card.createCardByName(cardName);
+            card.setup(getCurrentTurnPlayer());
+            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(card);
+        } catch (Exception e) {
+            scene.showError("card with this name doesn't exist");
+        }
+    }
+
+    public void increaseLP_C(int amount) {
+        getCurrentTurnPlayer().increaseLP(amount);
+    }
+
+    //// Cheat codes
+
+    public void setWinner_C(String nickname) {
+        if (nickname.equals(player1.getUserData().getNickname())) {
+            finishGame(1);
+        }
+        if (nickname.equals(player2.getUserData().getNickname())) {
+            finishGame(2);
+        }
+    }
+
+    private enum SelectCommandType {
+        MONSTER,
+        SPELL,
+        HAND,
+        FIELD
+    }
+
     public class CardSlotAddress {
         private boolean forOpponent;
         private ZoneType zone;
@@ -586,42 +617,6 @@ public class GameManager {
 
         public boolean isForOpponent() {
             return forOpponent;
-        }
-    }
-
-    private enum SelectCommandType {
-        MONSTER,
-        SPELL,
-        HAND,
-        FIELD
-    }
-
-    public Event<Card> getRotate() {
-        return ((MonsterCard) currentSelectedCard).getFaceUp();
-    }
-
-    //// Cheat codes
-
-    public void addCard_C(String cardName) {
-        try {
-            Card card = Card.createCardByName(cardName);
-            card.setup(getCurrentTurnPlayer());
-            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(card);
-        } catch (Exception e) {
-            scene.showError("card with this name doesn't exist");
-        }
-    }
-
-    public void increaseLP_C(int amount) {
-        getCurrentTurnPlayer().increaseLP(amount);
-    }
-
-    public void setWinner_C(String nickname) {
-        if (nickname.equals(player1.getUserData().getNickname())) {
-            finishGame(1);
-        }
-        if (nickname.equals(player2.getUserData().getNickname())) {
-            finishGame(2);
         }
     }
 
