@@ -1,11 +1,10 @@
 package model;
 
 import com.google.gson.Gson;
+import javafx.scene.image.Image;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class UserData {
@@ -25,11 +24,7 @@ public class UserData {
         this.nickname = nickname;
         this.password = password;
         this.money = 100000;
-        try {
-            profileImageUrl = new URL("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/profileMenu/Chara001.dds6.png").toExternalForm();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        profileImageUrl = "/src/main/resources/asset/profileMenu/defaultAvatar.png";
     }
 
     public ArrayList<Deck> getDecks() {
@@ -128,11 +123,15 @@ public class UserData {
     }
 
     public String getProfileImageUrl() {
-        return profileImageUrl;
+        return "file:" + System.getProperty("user.dir") + profileImageUrl;
     }
 
     public void setProfileImageUrl(String url) {
         this.profileImageUrl = url;
+    }
+
+    public Image getProfileImage() {
+        return new Image("file:" + System.getProperty("user.dir") + profileImageUrl);
     }
 }
 

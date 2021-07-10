@@ -53,7 +53,7 @@ public class DeckController {
 
     @FXML
     void initialize() {
-        if (deckMenu == null) deckMenu = new DeckMenu();
+        if (deckMenu == null) deckMenu = new DeckMenu(this);
         ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
         listOfDecks.setLayoutX(0);
         deckSetting.setLayoutX(1600);
