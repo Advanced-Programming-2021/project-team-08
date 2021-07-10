@@ -1,8 +1,12 @@
 package model;
 
 import controller.ApplicationManger;
+import controller.DeckController;
 import model.cards.Card;
 import model.cards.data.CardData;
+import model.cards.data.SpellCardData;
+import model.cards.data.TrapCardData;
+import model.enums.CardType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +34,8 @@ public class Deck {
     public String getName() {
         return name;
     }
+
+
 
     public static void removeADeck(String name) {
         Deck deck = getDeckWithName(name);
@@ -132,6 +138,46 @@ public class Deck {
         }
     }
 
+    public static void addCardGraphic(String cardName,String mainOrSide,String deckName) throws Exception {
+        Integer cardId = Card.getCardIdByName(cardName);
+        CardData cardData=CardData.getCardByName(cardName);
+        if (mainOrSide.equals("main")){
+            if (Deck.isMainDeckFull(deckName)) {
+                DeckController.showMessage("main deck is full");
+            } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already three cards with name " + cardName + " in deck " + deckName);
+            } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
+                    Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+            } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
+                    Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+            } else {
+                DeckController.showMessage("card added to deck successfully");
+                Deck.addCard(cardName, deckName, "main");
+                ApplicationManger.getLoggedInUser().getUserData().save();
+            }
+
+        }
+        else if (mainOrSide.equals("side")){
+            if (Deck.isSideDeckFull(deckName)) {
+                DeckController.showMessage("side deck is full");
+            } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already three cards with name " + cardName + " in deck " + deckName);
+            } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
+                    Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+            } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
+                    Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
+                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+            } else {
+                DeckController.showMessage("card added to deck successfully");
+                Deck.addCard(cardName, deckName, "side");
+                ApplicationManger.getLoggedInUser().getUserData().save();
+            }
+        }
+    }
+
     public static void removeCardFromDeck(String nameOfCard, String nameOfDeck, String mainOrSide) {
         try {
             int cardId = Card.getCardIdByName(nameOfCard);
@@ -144,6 +190,8 @@ public class Deck {
             e.printStackTrace();
         }
     }
+
+
 
     public static boolean isThisDeckValid(Deck deck) {
         return deck.mainDeck.size() >= 40;

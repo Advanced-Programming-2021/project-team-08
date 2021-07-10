@@ -119,5 +119,7 @@ public class User {
     public static void deleteAccount(User user) {
         allUser.remove(user);
     }
+
+
 }
 

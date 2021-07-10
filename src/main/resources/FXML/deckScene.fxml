@@ -43,6 +43,7 @@
                   </Label>
                   <Button fx:id="nextDeckCreate" layoutX="991.0" layoutY="575.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" text="next" />
                   <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" />
+                  <Button fx:id="backToMainScene" layoutX="76.0" layoutY="799.0" mnemonicParsing="false" text="back" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css">
@@ -75,6 +76,19 @@
                   <Label layoutX="784.0" layoutY="57.0" prefHeight="37.0" prefWidth="155.0" text="Side Deck" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="goToSideOrMainDeck" layoutX="547.0" layoutY="745.0" opacity="0.0" text="go to main or side" textFill="WHITE">
+                     <font>
+                        <Font name="Harrington" size="34.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="goToMainDeckButton" layoutX="873.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="83.0" text="main " />
+                  <Button fx:id="goToSideDEckButton" layoutX="965.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="83.0" text="side" />
+                  <Button fx:id="backToListOfDecks" layoutX="132.0" layoutY="795.0" mnemonicParsing="false" text="back" />
+                  <Label fx:id="addOrDeleteMessage" alignment="CENTER" layoutX="613.0" layoutY="799.0" prefHeight="55.0" prefWidth="492.0">
+                     <font>
+                        <Font size="25.0" />
                      </font>
                   </Label>
                </children></AnchorPane>

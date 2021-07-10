@@ -5,14 +5,14 @@ import controller.DeckController;
 import controller.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import model.Deck;
 import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
@@ -26,50 +26,66 @@ public class DeckMenu extends Scene {
     private User activeUser;
     private DeckController deckController;
 
+
     public void setCards(AnchorPane anchorPane,ArrayList<CardData> cards,String scrollPaneType,String deckName){
         int size = cards.size();
         if (size == 0) anchorPane.setPrefHeight(600);
-        else if (size % 3 == 0) anchorPane.setPrefHeight((double) (cards.size() / 3) * 445 + 180);
-        else anchorPane.setPrefHeight((double) (cards.size() / 3 + 1) * 445 + 180);
+        else if (size % 3 == 0) anchorPane.setPrefHeight((double) (cards.size() / 3) * 212.5 + 180);
+        else anchorPane.setPrefHeight((double) (cards.size() / 3 + 1) * 212.5 + 180);
         for (int i = 0; i < cards.size(); i++) {
             addCardImage(anchorPane, cards.get(i), i,scrollPaneType,deckName);
         }
     }
     private void addCardImage(AnchorPane anchorPane, CardData cardData, int index,String scrollPaneType,String deckName){
         ImageView cardImage = new ImageView(cardData.getCardImage());
-        Button addOrDelete=new Button();
-        addOrDelete.setOpacity(0);
-        anchorPane.getChildren().add(index, addOrDelete);
+
+
         anchorPane.getChildren().add(index, cardImage);
 
         cardImage.setFitHeight(212.5);
-        addOrDelete.setPrefHeight(212.5);
         cardImage.setFitWidth(120);
-        addOrDelete.setPrefHeight(120);
 
         int x = (index % 3) * (130) + 20;
         int y = (index / 3) * (222) + 20;
 
         cardImage.setX(x);
         cardImage.setY(y);
-        addOrDelete.setLayoutX(x);
-        addOrDelete.setLayoutY(y);
+
 
         cardImage.setOnMouseEntered(event -> {
-            addOrDelete.setOpacity(0.5);
+            cardImage.setOpacity(0.5);
         });
-        addOrDelete.setOnMouseClicked(event -> {
+        cardImage.setOnMouseClicked(event -> {
             if(scrollPaneType.equals("hand")){
+                      Button goToMainDeckButton=deckController.getGoToMainDeckButton();
+                      Button goToSideDeckButton=deckController.getGoToSideDeckButton();
+                      deckController.setOpacity();
+                      goToMainDeckButton.setOnMouseClicked(event1 -> {
+                          try {
+                              Deck.addCardGraphic(cardData.getCardName(),"main",deckName);
+                              deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
 
+                          } catch (Exception e) {
+                              e.printStackTrace();
+                          }
+                      });
+                      goToSideDeckButton.setOnMouseClicked(event1 -> {
+                          try {
+                              Deck.addCardGraphic(cardData.getCardName(),"side",deckName);
+                              deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
+                          } catch (Exception e) {
+                              e.printStackTrace();
+                          }
+                      });
             }
-            else{
-//                deckController.removeCardGraphic(cardData.getCardName(),scrollPaneType,deckName);
+            else {
+                Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
+                DeckController.showMessage("card removed from deck successfully");
+                deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
             }
-
         });
         cardImage.setOnMouseExited(event -> {
-            addOrDelete.setOpacity(0);
-
+            cardImage.setOpacity(1);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
