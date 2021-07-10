@@ -80,7 +80,7 @@ public class DeckMenu extends Scene {
             }
             else {
                 Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
-                DeckController.showMessage("card removed from deck successfully");
+                deckController.showMessage("card removed from deck successfully");
                 deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
             }
         });

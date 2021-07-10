@@ -48,7 +48,7 @@ public class DeckController {
     public Button goToSideDeckButton;
     public Button backToListOfDecks;
     public Button backToMainScene;
-    public static Label addOrDeleteMessage;
+    public Label addOrDeleteMessage;
 
 
     @FXML
@@ -61,7 +61,7 @@ public class DeckController {
         setDecks(scrollPane, showingDeck);
     }
 
-    public static void showMessage(String message) {
+    public void showMessage(String message) {
         addOrDeleteMessage.setText(message);
         if (message.equals("card removed from deck successfully") ||
                 message.equals("card added to deck successfully"))

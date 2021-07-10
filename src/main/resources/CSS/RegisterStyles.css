@@ -8,3 +8,7 @@
     -fx-background-image: url("../asset/register/GUI_T_ShopButton1LL_3.dds.png");
 
 }
+
+.registerFont{
+    -fx-text-fill: white;
+}
