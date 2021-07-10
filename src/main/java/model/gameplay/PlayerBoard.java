@@ -1,6 +1,7 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.cards.Card;
@@ -18,10 +19,10 @@ public class PlayerBoard {
     private CardSlot deckZone = new CardSlot(ZoneType.DECK);
     private CardSlot fieldZone = new CardSlot(ZoneType.FIELD);
     private ArrayList<CardSlot> monsterZone = new ArrayList<CardSlot>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardSlot(i+1,ZoneType.MONSTER));
+        for (int i = 0; i < 5; i++) add(new CardSlot(i + 1, ZoneType.MONSTER));
     }};
     private ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
-        for (int i = 0; i < 5; i++) add(new CardSlot(i+1, ZoneType.SPELL_AND_TRAP));
+        for (int i = 0; i < 5; i++) add(new CardSlot(i + 1, ZoneType.SPELL_AND_TRAP));
     }};
     private CardSlot hand = new CardSlot(ZoneType.HAND);
 
@@ -37,11 +38,14 @@ public class PlayerBoard {
 
         ArrayList<CardData> deck = playerDeck.getMainDeck();
         Collections.shuffle(deck);
+
+        ArrayList<Card> deckCards = new ArrayList<>();
         for (CardData data : deck) {
             Card c = Card.createCardByCardData(data);
+            deckCards.add(c);
             deckZone.appendCard(c);
         }
-        GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckZone.getAllCards());
+        Platform.runLater(() -> GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckCards));
     }
 
     public ArrayList<CardSlot> getMonsterZone() {

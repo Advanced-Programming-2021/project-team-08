@@ -20,6 +20,7 @@ public class GraphicCard {
     private CardData data;
     private GraphicCardSlot slot;
     private CardStatus status = CardStatus.TO_BACK;
+    private boolean toAttackPosition = true;
 
     public GraphicCard(Card card) {
         this.data = card.getCardData();
@@ -50,6 +51,13 @@ public class GraphicCard {
         });
     }
 
+    public boolean isToAttackPosition() {
+        return toAttackPosition;
+    }
+
+    public void setToAttackPosition(boolean toAttackPosition) {
+        this.toAttackPosition = toAttackPosition;
+    }
 
     public static Image getBack() {
         return back;

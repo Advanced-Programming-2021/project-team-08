@@ -2,3 +2,14 @@
     -fx-font-family: 'Heebeo';
     src: url("../asset/font/Heebeo.ttf");
 }
+
+.bluePlayer{
+    -fx-border-color: blue;
+    -fx-border-width: 5;
+    -fx-background-color: rgba(0, 0, 255, 0.5);
+}
+.redPlayer{
+    -fx-border-color: red;
+    -fx-border-width: 5;
+    -fx-background-color: rgba(255, 0, 0, 0.5);
+}

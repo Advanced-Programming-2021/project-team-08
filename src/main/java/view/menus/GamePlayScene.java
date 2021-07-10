@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Point3D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +23,7 @@ import model.cards.Card;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.enums.CardStatus;
+import model.enums.Phase;
 import model.gameplay.AttackResult;
 import model.gameplay.Player;
 import model.graphic.GraphicCard;
@@ -39,8 +41,12 @@ public class GamePlayScene extends Scene {
     public Label player2Nickname_T;
     public Label player1LP_T;
     public Label player2LP_T;
+    public ImageView player1LP_bar;
+    public ImageView player2LP_bar;
     public AnchorPane board;
     public AnchorPane root;
+
+    public Label currentPhase;
 
     private graphicBoard gBoard;
 
@@ -63,26 +69,31 @@ public class GamePlayScene extends Scene {
         GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
 
         try {
-            //new GameManager(false, User.getUserByUsername("Abolfazl").getUserData(), null, this, sceneController);
-            new GameManager(data, this);
+            new Thread(() -> {
+                new GameManager(data, this);
+            }).start();
             firstSetupUI(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public GamePlayScene() {
-        //sceneController = new GamePlaySceneController(this);
-    }
-
     private void firstSetupUI(GamePlaySceneController.DuelData data) {
-        player1Nickname_T.setText(data.getFirstPlayer().getNickname());
-        player2Nickname_T.setText(data.getSecondPlayer().getNickname());
+        player1Nickname_T.setText(data.getFirstPlayer().getUsername() + " (" + data.getFirstPlayer().getNickname() + ")");
+        player2Nickname_T.setText(data.getSecondPlayer().getUsername() + " (" + data.getSecondPlayer().getNickname() + ")");
+        player1LP_T.setText("LP      " + sceneController.getGameManager().getPlayer1().getLP());
+        player2LP_T.setText("LP      " + sceneController.getGameManager().getPlayer2().getLP());
     }
 
-    public void updateUI() {
-        player1LP_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer1().getLP());
-        player2LP_T.setText("LP\t\t" + sceneController.getGameManager().getPlayer2().getLP());
+    public void changePhase(Phase toPhase) {
+        currentPhase.setText(toPhase.toString().replace("_", " "));
+        if (GameManager.getInstance().getCurrentPlayerTurn() == 1) {
+            currentPhase.getStyleClass().clear();
+            currentPhase.getStyleClass().add("bluePlayer");
+        } else {
+            currentPhase.getStyleClass().clear();
+            currentPhase.getStyleClass().add("redPlayer");
+        }
     }
 
     @Override
@@ -248,7 +259,7 @@ public class GamePlayScene extends Scene {
     }
 
     public void showBoard(String gameBoard) {
-        System.out.println(gameBoard);
+        //System.out.println(gameBoard);
     }
 
     public void showGraveyard(ArrayList<Card> cards) {
@@ -348,16 +359,14 @@ public class GamePlayScene extends Scene {
     }
 
     public void firstSetupBoardGraphic(int playerNumber, ArrayList<Card> cards) {
-        int i = 0;
         double z = cards.size();
-        for (Card c : cards) {
-            GraphicCard gc = new GraphicCard(c);
+        for (int i = 0; i < z; i++) {
+            GraphicCard gc = new GraphicCard(cards.get(i));
             gBoard.getPlayerBoard(playerNumber).getDeck().appendCard(gc);
             gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
             gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutX() + 8);
             gc.getShape().setTranslateY(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutY() + 5);
             gc.getShape().setTranslateZ(-(double) i / 3);
-            i++;
         }
     }
 
@@ -393,9 +402,7 @@ public class GamePlayScene extends Scene {
         FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
 
         ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().add(thisCard);
-        parallelTransition.getChildren().add(rotateTransition);
-        parallelTransition.getChildren().add(flipCardAnimation);
+        parallelTransition.getChildren().addAll(thisCard, rotateTransition, flipCardAnimation);
 
         parallelTransition.setOnFinished(onEnd);
         parallelTransition.play();
@@ -405,6 +412,8 @@ public class GamePlayScene extends Scene {
         graphicBoard.GraphicPlayerBoard playerBoard = gBoard.getPlayerBoard(playerNumber);
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
         GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber);
+
+        removeCardFromHand(handCardNumber, playerBoard);
 
         playerBoard.getHand().getAllCards().remove(c);
         playerBoard.getMonster(toSlotNumber).setCard(c);
@@ -422,8 +431,7 @@ public class GamePlayScene extends Scene {
         rotateTransition.setToAngle(0);
 
         ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().add(thisCard);
-        parallelTransition.getChildren().add(rotateTransition);
+        parallelTransition.getChildren().addAll(thisCard, rotateTransition);
 
         parallelTransition.play();
     }
@@ -433,8 +441,11 @@ public class GamePlayScene extends Scene {
         GraphicCard c = playerBoard.getHand().getAllCards().get(handCardNumber - 1);
         GraphicCardSlot slot = playerBoard.getMonster(toSlotNumber);
 
+        removeCardFromHand(handCardNumber, playerBoard);
+
         playerBoard.getHand().getAllCards().remove(c);
         playerBoard.getMonster(toSlotNumber).setCard(c);
+        c.setToAttackPosition(false);
 
         TranslateTransition thisCard = new TranslateTransition();
         thisCard.setDuration(Duration.millis(800));
@@ -449,9 +460,7 @@ public class GamePlayScene extends Scene {
         FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.TO_BACK);
 
         ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().add(thisCard);
-        parallelTransition.getChildren().add(rotateTransition);
-        parallelTransition.getChildren().add(rotateTransition1);
+        parallelTransition.getChildren().addAll(thisCard, rotateTransition, rotateTransition1);
 
         SequentialTransition s = new SequentialTransition();
         s.getChildren().add(flipCardAnimation);
@@ -460,14 +469,38 @@ public class GamePlayScene extends Scene {
         s.play();
     }
 
-    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attacker, int defender) {
-        //getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
-        //getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
-        //player1LP_T.setText("LP\t\t"+result.getAttackerPlayer().getLP());
-        //player2LP_T.setText("LP\t\t"+result.getLP());
+    private void removeCardFromHand(int handCardNumber, graphicBoard.GraphicPlayerBoard playerBoard) {
+        ArrayList<GraphicCard> handCards = playerBoard.getHand().getAllCards();
+        int n = handCards.size();
 
+        for (int i = handCardNumber; i < n; i++) {
+            TranslateTransition previousCards = new TranslateTransition();
+            previousCards.setDuration(Duration.millis(400));
+            previousCards.setNode(handCards.get(i).getShape());
+            previousCards.setByX(-42);
+            previousCards.play();
+        }
+        for (int i = handCardNumber - 2; i >= 0; i--) {
+            TranslateTransition previousCards = new TranslateTransition();
+            previousCards.setDuration(Duration.millis(400));
+            previousCards.setNode(handCards.get(i).getShape());
+            previousCards.setByX(42);
+            previousCards.play();
+        }
+    }
+
+    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attacker, int defender) {
         graphicBoard.GraphicPlayerBoard attackerBoard = gBoard.getPlayerBoard(playerNumber);
         graphicBoard.GraphicPlayerBoard defenderBoard = gBoard.getPlayerBoard(playerNumber == 1 ? 2 : 1);
+
+        if (result.isAttackedFlip()) {
+            GraphicCard gc = defenderBoard.getMonster(defender).getCard();
+            FlipCardAnimation flipCardAnimation = new FlipCardAnimation(gc, 300, CardStatus.FACE_UP);
+            flipCardAnimation.play();
+        }
+
+        changePlayerLP(result.getAttackerPlayer().getPlayerNumber(), -result.getPlayer1LPDecrease());
+        changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
 
         if (result.isDestroyCard1()) {
             attackerBoard.moveToGraveyard(attacker);
@@ -475,5 +508,27 @@ public class GamePlayScene extends Scene {
         if (result.isDestroyCard2()) {
             defenderBoard.moveToGraveyard(defender);
         }
+    }
+
+    private void changePlayerLP(int playerNumber, int amount) {
+        System.out.println(playerNumber + "," + player1LP_T.getText());
+        System.out.println(playerNumber + "," + player2LP_T.getText());
+
+        Label text;
+        ImageView bar;
+        if (playerNumber == 1) {
+            text = player1LP_T;
+            bar = player1LP_bar;
+        } else {
+            text = player2LP_T;
+            bar = player2LP_bar;
+        }
+
+        System.out.println(playerNumber + ",,," + text.getText());
+        int current = Integer.parseInt(text.getText().substring(8));
+        text.setText("LP      " + (current + amount));
+        double ratio = (double) (current + amount) / 8000;
+        bar.setViewport(new Rectangle2D(0, 0, ratio * 284, 32));
+        bar.setFitWidth(ratio * 284);
     }
 }

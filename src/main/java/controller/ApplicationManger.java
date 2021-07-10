@@ -51,9 +51,7 @@ public class ApplicationManger extends Application {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
         new SoundManager().playSound("musics/ForestWalk.mp3");
-        //loggedInUser = User.getUserByUsername("Abolfazl");
         goToScene("firstScene.fxml");
-        //goToScene1(SceneName.PROFILE_MENU, false);
     }
 
 
