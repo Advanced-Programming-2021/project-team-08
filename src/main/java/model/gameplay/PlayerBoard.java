@@ -1,6 +1,7 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.cards.Card;
@@ -33,11 +34,14 @@ public class PlayerBoard {
 
         ArrayList<CardData> deck = playerDeck.getMainDeck();
         Collections.shuffle(deck);
+
+        ArrayList<Card> deckCards = new ArrayList<>();
         for (CardData data : deck) {
             Card c = Card.createCardByCardData(data);
+            deckCards.add(c);
             deckZone.appendCard(c);
         }
-        GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckZone.getAllCards());
+        Platform.runLater(() -> GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckCards));
     }
 
     public int getPlayerNumber() {

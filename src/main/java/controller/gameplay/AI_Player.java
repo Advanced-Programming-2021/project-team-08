@@ -15,7 +15,6 @@ import model.gameplay.PlayerBoard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class AI_Player {
@@ -48,14 +47,24 @@ public class AI_Player {
     }
 
     public void playATurn() {
-        gameManager.goToNextPhase();
-        gameManager.goToNextPhase();
-        setTraps();
-        activateSpells();
-        summonMonster();
-        gameManager.goToNextPhase();
-        doAttack();
-        gameManager.goToNextPhase();
+        try {
+            Thread.sleep(1000);
+            gameManager.goToNextPhase();
+            Thread.sleep(1000);
+            gameManager.goToNextPhase();
+            setTraps();
+            activateSpells();
+            summonMonster();
+            Thread.sleep(1000);
+            gameManager.goToNextPhase();
+            doAttack();
+            Thread.sleep(1000);
+            gameManager.goToNextPhase();
+            Thread.sleep(1000);
+            gameManager.goToNextPhase();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setTraps() {
@@ -68,7 +77,7 @@ public class AI_Player {
                 gameManager.setCard();
                 trapCards.remove(0);
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -92,7 +101,7 @@ public class AI_Player {
                 gameManager.activateCard();
                 spellCards.remove(0);
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -106,7 +115,7 @@ public class AI_Player {
                 gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(fieldCards.get(0)) + 1));
                 gameManager.activateCard();
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -128,7 +137,7 @@ public class AI_Player {
                 gameManager.selectCard("--hand " + (board.getHand().getAllCards().indexOf(monsterCards.get(i)) + 1));
                 gameManager.summonCard(chooseTribute(((MonsterCard) monsterCards.get(i)).getTributeNumber()).toArray(new Integer[0]));
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

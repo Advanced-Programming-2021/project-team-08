@@ -8,9 +8,11 @@ import model.gameplay.AttackResult;
 import model.gameplay.Player;
 
 public class MonsterCard extends Card {
-    protected Event<Card> faceUp = new Event<>();
     private boolean isAttackPosition;
     private boolean attackedThisTurn;
+
+    protected Event<Card> onFaceUp = new Event<>();
+
     private Event<AttackResult> onAttacked = new Event<>();
 
     public MonsterCard(MonsterCardData data) {
@@ -40,12 +42,12 @@ public class MonsterCard extends Card {
         }
     }
 
-    public boolean isAttackedThisTurn() {
-        return attackedThisTurn;
-    }
-
     public void setAttackedThisTurn(boolean attackedThisTurn) {
         this.attackedThisTurn = attackedThisTurn;
+    }
+
+    public boolean isAttackedThisTurn() {
+        return attackedThisTurn;
     }
 
     public void changePosition(boolean toAttack) {
@@ -55,15 +57,18 @@ public class MonsterCard extends Card {
     public void onSummon() {
         shape.toFront();
         cardStatus = CardStatus.FACE_UP;
-        faceUp.invoke(this);
+        onFaceUp.invoke(this);
         isAttackPosition = true;
     }
 
-    public Event<Card> getFaceUp() {
-        return faceUp;
+    public Event<Card> getOnFaceUp() {
+        return onFaceUp;
     }
 
     public void onAttacked(AttackResult result) {
+        if(cardStatus == CardStatus.TO_BACK) {
+            cardStatus = CardStatus.FACE_UP;
+        }
         onAttacked.invoke(result);
     }
 

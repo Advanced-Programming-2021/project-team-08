@@ -1,6 +1,7 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
+import javafx.application.Platform;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
@@ -21,14 +22,16 @@ public class Player {
     private GameManager gameManager;
     private int bannedCardTurn = 0;
     private int trapBanned = 0;
+    private int playerNumber;
 
     private boolean summonOrSetInThisTurn = false;
     private EventNoParam onChangeTurnEvent = new EventNoParam();
 
-    public Player(UserData userData, PlayerBoard playerBoard, GameManager gameManager) {
+    public Player(UserData userData, PlayerBoard playerBoard, GameManager gameManager, int playerNumber) {
         this.userData = userData;
         this.playerBoard = playerBoard;
         this.gameManager = gameManager;
+        this.playerNumber = playerNumber;
 
         for (Card card : playerBoard.getDeckZone().getAllCards()) {
             card.setup(this);
@@ -36,6 +39,10 @@ public class Player {
 
         EventNoParam e = new EventNoParam();
         e.addListener(gameManager::firstSetup);
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     public UserData getUserData() {
@@ -95,39 +102,11 @@ public class Player {
             return;
         }
 
-        //ArrayList<Card> pre = playerBoard.getHand().getAllCards();
         playerBoard.getHand().appendCard(c);
-        gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
-
-        /*for (Card card : pre) {
-            TranslateTransition previousCards = new TranslateTransition();
-            previousCards.setDuration(Duration.millis(400));
-            previousCards.setNode(card.getShape());
-            previousCards.setByX(-42);
-            previousCards.play();
-        }
-
-        TranslateTransition thisCard = new TranslateTransition();
-        thisCard.setDuration(Duration.millis(800));
-        thisCard.setNode(c.getShape());
-        thisCard.setToX(playerBoard.getHand().getSlotView().getLayoutX() + pre.size() * 42 - 154);
-        thisCard.setToY(playerBoard.getHand().getSlotView().getLayoutY());
-
-        RotateTransition rotateTransition = new RotateTransition();
-        rotateTransition.setDuration(Duration.millis(800));
-        rotateTransition.setNode(c.getShape());
-        rotateTransition.setAxis(new Point3D(1, 0, 0));
-        rotateTransition.setToAngle(45);
-
-        //FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300);
-
-        ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().add(thisCard);
-        parallelTransition.getChildren().add(rotateTransition);
-        //parallelTransition.getChildren().add(flipCardAnimation);
-
-        parallelTransition.play();*/
-        //parallelTransition.setOnFinished(event -> drawCard(n - 1, onEnd));
+        //gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
+        Platform.runLater(()->{
+                gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
+        });
 
         System.out.println("new card added to the hand: " + c.getCardData().getCardName());
     }

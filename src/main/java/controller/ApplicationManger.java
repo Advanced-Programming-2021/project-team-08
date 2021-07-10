@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class ApplicationManger extends Application {
+    private static Scene currentScene;
+    private static User loggedInUser;
+    private static Stage mainStage;
+
     public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         try {
@@ -30,13 +34,26 @@ public class ApplicationManger extends Application {
             e.printStackTrace();
         }
     }};
-    private static Scene currentScene;
-    private static User loggedInUser;
-    private static Stage mainStage;
 
     public static Stage getMainStage() {
         return mainStage;
     }
+
+    public void run(String[] args) {
+        //goToScene(SceneName.REGISTER_MENU, false);
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        new ReadMonsterCardsData().setGraphic();
+        new ReadSpellTrapCardsData().setGraphic();
+        mainStage = primaryStage;
+        primaryStage.setTitle("Yu-Gi-Oh");
+        new SoundManager().playSound("musics/ForestWalk.mp3");
+        goToScene("firstScene.fxml");
+    }
+
 
     public static void goToScene(SceneName sceneName, boolean isTest) {
         System.out.println("<<" + sceneName.name().replace("_", " ") + ">>");
@@ -92,7 +109,6 @@ public class ApplicationManger extends Application {
     }
 
     public static void goToScene(String url) {
-        new SoundManager().playSound("musics/tap.wav");
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         try {
             FXMLLoader loader = new FXMLLoader(new URL(rootPath + url));
@@ -106,31 +122,16 @@ public class ApplicationManger extends Application {
         }
     }
 
-    public static User getLoggedInUser() {
-        return loggedInUser;
-    }
-
     public static void setLoggedInUser(User loggedInUser) {
         ApplicationManger.loggedInUser = loggedInUser;
     }
 
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
     public static void logoutCurrentUser() {
         loggedInUser = null;
-    }
-
-    public void run(String[] args) {
-        //goToScene(SceneName.REGISTER_MENU, false);
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        new ReadMonsterCardsData().setGraphic();
-        new ReadSpellTrapCardsData().setGraphic();
-        mainStage = primaryStage;
-        primaryStage.setTitle("Yu-Gi-Oh");
-        new SoundManager().playBackgroundSound();
-        goToScene("firstScene.fxml");
     }
 
 /*    public static void modifyFile(String filePath, String oldString, String newString) {

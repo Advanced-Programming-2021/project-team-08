@@ -1,8 +1,11 @@
 package model.graphic;
 
+import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import model.animation.RotateCenterTransition;
 import model.enums.ZoneType;
 
 import java.util.ArrayList;
@@ -68,7 +71,17 @@ public class graphicBoard {
             move.setNode(c.getShape());
             move.setToX(graveyard.getImageView().getLayoutX() + 5);
             move.setToY(graveyard.getImageView().getLayoutY() + 25);
-            move.play();
+
+            if(!c.isToAttackPosition()){
+                RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 90, Rotate.Z_AXIS);
+                ParallelTransition parallelTransition = new ParallelTransition();
+                parallelTransition.getChildren().add(move);
+                parallelTransition.getChildren().add(rotateTransition);
+                parallelTransition.play();
+            }
+            else {
+                move.play();
+            }
         }
     }
 }

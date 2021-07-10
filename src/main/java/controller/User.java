@@ -8,12 +8,11 @@ import java.util.ArrayList;
 
 public class User {
     private static ArrayList<User> allUser;
+    private final UserData userData;
 
     static {
         allUser = new ArrayList<>();
     }
-
-    private final UserData userData;
 
     public User(String username, String nickname, String password) {
         userData = new UserData(username, nickname, password);
@@ -37,6 +36,10 @@ public class User {
             if (user.getUserData().getNickname().equals(nickname)) return user;
         }
         return null;
+    }
+
+    public UserData getUserData() {
+        return userData;
     }
 
     public static boolean loginUser(String username, String password) {
@@ -75,24 +78,12 @@ public class User {
         return scoreboard;
     }
 
-    public static void deleteAccount(User user) {
-        allUser.remove(user);
-    }
-
-    public UserData getUserData() {
-        return userData;
-    }
-
     public void addDeck(Deck deck) {
         userData.addDeck(deck);
     }
 
     public Deck getActiveDeck() {
         return userData.getActiveDeck();
-    }
-
-    public void setActiveDeck(String deckName) {
-        userData.setActiveDeckName(deckName);
     }
 
     public ArrayList<Deck> getDecks() {
@@ -120,5 +111,15 @@ public class User {
 
         return result;
     }
+
+    public void setActiveDeck(String deckName) {
+        userData.setActiveDeckName(deckName);
+    }
+
+    public static void deleteAccount(User user) {
+        allUser.remove(user);
+    }
+
+
 }
 

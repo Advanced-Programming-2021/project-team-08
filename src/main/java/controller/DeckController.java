@@ -2,15 +2,17 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import model.Command;
 import model.Deck;
+import model.cards.Card;
 import model.cards.data.CardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
@@ -18,6 +20,8 @@ import model.enums.CardType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.DeckMenu;
+import view.menus.SceneName;
+import view.menus.ShopScene;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,6 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeckController {
+    private DeckMenu deckMenu;
     public TextField deckNameTextField;
     public TextField cardNameTextField;
     public Label deckNameLabel;
@@ -38,11 +43,13 @@ public class DeckController {
     public AnchorPane scrollMainDeck;
     public AnchorPane scrollSideDeck;
     public AnchorPane scrollHandCards;
-    private DeckMenu deckMenu;
+    public Label goToSideOrMainDeck;
+    public Button goToMainDeckButton;
+    public Button goToSideDeckButton;
+    public Button backToListOfDecks;
+    public Button backToMainScene;
+    public static Label addOrDeleteMessage;
 
-    public DeckController() {
-
-    }
 
     @FXML
     void initialize() {
@@ -54,6 +61,26 @@ public class DeckController {
         setDecks(scrollPane, showingDeck);
     }
 
+    public static void showMessage(String message) {
+        addOrDeleteMessage.setText(message);
+        if (message.equals("card removed from deck successfully") ||
+                message.equals("card added to deck successfully"))
+            addOrDeleteMessage.setTextFill(Color.GREEN);
+        else    addOrDeleteMessage.setTextFill(Color.RED);
+    }
+
+    public Label getGoToSideOrMainDeck() {
+        return goToSideOrMainDeck;
+    }
+
+    public Button getGoToMainDeckButton() {
+        return goToMainDeckButton;
+    }
+
+    public Button getGoToSideDeckButton() {
+        return goToSideDeckButton;
+    }
+
     public void setDecks(VBox scrollPane, ArrayList<Deck> decks) {
         for (int i = 0; i < decks.size(); i++) {
             Deck deck = decks.get(i);
@@ -61,8 +88,8 @@ public class DeckController {
             hBox.setPrefWidth(1000);
             Button deckButton = new Button();
             Button deleteButton = new Button();
-            Button editDeck = new Button();
-            editDeck.setText("edit");
+//            Button editDeck=new Button();
+//            editDeck.setText("edit");
             deleteButton.setText("Delete");
             Button setActiveButton = new Button();
             hBox.getChildren().add(0, deckButton);
@@ -81,7 +108,7 @@ public class DeckController {
 
             }
             deckButton.setPrefWidth(5000);
-            hBox.getChildren().add(3, editDeck);
+//            hBox.getChildren().add(3, editDeck);
 //            System.out.println(deck.getName());
             if (Deck.isThisDeckValid(deck))
                 deckButton.setText(deck.getName() + " / valid \nnumber of cards of main deck: " + deck.getMainDeck().size() + "\n number of cards of side deck: " + deck.getSideDeck().size());
@@ -90,11 +117,11 @@ public class DeckController {
             scrollPane.getChildren().add(i, hBox);
             deckButton.setPrefHeight(100);
             deleteButton.setPrefHeight(100);
-            editDeck.setPrefHeight(100);
+//            editDeck.setPrefHeight(100);
 
             deckButton.setPrefWidth(700);
             deleteButton.setPrefWidth(500);
-            editDeck.setPrefWidth(500);
+//            editDeck.setPrefWidth(500);
             double x = (i % 5) * (260) + 20;
             double y = (i / 5) * (445) + 20;
             deckButton.setLayoutX(x);
@@ -102,7 +129,7 @@ public class DeckController {
             deckButton.setOnMouseClicked(event -> {
                 deckSetting.setLayoutX(0.0);
                 listOfDecks.setLayoutX(1600.0);
-                AddOrDeleteCard(deck);
+                addOrDeleteCard(deck);
 
             });
             setActiveButton.setOnMouseClicked(event -> {
@@ -121,13 +148,17 @@ public class DeckController {
                 scrollPane.getChildren().clear();
                 setDecks(scrollPane, decks);
             });
-            editDeck.setOnMouseClicked(event -> {
-
+//            editDeck.setOnMouseClicked(event -> {
+//
+//            });
+            backToMainScene.setOnMouseClicked(event -> {
+                ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
             });
         }
     }
 
-    public void AddOrDeleteCard(Deck deck) {
+    public void addOrDeleteCard(Deck deck) {
+
         ArrayList<CardData> mainDeckCards = deck.getMainDeck();
         ArrayList<CardData> sideDeckCards = deck.getSideDeck();
         ArrayList<CardData> handCards = Deck.getCardDataArrayFromIdArray(
@@ -138,6 +169,12 @@ public class DeckController {
         deckMenu.setCards(scrollMainDeck, mainDeckCards, "main", deck.getName());
         deckMenu.setCards(scrollSideDeck, sideDeckCards, "side", deck.getName());
         deckMenu.setCards(scrollHandCards, handCards, "hand", deck.getName());
+        backToListOfDecks.setOnMouseClicked(event -> {
+            listOfDecks.setLayoutX(0.0);
+            deckSetting.setLayoutX(1600.0);
+            scrollPane.getChildren().clear();
+            setDecks(scrollPane, ApplicationManger.getLoggedInUser().getDecks());
+        });
 
     }
 
@@ -171,6 +208,10 @@ public class DeckController {
             setDecks(scrollPane, showingDeck);
 
         }
+    }
+
+    public DeckController() {
+
     }
 
     public void deckCreate(String deckName) {
@@ -291,6 +332,35 @@ public class DeckController {
 
     }
 
+
+//    public void addCardGraphic(String cardName, String mainOrSide, String deckName) throws Exception {
+//        Deck deck=Deck.getDeckWithName(deckName);
+//        Integer cardId=Card.getCardIdByName(cardName);
+//        if (mainOrSide.equals("main")){
+//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(cardId);
+//            deck.getMainDeck().add(CardData.getCardByName(cardName));
+//        }
+//        else if (mainOrSide.equals("side")){
+//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(cardId);
+//            deck.getSideDeck().add(CardData.getCardByName(cardName));
+//        }
+//        addOrDeleteCard(deck);
+//    }
+//
+//    public void removeCardGraphic(String cardName,String scrollPaneType,String deckName) throws Exception {
+//        Deck deck=Deck.getDeckWithName(deckName);
+//        Integer cardId=Card.getCardIdByName(cardName);
+//        if(scrollPaneType.equals("main")){
+//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(cardId);
+//            deck.getMainDeck().remove(CardData.getCardByName(cardName));
+//        }
+//        else if (scrollPaneType.equals("side")){
+//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(cardId);
+//            deck.getSideDeck().remove(CardData.getCardByName(cardName));
+//        }
+//        addOrDeleteCard(deck);
+//    }
+
     public void showAllDecks() {
         ArrayList<Deck> decks = ApplicationManger.getLoggedInUser().getDecks();
         System.out.println("Decks:");
@@ -405,4 +475,12 @@ public class DeckController {
         deckNameTextField.setOpacity(1);
         deckNameLabel.setOpacity(1);
     }
+
+    public void setOpacity() {
+        goToSideOrMainDeck.setOpacity(1);
+        goToMainDeckButton.setOpacity(1);
+        goToSideDeckButton.setOpacity(1);
+    }
+
+
 }

@@ -10,94 +10,89 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171"
-            fx:controller="controller.DeckController">
-    <children>
-        <Group layoutX="10.0" layoutY="10.0">
-            <children>
-                <AnchorPane fx:id="listOfDecks" prefHeight="900.0" prefWidth="1600.0" styleClass="deckBackground"
-                            stylesheets="@../CSS/deckStyle.css">
-                    <children>
-                        <ScrollPane layoutX="473.0" layoutY="48.0" prefHeight="332.0" prefWidth="752.0">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="1000.0">
-                                    <children>
-                                        <VBox fx:id="scrollPane" layoutX="21.0" layoutY="24.0" prefHeight="236.0"
-                                              prefWidth="635.0" spacing="10.0">
-                                            <children>
-                                                <HBox fx:id="deckHBox" prefHeight="216.0" prefWidth="677.0"
-                                                      spacing="100.0"/>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </ScrollPane>
-                        <Label fx:id="message" layoutX="516.0" layoutY="727.0" opacity="0.0" prefHeight="55.0"
-                               prefWidth="448.0" style="-fx-background-color: white;"/>
-                        <Button layoutX="643.0" layoutY="440.0" mnemonicParsing="false" onAction="#deckCreate"
-                                prefHeight="68.0" prefWidth="179.0" text="create a deck">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <TextField fx:id="deckNameTextField" layoutX="615.0" layoutY="564.0" opacity="0.0"
-                                   prefHeight="77.0" prefWidth="250.0"/>
-                        <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="575.0" opacity="0.0" prefHeight="55.0"
-                               prefWidth="155.0" text="deckName">
-                            <font>
-                                <Font name="Harrington" size="30.0"/>
-                            </font>
-                        </Label>
-                        <Button fx:id="nextDeckCreate" layoutX="991.0" layoutY="575.0" mnemonicParsing="false"
-                                onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0"
-                                text="next"/>
-                        <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0"/>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0"
-                            styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css">
-                    <children>
-                        <ScrollPane layoutX="114.0" layoutY="116.0" prefHeight="583.0" prefWidth="424.0">
-                            <content>
-                                <AnchorPane fx:id="scrollMainDeck" minHeight="0.0" minWidth="0.0" prefHeight="649.0"
-                                            prefWidth="423.0"/>
-                            </content>
-                        </ScrollPane>
-                        <ScrollPane layoutX="631.0" layoutY="111.0" prefHeight="592.0" prefWidth="455.0">
-                            <content>
-                                <AnchorPane fx:id="scrollSideDeck" minHeight="0.0" minWidth="0.0" prefHeight="668.0"
-                                            prefWidth="441.0"/>
-                            </content>
-                        </ScrollPane>
-                        <ScrollPane layoutX="1149.0" layoutY="111.0" prefHeight="592.0" prefWidth="433.0">
-                            <content>
-                                <AnchorPane fx:id="scrollHandCards" minHeight="0.0" minWidth="0.0" prefHeight="671.0"
-                                            prefWidth="432.0"/>
-                            </content>
-                        </ScrollPane>
-                        <Label layoutX="221.0" layoutY="55.0" prefHeight="37.0" prefWidth="155.0" text="Main Deck"
-                               textFill="WHITE">
-                            <font>
-                                <Font name="Harrington" size="28.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="1274.0" layoutY="57.0" prefHeight="37.0" prefWidth="155.0" text="Hand Cards"
-                               textFill="WHITE">
-                            <font>
-                                <Font name="Harrington" size="28.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="784.0" layoutY="57.0" prefHeight="37.0" prefWidth="155.0" text="Side Deck"
-                               textFill="WHITE">
-                            <font>
-                                <Font name="Harrington" size="28.0"/>
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-            </children>
-        </Group>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeckController">
+   <children>
+      <Group layoutX="10.0" layoutY="10.0">
+         <children>
+            <AnchorPane fx:id="listOfDecks" prefHeight="900.0" prefWidth="1600.0" styleClass="deckBackground" stylesheets="@../CSS/deckStyle.css">
+               <children>
+                  <ScrollPane layoutX="473.0" layoutY="48.0" prefHeight="332.0" prefWidth="752.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="1000.0">
+                           <children>
+                              <VBox fx:id="scrollPane" layoutX="21.0" layoutY="24.0" prefHeight="236.0" prefWidth="635.0" spacing="10.0">
+                                 <children>
+                                    <HBox fx:id="deckHBox" prefHeight="216.0" prefWidth="677.0" spacing="100.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="message" layoutX="516.0" layoutY="727.0" opacity="0.0" prefHeight="55.0" prefWidth="448.0" style="-fx-background-color: white;" />
+                  <Button layoutX="643.0" layoutY="440.0" mnemonicParsing="false" onAction="#deckCreate" prefHeight="68.0" prefWidth="179.0" text="create a deck">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="deckNameTextField" layoutX="615.0" layoutY="564.0" opacity="0.0" prefHeight="77.0" prefWidth="250.0" />
+                  <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="575.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" text="deckName">
+                     <font>
+                        <Font name="Harrington" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="nextDeckCreate" layoutX="991.0" layoutY="575.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" text="next" />
+                  <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" />
+                  <Button fx:id="backToMainScene" layoutX="76.0" layoutY="799.0" mnemonicParsing="false" text="back" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css">
+               <children>
+                  <ScrollPane layoutX="114.0" layoutY="116.0" prefHeight="583.0" prefWidth="424.0">
+                    <content>
+                      <AnchorPane fx:id="scrollMainDeck" minHeight="0.0" minWidth="0.0" prefHeight="649.0" prefWidth="423.0" />
+                    </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="631.0" layoutY="111.0" prefHeight="592.0" prefWidth="455.0">
+                     <content>
+                        <AnchorPane fx:id="scrollSideDeck" minHeight="0.0" minWidth="0.0" prefHeight="668.0" prefWidth="441.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="1149.0" layoutY="111.0" prefHeight="592.0" prefWidth="433.0">
+                     <content>
+                        <AnchorPane fx:id="scrollHandCards" minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="432.0" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="221.0" layoutY="55.0" prefHeight="37.0" prefWidth="155.0" text="Main Deck" textFill="WHITE">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="1274.0" layoutY="57.0" prefHeight="37.0" prefWidth="155.0" text="Hand Cards" textFill="WHITE">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="784.0" layoutY="57.0" prefHeight="37.0" prefWidth="155.0" text="Side Deck" textFill="WHITE">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="goToSideOrMainDeck" layoutX="547.0" layoutY="745.0" opacity="0.0" text="go to main or side" textFill="WHITE">
+                     <font>
+                        <Font name="Harrington" size="34.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="goToMainDeckButton" layoutX="873.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="83.0" text="main " />
+                  <Button fx:id="goToSideDEckButton" layoutX="965.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="83.0" text="side" />
+                  <Button fx:id="backToListOfDecks" layoutX="132.0" layoutY="795.0" mnemonicParsing="false" text="back" />
+                  <Label fx:id="addOrDeleteMessage" alignment="CENTER" layoutX="613.0" layoutY="799.0" prefHeight="55.0" prefWidth="492.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+         </children>
+      </Group>
+   </children>
 </AnchorPane>

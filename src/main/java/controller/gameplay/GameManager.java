@@ -1,6 +1,7 @@
 package controller.gameplay;
 
 import controller.GamePlaySceneController;
+import javafx.application.Platform;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
@@ -37,7 +38,11 @@ public class GameManager {
     }};
 
     private static GameManager instance;
-    protected Event<AttackResult> destroyAMonster = new Event<>();
+
+    public static GameManager getInstance() {
+        return instance;
+    }
+
     private Player player1, player2;
     private int turn, currentPlayerTurn;
     private Phase currentPhase;
@@ -54,10 +59,16 @@ public class GameManager {
     private Event<Card> onSummonACard = new Event<>();
     private Event<Card> onFlipSummon = new Event<>();
     private EventNoParam onChangeTurn = new EventNoParam();
+    protected Event<AttackResult> destroyAMonster = new Event<>();
+
     private boolean isFirstSetup = false;
+
     private boolean canAttack = true;
+
+
     private boolean isAI;
     private AI_Player ai;
+
     public GameManager(boolean isPlayer, UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         instance = this;
         this.scene = scene;
@@ -66,16 +77,16 @@ public class GameManager {
         isAI = !isPlayer;
         if (isAI) {
             ai = new AI_Player(this);
-            gameBoard = new GameBoard(user1.getActiveDeck(), ai.getAIUserData().getActiveDeck(), this, scene.board);
+            gameBoard = new GameBoard(user1.getActiveDeck(), AI_Player.getAIUserData().getActiveDeck(), this, scene.board);
 
-            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
-            this.player2 = new Player(ai.getAIUserData(), gameBoard.getPlayer2Board(), this);
+            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
+            this.player2 = new Player(AI_Player.getAIUserData(), gameBoard.getPlayer2Board(), this, 2);
             ai.setup(player2, player1);
         } else {
             gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this, scene.board);
 
-            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this);
-            this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this);
+            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
+            this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this, 2);
         }
 
         Effect.setGameManager(this);
@@ -85,10 +96,6 @@ public class GameManager {
 
     public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene) {
         this(duelData.isPlayer(), duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
-    }
-
-    public static GameManager getInstance() {
-        return instance;
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -121,7 +128,6 @@ public class GameManager {
         this.canAttack = canAttack;
     }
 
-
     public GamePlayScene getScene() {
         return scene;
     }
@@ -132,10 +138,6 @@ public class GameManager {
 
     public Phase getCurrentPhase() {
         return currentPhase;
-    }
-
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
     }
 
     public int getCurrentPlayerTurn() {
@@ -181,17 +183,22 @@ public class GameManager {
                 break;
             case MAIN:
                 if (turn == 1) {
-                    changeTurn();
-                    return;
+                    startEndPhase();
+                } else {
+                    startBattlePhase();
                 }
-                startBattlePhase();
                 break;
             case BATTLE:
-                changeTurn();
+                startEndPhase();
                 break;
             case END:
+                changeTurn();
                 break;
         }
+    }
+
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
     }
 
     private void changeTurn() {
@@ -204,7 +211,7 @@ public class GameManager {
         if (isAI) {
             if (currentPlayerTurn == 2) {
                 scene.setWaitForAI(true);
-                ai.playATurn();
+                new Thread(() -> ai.playATurn()).start();
             } else {
                 scene.setWaitForAI(false);
             }
@@ -223,6 +230,7 @@ public class GameManager {
             getCurrentTurnPlayer().drawCard(1, null);
         }
         scene.showPhase("Draw");
+        Platform.runLater(() -> scene.changePhase(Phase.DRAW));
         onCardActionDone();
     }
 
@@ -230,18 +238,28 @@ public class GameManager {
         currentPhase = Phase.STANDBY;
 
         scene.showPhase("Standby");
+        Platform.runLater(() -> scene.changePhase(Phase.STANDBY));
     }
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
         onChangeTurn.invoke();
         scene.showPhase("Main");
+        Platform.runLater(() -> scene.changePhase(Phase.MAIN));
     }
 
     private void startBattlePhase() {
         currentPhase = Phase.BATTLE;
 
         scene.showPhase("Battle");
+        Platform.runLater(() -> scene.changePhase(Phase.BATTLE));
+    }
+
+    private void startEndPhase() {
+        currentPhase = Phase.END;
+
+        scene.showPhase("End");
+        Platform.runLater(() -> scene.changePhase(Phase.END));
     }
 
     public Player getCurrentTurnPlayer() {
@@ -339,23 +357,15 @@ public class GameManager {
     public void summonCard(Integer... args) {
         try {
             CardSlot s = getCurrentTurnPlayer().summonCard(currentSelectedCard, args);
-            scene.summon(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
+            final int playerNumber = currentPlayerTurn;
+            final int a = currentSelectedCardAddress.number;
+            final int b = s.getNumber();
+            //scene.summon(playerNumber, a, b);
+            Platform.runLater(() -> scene.summon(playerNumber, a, b));
             scene.log("summoned successfully");
             onCardActionDone();
             onSummonACard.invoke(currentSelectedCard);
         } catch (Exception e) {
-            scene.showError(e.getMessage());
-        }
-    }
-
-    public void summonCard(Card card, Integer... args) {
-        try {
-            getCurrentTurnPlayer().summonCard(card, args);
-            scene.log("summoned successfully");
-            onCardActionDone();
-            onSummonACard.invoke(currentSelectedCard);
-        } catch (Exception e) {
-            e.printStackTrace();
             scene.showError(e.getMessage());
         }
     }
@@ -378,8 +388,12 @@ public class GameManager {
     public void setCard() {
         try {
             CardSlot s = getCurrentTurnPlayer().setCard(currentSelectedCard);
-            if (currentSelectedCard.getCardType() == CardType.MONSTER)
-                scene.setMonster(currentPlayerTurn, currentSelectedCardAddress.number, s.getNumber());
+            if (currentSelectedCard.getCardType() == CardType.MONSTER) {
+                final int playerNumber = currentPlayerTurn;
+                final int a = currentSelectedCardAddress.number;
+                final int b = s.getNumber();
+                Platform.runLater(() -> scene.setMonster(playerNumber, a, b));
+            }
             scene.log("set successfully");
             onCardActionDone();
         } catch (Exception e) {
@@ -457,8 +471,9 @@ public class GameManager {
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
         if (result.isCanceled()) return;
-        int a = attacker.getCardSlot().getNumber();
-        int b = attacked.getCardSlot().getNumber();
+        final int a = attacker.getCardSlot().getNumber();
+        final int b = attacked.getCardSlot().getNumber();
+        final int playerNumber = currentPlayerTurn;
 
         getCurrentTurnPlayer().decreaseLP(result.getPlayer1LPDecrease());
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
@@ -469,7 +484,7 @@ public class GameManager {
             attacked.moveToGraveyard();
         }
         scene.log(result.getResultMessage());
-        scene.applyAttackResultGraphic(result, currentPlayerTurn, a, b);
+        Platform.runLater(() -> scene.applyAttackResultGraphic(result, playerNumber, a, b));
     }
 
     public void applyDirectAttack(AttackResult result) {
@@ -554,42 +569,6 @@ public class GameManager {
         scene.log("Game Over");
     }
 
-    public Event<Card> getRotate() {
-        return ((MonsterCard) currentSelectedCard).getFaceUp();
-    }
-
-    public void addCard_C(String cardName) {
-        try {
-            Card card = Card.createCardByName(cardName);
-            card.setup(getCurrentTurnPlayer());
-            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(card);
-        } catch (Exception e) {
-            scene.showError("card with this name doesn't exist");
-        }
-    }
-
-    public void increaseLP_C(int amount) {
-        getCurrentTurnPlayer().increaseLP(amount);
-    }
-
-    //// Cheat codes
-
-    public void setWinner_C(String nickname) {
-        if (nickname.equals(player1.getUserData().getNickname())) {
-            finishGame(1);
-        }
-        if (nickname.equals(player2.getUserData().getNickname())) {
-            finishGame(2);
-        }
-    }
-
-    private enum SelectCommandType {
-        MONSTER,
-        SPELL,
-        HAND,
-        FIELD
-    }
-
     public class CardSlotAddress {
         private boolean forOpponent;
         private ZoneType zone;
@@ -617,6 +596,42 @@ public class GameManager {
 
         public boolean isForOpponent() {
             return forOpponent;
+        }
+    }
+
+    private enum SelectCommandType {
+        MONSTER,
+        SPELL,
+        HAND,
+        FIELD
+    }
+
+    public Event<Card> getRotate() {
+        return ((MonsterCard) currentSelectedCard).getOnFaceUp();
+    }
+
+    //// Cheat codes
+
+    public void addCard_C(String cardName) {
+        try {
+            Card card = Card.createCardByName(cardName);
+            card.setup(getCurrentTurnPlayer());
+            getCurrentTurnPlayer().getPlayerBoard().getHand().appendCard(card);
+        } catch (Exception e) {
+            scene.showError("card with this name doesn't exist");
+        }
+    }
+
+    public void increaseLP_C(int amount) {
+        getCurrentTurnPlayer().increaseLP(amount);
+    }
+
+    public void setWinner_C(String nickname) {
+        if (nickname.equals(player1.getUserData().getNickname())) {
+            finishGame(1);
+        }
+        if (nickname.equals(player2.getUserData().getNickname())) {
+            finishGame(2);
         }
     }
 

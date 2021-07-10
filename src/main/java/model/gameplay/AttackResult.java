@@ -10,12 +10,14 @@ public class AttackResult {
     //2 for attacked
 
     private Player attackerPlayer;
+    private Player attackedPlayer;
     private int player1LPDecrease = 0;
     private int player2LPDecrease = 0;
     private boolean destroyCard1 = false;
     private boolean destroyCard2 = false;
     private int destroyMonsterCard1 = 0;
     private int destroyMonsterCard2 = 0;
+    private boolean attackedFlip = false;
 
     private String resultMessage = "";
     private Card attacker;
@@ -23,6 +25,7 @@ public class AttackResult {
 
     public AttackResult(MonsterCard attacker, MonsterCard attacked) {
         attackerPlayer = attacker.getCardOwner();
+        attackedPlayer = attacked.getCardOwner();
         this.attacker = attacker;
         int point1, point2;
         if (attacked.isAttackPosition()) {
@@ -69,6 +72,7 @@ public class AttackResult {
 
         if (attacked.getCardStatus() == CardStatus.TO_BACK) {
             resultMessage = "opponent's monster card was \"" + attacked.getData().getCardName() + "\" and " + resultMessage;
+            attackedFlip = true;
         }
         attacked.onAttacked(this);
     }
@@ -124,6 +128,10 @@ public class AttackResult {
         return attackerPlayer;
     }
 
+    public Player getAttackedPlayer() {
+        return attackedPlayer;
+    }
+
     public boolean isCanceled() {
         return canceled;
     }
@@ -134,5 +142,9 @@ public class AttackResult {
 
     public void cancel() {
         this.canceled = true;
+    }
+
+    public boolean isAttackedFlip() {
+        return attackedFlip;
     }
 }
