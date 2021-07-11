@@ -184,6 +184,7 @@ public class GraphicCard {
     }
 
     public void onMouseEnter() {
+        shape.getStyleClass().add("onHoverCard");
         switch (slot.getType()) {
             case HAND:
                 shape.setLayoutY(shape.getLayoutY() - 30);
@@ -192,6 +193,7 @@ public class GraphicCard {
     }
 
     public void onMouseExit() {
+        shape.getStyleClass().remove("onHoverCard");
         switch (slot.getType()) {
             case HAND:
                 shape.setLayoutY(shape.getLayoutY() + 30);

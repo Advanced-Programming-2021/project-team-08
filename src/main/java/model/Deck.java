@@ -143,35 +143,32 @@ public class Deck {
         CardData cardData=CardData.getCardByName(cardName);
         if (mainOrSide.equals("main")){
             if (Deck.isMainDeckFull(deckName)) {
-                DeckController.showMessage("main deck is full");
+                throw new Exception("main deck is full");
             } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already three cards with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already three cards with name " + cardName + " in deck " + deckName);
             } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
                     Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already one card with name " + cardName + " in deck " + deckName);
             } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
                     Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already one card with name " + cardName + " in deck " + deckName);
             } else {
-                DeckController.showMessage("card added to deck successfully");
                 Deck.addCard(cardName, deckName, "main");
                 ApplicationManger.getLoggedInUser().getUserData().save();
             }
-
         }
         else if (mainOrSide.equals("side")){
             if (Deck.isSideDeckFull(deckName)) {
-                DeckController.showMessage("side deck is full");
+                throw new Exception("side deck is full");
             } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already three cards with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already three cards with name " + cardName + " in deck " + deckName);
             } else if (cardData.getCardType().equals(CardType.SPELL) && ((SpellCardData) cardData).isLimited() &&
                     Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already one card with name " + cardName + " in deck " + deckName);
             } else if (cardData.getCardType().equals(CardType.TRAP) && ((TrapCardData) cardData).isLimited() &&
                     Deck.isThereAreOneCardsOfThisCardInDeck(cardName, deckName)) {
-                DeckController.showMessage("there are already one card with name " + cardName + " in deck " + deckName);
+                throw new Exception("there are already one card with name " + cardName + " in deck " + deckName);
             } else {
-                DeckController.showMessage("card added to deck successfully");
                 Deck.addCard(cardName, deckName, "side");
                 ApplicationManger.getLoggedInUser().getUserData().save();
             }

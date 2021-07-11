@@ -68,7 +68,7 @@ public class ApplicationManger extends Application {
                 currentScene.start();
                 break;
             case DECK_MENU:
-                currentScene = new DeckMenu();
+                currentScene = new DeckMenu(null);
                 currentScene.start();
                 break;
             case SHOP_MENU:

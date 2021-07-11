@@ -5,14 +5,10 @@ import controller.DeckController;
 import controller.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
@@ -27,16 +23,17 @@ public class DeckMenu extends Scene {
     private DeckController deckController;
 
 
-    public void setCards(AnchorPane anchorPane,ArrayList<CardData> cards,String scrollPaneType,String deckName){
+    public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards, String scrollPaneType, String deckName) {
         int size = cards.size();
         if (size == 0) anchorPane.setPrefHeight(600);
         else if (size % 3 == 0) anchorPane.setPrefHeight((double) (cards.size() / 3) * 212.5 + 180);
         else anchorPane.setPrefHeight((double) (cards.size() / 3 + 1) * 212.5 + 180);
         for (int i = 0; i < cards.size(); i++) {
-            addCardImage(anchorPane, cards.get(i), i,scrollPaneType,deckName);
+            addCardImage(anchorPane, cards.get(i), i, scrollPaneType, deckName);
         }
     }
-    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index,String scrollPaneType,String deckName){
+
+    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index, String scrollPaneType, String deckName) {
         ImageView cardImage = new ImageView(cardData.getCardImage());
 
 
@@ -56,31 +53,31 @@ public class DeckMenu extends Scene {
             cardImage.setOpacity(0.5);
         });
         cardImage.setOnMouseClicked(event -> {
-            if(scrollPaneType.equals("hand")){
-                      Button goToMainDeckButton=deckController.getGoToMainDeckButton();
-                      Button goToSideDeckButton=deckController.getGoToSideDeckButton();
-                      deckController.setOpacity();
-                      goToMainDeckButton.setOnMouseClicked(event1 -> {
-                          try {
-                              Deck.addCardGraphic(cardData.getCardName(),"main",deckName);
-                              deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-
-                          } catch (Exception e) {
-                              e.printStackTrace();
-                          }
-                      });
-                      goToSideDeckButton.setOnMouseClicked(event1 -> {
-                          try {
-                              Deck.addCardGraphic(cardData.getCardName(),"side",deckName);
-                              deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-                          } catch (Exception e) {
-                              e.printStackTrace();
-                          }
-                      });
-            }
-            else {
+            if (scrollPaneType.equals("hand")) {
+                Button goToMainDeckButton = deckController.getGoToMainDeckButton();
+                Button goToSideDeckButton = deckController.getGoToSideDeckButton();
+                deckController.setOpacity();
+                goToMainDeckButton.setOnMouseClicked(event1 -> {
+                    try {
+                        Deck.addCardGraphic(cardData.getCardName(), "main", deckName);
+                        deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
+                        deckController.showMessage("card added to deck successfully");
+                    } catch (Exception e) {
+                        deckController.addOrDeleteMessage.setText(e.getMessage());
+                    }
+                });
+                goToSideDeckButton.setOnMouseClicked(event1 -> {
+                    try {
+                        Deck.addCardGraphic(cardData.getCardName(), "side", deckName);
+                        deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
+                        deckController.showMessage("card added to deck successfully");
+                    } catch (Exception e) {
+                        deckController.addOrDeleteMessage.setText(e.getMessage());
+                    }
+                });
+            } else {
                 Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
-                DeckController.showMessage("card removed from deck successfully");
+                deckController.showMessage("card removed from deck successfully");
                 deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
             }
         });
@@ -96,9 +93,9 @@ public class DeckMenu extends Scene {
     }
 
 
-    public DeckMenu() {
+    public DeckMenu(DeckController deckController) {
         this.activeUser = ApplicationManger.getLoggedInUser();
-        this.deckController = new DeckController();
+        this.deckController = deckController;
     }
 
     @Override

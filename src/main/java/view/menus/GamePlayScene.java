@@ -85,6 +85,8 @@ public class GamePlayScene extends Scene {
     private void firstSetupUI(GamePlaySceneController.DuelData data) {
         player1Nickname_T.setText(data.getFirstPlayer().getUsername() + " (" + data.getFirstPlayer().getNickname() + ")");
         player2Nickname_T.setText(data.getSecondPlayer().getUsername() + " (" + data.getSecondPlayer().getNickname() + ")");
+        player1Avatar.setImage(data.getFirstPlayer().getProfileImage());
+        player2Avatar.setImage(data.getSecondPlayer().getProfileImage());
         player1LP_T.setText("LP      " + sceneController.getGameManager().getPlayer1().getLP());
         player2LP_T.setText("LP      " + sceneController.getGameManager().getPlayer2().getLP());
     }
