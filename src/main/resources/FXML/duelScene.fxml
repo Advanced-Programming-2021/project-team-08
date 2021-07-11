@@ -12,7 +12,7 @@
             <children>
                 <Button layoutX="300" layoutY="100" mnemonicParsing="false" onAction="#startDuel"
                         styleClass="start-button" text="DUEL"/>
-                <Label fx:id="duelMessage" layoutX="200" layoutY="200" styleClass="duel-message" text="Label"/>
+                <Label fx:id="duelMessage" layoutX="200" layoutY="200" styleClass="duel-message" />
                 <TextField fx:id="playerName" layoutX="1" layoutY="1" styleClass="text-field"/>
                 <CheckBox fx:id="threeRound" layoutX="100" layoutY="100" mnemonicParsing="false"
                           onAction="#threeRoundsAction" styleClass="check-box" text="3 rounds"/>
@@ -20,9 +20,9 @@
                           styleClass="check-box" text="1 round"/>
             </children>
         </Pane>
-        <Button layoutX="1200" layoutY="100" mnemonicParsing="false" text="singlePlayer"
+        <Button layoutX="1000" layoutY="200" mnemonicParsing="false" text="singlePlayer"
                 styleClass="single-multi-button" onAction="#singlePlayMenu"/>
-        <Button layoutX="1200" layoutY="400" mnemonicParsing="false" text="multiplayer" styleClass="single-multi-button"
+        <Button layoutX="1000" layoutY="550" mnemonicParsing="false" text="multiplayer" styleClass="single-multi-button"
                 onAction="#multiPlayMenu"/>
 
 

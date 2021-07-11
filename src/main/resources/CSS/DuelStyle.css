@@ -22,5 +22,20 @@
 }
 
 .single-multi-button {
+    -fx-font: 40px default;
+    -fx-text-fill: white;
+    -fx-background-color: darkblue;
+    -fx-background-radius: 10;
+    -fx-pref-width: 400;
+    -fx-pref-height: 100;
+}
 
+.single-multi-button:hover {
+    -fx-background-radius: 11;
+    -fx-pref-width: 440;
+    -fx-pref-height: 110;
+    -fx-background-color: blue;
+    -fx-font: 44px default;
+    -fx-translate-x: -20;
+    -fx-translate-y: -5;
 }
