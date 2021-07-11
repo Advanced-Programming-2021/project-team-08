@@ -22,10 +22,8 @@
     -fx-pref-height: 101px;
 }
 
-.menu-label:hover {
-    -fx-font: 55px Arial;
-    -fx-text-fill: yellow;
-    -fx-font-weight: bold;
+.menu-label:disabled {
+    -fx-opacity: 1;
 }
 
 .name-label {

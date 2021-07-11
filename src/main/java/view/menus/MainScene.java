@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.animation.SpriteAnimation;
 
@@ -85,8 +86,9 @@ public class MainScene extends Scene {
     private void setMenuItemAnimation(ImageView menuItem, Label label) {
         SequentialTransition menuItemActiveTransition = setupActiveAnimation(menuItem);
         SequentialTransition menuItemInactiveTransition = setupInactiveAnimation(menuItem);
+        label.setDisable(true);
         menuItemInactiveTransition.play();
-        label.setOnMouseEntered(event -> {
+        menuItem.setOnMouseEntered(event -> {
             menuItem.setImage(menuHoverImage);
             menuItemInactiveTransition.stop();
             menuItemActiveTransition.play();
@@ -94,9 +96,10 @@ public class MainScene extends Scene {
             menuItem.setFitHeight(121.2);
             menuItem.setLayoutX(420.8);
             menuItem.setLayoutY(menuItem.getLayoutY() - 10.1);
+            //label.setFont(new Font(55));
             label.setTextFill(Color.YELLOW);
         });
-        label.setOnMouseExited(event -> {
+        menuItem.setOnMouseExited(event -> {
             menuItem.setImage(menuImage);
             menuItemActiveTransition.stop();
             menuItemInactiveTransition.play();
@@ -104,6 +107,7 @@ public class MainScene extends Scene {
             menuItem.setFitHeight(101);
             menuItem.setLayoutX(484);
             menuItem.setLayoutY(menuItem.getLayoutY() + 10.1);
+            //label.setFont(new Font(45));
             label.setTextFill(Color.WHITE);
         });
     }
