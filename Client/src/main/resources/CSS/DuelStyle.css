@@ -3,22 +3,50 @@
 }
 
 .check-box {
-
+    -fx-font: 30px default;
+    -fx-text-fill: white;
+    -fx-pref-width: 180;
+    -fx-pref-height: 70;
+    -fx-background-color: darkBlue;
+    -fx-background-radius: 5;
 }
 
 .duel-message {
-    -fx-font: 20px default;
+    -fx-font: 25px default;
     -fx-text-fill: white;
-    -fx-pref-width: 300;
+    -fx-pref-width: 500;
     -fx-pref-height: 70;
+    -fx-background-radius: 10;
+    -fx-background-color: darkBlue;
 }
 
 .start-button {
+    -fx-font: 30px default;
+    -fx-text-fill: white;
+    -fx-pref-width: 140;
+    -fx-pref-height: 70;
+    -fx-background-color: darkBlue;
+    -fx-background-radius: 5;
+}
 
+.start-button:hover {
+    -fx-font: 33px default;
+    -fx-text-fill: white;
+    -fx-pref-width: 154;
+    -fx-pref-height: 77;
+    -fx-background-color: blue;
+    -fx-background-radius: 5.5;
+    -fx-translate-y: -3.5;
+    -fx-translate-x: -7;
 }
 
 .text-field {
-
+    -fx-font: 30px default;
+    -fx-text-fill: white;
+    -fx-pref-width: 300;
+    -fx-pref-height: 80;
+    -fx-background-radius: 8;
+    -fx-background-color: darkBlue;
 }
 
 .single-multi-button {

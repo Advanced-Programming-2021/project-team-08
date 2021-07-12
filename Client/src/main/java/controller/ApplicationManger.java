@@ -51,7 +51,7 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        new SoundManager().playSound("musics/ForestWalk.mp3");
+        new SoundManager().playBackgroundSound();
         goToScene("firstScene.fxml");
     }
 

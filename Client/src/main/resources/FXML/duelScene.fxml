@@ -8,15 +8,15 @@
             fx:controller="view.menus.DuelScene">
     <children>
 
-        <Pane fx:id="duelPane" layoutX="100" layoutY="100" prefHeight="600.0" prefWidth="1000.0" visible="false">
+        <Pane fx:id="duelPane" layoutX="60" layoutY="100" prefHeight="600.0" prefWidth="1000.0" visible="false">
             <children>
-                <Button layoutX="300" layoutY="100" mnemonicParsing="false" onAction="#startDuel"
+                <Button layoutX="420" layoutY="100" mnemonicParsing="false" onAction="#startDuel"
                         styleClass="start-button" text="DUEL"/>
-                <Label fx:id="duelMessage" layoutX="200" layoutY="200" styleClass="duel-message" />
-                <TextField fx:id="playerName" layoutX="1" layoutY="1" styleClass="text-field"/>
-                <CheckBox fx:id="threeRound" layoutX="100" layoutY="100" mnemonicParsing="false"
+                <Label fx:id="duelMessage" layoutX="20" layoutY="200" styleClass="duel-message" />
+                <TextField fx:id="playerName" layoutX="20" styleClass="text-field"/>
+                <CheckBox fx:id="threeRound" layoutX="220" layoutY="100" mnemonicParsing="false"
                           onAction="#threeRoundsAction" styleClass="check-box" text="3 rounds"/>
-                <CheckBox fx:id="oneRound" layoutX="1" layoutY="100" mnemonicParsing="false" onAction="#oneRoundAction"
+                <CheckBox fx:id="oneRound" layoutX="20" layoutY="100" mnemonicParsing="false" onAction="#oneRoundAction"
                           styleClass="check-box" text="1 round"/>
             </children>
         </Pane>
@@ -25,6 +25,8 @@
         <Button layoutX="1000" layoutY="550" mnemonicParsing="false" text="multiplayer" styleClass="single-multi-button"
                 onAction="#multiPlayMenu"/>
 
+        <Button layoutX="80" layoutY="750" mnemonicParsing="false" onAction="#back"
+                styleClass="start-button" text="Back"/>
 
     </children>
 </AnchorPane>

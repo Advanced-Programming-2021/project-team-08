@@ -1,6 +1,8 @@
 package view.menus;
 
+import controller.ApplicationManger;
 import controller.DuelController;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -39,7 +41,11 @@ public class DuelScene extends Scene {
     public void startDuel(ActionEvent actionEvent) {
         int rounds;
         if (threeRound.isSelected()) rounds = 3;
-        else rounds = 1;
+        else if (oneRound.isSelected()) rounds = 1;
+        else {
+            duelMessage.setText("you should set the rounds number");
+            return;
+        }
         if (isSinglePlayer) {
             duelMessage.setText(duelController.duelSinglePlayer(rounds));
         } else {
@@ -48,14 +54,20 @@ public class DuelScene extends Scene {
     }
 
     public void singlePlayMenu(ActionEvent actionEvent) {
+        duelPane.setLayoutY(100);
         duelPane.setVisible(true);
         isSinglePlayer = true;
         playerName.setVisible(false);
     }
 
     public void multiPlayMenu(ActionEvent actionEvent) {
+        duelPane.setLayoutY(450);
         duelPane.setVisible(true);
         isSinglePlayer = false;
         playerName.setVisible(true);
+    }
+
+    public void back(ActionEvent actionEvent) {
+        ApplicationManger.goToScene("mainScene.fxml");
     }
 }

@@ -11,23 +11,17 @@
     <children>
         <ImageView fx:id="menuName" layoutX="450" layoutY="50" fitWidth="700" fitHeight="150" styleClass="menu-name"/>
         <Label text="main menu" layoutX="670" layoutY="100" styleClass="name-label"/>
-        <ImageView fx:id="duel" layoutX="484" layoutY="220" styleClass="menu-item"/>
-        <Label fx:id="duelLabel" layoutX="484" layoutY="220" styleClass="menu-label" text="duel"
-               onMouseClicked="#duelRun"/>
-        <ImageView fx:id="deck" layoutX="484" layoutY="320" styleClass="menu-item"/>
-        <Label fx:id="deckLabel" layoutX="484" layoutY="320" styleClass="menu-label" text="deck editor"
-               onMouseClicked="#deckRun"/>
-        <ImageView fx:id="shop" layoutX="484" layoutY="420" styleClass="menu-item"/>
-        <Label fx:id="shopLabel" layoutX="484" layoutY="420" styleClass="menu-label" text="shop"
-               onMouseClicked="#shopRun"/>
-        <ImageView fx:id="card" layoutX="484" layoutY="520" styleClass="menu-item"/>
-        <Label fx:id="cardLabel" layoutX="484" layoutY="520" styleClass="menu-label" text="card"
-               onMouseClicked="#card"/>
-        <ImageView fx:id="profile" layoutX="484" layoutY="620" styleClass="menu-item"/>
-        <Label fx:id="profileLabel" layoutX="484" layoutY="620" styleClass="menu-label" text="profile"
-               onMouseClicked="#profileRun"/>
-        <ImageView fx:id="exit" layoutX="484" layoutY="720" styleClass="menu-item"/>
-        <Label fx:id="exitLabel" layoutX="484" layoutY="720" styleClass="menu-label" text="exit"
-               onMouseClicked="#exitGame"/>
+        <ImageView fx:id="duel" layoutX="484" layoutY="220" styleClass="menu-item"  onMouseClicked="#duelRun"/>
+        <Label fx:id="duelLabel" layoutX="484" layoutY="220" styleClass="menu-label" text="duel"/>
+        <ImageView fx:id="deck" layoutX="484" layoutY="320" styleClass="menu-item" onMouseClicked="#deckRun"/>
+        <Label fx:id="deckLabel" layoutX="484" layoutY="320" styleClass="menu-label" text="deck editor"/>
+        <ImageView fx:id="shop" layoutX="484" layoutY="420" styleClass="menu-item" onMouseClicked="#shopRun"/>
+        <Label fx:id="shopLabel" layoutX="484" layoutY="420" styleClass="menu-label" text="shop"/>
+        <ImageView fx:id="card" layoutX="484" layoutY="520" styleClass="menu-item" onMouseClicked="#card"/>
+        <Label fx:id="cardLabel" layoutX="484" layoutY="520" styleClass="menu-label" text="card"/>
+        <ImageView fx:id="profile" layoutX="484" layoutY="620" styleClass="menu-item" onMouseClicked="#profileRun"/>
+        <Label fx:id="profileLabel" layoutX="484" layoutY="620" styleClass="menu-label" text="profile"/>
+        <ImageView fx:id="exit" layoutX="484" layoutY="720" styleClass="menu-item" onMouseClicked="#exitGame"/>
+        <Label fx:id="exitLabel" layoutX="484" layoutY="720" styleClass="menu-label" text="exit"/>
     </children>
 </AnchorPane>

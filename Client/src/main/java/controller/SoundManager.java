@@ -8,6 +8,7 @@ import java.io.File;
 public class SoundManager {
 
     MediaPlayer mediaPlayer;
+    Media media;
 
     public void playSound(String location) {
         Media hit = new Media(new File(location).toURI().toString());
@@ -23,9 +24,8 @@ public class SoundManager {
     }
 
     public void playBackgroundSound() {
-        Media hit = new Media(new File("musics/ForestWalk.mp3").toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.setAutoPlay(true);
+        media = new Media(new File("musics/ForestWalk.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
