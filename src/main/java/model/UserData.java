@@ -17,7 +17,15 @@ public class UserData {
     private ArrayList<Deck> decks = new ArrayList<>();
     private String activeDeckName;
     private String profileImageUrl;
+    private Image avatar;
 
+    public void setAvatar(Image avatar) {
+        this.avatar = avatar;
+    }
+
+    public Image getAvatar() {
+        return avatar;
+    }
 
     public UserData(String username, String nickname, String password) {
         this.username = username;

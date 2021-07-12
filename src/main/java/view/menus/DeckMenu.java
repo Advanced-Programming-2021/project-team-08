@@ -35,20 +35,13 @@ public class DeckMenu extends Scene {
 
     private void addCardImage(AnchorPane anchorPane, CardData cardData, int index, String scrollPaneType, String deckName) {
         ImageView cardImage = new ImageView(cardData.getCardImage());
-
-
         anchorPane.getChildren().add(index, cardImage);
-
         cardImage.setFitHeight(212.5);
         cardImage.setFitWidth(120);
-
         int x = (index % 3) * (130) + 20;
         int y = (index / 3) * (222) + 20;
-
         cardImage.setX(x);
         cardImage.setY(y);
-
-
         cardImage.setOnMouseEntered(event -> {
             cardImage.setOpacity(0.5);
         });

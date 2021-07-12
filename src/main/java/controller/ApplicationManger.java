@@ -30,6 +30,7 @@ public class ApplicationManger extends Application {
             put(SceneName.PROFILE_MENU, new URL(rootPath + "profileScene.fxml"));
             put(SceneName.DUEL_SCENE, new URL(rootPath + "singleDuelScene.fxml"));
             put(SceneName.DECK_MENU, new URL(rootPath + "deckScene.fxml"));
+            put(SceneName.SCOREBOARD_MENU, new URL(rootPath + "scoreboard.fxml"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

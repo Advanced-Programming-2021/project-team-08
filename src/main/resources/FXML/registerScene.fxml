@@ -1,94 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground"
-            stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171"
-            fx:controller="controller.RegisterController">
-    <children>
-        <Button layoutY="752.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="82.0" prefWidth="500.0"
-                style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css"
-                text="back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="66.0"
-                AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="752.0">
-            <font>
-                <Font name="Harrington" size="21.0"/>
-            </font>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND"/>
-            </cursor>
-        </Button>
-        <TextField layoutX="807.0" layoutY="511.0" AnchorPane.bottomAnchor="430.0" AnchorPane.topAnchor="510.0"/>
-        <TextField fx:id="usernameOfSignup" layoutX="624.0" layoutY="229.0" prefHeight="75.0" prefWidth="500.0"
-                   style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css"
-                   AnchorPane.bottomAnchor="596.0" AnchorPane.leftAnchor="624.0" AnchorPane.rightAnchor="476.0"
-                   AnchorPane.topAnchor="229.0">
-            <cursor>
-                <Cursor fx:constant="TEXT"/>
-            </cursor>
-            <font>
-                <Font name="Harrington" size="30.0"/>
-            </font>
-        </TextField>
-        <Label layoutX="410.0" layoutY="233.0" prefHeight="68.0" prefWidth="187.0" text="username" textFill="WHITE">
-            <font>
-                <Font name="Harrington" size="40.0"/>
-            </font>
-        </Label>
-        <Label layoutX="435.0" layoutY="436.0" prefHeight="50.0" prefWidth="187.0" text="password" textFill="WHITE">
-            <font>
-                <Font name="Harrington" size="33.0"/>
-            </font>
-        </Label>
-        <Button graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup"
-                prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton"
-                stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
-            <font>
-                <Font name="Harrington" size="25.0"/>
-            </font>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND"/>
-            </cursor>
-        </Button>
-        <TextField fx:id="passwordOfSignup" layoutX="624.0" layoutY="424.0" prefHeight="75.0" prefWidth="500.0"
-                   style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
-            <cursor>
-                <Cursor fx:constant="TEXT"/>
-            </cursor>
-            <font>
-                <Font size="30.0"/>
-            </font>
-        </TextField>
-        <TextField fx:id="nicknameOfSignup" layoutX="624.0" layoutY="327.0" prefHeight="75.0" prefWidth="500.0"
-                   style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css">
-            <cursor>
-                <Cursor fx:constant="TEXT"/>
-            </cursor>
-            <font>
-                <Font name="Harrington" size="30.0"/>
-            </font>
-        </TextField>
-        <Label layoutX="417.0" layoutY="331.0" prefHeight="68.0" prefWidth="187.0" text="nickname" textFill="WHITE">
-            <font>
-                <Font name="Harrington" size="40.0"/>
-            </font>
-        </Label>
-        <Label fx:id="errorOfSignup" layoutX="511.0" layoutY="542.0" prefHeight="68.0" prefWidth="686.0"
-               textFill="#170000">
-            <font>
-                <Font name="Harrington" size="30.0"/>
-            </font>
-        </Label>
-        <Label fx:id="successOfSignup" layoutX="511.0" layoutY="628.0" prefHeight="68.0" prefWidth="686.0"
-               textFill="#170000">
-            <font>
-                <Font name="Harrington" size="38.0"/>
-            </font>
-        </Label>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+   <children>
+      <Group>
+         <children>
+            <AnchorPane fx:id="registerAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css">
+                <children>
+                    <Button layoutY="752.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="82.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="752.0">
+                        <font>
+                            <Font name="Harrington" size="21.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
+                    </Button>
+                    <TextField layoutX="807.0" layoutY="511.0" AnchorPane.bottomAnchor="430.0" AnchorPane.topAnchor="510.0" />
+                    <TextField fx:id="usernameOfSignup" layoutX="624.0" layoutY="229.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css" AnchorPane.bottomAnchor="596.0" AnchorPane.leftAnchor="624.0" AnchorPane.rightAnchor="476.0" AnchorPane.topAnchor="229.0">
+                        <cursor>
+                            <Cursor fx:constant="TEXT" />
+                        </cursor>
+                        <font>
+                            <Font name="Harrington" size="30.0" />
+                        </font>
+                     <styleClass>
+                        <String fx:value="registerButton" />
+                        <String fx:value="registerFont" />
+                     </styleClass>
+                    </TextField>
+                    <Label layoutX="410.0" layoutY="233.0" prefHeight="68.0" prefWidth="187.0" text="username" textFill="WHITE">
+                        <font>
+                            <Font name="Harrington" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label layoutX="435.0" layoutY="436.0" prefHeight="50.0" prefWidth="187.0" text="password" textFill="WHITE">
+                        <font>
+                            <Font name="Harrington" size="33.0" />
+                        </font>
+                    </Label>
+                    <Button graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
+                        <font>
+                            <Font name="Harrington" size="25.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
+                    </Button>
+                    <TextField fx:id="passwordOfSignup" layoutX="624.0" layoutY="424.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
+                        <cursor>
+                            <Cursor fx:constant="TEXT" />
+                        </cursor>
+                        <font>
+                            <Font name="Harrington" size="30.0" />
+                        </font>
+                     <styleClass>
+                        <String fx:value="registerButton" />
+                        <String fx:value="registerFont" />
+                     </styleClass>
+                    </TextField>
+                    <TextField fx:id="nicknameOfSignup" layoutX="624.0" layoutY="327.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
+                        <cursor>
+                            <Cursor fx:constant="TEXT" />
+                        </cursor>
+                        <font>
+                            <Font name="Harrington" size="30.0" />
+                        </font>
+                     <styleClass>
+                        <String fx:value="registerButton" />
+                        <String fx:value="registerFont" />
+                     </styleClass>
+                    </TextField>
+                    <Label layoutX="417.0" layoutY="331.0" prefHeight="68.0" prefWidth="187.0" text="nickname" textFill="WHITE">
+                        <font>
+                            <Font name="Harrington" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="errorOfSignup" layoutX="511.0" layoutY="542.0" prefHeight="68.0" prefWidth="686.0" textFill="#170000">
+                        <font>
+                            <Font name="Harrington" size="30.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="successOfSignup" layoutX="511.0" layoutY="628.0" prefHeight="68.0" prefWidth="686.0" textFill="#170000">
+                        <font>
+                            <Font name="Harrington" size="38.0" />
+                        </font>
+                    </Label>
+                </children>
+            </AnchorPane>
+            <AnchorPane fx:id="avatarAnchorPane" layoutX="1600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="scoreboardBackground" stylesheets="@../CSS/Avatar.css">
+               <children>
+                  <Label layoutX="605.0" layoutY="83.0" text="select an Avatar">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="230.0" layoutY="181.0" prefHeight="687.0" prefWidth="1140.0">
+                     <content>
+                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="693.0" prefWidth="1139.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </Group>
+   </children>
 </AnchorPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="scoreboardBackground" stylesheets="@../CSS/Avatar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+   <children>
+      <Label layoutX="605.0" layoutY="83.0" text="select an Avatar">
+         <font>
+            <Font name="Harrington" size="55.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="230.0" layoutY="181.0" prefHeight="687.0" prefWidth="1140.0">
+        <content>
+          <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="693.0" prefWidth="1139.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

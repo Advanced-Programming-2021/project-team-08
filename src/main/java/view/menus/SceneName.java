@@ -11,5 +11,5 @@ public enum SceneName {
     SCOREBOARD_MENU,
     IMPORT_EXPORT_MENU,
     GAMEPLAY_SCENE,
-    DUEL_SCENE
+    DUEL_SCENE,
 }
