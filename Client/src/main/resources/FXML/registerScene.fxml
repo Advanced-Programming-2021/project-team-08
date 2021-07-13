@@ -103,7 +103,7 @@
                         <Font name="Harrington" size="55.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="230.0" layoutY="181.0" opacity="0.66" prefHeight="577.0" prefWidth="1132.0">
+                  <ScrollPane layoutX="230.0" layoutY="181.0" opacity="0.94" prefHeight="577.0" prefWidth="1132.0">
                      <content>
                         <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1138.0" />
                      </content>

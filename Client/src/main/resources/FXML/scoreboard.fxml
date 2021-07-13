@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -14,11 +13,7 @@
          <content>
             <AnchorPane>
                <children>
-                  <VBox fx:id="vBox" prefHeight="659.0" prefWidth="503.0" spacing="10.0">
-                     <children>
-                        <HBox fx:id="hBox" prefHeight="120.0" prefWidth="503.0" spacing="20.0" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="vBox" layoutX="12.0" layoutY="14.0" prefHeight="657.0" prefWidth="489.0" spacing="10.0" />
                </children>
             </AnchorPane>
          </content>
@@ -28,12 +23,12 @@
             <Font name="Harrington" size="53.0" />
          </font>
       </Label>
-      <Label layoutX="722.0" layoutY="123.0" style="-fx-font-family: arial;" text="rank">
+      <Label layoutX="719.0" layoutY="122.0" style="-fx-font-family: arial;" text="rank">
          <font>
             <Font name="Harrington" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="892.0" layoutY="123.0" style="-fx-font-family: arial;" text="nickName">
+      <Label layoutX="873.0" layoutY="123.0" style="-fx-font-family: arial;" text="nickName">
          <font>
             <Font name="Harrington" size="29.0" />
          </font>
