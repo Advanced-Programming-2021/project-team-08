@@ -116,4 +116,8 @@ public class ProfileScene extends Scene {
     public void back(ActionEvent actionEvent) {
         ApplicationManger.goToScene("mainScene.fxml");
     }
+
+    public void showScoreboard(ActionEvent actionEvent) {
+        ApplicationManger.goToScene1(SceneName.SCOREBOARD_MENU,false);
+    }
 }

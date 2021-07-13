@@ -16,3 +16,20 @@
     -fx-font-size: 50;
     -fx-text-origin: center;
 }
+
+.back {
+    -fx-pref-height: 70;
+    -fx-pref-width: 200;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    /*-fx-background-color: rgb(0, 12, 65);*/
+    -fx-font: 30px arial;
+}
+.create {
+    -fx-pref-height: 70;
+    -fx-pref-width: 300;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    /*-fx-background-color: rgb(0, 12, 65);*/
+    -fx-font: 30px arial;
+}
