@@ -36,6 +36,8 @@ public class ApplicationManger extends Application {
         }
     }};
 
+    private static SoundManager soundManager;
+
     public static Stage getMainStage() {
         return mainStage;
     }
@@ -51,7 +53,8 @@ public class ApplicationManger extends Application {
         new ReadSpellTrapCardsData().setGraphic();
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
-        new SoundManager().playBackgroundSound();
+        soundManager = new SoundManager();
+        soundManager.playBackgroundSound();
         goToScene("firstScene.fxml");
     }
 
