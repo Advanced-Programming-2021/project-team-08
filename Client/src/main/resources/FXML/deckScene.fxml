@@ -14,9 +14,9 @@
    <children>
       <Group layoutX="10.0" layoutY="10.0">
          <children>
-            <AnchorPane fx:id="listOfDecks" prefHeight="900.0" prefWidth="1600.0" styleClass="deckBackground" stylesheets="@../CSS/deckStyle.css">
+            <AnchorPane fx:id="listOfDecks" layoutX="-17.0" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: green;" styleClass="deckBackground" stylesheets="@../CSS/deckStyle.css">
                <children>
-                  <ScrollPane layoutX="431.0" layoutY="40.0" prefHeight="332.0" prefWidth="752.0">
+                  <ScrollPane layoutX="431.0" layoutY="40.0" opacity="0.78" prefHeight="332.0" prefWidth="752.0">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="1000.0">
                            <children>
@@ -30,27 +30,27 @@
                      </content>
                   </ScrollPane>
                   <Label fx:id="message" layoutX="516.0" layoutY="727.0" opacity="0.0" prefHeight="55.0" prefWidth="448.0" style="-fx-background-color: white;" />
-                  <Button layoutX="711.0" layoutY="400.0" mnemonicParsing="false" onAction="#deckCreate" prefHeight="68.0" prefWidth="179.0" text="create a deck">
+                  <Button layoutX="686.0" layoutY="423.0" mnemonicParsing="false" onAction="#deckCreate" prefHeight="77.0" prefWidth="279.0" style="-fx-background-color: orange;" styleClass="create" text="create a deck">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                   <TextField fx:id="deckNameTextField" layoutX="615.0" layoutY="489.0" opacity="0.0" prefHeight="77.0" prefWidth="250.0" />
-                  <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="500.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" text="deckName" textFill="WHITE">
+                  <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="500.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" style="-fx-font-family: arial;" text="deckName" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="nextDeckCreate" layoutX="975.0" layoutY="539.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" text="next" textFill="WHITE">
+                  <Button fx:id="nextDeckCreate" layoutX="975.0" layoutY="539.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" style="-fx-background-color: orange;" styleClass="back" text="next" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Button>
-                  <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" />
-                  <Button fx:id="backToMainScene" layoutX="34.0" layoutY="791.0" mnemonicParsing="false" text="back">
+                  <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" style="-fx-font-family: arial;" />
+                  <Button fx:id="backToMainScene" layoutX="34.0" layoutY="791.0" mnemonicParsing="false" style="-fx-background-color: ORANGE;" styleClass="back" stylesheets="@../CSS/deckStyle.css" text="back">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Button>
-                  <Label fx:id="cardNameLabel" layoutX="440.0" layoutY="604.0" opacity="0.0" prefHeight="68.0" prefWidth="155.0" text="cardName" textFill="WHITE">
+                  <Label fx:id="cardNameLabel" layoutX="440.0" layoutY="604.0" opacity="0.0" prefHeight="68.0" prefWidth="155.0" style="-fx-font-family: arial;" text="cardName" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="29.0" />
                      </font>
@@ -90,18 +90,18 @@
                         <Font name="Harrington" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="goToSideOrMainDeck" layoutX="547.0" layoutY="745.0" opacity="0.0" text="go to main or side" textFill="WHITE">
+                  <Label fx:id="goToSideOrMainDeck" layoutX="547.0" layoutY="745.0" opacity="0.0" style="-fx-font-family: arial;" text="go to main or side" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="34.0" />
                      </font>
                   </Label>
-                  <Button fx:id="goToMainDeckButton" layoutX="873.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="83.0" text="main " />
-                  <Button fx:id="goToSideDeckButton" layoutX="965.0" layoutY="745.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="83.0" text="side" />
-                  <Button fx:id="backToListOfDecks" layoutX="132.0" layoutY="795.0" mnemonicParsing="false" text="back">
+                  <Button fx:id="goToMainDeckButton" layoutX="873.0" layoutY="749.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="83.0" styleClass="back" stylesheets="@../CSS/ProfileStyle.css" text="main " />
+                  <Button fx:id="goToSideDeckButton" layoutX="1105.0" layoutY="750.0" mnemonicParsing="false" opacity="0.0" prefHeight="37.0" prefWidth="83.0" styleClass="back" stylesheets="@../CSS/ProfileStyle.css" text="side" />
+                  <Button fx:id="backToListOfDecks" layoutX="99.0" layoutY="785.0" mnemonicParsing="false" styleClass="back" stylesheets="@../CSS/ProfileStyle.css" text="back">
                      <font>
                         <Font name="Harrington" size="15.0" />
                      </font></Button>
-                  <Label fx:id="addOrDeleteMessage" alignment="CENTER" layoutX="613.0" layoutY="799.0" prefHeight="55.0" prefWidth="492.0" text="." textFill="WHITE">
+                  <Label fx:id="addOrDeleteMessage" alignment="CENTER" layoutX="613.0" layoutY="799.0" prefHeight="55.0" prefWidth="492.0" style="-fx-font-family: arial;" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>

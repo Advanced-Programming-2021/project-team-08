@@ -4,6 +4,7 @@ import controller.ApplicationManger;
 import controller.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -123,6 +124,9 @@ public class ScoreboardMenu extends Scene {
     }
 
 
+    public void back(MouseEvent mouseEvent) {
+        ApplicationManger.goToScene1(SceneName.PROFILE_MENU,false);
+    }
 }
 
 class sort implements Comparator<UserData> {

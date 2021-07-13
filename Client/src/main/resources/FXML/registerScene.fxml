@@ -98,14 +98,14 @@
             </AnchorPane>
             <AnchorPane fx:id="avatarAnchorPane" layoutX="1600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="scoreboardBackground" stylesheets="@../CSS/Avatar.css">
                <children>
-                  <Label layoutX="605.0" layoutY="83.0" text="select an Avatar">
+                  <Label layoutX="605.0" layoutY="83.0" style="-fx-font-family: arial;" text="select an Avatar">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="230.0" layoutY="181.0" prefHeight="687.0" prefWidth="1140.0">
+                  <ScrollPane layoutX="230.0" layoutY="181.0" opacity="0.66" prefHeight="577.0" prefWidth="1132.0">
                      <content>
-                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="693.0" prefWidth="1139.0" />
+                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1138.0" />
                      </content>
                   </ScrollPane>
                </children>
