@@ -27,6 +27,7 @@ public class CardOptionsScene extends Scene {
     }
 
     public void importCardRun(ActionEvent actionEvent) {
+        next.setText("import");
         message.setText("");
         cardName.clear();
         cardName.setOpacity(1);
@@ -40,6 +41,7 @@ public class CardOptionsScene extends Scene {
     }
 
     public void exportCardRun(ActionEvent actionEvent) {
+        next.setText("export");
         message.setText("");
         cardName.clear();
         cardName.setOpacity(1);

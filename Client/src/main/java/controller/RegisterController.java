@@ -111,7 +111,7 @@ public class RegisterController {
                 successOfSignup.setText("user created successfully!");
                 registerAnchorPane.setLayoutX(1600);
                 avatarAnchorPane.setLayoutX(0);
-                setCards();
+                setCards(user);
                 successOfSignup.setTextFill(Color.GREEN);
                 FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
                 userFile.write(new Gson().toJson(user));
@@ -145,17 +145,17 @@ public class RegisterController {
     }
 
 
-    public void setCards() throws MalformedURLException {
+    public void setCards(User user) throws MalformedURLException {
         scrollPane.setPrefHeight((double) (140 / 5) * 300 + 180);
 
         File[] files=new File("src/main/resources/asset/busts").listFiles();
         assert  files != null;
         for (int i = 0; i < 130; i++) {
-            addCardImage(files[i].getName() , i);
+            addCardImage(files[i].getName() , i,user);
         }
     }
 
-    private void addCardImage(String imageName,int index) {
+    private void addCardImage(String imageName,int index,User user) {
         String path="src/main/resources/asset/busts/" + imageName;
         File file= new File(path);
         Image image = new Image(file.toURI().toString());
@@ -178,7 +178,8 @@ public class RegisterController {
             cardImage.toBack();
         });
         cardImage.setOnMouseClicked(event -> {
-            ApplicationManger.getLoggedInUser().getUserData().setProfileImageUrl(file.toURI().toString());
+            user.getUserData().setProfileImageUrl(file.toURI().toString());
+            ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override

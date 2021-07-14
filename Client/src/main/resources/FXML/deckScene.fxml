@@ -29,33 +29,33 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <Label fx:id="message" layoutX="516.0" layoutY="727.0" opacity="0.0" prefHeight="55.0" prefWidth="448.0" style="-fx-background-color: white;" />
+                  <Label fx:id="message" layoutX="613.0" layoutY="737.0" opacity="0.0" prefHeight="55.0" prefWidth="448.0" style="-fx-background-color: white; -fx-alignment: center;" />
                   <Button layoutX="686.0" layoutY="423.0" mnemonicParsing="false" onAction="#deckCreate" prefHeight="77.0" prefWidth="279.0" style="-fx-background-color: orange;" styleClass="create" text="create a deck">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="deckNameTextField" layoutX="615.0" layoutY="489.0" opacity="0.0" prefHeight="77.0" prefWidth="250.0" />
-                  <Label fx:id="deckNameLabel" layoutX="440.0" layoutY="500.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" style="-fx-font-family: arial;" text="deckName" textFill="WHITE">
+                  <TextField fx:id="deckNameTextField" layoutX="783.0" layoutY="513.0" opacity="0.0" prefHeight="77.0" prefWidth="250.0" />
+                  <Label fx:id="deckNameLabel" layoutX="608.0" layoutY="524.0" opacity="0.0" prefHeight="55.0" prefWidth="155.0" style="-fx-font-family: arial;" text="deckName" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="nextDeckCreate" layoutX="975.0" layoutY="539.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" style="-fx-background-color: orange;" styleClass="back" text="next" textFill="WHITE">
+                  <Button fx:id="nextDeckCreate" layoutX="1261.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextDeckCreate" opacity="0.0" prefHeight="55.0" prefWidth="83.0" style="-fx-background-color: orange;" styleClass="back" text="next" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Button>
-                  <Label fx:id="message1" layoutX="501.0" layoutY="799.0" prefHeight="55.0" prefWidth="463.0" style="-fx-font-family: arial;" />
+                  <Label fx:id="message1" layoutX="605.0" layoutY="782.0" prefHeight="55.0" prefWidth="463.0" style="-fx-font-family: arial; -fx-alignment: center;" />
                   <Button fx:id="backToMainScene" layoutX="34.0" layoutY="791.0" mnemonicParsing="false" style="-fx-background-color: ORANGE;" styleClass="back" stylesheets="@../CSS/deckStyle.css" text="back">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Button>
-                  <Label fx:id="cardNameLabel" layoutX="440.0" layoutY="604.0" opacity="0.0" prefHeight="68.0" prefWidth="155.0" style="-fx-font-family: arial;" text="cardName" textFill="WHITE">
+                  <Label fx:id="cardNameLabel" layoutX="608.0" layoutY="628.0" opacity="0.0" prefHeight="68.0" prefWidth="155.0" style="-fx-font-family: arial;" text="cardName" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="29.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="cardNameTextField" layoutX="615.0" layoutY="604.0" opacity="0.0" prefHeight="68.0" prefWidth="250.0" />
+                  <TextField fx:id="cardNameTextField" layoutX="783.0" layoutY="628.0" opacity="0.0" prefHeight="68.0" prefWidth="250.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="deckSetting" layoutX="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="deckSetting" stylesheets="@../CSS/deckStyle.css">
