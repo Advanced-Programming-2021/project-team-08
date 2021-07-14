@@ -178,7 +178,7 @@ public class RegisterController {
             cardImage.toBack();
         });
         cardImage.setOnMouseClicked(event -> {
-            ApplicationManger.getLoggedInUser().getUserData().setAvatar(image);
+            ApplicationManger.getLoggedInUser().getUserData().setProfileImageUrl(file.toURI().toString());
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
