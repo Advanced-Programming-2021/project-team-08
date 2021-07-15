@@ -94,7 +94,8 @@ public class DeckController {
             Button setActiveButton = new Button();
             hBox.getChildren().add(0, deckButton);
             hBox.getChildren().add(1, deleteButton);
-            if (ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())) {
+            if (ApplicationManger.getLoggedInUser().getUserData().isThereADeckThatActivated()&&
+                    ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())) {
                 Label setActiveLabel = new Label();
                 setActiveLabel.setText("     active");
                 hBox.getChildren().add(2, setActiveLabel);

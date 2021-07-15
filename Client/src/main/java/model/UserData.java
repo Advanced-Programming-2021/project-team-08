@@ -88,6 +88,11 @@ public class UserData {
         return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
     }
 
+    public boolean isThereADeckThatActivated(){
+        if (activeDeckName==null)
+            return false;
+        return true;
+    }
     public int getMoney() {
         return money;
     }
