@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 public class ServerManager {
-        ServerSocket serverSocket;
+    ServerSocket serverSocket;
 
     {
         try {
@@ -16,7 +16,7 @@ public class ServerManager {
             while (true) {
                 Socket socket = serverSocket.accept();
                 ServerThread serverThread = new ServerThread();
-                serverThread.init(socket, serverSocket, this);
+                serverThread.init(socket, serverSocket, null);
                 serverThread.start();
             }
         } catch (IOException e) {
@@ -24,10 +24,10 @@ public class ServerManager {
         }
     }
 
-    }
 }
 
-public class ServerThread extends Thread {
+
+class ServerThread extends Thread {
     Socket socket;
     ServerSocket serverSocket;
     ServerController serverController;
