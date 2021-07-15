@@ -33,3 +33,8 @@
     /*-fx-background-color: rgb(0, 12, 65);*/
     -fx-font: 30px arial;
 }
+
+.message {
+    -fx-background-image: url("../asset/deckMenu/UserDetailBG_02.dds.png");
+
+}

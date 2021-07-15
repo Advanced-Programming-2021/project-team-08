@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -32,9 +33,7 @@ import java.util.regex.Pattern;
 public class DeckController {
     private DeckMenu deckMenu;
     public TextField deckNameTextField;
-    public TextField cardNameTextField;
     public Label deckNameLabel;
-    public Label cardNameLabel;
     public VBox scrollPane;
     public AnchorPane listOfDecks;
     public AnchorPane deckSetting;
@@ -62,15 +61,14 @@ public class DeckController {
     }
 
     public void showMessage(String message) {
+        addOrDeleteMessage.setOpacity(1);
         addOrDeleteMessage.setText(message);
-        if (message.equals("card removed from deck successfully") ||
-                message.equals("card added to deck successfully"))
+        if (message.equals("card removed from main deck successfully") ||
+                message.equals("card removed from side deck successfully")||
+                message.equals("card added to side deck successfully")||
+                message.equals("card added to main deck successfully"))
             addOrDeleteMessage.setTextFill(Color.GREEN);
         else    addOrDeleteMessage.setTextFill(Color.RED);
-    }
-
-    public Label getGoToSideOrMainDeck() {
-        return goToSideOrMainDeck;
     }
 
     public Button getGoToMainDeckButton() {
@@ -86,6 +84,7 @@ public class DeckController {
             Deck deck = decks.get(i);
             HBox hBox = new HBox();
             hBox.setPrefWidth(1000);
+            hBox.setMinHeight(70);
             Button deckButton = new Button();
             Button deleteButton = new Button();
 //            Button editDeck=new Button();
@@ -97,7 +96,9 @@ public class DeckController {
             if (ApplicationManger.getLoggedInUser().getUserData().isThereADeckThatActivated()&&
                     ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())) {
                 Label setActiveLabel = new Label();
-                setActiveLabel.setText("     active");
+                setActiveLabel.setText("active");
+                setActiveLabel.setAlignment(Pos.CENTER);
+                setActiveLabel.setStyle("-fx-background-color: rgb(140, 225, 0)");
                 hBox.getChildren().add(2, setActiveLabel);
                 setActiveLabel.setPrefHeight(100);
                 setActiveLabel.setPrefWidth(500);
@@ -127,9 +128,14 @@ public class DeckController {
             double y = (i / 5) * (445) + 20;
             deckButton.setLayoutX(x);
             deckButton.setLayoutY(y);
+            hBox.setSpacing(20);
             deckButton.setOnMouseClicked(event -> {
                 deckSetting.setLayoutX(0.0);
                 listOfDecks.setLayoutX(1600.0);
+                addOrDeleteMessage.setOpacity(0);
+                goToSideOrMainDeck.setOpacity(0);
+                goToMainDeckButton.setOpacity(0);
+                goToSideDeckButton.setOpacity(0);
                 addOrDeleteCard(deck);
 
             });
@@ -171,6 +177,10 @@ public class DeckController {
         deckMenu.setCards(scrollSideDeck, sideDeckCards, "side", deck.getName());
         deckMenu.setCards(scrollHandCards, handCards, "hand", deck.getName());
         backToListOfDecks.setOnMouseClicked(event -> {
+            nextDeckCreate.setOpacity(0);
+            message.setOpacity(0);
+            deckNameLabel.setOpacity(0);
+            deckNameTextField.setOpacity(0);
             listOfDecks.setLayoutX(0.0);
             deckSetting.setLayoutX(1600.0);
             scrollPane.getChildren().clear();
@@ -193,21 +203,28 @@ public class DeckController {
 
     public void nextDeckCreate() {
         String deckName = deckNameTextField.getText();
-        if (Deck.isThereADeckWithThisName(deckName)) {
+        if (deckName.equals("")){
             message.setTextFill(Color.RED);
             message.setOpacity(1);
-            message.setText("deck with name " + deckName + " already exists");
-        } else {
-            String username = ApplicationManger.getLoggedInUser().getUsername();
-            Deck deck = new Deck(deckName, username);
-            ApplicationManger.getLoggedInUser().addDeck(deck);
-            message.setTextFill(Color.GREEN);
-            message.setOpacity(1);
-            message.setText("deck created successfully!");
-            ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
-            scrollPane.getChildren().clear();
-            setDecks(scrollPane, showingDeck);
+            message.setText("You have not entered any names");
+        }
+        else {
+            if (Deck.isThereADeckWithThisName(deckName)) {
+                message.setTextFill(Color.RED);
+                message.setOpacity(1);
+                message.setText("deck with name " + deckName + " already exists");
+            } else {
+                String username = ApplicationManger.getLoggedInUser().getUsername();
+                Deck deck = new Deck(deckName, username);
+                ApplicationManger.getLoggedInUser().addDeck(deck);
+                message.setTextFill(Color.GREEN);
+                message.setOpacity(1);
+                message.setText("deck created successfully!");
+                ArrayList<Deck> showingDeck = ApplicationManger.getLoggedInUser().getDecks();
+                scrollPane.getChildren().clear();
+                setDecks(scrollPane, showingDeck);
 
+            }
         }
     }
 
@@ -333,35 +350,6 @@ public class DeckController {
 
     }
 
-
-//    public void addCardGraphic(String cardName, String mainOrSide, String deckName) throws Exception {
-//        Deck deck=Deck.getDeckWithName(deckName);
-//        Integer cardId=Card.getCardIdByName(cardName);
-//        if (mainOrSide.equals("main")){
-//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(cardId);
-//            deck.getMainDeck().add(CardData.getCardByName(cardName));
-//        }
-//        else if (mainOrSide.equals("side")){
-//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().remove(cardId);
-//            deck.getSideDeck().add(CardData.getCardByName(cardName));
-//        }
-//        addOrDeleteCard(deck);
-//    }
-//
-//    public void removeCardGraphic(String cardName,String scrollPaneType,String deckName) throws Exception {
-//        Deck deck=Deck.getDeckWithName(deckName);
-//        Integer cardId=Card.getCardIdByName(cardName);
-//        if(scrollPaneType.equals("main")){
-//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(cardId);
-//            deck.getMainDeck().remove(CardData.getCardByName(cardName));
-//        }
-//        else if (scrollPaneType.equals("side")){
-//            ApplicationManger.getLoggedInUser().getCardsThatThereIsNotInAnyDeck().add(cardId);
-//            deck.getSideDeck().remove(CardData.getCardByName(cardName));
-//        }
-//        addOrDeleteCard(deck);
-//    }
-
     public void showAllDecks() {
         ArrayList<Deck> decks = ApplicationManger.getLoggedInUser().getDecks();
         System.out.println("Decks:");
@@ -434,47 +422,6 @@ public class DeckController {
             System.out.println(card.getCardName() + ": " + card.getCardDescription());
         }
 
-    }
-
-    public void deckCreateGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-    }
-
-    public void removeCardGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-
-        cardNameLabel.setOpacity(1);
-        cardNameTextField.setOpacity(1);
-    }
-
-    public void addCardGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-
-        cardNameLabel.setOpacity(1);
-        cardNameTextField.setOpacity(1);
-    }
-
-    public void deckSetActiveGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-    }
-
-    public void deckDeleteGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-    }
-
-    public void showDeckGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
-    }
-
-    public void deckShowCardsGraphic(ActionEvent actionEvent) {
-        deckNameTextField.setOpacity(1);
-        deckNameLabel.setOpacity(1);
     }
 
     public void setOpacity() {

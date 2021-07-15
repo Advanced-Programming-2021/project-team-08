@@ -9,6 +9,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import model.Deck;
 import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
@@ -53,24 +54,31 @@ public class DeckMenu extends Scene {
                 goToMainDeckButton.setOnMouseClicked(event1 -> {
                     try {
                         Deck.addCardGraphic(cardData.getCardName(), "main", deckName);
+                        deckController.showMessage("card added to main deck successfully");
                         deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-                        deckController.showMessage("card added to deck successfully");
                     } catch (Exception e) {
+                        deckController.addOrDeleteMessage.setTextFill(Color.RED);
+                        deckController.addOrDeleteMessage.setOpacity(1);
                         deckController.addOrDeleteMessage.setText(e.getMessage());
                     }
                 });
                 goToSideDeckButton.setOnMouseClicked(event1 -> {
                     try {
                         Deck.addCardGraphic(cardData.getCardName(), "side", deckName);
+                        deckController.showMessage("card added to side deck successfully");
                         deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-                        deckController.showMessage("card added to deck successfully");
                     } catch (Exception e) {
+                        deckController.addOrDeleteMessage.setTextFill(Color.RED);
+                        deckController.addOrDeleteMessage.setOpacity(1);
                         deckController.addOrDeleteMessage.setText(e.getMessage());
                     }
                 });
             } else {
                 Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
-                deckController.showMessage("card removed from deck successfully");
+                if (scrollPaneType.equals("main"))
+                    deckController.showMessage("card removed from main deck successfully");
+                else if (scrollPaneType.equals("side"))
+                    deckController.showMessage("card removed from side deck successfully");
                 deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
             }
         });

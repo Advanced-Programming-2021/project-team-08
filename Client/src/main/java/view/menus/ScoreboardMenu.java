@@ -65,6 +65,7 @@ public class ScoreboardMenu extends Scene {
             }
             hBox.getChildren().clear();
 //            vBox.getChildren().clear();
+
             hBox.getChildren().add(0, rank);
             hBox.getChildren().add(1, nickName);
             hBox.getChildren().add(2, point);
