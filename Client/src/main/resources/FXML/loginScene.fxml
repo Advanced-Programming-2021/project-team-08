@@ -52,7 +52,7 @@
                 <Cursor fx:constant="OPEN_HAND" />
             </cursor>
         </Button>
-        <Button layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
+        <Button fx:id="nextLogin" layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="36.0" />
             </font>

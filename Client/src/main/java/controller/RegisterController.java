@@ -47,11 +47,13 @@ public class RegisterController {
     public AnchorPane registerAnchorPane;
     public AnchorPane avatarAnchorPane;
     public Button next;
+    public Button nextLogin;
     private static String textButton;
 
     @FXML
     void initialize(){
             next.setText(textButton);
+            nextLogin.setText(textButton);
     }
 
     public static void setButton(String text){
@@ -155,7 +157,6 @@ public class RegisterController {
             errorOfLogin.setTextFill(Color.RED);
         }
     }
-
 
     public void setCards(User user) throws MalformedURLException {
         scrollPane.setPrefHeight((double) (140 / 5) * 300 + 180);
