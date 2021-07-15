@@ -50,7 +50,7 @@ class ServerThread extends Thread {
                 ServerController serverController = ServerController.getController(input);
                 String result;
                 if (serverController == null) {
-                    result = ServerController.serverMessage(MessageType.ERROR,"invalid server controller", null);
+                    result = ServerController.serverMessage(MessageType.ERROR,"invalid client message", null);
                 }else {
                     result = serverController.getServerMessage(input);
                 }

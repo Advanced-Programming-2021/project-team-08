@@ -12,12 +12,16 @@ public abstract class ServerController {
     private HashMap<String, User> activeUsers = new HashMap<>();
 
     public static ServerController getController(String input) {
-        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
-        String controllerName = jsonObject.get("controller").getAsString();
-        switch (controllerName) {
-            case "register" : return RegisterController.getInstance();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+            String controllerName = jsonObject.get("controller").getAsString();
+            switch (controllerName) {
+                case "register" : return RegisterController.getInstance();
 
-            default: return null;
+                default: return null;
+            }
+        }catch (Exception e) {
+            return null;
         }
     }
 

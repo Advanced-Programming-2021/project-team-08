@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.JsonObject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.PerspectiveCamera;
@@ -9,8 +10,11 @@ import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 import view.menus.*;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -18,6 +22,10 @@ public class ApplicationManger extends Application {
     private static Scene currentScene;
     private static User loggedInUser;
     private static Stage mainStage;
+
+    private static Socket socket;
+    private static DataInputStream dataInputStream;
+    private static DataOutputStream dataOutputStream;
 
     public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
@@ -140,7 +148,35 @@ public class ApplicationManger extends Application {
     }
 
     private void setupServer() {
+        try {
+            socket = new Socket("localhost", 7755);
+            dataInputStream = new DataInputStream(socket.getInputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            System.out.println(dataInputStream.readUTF());
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
 
+    public static String getServerResponse(String controller, String method, HashMap<String, String> data) {
+        String message = null;
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("controller", controller);
+        jsonObject.addProperty("method", method);
+        if (data != null) {
+            for (String key : data.keySet()) {
+                jsonObject.addProperty(key, data.get(key));
+            }
+        }
+        message = jsonObject.toString();
+        try {
+            dataOutputStream.writeUTF(message);
+            dataOutputStream.flush();
+            return dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 /*    public static void modifyFile(String filePath, String oldString, String newString) {
