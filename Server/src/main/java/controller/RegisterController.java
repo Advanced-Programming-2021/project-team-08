@@ -15,8 +15,14 @@ import java.util.Base64;
 
 public class RegisterController extends ServerController {
 
-    private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
-    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+    private static final SecureRandom secureRandom = new SecureRandom();
+    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+
+    private static RegisterController registerController = new RegisterController();
+
+    public static RegisterController getInstance() {
+        return registerController;
+    }
 
     public static String registerUser(String input) {
         JsonElement jsonElement = JsonParser.parseString(input);
