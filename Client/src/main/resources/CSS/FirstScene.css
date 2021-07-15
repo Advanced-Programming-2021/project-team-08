@@ -1,0 +1,6 @@
+.register:hover{
+    -fx-pref-width: 518;
+    -fx-pref-height: 92;
+    -fx-translate-y: -5;
+    -fx-translate-x: -5;
+}

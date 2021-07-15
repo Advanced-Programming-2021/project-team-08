@@ -14,7 +14,7 @@
    <children>
       <Group>
          <children>
-            <AnchorPane fx:id="registerAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css">
+            <AnchorPane fx:id="registerAnchorPane" layoutX="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css">
                 <children>
                     <Button layoutY="752.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="82.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="752.0">
                         <font>
