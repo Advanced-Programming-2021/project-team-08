@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,12 +11,12 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
     <children>
-        <Label layoutX="482.0" layoutY="334.0" prefHeight="79.0" prefWidth="176.0" text="username" textFill="WHITE">
+        <Label layoutX="482.0" layoutY="342.0" prefHeight="79.0" prefWidth="176.0" text="username" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="37.0" />
             </font>
         </Label>
-        <Label layoutX="474.0" layoutY="450.0" prefHeight="79.0" prefWidth="176.0" text="password" textFill="WHITE">
+        <Label layoutX="474.0" layoutY="458.0" prefHeight="79.0" prefWidth="176.0" text="password" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="37.0" />
             </font>
@@ -44,30 +45,46 @@
             <String fx:value="registerFont" />
          </styleClass>
         </TextField>
-        <Button layoutX="78.0" layoutY="764.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="back" textFill="WHITE">
+        <Button layoutX="78.0" layoutY="764.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" text="back" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="36.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
+                <Cursor fx:constant="HAND" />
             </cursor>
+         <stylesheets>
+            <URL value="@../CSS/MenuStyles.css" />
+            <URL value="@../CSS/FirstScene.css" />
+         </stylesheets>
+         <styleClass>
+            <String fx:value="registerButton" />
+            <String fx:value="register" />
+         </styleClass>
         </Button>
-        <Button fx:id="next" layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" textFill="WHITE">
+        <Button fx:id="next" layoutX="1007.0" layoutY="764.0" mnemonicParsing="false" onAction="#nextOfLogin" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="36.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
+                <Cursor fx:constant="HAND" />
             </cursor>
+         <stylesheets>
+            <URL value="@../CSS/MenuStyles.css" />
+            <URL value="@../CSS/FirstScene.css" />
+         </stylesheets>
+         <styleClass>
+            <String fx:value="registerButton" />
+            <String fx:value="register" />
+         </styleClass>
         </Button>
-        <Label fx:id="errorOfLogin" layoutX="493.0" layoutY="588.0" prefHeight="61.0" prefWidth="595.0">
+        <Label fx:id="errorOfLogin" layoutX="570.0" layoutY="584.0" prefHeight="61.0" prefWidth="595.0" style="-fx-alignment: center;" textFill="WHITE">
             <font>
-                <Font size="30.0" />
+                <Font name="Arial" size="30.0" />
             </font>
         </Label>
-        <Label fx:id="successOfLogin" layoutX="543.0" layoutY="673.0" prefHeight="61.0" prefWidth="551.0">
+        <Label fx:id="successOfLogin" layoutX="570.0" layoutY="663.0" prefHeight="61.0" prefWidth="595.0" style="-fx-alignment: center;" textFill="WHITE">
             <font>
-                <Font name="Harrington" size="30.0" />
+                <Font name="Arial" size="30.0" />
             </font>
         </Label>
     </children>

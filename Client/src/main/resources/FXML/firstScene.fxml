@@ -17,7 +17,7 @@
                 <Font name="Harrington" size="39.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
+                <Cursor fx:constant="HAND" />
             </cursor>
          <styleClass>
             <String fx:value="registerButton" />
@@ -29,7 +29,7 @@
                 <Font name="Harrington" size="39.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
+                <Cursor fx:constant="HAND" />
             </cursor>
          <stylesheets>
             <URL value="@../CSS/RegisterStyles.css" />
@@ -45,7 +45,7 @@
                 <Font name="Harrington" size="39.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
+                <Cursor fx:constant="HAND" />
             </cursor>
          <styleClass>
             <String fx:value="registerButton" />

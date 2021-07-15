@@ -16,21 +16,24 @@
          <children>
             <AnchorPane fx:id="registerAnchorPane" layoutX="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css">
                 <children>
-                    <Button layoutY="752.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="82.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="752.0">
+                    <Button layoutY="752.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css" text="back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1042.0" AnchorPane.topAnchor="752.0">
                         <font>
-                            <Font name="Harrington" size="21.0" />
+                            <Font name="Harrington" size="36.0" />
                         </font>
                         <cursor>
-                            <Cursor fx:constant="OPEN_HAND" />
+                            <Cursor fx:constant="HAND" />
                         </cursor>
+                     <styleClass>
+                        <String fx:value="registerButton" />
+                        <String fx:value="register" />
+                     </styleClass>
                     </Button>
-                    <TextField layoutX="807.0" layoutY="511.0" AnchorPane.bottomAnchor="430.0" AnchorPane.topAnchor="510.0" />
-                    <TextField fx:id="usernameOfSignup" layoutX="624.0" layoutY="229.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css" AnchorPane.bottomAnchor="596.0" AnchorPane.leftAnchor="624.0" AnchorPane.rightAnchor="476.0" AnchorPane.topAnchor="229.0">
+                    <TextField fx:id="usernameOfSignup" layoutX="624.0" layoutY="229.0" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css" AnchorPane.bottomAnchor="596.0" AnchorPane.leftAnchor="624.0" AnchorPane.rightAnchor="476.0" AnchorPane.topAnchor="229.0">
                         <cursor>
                             <Cursor fx:constant="TEXT" />
                         </cursor>
                         <font>
-                            <Font name="Harrington" size="30.0" />
+                            <Font name="Harrington" size="31.0" />
                         </font>
                      <styleClass>
                         <String fx:value="registerButton" />
@@ -47,32 +50,36 @@
                             <Font name="Harrington" size="33.0" />
                         </font>
                     </Label>
-                    <Button fx:id="next" graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" textFill="WHITE">
+                    <Button fx:id="next" graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css" textFill="WHITE">
                         <font>
-                            <Font name="Harrington" size="25.0" />
+                            <Font name="Harrington" size="36.0" />
                         </font>
                         <cursor>
-                            <Cursor fx:constant="OPEN_HAND" />
+                            <Cursor fx:constant="HAND" />
                         </cursor>
+                     <styleClass>
+                        <String fx:value="registerButton" />
+                        <String fx:value="register" />
+                     </styleClass>
                     </Button>
-                    <TextField fx:id="passwordOfSignup" layoutX="624.0" layoutY="424.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
+                    <TextField fx:id="passwordOfSignup" layoutX="624.0" layoutY="424.0" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css">
                         <cursor>
                             <Cursor fx:constant="TEXT" />
                         </cursor>
                         <font>
-                            <Font name="Harrington" size="30.0" />
+                            <Font name="Harrington" size="31.0" />
                         </font>
                      <styleClass>
                         <String fx:value="registerButton" />
                         <String fx:value="registerFont" />
                      </styleClass>
                     </TextField>
-                    <TextField fx:id="nicknameOfSignup" layoutX="624.0" layoutY="327.0" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
+                    <TextField fx:id="nicknameOfSignup" layoutX="624.0" layoutY="327.0" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css">
                         <cursor>
                             <Cursor fx:constant="TEXT" />
                         </cursor>
                         <font>
-                            <Font name="Harrington" size="30.0" />
+                            <Font name="Harrington" size="31.0" />
                         </font>
                      <styleClass>
                         <String fx:value="registerButton" />
@@ -84,28 +91,28 @@
                             <Font name="Harrington" size="40.0" />
                         </font>
                     </Label>
-                    <Label fx:id="errorOfSignup" layoutX="511.0" layoutY="542.0" prefHeight="68.0" prefWidth="686.0" textFill="#170000">
+                    <Label fx:id="errorOfSignup" layoutX="511.0" layoutY="542.0" prefHeight="68.0" prefWidth="686.0" style="-fx-alignment: center;" textFill="WHITE">
                         <font>
-                            <Font name="Harrington" size="30.0" />
+                            <Font name="Arial" size="30.0" />
                         </font>
                     </Label>
-                    <Label fx:id="successOfSignup" layoutX="511.0" layoutY="628.0" prefHeight="68.0" prefWidth="686.0" textFill="#170000">
+                    <Label fx:id="successOfSignup" layoutX="511.0" layoutY="628.0" prefHeight="68.0" prefWidth="686.0" style="-fx-alignment: center;" textFill="WHITE">
                         <font>
-                            <Font name="Harrington" size="38.0" />
+                            <Font name="Arial" size="30.0" />
                         </font>
                     </Label>
                 </children>
             </AnchorPane>
             <AnchorPane fx:id="avatarAnchorPane" layoutX="1600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="scoreboardBackground" stylesheets="@../CSS/Avatar.css">
                <children>
-                  <Label layoutX="605.0" layoutY="83.0" style="-fx-font-family: arial;" text="select an Avatar">
+                  <Label layoutX="586.0" layoutY="74.0" prefHeight="73.0" prefWidth="452.0" style="-fx-font-family: arial; -fx-alignment: center; -fx-font-family: Harrington; -fx-font-size: 60; -fx-background-color: rgb(90, 139, 206); -fx-background-radius: 30;" text="select an Avatar">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
                   </Label>
                   <ScrollPane layoutX="230.0" layoutY="181.0" opacity="0.94" prefHeight="577.0" prefWidth="1132.0">
                      <content>
-                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1138.0" />
+                        <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" opacity="0.68" prefHeight="572.0" prefWidth="1138.0" style="-fx-background-color: rgb(194, 238, 255);" />
                      </content>
                   </ScrollPane>
                </children>
