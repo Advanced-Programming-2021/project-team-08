@@ -32,19 +32,22 @@ public class ReadSpellTrapCardsData {
         }
     }
 
-    public void readACardData(String[] data) {
+    public CardData readACardData(String[] data) {
         if (data[1].equals("Trap")) {
             TrapCardData trapCardData = new TrapCardData();
             trapCardData = (TrapCardData) setSpellTrapData(data, trapCardData);
             trapCardData.setLimited(data[4].trim().equals("Limited"));
             trapCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-", "_")));
+            return trapCardData;
         } else if (data[1].equals("Spell")) {
             SpellCardData spellCardData = new SpellCardData();
             spellCardData = (SpellCardData) setSpellTrapData(data, spellCardData);
             spellCardData.setLimited(data[4].trim().equals("Limited"));
             spellCardData.setTrapProperty(SpellTrapProperty.valueOf(data[2].trim().toUpperCase(Locale.ROOT).replace("-", "_")));
+            return spellCardData;
         } else {
             System.out.println("the card type is wrong");
+            return null;
         }
     }
 

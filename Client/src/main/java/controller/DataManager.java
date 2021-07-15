@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.cards.data.CardData;
-import model.cards.data.MonsterCardData;
-import model.cards.data.SpellCardData;
-import model.cards.data.TrapCardData;
+import model.cards.data.*;
 import view.menus.CardOptionsScene;
 
 import java.io.File;
@@ -76,25 +73,21 @@ public class DataManager {
         try {
             FileReader fileReader = new FileReader(fileLocation);
             String fileData = new String(Files.readAllBytes(Paths.get(file.toString())));
+            System.out.println(fileData);
             JsonObject jsonObject = JsonParser.parseReader(fileReader).getAsJsonObject();
             CardData cardData;
             switch (jsonObject.get("cardType").toString().replaceAll("\"", "")) {
                 case "MONSTER":
-                    cardData = new Gson().fromJson(fileData, MonsterCardData.class);
+                    cardData = new ReadMonsterCardsData().readACardData(fileData.split(","));
                     break;
                 case "SPELL":
-                    cardData = new Gson().fromJson(fileData, SpellCardData.class);
-                    break;
                 case "TRAP":
-                    cardData = new Gson().fromJson(fileData, TrapCardData.class);
+                    cardData = new ReadSpellTrapCardsData().readACardData(fileData.split(","));
                     break;
                 default:
                      CardOptionsScene.setMessage("couldn't find card type");
                     return;
             }
-            cardData.readEffectFromEffectString();
-//            System.out.println(cardData);
-
               CardOptionsScene.setMessage("card imported successfully.");
         } catch (IOException e) {
               CardOptionsScene.setMessage(e.getMessage());

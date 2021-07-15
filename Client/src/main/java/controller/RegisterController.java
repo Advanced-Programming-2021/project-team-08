@@ -51,7 +51,7 @@ public class RegisterController {
 
     @FXML
     void initialize(){
-            next.setText(textButton);
+        next.setText(textButton);
     }
 
     public static void setButton(String text){
@@ -126,7 +126,7 @@ public class RegisterController {
                 setCards(user);
                 successOfSignup.setTextFill(Color.GREEN);
                 FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
-                userFile.write(new Gson().toJson(user));
+                userFile.write(new Gson().toJson(user.getUserData()));
                 userFile.close();
             }
         } catch (IOException e) {

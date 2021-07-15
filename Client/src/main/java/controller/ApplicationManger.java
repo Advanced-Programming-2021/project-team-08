@@ -44,6 +44,7 @@ public class ApplicationManger extends Application {
 
     public void run(String[] args) {
         //goToScene(SceneName.REGISTER_MENU, false);
+        setupServer();
         launch(args);
     }
 
@@ -136,6 +137,10 @@ public class ApplicationManger extends Application {
 
     public static void logoutCurrentUser() {
         loggedInUser = null;
+    }
+
+    private void setupServer() {
+
     }
 
 /*    public static void modifyFile(String filePath, String oldString, String newString) {

@@ -38,7 +38,7 @@ public class ReadMonsterCardsData {
         }
     }
 
-    private void readACardData(String[] rowData) {
+    public MonsterCardData readACardData(String[] rowData) {
         MonsterCardData monsterCardData = new MonsterCardData();
         setMonsterName(rowData[0].trim().replaceAll(" comma", ","), monsterCardData);
         setMonsterLevel(rowData[1].trim(), monsterCardData);
@@ -53,6 +53,7 @@ public class ReadMonsterCardsData {
         if (rowData.length == 11) {
             monsterCardData.setEffect(rowData[10].replace(" comma", ",").trim());
         }
+        return monsterCardData;
     }
 
     private void setMonsterName(String name, MonsterCardData monsterCardData) {
