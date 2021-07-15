@@ -66,3 +66,15 @@
 .change-menu {
     -fx-background-color: rgb(15, 126, 146);
 }
+
+.specs-label {
+    -fx-pref-width: 300;
+    -fx-pref-height: 80;
+    -fx-font: 30px Arial;
+
+}
+
+.specs-pane {
+    -fx-background-color: lightblue;
+    -fx-background-radius:10;
+}

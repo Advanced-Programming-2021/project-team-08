@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import model.User;
 import model.enums.MessageType;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -21,6 +22,10 @@ public class FileManager {
     public MessageType createUser(User user) {
         FileWriter userFile;
         try {
+            File file = new File("users");
+            if (!file.exists()) {
+                if (!file.mkdir()) throw new IOException("could not make users folder");
+            }
             userFile = new FileWriter("users/" + user.getUserData().getUsername() +".json");
             userFile.write(new Gson().toJson(user));
             userFile.close();

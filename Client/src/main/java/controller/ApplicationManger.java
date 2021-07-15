@@ -152,14 +152,13 @@ public class ApplicationManger extends Application {
             socket = new Socket("localhost", 7755);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            System.out.println(dataInputStream.readUTF());
         } catch (IOException x) {
             x.printStackTrace();
         }
     }
 
     public static String getServerResponse(String controller, String method, HashMap<String, String> data) {
-        String message = null;
+        String message;
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("controller", controller);
         jsonObject.addProperty("method", method);

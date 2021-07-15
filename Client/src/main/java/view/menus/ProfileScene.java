@@ -3,8 +3,11 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.ProfileController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import model.enums.ProfileMessages;
@@ -21,6 +24,9 @@ public class ProfileScene extends Scene {
     public TextField oldPassField;
     public TextField newPassField;
     public TextField newNicknameField;
+    public Pane specsPane;
+    public Label usernameLabel;
+    public Label nicknameLabel;
 
     public ProfileScene() {
         profileController = new ProfileController(this);
@@ -45,6 +51,21 @@ public class ProfileScene extends Scene {
             return 0;
         } else System.out.println("invalid commands");
         return 1;
+    }
+
+    @FXML
+    void initialize() {
+        updateLabels();
+        Image image = new Image(ApplicationManger.getLoggedInUser().getUserData().getProfileImageUrl());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(200);
+        specsPane.getChildren().add(specsPane.getChildren().size(), imageView);
+    }
+
+    private void updateLabels() {
+        usernameLabel.setText("username: " + ApplicationManger.getLoggedInUser().getUsername());
+        nicknameLabel.setText("nickname: " + ApplicationManger.getLoggedInUser().getUserData().getNickname());
     }
 
     public void errorMessage(ProfileMessages error) {
@@ -84,6 +105,7 @@ public class ProfileScene extends Scene {
 
     public void changeNickname(ActionEvent actionEvent) {
         profileController.changeNickname1(newNicknameField.getText());
+        updateLabels();
     }
 
     public void changePassword(ActionEvent actionEvent) {

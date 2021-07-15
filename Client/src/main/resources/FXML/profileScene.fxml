@@ -37,6 +37,11 @@
             </children>
         </Pane>
 
+        <Pane fx:id="specsPane"  prefHeight="200" prefWidth="520" layoutY="20" layoutX="50" styleClass="specs-pane">
+            <Label fx:id="usernameLabel" layoutX="220" styleClass="specs-label"/>
+            <Label fx:id="nicknameLabel"  layoutX="220" layoutY="100" styleClass="specs-label"/>
+        </Pane>
+
         <Button layoutX="20" layoutY="750" mnemonicParsing="false" onAction="#back" styleClass="back" text="Back" />
       <Button layoutX="1000.0" layoutY="674.0" mnemonicParsing="false" onAction="#showScoreboard" styleClass="menu-item" text="Scoreboard" />
 
