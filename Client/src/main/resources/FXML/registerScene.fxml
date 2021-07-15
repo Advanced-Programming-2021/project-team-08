@@ -47,7 +47,7 @@
                             <Font name="Harrington" size="33.0" />
                         </font>
                     </Label>
-                    <Button graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" text="next" textFill="WHITE">
+                    <Button fx:id="next" graphicTextGap="5.0" layoutX="1056.0" layoutY="756.0" mnemonicParsing="false" onAction="#nextOfSignup" prefHeight="75.0" prefWidth="500.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/MenuStyles.css" textFill="WHITE">
                         <font>
                             <Font name="Harrington" size="25.0" />
                         </font>

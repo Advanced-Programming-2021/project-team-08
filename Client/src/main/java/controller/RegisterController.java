@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -44,7 +46,17 @@ public class RegisterController {
     public AnchorPane scrollPane;
     public AnchorPane registerAnchorPane;
     public AnchorPane avatarAnchorPane;
+    public Button next;
+    private static String textButton;
 
+    @FXML
+    void initialize(){
+            next.setText(textButton);
+    }
+
+    public static void setButton(String text){
+        textButton=text;
+    }
 
     public static int registerUser(String userInput) {
         HashMap<String, CommandFieldType> fieldsOfRegisterUser = new HashMap<>();

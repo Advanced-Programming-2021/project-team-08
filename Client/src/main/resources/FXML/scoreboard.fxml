@@ -28,7 +28,7 @@
             <Font name="Harrington" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="873.0" layoutY="123.0" style="-fx-font-family: arial;" text="nickName">
+      <Label layoutX="873.0" layoutY="123.0" style="-fx-font-family: arial;" text="nickname">
          <font>
             <Font name="Harrington" size="29.0" />
          </font>
