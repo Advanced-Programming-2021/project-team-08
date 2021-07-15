@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import model.User;
 import model.enums.MessageType;
 
@@ -11,7 +12,13 @@ public abstract class ServerController {
     private HashMap<String, User> activeUsers = new HashMap<>();
 
     public static ServerController getController(String input) {
-        return null;
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        String controllerName = jsonObject.get("controller").getAsString();
+        switch (controllerName) {
+            case "register" : return RegisterController.getInstance();
+
+            default: return null;
+        }
     }
 
     public abstract String getServerMessage(String input);
@@ -31,5 +38,6 @@ public abstract class ServerController {
     protected void addUser(String token, User user) {
         activeUsers.put(token, user);
     }
+
 
 }
