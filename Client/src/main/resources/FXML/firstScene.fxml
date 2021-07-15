@@ -12,13 +12,17 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FirstSceneController">
     <children>
-        <Button layoutX="550.0" layoutY="775.0" mnemonicParsing="false" onAction="#exit" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" styleClass="registerButton" stylesheets="@../CSS/RegisterStyles.css" text="exit" textFill="WHITE">
+        <Button layoutX="550.0" layoutY="775.0" mnemonicParsing="false" onAction="#exit" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css" text="exit" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="39.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="OPEN_HAND" />
             </cursor>
+         <styleClass>
+            <String fx:value="registerButton" />
+            <String fx:value="register" />
+         </styleClass>
         </Button>
         <Button layoutX="550.0" layoutY="561.0" mnemonicParsing="false" onAction="#register" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" text="register" textFill="WHITE">
             <font>
@@ -36,17 +40,13 @@
             <String fx:value="register" />
          </styleClass>
         </Button>
-        <Button layoutX="543.0" layoutY="664.0" mnemonicParsing="false" onAction="#login" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" text="login" textFill="WHITE">
+        <Button layoutX="543.0" layoutY="664.0" mnemonicParsing="false" onAction="#login" prefHeight="82.0" prefWidth="508.0" style="-fx-background-color: null;" stylesheets="@../CSS/FirstScene.css" text="login" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="39.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="OPEN_HAND" />
             </cursor>
-         <stylesheets>
-            <URL value="@../CSS/RegisterStyles.css" />
-            <URL value="@../CSS/FirstScene.css" />
-         </stylesheets>
          <styleClass>
             <String fx:value="registerButton" />
             <String fx:value="register" />
