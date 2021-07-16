@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public abstract class ServerController {
 
-    private HashMap<String, User> activeUsers = new HashMap<>();
+    private static HashMap<String, User> activeUsers = new HashMap<>();
 
     public static ServerController getController(String input) {
         try {
@@ -25,6 +25,14 @@ public abstract class ServerController {
         }
     }
 
+    public static String checkToken(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        String controllerName = jsonObject.get("controller").getAsString();
+        if (!controllerName.equals("register") && jsonObject.get("token") == null) return serverMessage(MessageType.ERROR, "no token input", null);
+        if (!controllerName.equals("register") && getUserByToken(jsonObject.get("token").getAsString()) == null) return serverMessage(MessageType.ERROR, "invalid token", null);
+        return null;
+    }
+
     public abstract String getServerMessage(String input);
 
     protected static String serverMessage(MessageType messageType, String message, String returnObject) {
@@ -35,7 +43,8 @@ public abstract class ServerController {
         return jsonObject.toString();
     }
 
-    public User getUserByToken(String token) {
+    public static User getUserByToken(String token) {
+        if (token == null) return null;
         return activeUsers.get(token);
     }
 

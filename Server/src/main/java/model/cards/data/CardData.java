@@ -30,6 +30,8 @@ public abstract class CardData {
     @Expose
     private String effectString;
     private Image cardImage;
+    private int number = 5;
+    private boolean isBanned = false;
 
     public static CardData getCardByName(String cardName) {
         for (CardData cardData : allCardData) {
@@ -90,6 +92,14 @@ public abstract class CardData {
         this.cardId = id;
     }
 
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
+
     public Image getCardImage() {
         return cardImage;
     }
@@ -104,15 +114,24 @@ public abstract class CardData {
         while (matcher.find()) {
             Gson gson = new Gson();
             JsonObject jsonObject = JsonParser.parseString(matcher.group()).getAsJsonObject();
-            for (String effectName : jsonObject.keySet()) {
-                try {
-                    ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
-                    effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
-                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
+//            for (String effectName : jsonObject.keySet()) {
+//                try {
+//                    ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
+//                    effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
+//                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            //TODO: set effect must be completed
         }
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public void readEffectFromEffectString() {

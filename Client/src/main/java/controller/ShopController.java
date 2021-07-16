@@ -1,5 +1,7 @@
 package controller;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
@@ -10,14 +12,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.cards.data.CardData;
+import org.json.simple.JSONObject;
 import view.menus.ShopScene;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ShopController {
 
-    private static int i = 0;
     public Label buyMessageLabel;
     public TextField searchedString;
     public AnchorPane scrollPane;
@@ -28,13 +31,11 @@ public class ShopController {
     private ShopScene shopScene;
 
     public ShopController() {
-        i++;
         this.activeUser = ApplicationManger.getLoggedInUser();
         if (activeUser == null) {
             this.activeUser = new User("test", "test", "test");
             activeUser.getUserData().decreaseMoney(9900);
         }
-        System.out.println("user money is : " + activeUser.getUserData().getMoney() + "in the time : " + i);
     }
 
 
@@ -88,9 +89,17 @@ public class ShopController {
     }
 
     public void buyACard(CardData cardData) {
-        activeUser.getUserData().decreaseMoney(cardData.getPrice());
-        activeUser.getUserData().addCard(cardData.getCardId());
-        updateUserMoney();
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", cardData.getName());
+        String response = ApplicationManger.getServerResponse("shop", "buy", data);
+        JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+        String type = jsonObject.get("type").getAsString();
+        if (type.equals("SUCCESSFUL")) {
+            activeUser.getUserData().decreaseMoney(cardData.getPrice());
+            activeUser.getUserData().addCard(cardData.getCardId());
+            updateUserMoney();
+        }
+        setLabelMessage(jsonObject.get("message").getAsString(), type.equals("SUCCESSFUL"));
     }
 
     public Label getMessageLabel() {

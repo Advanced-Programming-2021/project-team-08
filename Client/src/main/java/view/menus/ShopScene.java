@@ -16,6 +16,7 @@ import model.cards.data.CardData;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -125,9 +126,7 @@ public class ShopScene extends Scene {
             cardImage.toBack();
         });
         cardImage.setOnMouseClicked(event -> {
-            if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
-                notEnoughMoneyAction();
-            } else buyCard(cardData);
+            buyCard(cardData);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -154,10 +153,8 @@ public class ShopScene extends Scene {
     private void buyCard(CardData cardData) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " + " ?", ButtonType.YES, ButtonType.NO);
         alert.setContentText("Do you really want to buy " + cardData.getCardName() + "?");
-        ImageView imageView = new ImageView();
-        imageView.setImage(cardData.getCardImage());
-        alert.setGraphic(new ImageView());
         alert.showAndWait();
+
         if (alert.getResult() == ButtonType.YES) {
             shopController.buyACard(cardData);
             message.setText("you bought the card :)");

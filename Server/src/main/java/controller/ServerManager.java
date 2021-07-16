@@ -18,6 +18,7 @@ import java.net.SocketException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ServerManager {
     ServerSocket serverSocket;
@@ -59,7 +60,11 @@ public class ServerManager {
                         new TypeToken<UserData>() {
                         }.getType())));
             }
+
+        }else {
+            System.out.println("file list is null");
         }
+
         User.setAllUser(allOfUsers);
     }
 }
@@ -81,14 +86,17 @@ class ServerThread extends Thread {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             while (true) {
                 String input = dataInputStream.readUTF();
-                if (input.equals("")) break;
-                ServerController serverController = ServerController.getController(input);
                 String result;
-                if (serverController == null) {
-                    result = ServerController.serverMessage(MessageType.ERROR,"invalid client message", null);
-                }else {
-                    result = serverController.getServerMessage(input);
+                if (input.equals("")) break;
+                if ((result = ServerController.checkToken(input)) == null) {
+                    ServerController serverController = ServerController.getController(input);
+                    if (serverController == null) {
+                        result = ServerController.serverMessage(MessageType.ERROR,"invalid client message", null);
+                    }else {
+                        result = serverController.getServerMessage(input);
+                    }
                 }
+                System.out.println(result);
                 dataOutputStream.writeUTF(result);
                 dataOutputStream.flush();
             }

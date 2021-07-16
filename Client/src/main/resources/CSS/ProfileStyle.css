@@ -68,9 +68,9 @@
 }
 
 .specs-label {
-    -fx-pref-width: 300;
+    -fx-pref-width: 350;
     -fx-pref-height: 80;
-    -fx-font: 30px Arial;
+    -fx-font: 25px Arial;
 
 }
 

@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.PerspectiveCamera;
@@ -26,6 +27,7 @@ public class ApplicationManger extends Application {
     private static Socket socket;
     private static DataInputStream dataInputStream;
     private static DataOutputStream dataOutputStream;
+    private static String token;
 
     public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
@@ -162,6 +164,9 @@ public class ApplicationManger extends Application {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("controller", controller);
         jsonObject.addProperty("method", method);
+        if (!controller.equals("register")) {
+            jsonObject.addProperty("token", token);
+        }
         if (data != null) {
             for (String key : data.keySet()) {
                 jsonObject.addProperty(key, data.get(key));
@@ -171,7 +176,14 @@ public class ApplicationManger extends Application {
         try {
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
-            return dataInputStream.readUTF();
+            String serverMessage = dataInputStream.readUTF();
+            if (controller.equals("register") && method.equals("login")) {
+                JsonObject jsonObject1 = JsonParser.parseString(serverMessage).getAsJsonObject();
+                if (jsonObject1.get("type").toString().equals("SUCCESSFUL")) {
+                    token = jsonObject1.get("token").getAsString();
+                }
+            }
+            return serverMessage;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -137,6 +137,10 @@ public class RegisterController {
 
     public void nextOfLogin(ActionEvent actionEvent) {
         try {
+            HashMap<String, String> data = new HashMap<>();
+            data.put("username", usernameOfLogin.getText());
+            data.put("password", passwordOfLogin.getText());
+            System.out.println(ApplicationManger.getServerResponse("register", "login", data));
             if (!User.doesUsernameExists(usernameOfLogin.getText())) {
                 errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
                 errorOfLogin.setTextFill(Color.RED);
