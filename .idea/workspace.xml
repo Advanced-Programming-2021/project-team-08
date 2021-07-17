@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="74121f4e-9c61-4f99-9aa3-206f11f15404" name="Default Changelist" comment="- fix some other errors" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="FxmlFile" />
+        <option value="CSS File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1r7ggLzJUshWOhj2ETyd6NO6eif" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/controller" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Menus" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\University\Current\AP\Project\yu-gi-oh\src\main\resources\FXML" />
+      <recent name="E:\University\Current\AP\Project\yu-gi-oh\src\main\java\view\fxml" />
+      <recent name="E:\University\Current\AP\Project\yu-gi-oh\src\main\java\view" />
+      <recent name="E:\University\Current\AP\Project\yu-gi-oh\src\main\java\controller" />
+      <recent name="E:\University\Current\AP\Project\yu-gi-oh\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="model" />
+      <recent name="Models" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.effectSystem.effects" />
+      <recent name="Controllers" />
+      <recent name="Model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="yu-gi-oh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in yu-gi-oh" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="yu-gi-oh" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EffectsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="yu-gi-oh" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="EffectsTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GamePlayTest (۱)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="yu-gi-oh" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="uniqueId" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:GamePlayTest]" />
+      </uniqueIds>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GamePlayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="yu-gi-oh" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GamePlayTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.All in yu-gi-oh" />
+        <item itemvalue="JUnit.GamePlayTest" />
+        <item itemvalue="JUnit.GamePlayTest (۱)" />
+        <item itemvalue="JUnit.EffectsTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74121f4e-9c61-4f99-9aa3-206f11f15404" name="Default Changelist" comment="" />
+      <created>1618332654726</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618332654726</updated>
+      <workItem from="1618332658985" duration="60000" />
+      <workItem from="1618339382347" duration="1502000" />
+      <workItem from="1618574312446" duration="643000" />
+      <workItem from="1618584531623" duration="30000" />
+      <workItem from="1618621033499" duration="15000" />
+      <workItem from="1618621097156" duration="1914000" />
+      <workItem from="1618687589877" duration="2952000" />
+      <workItem from="1618692788143" duration="5862000" />
+      <workItem from="1618836452702" duration="663000" />
+      <workItem from="1618854579170" duration="1707000" />
+      <workItem from="1618857042273" duration="1122000" />
+      <workItem from="1618931411263" duration="1281000" />
+      <workItem from="1619094878282" duration="654000" />
+      <workItem from="1619096180724" duration="344000" />
+      <workItem from="1619254013886" duration="2882000" />
+      <workItem from="1619281404751" duration="5298000" />
+      <workItem from="1619554313174" duration="1229000" />
+      <workItem from="1620331074238" duration="1342000" />
+      <workItem from="1620390650535" duration="1385000" />
+      <workItem from="1620902398456" duration="425000" />
+      <workItem from="1620984352229" duration="89000" />
+      <workItem from="1620985962888" duration="33000" />
+      <workItem from="1621057492704" duration="2029000" />
+      <workItem from="1621062205968" duration="1542000" />
+      <workItem from="1621063785137" duration="1918000" />
+      <workItem from="1621259841824" duration="22780000" />
+      <workItem from="1621408645508" duration="13404000" />
+      <workItem from="1621448216715" duration="2167000" />
+      <workItem from="1621451559786" duration="620000" />
+      <workItem from="1621456597170" duration="192000" />
+      <workItem from="1621485761674" duration="85000" />
+      <workItem from="1621516921874" duration="23000" />
+      <workItem from="1621523774463" duration="32000" />
+      <workItem from="1622294862869" duration="10294000" />
+      <workItem from="1622382040445" duration="596000" />
+      <workItem from="1622397394959" duration="865000" />
+      <workItem from="1622533125170" duration="2712000" />
+      <workItem from="1622747143397" duration="600000" />
+      <workItem from="1622747809021" duration="976000" />
+      <workItem from="1622819310743" duration="830000" />
+      <workItem from="1622992638288" duration="3297000" />
+      <workItem from="1623094028584" duration="150000" />
+      <workItem from="1623151523041" duration="123000" />
+      <workItem from="1623330580477" duration="8474000" />
+      <workItem from="1623399884793" duration="15000" />
+      <workItem from="1623914432452" duration="27347000" />
+      <workItem from="1624006787834" duration="1231000" />
+      <workItem from="1624019449131" duration="6742000" />
+      <workItem from="1624079748164" duration="859000" />
+      <workItem from="1624267436125" duration="8373000" />
+      <workItem from="1624284467279" duration="4549000" />
+      <workItem from="1624291894524" duration="1570000" />
+      <workItem from="1624296568904" duration="4856000" />
+      <workItem from="1624354819102" duration="20865000" />
+      <workItem from="1624430668617" duration="29203000" />
+      <workItem from="1624516227792" duration="7177000" />
+      <workItem from="1624541493312" duration="618000" />
+      <workItem from="1624547562428" duration="68252000" />
+      <workItem from="1624712378090" duration="2021000" />
+      <workItem from="1624717449957" duration="3670000" />
+      <workItem from="1624722084835" duration="7827000" />
+      <workItem from="1624736072895" duration="2429000" />
+      <workItem from="1624738989559" duration="475000" />
+      <workItem from="1624893517487" duration="1240000" />
+      <workItem from="1625125054630" duration="2226000" />
+      <workItem from="1625127312307" duration="1318000" />
+      <workItem from="1625132688684" duration="5128000" />
+      <workItem from="1625214266932" duration="3093000" />
+      <workItem from="1625226796666" duration="8953000" />
+      <workItem from="1625305466009" duration="683000" />
+      <workItem from="1625320467586" duration="977000" />
+      <workItem from="1625332694603" duration="1799000" />
+      <workItem from="1625385915503" duration="10042000" />
+      <workItem from="1625414778920" duration="12687000" />
+      <workItem from="1625472871520" duration="22762000" />
+      <workItem from="1625513292040" duration="4336000" />
+      <workItem from="1625517779151" duration="1194000" />
+      <workItem from="1625533268319" duration="3099000" />
+      <workItem from="1625564014738" duration="1929000" />
+      <workItem from="1625601262693" duration="10000" />
+      <workItem from="1625682890105" duration="13758000" />
+      <workItem from="1625734397787" duration="19892000" />
+      <workItem from="1625839423842" duration="8833000" />
+      <workItem from="1625917319606" duration="21043000" />
+    </task>
+    <task id="LOCAL‎۰۰۰۰۱" summary="add Command class and command parser">
+      <created>1618623022422</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۱" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۱" />
+      <updated>1618623022422</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۲" summary="- complete Command parser&#10;- add UnitTest for CommandParser&#10;- add Exception">
+      <created>1618690412717</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۲" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۲" />
+      <updated>1618690412717</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۳" summary="- fix some other errors">
+      <created>1619096513864</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۳" />
+      <updated>1619096513864</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add Command class and command parser" />
+    <MESSAGE value="- complete Command parser&#10;- add UnitTest for CommandParser&#10;- add Exception" />
+    <MESSAGE value="- fix some other errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix some other errors" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/yu_gi_oh$EffectsTest.ic" NAME="EffectsTest Coverage Results" MODIFIED="1624727628958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/yu_gi_oh$All_in_yu_gi_oh.ic" NAME="All in yu-gi-oh Coverage Results" MODIFIED="1624732915089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/yu_gi_oh$GamePlayTest___.ic" NAME="GamePlayTest (۱) Coverage Results" MODIFIED="1624731582032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/yu_gi_oh$GamePlayTest.ic" NAME="GamePlayTest Coverage Results" MODIFIED="1624732287653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

@@ -102,10 +102,6 @@ public class ApplicationManger extends Application {
                 currentScene = new ImportScene();
                 currentScene.start();
                 break;
-            case GAMEPLAY_SCENE:
-                currentScene = new GamePlayScene();
-                currentScene.start();
-                break;
         }
     }
 
