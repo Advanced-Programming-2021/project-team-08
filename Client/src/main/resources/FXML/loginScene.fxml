@@ -2,14 +2,16 @@
 
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="registerBackground" stylesheets="@../CSS/RegisterStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
     <children>
         <Label layoutX="482.0" layoutY="342.0" prefHeight="79.0" prefWidth="176.0" text="username" textFill="WHITE">
             <font>
@@ -33,18 +35,21 @@
             <String fx:value="registerFont" />
          </styleClass>
         </TextField>
-        <TextField fx:id="passwordOfLogin" layoutX="698.0" layoutY="463.0" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
-            <cursor>
-                <Cursor fx:constant="TEXT" />
-            </cursor>
-            <font>
-                <Font name="Harrington" size="31.0" />
-            </font>
+      <PasswordField fx:id="passwordOfLogin" layoutX="698.0" layoutY="463.0" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" stylesheets="@../CSS/RegisterStyles.css">
          <styleClass>
             <String fx:value="registerButton" />
             <String fx:value="registerFont" />
          </styleClass>
-        </TextField>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </PasswordField>
         <Button layoutX="78.0" layoutY="764.0" mnemonicParsing="false" onAction="#backToFirstScene" prefHeight="79.0" prefWidth="504.0" style="-fx-background-color: null;" text="back" textFill="WHITE">
             <font>
                 <Font name="Harrington" size="36.0" />

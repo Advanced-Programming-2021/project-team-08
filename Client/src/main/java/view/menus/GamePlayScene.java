@@ -265,7 +265,7 @@ public class GamePlayScene {
         thisCard.setToX(playerBoard.getHand().getImageView().getLayoutX() + pre.size() * 42 - 73);
         thisCard.setToY(playerBoard.getHand().getImageView().getLayoutY());
 
-        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, -45, Rotate.X_AXIS);
+        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
 
         FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
 
@@ -375,9 +375,6 @@ public class GamePlayScene {
     }
 
     private void changePlayerLP(int playerNumber, int amount) {
-        System.out.println(playerNumber + "," + player1LP_T.getText());
-        System.out.println(playerNumber + "," + player2LP_T.getText());
-
         Label text;
         ImageView bar;
         if (playerNumber == 1) {
@@ -388,7 +385,6 @@ public class GamePlayScene {
             bar = player2LP_bar;
         }
 
-        System.out.println(playerNumber + ",,," + text.getText());
         int current = Integer.parseInt(text.getText().substring(8));
         text.setText("LP      " + (current + amount));
         double ratio = (double) (current + amount) / 8000;

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.CardView"
-            fx:id="anchorPane"
-            prefHeight="340.0" prefWidth="800.0">
 
+<AnchorPane fx:id="anchorPane" prefHeight="360.0" prefWidth="260.0" style="-fx-background-color: null;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CardView">
+   <children>
+      <ImageView fx:id="cardImage" fitHeight="152.0" fitWidth="115.0" layoutX="73.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="description" alignment="TOP_CENTER" layoutX="16.0" layoutY="167.0" prefHeight="183.0" prefWidth="228.0" style="-fx-background-color: blue;" textAlignment="CENTER" />
+   </children>
 </AnchorPane>

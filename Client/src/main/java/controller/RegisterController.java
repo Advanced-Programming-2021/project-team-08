@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,7 +39,7 @@ public class RegisterController {
     public TextField passwordOfSignup;
     public TextField nicknameOfSignup;
     public TextField usernameOfLogin;
-    public TextField passwordOfLogin;
+    public PasswordField passwordOfLogin;
     public Label errorOfSignup;
     public Label successOfSignup;
     public Label errorOfLogin;

@@ -12,6 +12,7 @@ import model.cards.data.CardData;
 import model.enums.CardStatus;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
+import view.CardView;
 
 public class GraphicCard {
     private static Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
@@ -184,6 +185,8 @@ public class GraphicCard {
     }
 
     public void onMouseEnter() {
+        CardView.getInstance().showCard(data);
+
         shape.getStyleClass().add("onHoverCard");
         switch (slot.getType()) {
             case HAND:

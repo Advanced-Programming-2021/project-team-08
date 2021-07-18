@@ -1,28 +1,30 @@
 package view;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.cards.data.CardData;
 
-import java.io.IOException;
-import java.net.URL;
-
-
 public class CardView {
     public AnchorPane anchorPane;
+    public ImageView cardImage;
+    public Label description;
 
-    public CardView() {
-        String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
-        FXMLLoader loader = null;
-        try {
-            loader = new FXMLLoader(new URL(rootPath + "firstScene.fxml"));
-            anchorPane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    private static CardView instance;
+
+    public static CardView getInstance() {
+        return instance;
+    }
+
+    public void initialize(){
+        instance = this;
+    }
+
+    public void showCard(CardData cardData){
+        cardImage.setImage(cardData.getCardImage());
+        description.setText(cardData.toString());
     }
 
     public void init(CardData cardData, double height, double width) {

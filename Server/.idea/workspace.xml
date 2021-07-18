@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/asset/gameplay/blu_light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/asset/gameplay/blu_light_g.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/asset/gameplay/lens.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/exportedCards/Yami.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/exportedCards/Yami.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/importCards/Test.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/importCards/Test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/Views/cardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/cardView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/CardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/CardView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/cardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/cardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/loginScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/loginScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/users/Abolfazl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/users/Abolfazl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,19 +44,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -92,6 +71,7 @@
       <updated>1626531714082</updated>
       <workItem from="1626531716280" duration="457000" />
       <workItem from="1626532199030" duration="3011000" />
+      <workItem from="1626591846291" duration="598000" />
     </task>
     <servers />
   </component>
