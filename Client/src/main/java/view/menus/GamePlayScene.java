@@ -374,6 +374,10 @@ public class GamePlayScene {
         }
     }
 
+    public void applyDirectAttackResult(AttackResult result, int playerNumber){
+        changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
+    }
+
     private void changePlayerLP(int playerNumber, int amount) {
         Label text;
         ImageView bar;

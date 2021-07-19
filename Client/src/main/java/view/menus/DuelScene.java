@@ -61,10 +61,7 @@ public class DuelScene extends Scene {
     }
 
     public void multiPlayMenu(ActionEvent actionEvent) {
-        duelPane.setLayoutY(450);
-        duelPane.setVisible(true);
-        isSinglePlayer = false;
-        playerName.setVisible(true);
+        ApplicationManger.goToScene1(SceneName.LOBBY_SCENE, false);
     }
 
     public void back(ActionEvent actionEvent) {
