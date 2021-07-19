@@ -1,6 +1,10 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.Command;
+import model.UserData;
 import model.cards.data.CardData;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
@@ -51,12 +56,12 @@ public class RegisterController {
     private static String textButton;
 
     @FXML
-    void initialize(){
+    void initialize() {
         next.setText(textButton);
     }
 
-    public static void setButton(String text){
-        textButton=text;
+    public static void setButton(String text) {
+        textButton = text;
     }
 
     public static int registerUser(String userInput) {
@@ -111,69 +116,119 @@ public class RegisterController {
         ApplicationManger.goToScene1(SceneName.FIRST_SCENE, false);
     }
 
-    public void nextOfSignup(ActionEvent actionEvent) {
-        try {
-            if (User.doesUsernameExists(usernameOfSignup.getText())) {
-                errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
+    public void nextOfSignup(ActionEvent actionEvent) throws Exception {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("username", usernameOfLogin.getText());
+        data.put("nickname", usernameOfLogin.getText());
+        data.put("password", passwordOfLogin.getText());
+        String result = ApplicationManger.getServerResponse("register", "login", data);
+        JsonElement jsonElement = JsonParser.parseString(result);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String message = jsonObject.get("message").getAsString();
+        if (message.startsWith("user with username")){
+            errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
                 errorOfSignup.setTextFill(Color.RED);
-            } else if (User.doesNicknameExists(nicknameOfSignup.getText())) {
-                errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
+        }
+        else if (message.startsWith("user with nickname")){
+            errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
                 errorOfSignup.setTextFill(Color.RED);
-            } else {
-                User user = new User(usernameOfSignup.getText(), nicknameOfSignup.getText(), passwordOfSignup.getText());
-                successOfSignup.setText("user created successfully!");
-                registerAnchorPane.setLayoutX(1600);
-                avatarAnchorPane.setLayoutX(0);
-                setCards(user);
-                successOfSignup.setTextFill(Color.GREEN);
-                FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
-                userFile.write(new Gson().toJson(user.getUserData()));
-                userFile.close();
-            }
-        } catch (IOException e) {
-            errorOfSignup.setText("Invalid command");
+        }
+        else if (message.startsWith("you")){
+            successOfSignup.setText("user created successfully!");
+            registerAnchorPane.setLayoutX(1600);
+            avatarAnchorPane.setLayoutX(0);
+            User user=new User(new Gson().fromJson(jsonObject.get("returnObject").getAsString(),
+                    new TypeToken<UserData>() {
+                    }.getType()));
+            setCards(user);
+            successOfSignup.setTextFill(Color.GREEN);
+            FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
+            userFile.write(new Gson().toJson(user.getUserData()));
+            userFile.close();
+        }
+        else if (message.startsWith("some")){
+            errorOfSignup.setText("some error in creating account");
             errorOfSignup.setTextFill(Color.RED);
         }
+//        try {
+//            if (User.doesUsernameExists(usernameOfSignup.getText())) {
+//                errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
+//                errorOfSignup.setTextFill(Color.RED);
+//            } else if (User.doesNicknameExists(nicknameOfSignup.getText())) {
+//                errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
+//                errorOfSignup.setTextFill(Color.RED);
+//            } else {
+//                User user = new User(usernameOfSignup.getText(), nicknameOfSignup.getText(), passwordOfSignup.getText());
+//                successOfSignup.setText("user created successfully!");
+//                registerAnchorPane.setLayoutX(1600);
+//                avatarAnchorPane.setLayoutX(0);
+//                setCards(user);
+//                successOfSignup.setTextFill(Color.GREEN);
+//                FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
+//                userFile.write(new Gson().toJson(user.getUserData()));
+//                userFile.close();
+//            }
+//        } catch (IOException e) {
+//            errorOfSignup.setText("Invalid command");
+//            errorOfSignup.setTextFill(Color.RED);
+//        }
     }
 
     public void nextOfLogin(ActionEvent actionEvent) {
-        try {
-            HashMap<String, String> data = new HashMap<>();
-            data.put("username", usernameOfLogin.getText());
-            data.put("password", passwordOfLogin.getText());
-            System.out.println(ApplicationManger.getServerResponse("register", "login", data));
-            if (!User.doesUsernameExists(usernameOfLogin.getText())) {
-                errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
-                errorOfLogin.setTextFill(Color.RED);
-            } else {
-                if (User.loginUser(usernameOfLogin.getText(), passwordOfLogin.getText())) {
-                    ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
-//                    if (!isTest) ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
-                } else {
-                    errorOfLogin.setText("username and password didn't match");
-                    errorOfLogin.setTextFill(Color.RED);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorOfLogin.setText("Invalid command");
+        HashMap<String, String> data = new HashMap<>();
+        data.put("username", usernameOfLogin.getText());
+        data.put("password", passwordOfLogin.getText());
+        String result = ApplicationManger.getServerResponse("register", "login", data);
+        JsonElement jsonElement = JsonParser.parseString(result);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String message = jsonObject.get("message").getAsString();
+        if (message.startsWith("input")) {
+            errorOfLogin.setText("username and password didn't match");
             errorOfLogin.setTextFill(Color.RED);
+        } else if (message.startsWith("there")) {
+            errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
+            errorOfLogin.setTextFill(Color.RED);
+        } else  {
+            User user=new User(new Gson().fromJson(jsonObject.get("returnObject").getAsString(),
+                    new TypeToken<UserData>() {
+                    }.getType()));
+            ApplicationManger.setLoggedInUser(user);
+            ApplicationManger.setToken(message);
+            ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
         }
+//        try {
+//            if (!User.doesUsernameExists(usernameOfLogin.getText())) {
+//                errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
+//                errorOfLogin.setTextFill(Color.RED);
+//            } else {
+//                if (User.loginUser(usernameOfLogin.getText(), passwordOfLogin.getText())) {
+//                    ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
+////                    if (!isTest) ApplicationManger.goToScene(SceneName.MAIN_MENU, false);
+//                } else {
+//                    errorOfLogin.setText("username and password didn't match");
+//                    errorOfLogin.setTextFill(Color.RED);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            errorOfLogin.setText("Invalid command");
+//            errorOfLogin.setTextFill(Color.RED);
+//        }
     }
 
     public void setCards(User user) throws MalformedURLException {
         scrollPane.setPrefHeight((double) (140 / 5) * 300 + 180);
 
-        File[] files=new File("src/main/resources/asset/busts").listFiles();
-        assert  files != null;
+        File[] files = new File("src/main/resources/asset/busts").listFiles();
+        assert files != null;
         for (int i = 0; i < 130; i++) {
-            addCardImage(files[i].getName() , i,user);
+            addCardImage(files[i].getName(), i, user);
         }
     }
 
-    private void addCardImage(String imageName,int index,User user) {
-        String path="src/main/resources/asset/busts/" + imageName;
-        File file= new File(path);
+    private void addCardImage(String imageName, int index, User user) {
+        String path = "src/main/resources/asset/busts/" + imageName;
+        File file = new File(path);
         Image image = new Image(file.toURI().toString());
         ImageView cardImage = new ImageView(image);
         scrollPane.getChildren().add(index, cardImage);
@@ -195,7 +250,7 @@ public class RegisterController {
         });
         cardImage.setOnMouseClicked(event -> {
             user.getUserData().setProfileImageUrl(file.toURI().toString());
-            ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
+            ApplicationManger.goToScene1(SceneName.FIRST_SCENE, false);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override

@@ -155,6 +155,10 @@ public class ApplicationManger extends Application {
         }
     }
 
+    public static void setToken(String token) {
+        ApplicationManger.token = token;
+    }
+
     public static String getServerResponse(String controller, String method, HashMap<String, String> data) {
         String message;
         JsonObject jsonObject = new JsonObject();
