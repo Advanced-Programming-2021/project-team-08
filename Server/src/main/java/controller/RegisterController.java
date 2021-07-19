@@ -50,7 +50,7 @@ public class RegisterController extends ServerController {
             }else {
                 String token = makeToken();
                 ServerController.addUser(token, user);
-                return serverMessage(MessageType.SUCCESSFUL, "you successfully got in", token);
+                return serverMessage(MessageType.SUCCESSFUL, token, new Gson().toJson(user.getUserData()));
             }
         } catch (Exception e) {
             return serverMessage(MessageType.ERROR, "there is no username with this username", null);

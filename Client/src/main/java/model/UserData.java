@@ -116,6 +116,11 @@ public class UserData {
         save();
     }
 
+    public void removeCard(int id) {
+        myCardsIds.remove(id);
+        save();
+    }
+
     public ArrayList<Integer> getMyCardsIds() {
         return myCardsIds;
     }

@@ -169,6 +169,7 @@ public class ApplicationManger extends Application {
             }
         }
         message = jsonObject.toString();
+        System.out.println(message);
         try {
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
@@ -176,7 +177,8 @@ public class ApplicationManger extends Application {
             if (controller.equals("register") && method.equals("login")) {
                 JsonObject jsonObject1 = JsonParser.parseString(serverMessage).getAsJsonObject();
                 if (jsonObject1.get("type").toString().equals("SUCCESSFUL")) {
-                    token = jsonObject1.get("token").getAsString();
+                    token = jsonObject1.get("message").getAsString();
+                    System.out.println(token);
                 }
             }
             return serverMessage;

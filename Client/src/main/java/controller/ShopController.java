@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.cards.data.CardData;
-import org.json.simple.JSONObject;
 import view.menus.ShopScene;
 
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class ShopController {
     public ImageView menuName;
     private User activeUser;
     private ShopScene shopScene;
+    private boolean isBuyMenu;
 
     public ShopController() {
         this.activeUser = ApplicationManger.getLoggedInUser();
@@ -42,7 +42,6 @@ public class ShopController {
     @FXML
     void initialize() {
         updateUserMoney();
-        setSearchedImage(null);
         menuName.setViewport(new Rectangle2D(0, 745, 960, 133));
     }
 
@@ -57,7 +56,7 @@ public class ShopController {
     }
 
 
-    public void setSearchedImage(KeyEvent actionEvent) {
+    public void setSearchedBuyImage() {
         if (shopScene == null) shopScene = new ShopScene(this, activeUser);
         ArrayList<CardData> showingCard = new ArrayList<>();
         for (CardData cardData : CardData.getAllCardData()) {
@@ -67,7 +66,24 @@ public class ShopController {
         }
         System.out.println("the size is : " + showingCard.size());
         scrollPane.getChildren().clear();
-        shopScene.setCards(scrollPane, showingCard);
+        shopScene.setCards(scrollPane, showingCard, isBuyMenu);
+    }
+
+    public void setSearchedSellImage() {
+        if (shopScene == null) shopScene = new ShopScene(this, activeUser);
+        ArrayList<CardData> showingCard = new ArrayList<>();
+        for (Integer cardId : activeUser.getUserData().getMyCardsIds()) {
+            CardData cardData = CardData.getCardById(cardId);
+            if (cardData == null) {
+                System.out.println("card is null");
+                continue;
+            }
+            if (cardData.getName().toLowerCase(Locale.ROOT).startsWith(searchedString.getText().toLowerCase(Locale.ROOT))) {
+                showingCard.add(cardData);
+            }
+        }
+        scrollPane.getChildren().clear();
+        shopScene.setCards(scrollPane, showingCard, isBuyMenu);
     }
 
     public void updateUserMoney() {
@@ -108,5 +124,33 @@ public class ShopController {
 
     public void back(MouseEvent mouseEvent) {
         ApplicationManger.goToScene("mainScene.fxml");
+    }
+
+    public void buyMenu(MouseEvent mouseEvent) {
+        isBuyMenu = true;
+        setSearchedBuyImage();
+    }
+
+    public void sellMenu(MouseEvent mouseEvent) {
+        isBuyMenu = false;
+        setSearchedSellImage();
+    }
+
+    public boolean isBuyMenu() {
+        return isBuyMenu;
+    }
+
+    public void sellACard(CardData cardData) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", cardData.getName());
+        String response = ApplicationManger.getServerResponse("shop", "sell", data);
+        JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+        String type = jsonObject.get("type").getAsString();
+        if (type.equals("SUCCESSFUL")) {
+            activeUser.getUserData().addMoney(cardData.getPrice());
+            activeUser.getUserData().addCard(cardData.getCardId());
+            updateUserMoney();
+        }
+        setLabelMessage(jsonObject.get("message").getAsString(), type.equals("SUCCESSFUL"));
     }
 }

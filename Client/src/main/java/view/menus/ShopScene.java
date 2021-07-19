@@ -95,17 +95,17 @@ public class ShopScene extends Scene {
         }
     }
 
-    public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards) {
+    public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards, boolean isBuying) {
         int size = cards.size();
         if (size == 0) anchorPane.setPrefHeight(600);
         else if (size % 5 == 0) anchorPane.setPrefHeight((double) (cards.size() / 5) * 445 + 180);
         else anchorPane.setPrefHeight((double) (cards.size() / 5 + 1) * 445 + 180);
         for (int i = 0; i < size; i++) {
-            addCardImage(anchorPane, cards.get(i), i);
+            addCardImage(anchorPane, cards.get(i), i, isBuying);
         }
     }
 
-    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index) {
+    private void addCardImage(AnchorPane anchorPane, CardData cardData, int index, boolean isBuying) {
         ImageView cardImage = new ImageView(cardData.getCardImage());
         anchorPane.getChildren().add(index, cardImage);
         cardImage.setFitHeight(425);
@@ -126,7 +126,16 @@ public class ShopScene extends Scene {
             cardImage.toBack();
         });
         cardImage.setOnMouseClicked(event -> {
-            buyCard(cardData);
+            if (isBuying) {
+                if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
+                    notEnoughMoneyAction();
+                }else {
+                    buyCard(cardData);
+                }
+            } else {
+                sellCard(cardData);
+            }
+
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -158,6 +167,17 @@ public class ShopScene extends Scene {
         if (alert.getResult() == ButtonType.YES) {
             shopController.buyACard(cardData);
             message.setText("you bought the card :)");
+        }
+    }
+
+    private void sellCard(CardData cardData) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " + " ?", ButtonType.YES, ButtonType.NO);
+        alert.setContentText("Do you really want to sell " + cardData.getCardName() + "?");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            shopController.sellACard(cardData);
+            message.setText("you sold the card :)");
         }
     }
 

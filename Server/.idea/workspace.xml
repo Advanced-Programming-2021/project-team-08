@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="some server edit">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ProfileScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ProfileScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/CSS/ProfileStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/CSS/ProfileStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/profileScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/profileScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/CardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/CardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ShopScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ShopScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/CSS/MenuStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/CSS/MenuStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/shopScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/shopScene.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ServerManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +122,7 @@
       <workItem from="1626532199030" duration="3011000" />
       <workItem from="1626591846291" duration="598000" />
       <workItem from="1626672634512" duration="7317000" />
-      <workItem from="1626696668766" duration="4007000" />
+      <workItem from="1626696668766" duration="4637000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

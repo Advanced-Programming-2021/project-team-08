@@ -22,14 +22,14 @@
             </children>
         </Pane>
         <Pane layoutX="550.0" layoutY="822.0" prefHeight="80.0" prefWidth="500.0" styleClass="shopMessageBox"/>
-        <ScrollPane id="scrollBar" hbarPolicy="NEVER" layoutX="80.0" layoutY="190.0" prefHeight="600.0"
+        <ScrollPane id="scrollBar" hbarPolicy="NEVER" layoutX="20.0" layoutY="190.0" prefHeight="600.0"
                     prefWidth="1440.0" styleClass="scroll-pane">
             <content>
                 <AnchorPane fx:id="scrollPane" minHeight="200.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1440"
                             styleClass="scroll-pane"/>
             </content>
         </ScrollPane>
-        <TextField fx:id="searchedString" layoutX="250.0" layoutY="130.0" onKeyReleased="#setSearchedImage"
+        <TextField fx:id="searchedString" layoutX="250.0" layoutY="130.0" onKeyReleased="#setSearchedBuyImage"
                    prefHeight="30.0" prefWidth="250.0" styleClass="searchTextBar">
             <font>
                 <Font size="20.0"/>
@@ -47,6 +47,12 @@
 
         <Button mnemonicParsing="false" text="Back" layoutX="20" layoutY="800" prefWidth="200" prefHeight="70"
                 styleClass="back" onMouseClicked="#back"/>
+
+        <Button mnemonicParsing="false" text="buy" layoutX="1430" layoutY="250" prefWidth="200" prefHeight="80"
+                styleClass="shop-buy-sell" onMouseClicked="#buyMenu"/>
+
+        <Button mnemonicParsing="false" text="sell" layoutX="1430" layoutY="550" prefWidth="200" prefHeight="80"
+                styleClass="shop-buy-sell" onMouseClicked="#sellMenu" />
 
     </children>
 </AnchorPane>

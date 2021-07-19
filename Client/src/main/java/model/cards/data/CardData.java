@@ -46,6 +46,13 @@ public abstract class CardData {
         return allCardData;
     }
 
+    public static CardData getCardById(int id) {
+        for (CardData cardData : allCardData) {
+            if (cardData.getCardId() == id) return cardData;
+        }
+        return null;
+    }
+
     public String getCardName() {
         return cardName;
     }

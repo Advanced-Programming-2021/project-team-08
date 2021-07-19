@@ -66,3 +66,15 @@
     -fx-cursor: hand;
 }
 
+.shop-buy-sell {
+    -fx-rotate: -90;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+    -fx-font: 30px arial;
+}
+
+.shop-buy-sell:hover {
+    -fx-background-color: rgb(22, 15, 146);
+    -fx-cursor: hand;
+}
