@@ -47,7 +47,7 @@
 .message-label {
     -fx-pref-height: 50;
     -fx-pref-width: 370;
-    -fx-font: 28px Arial;
+    -fx-font: 24px Arial;
 }
 
 .change-button {
@@ -68,7 +68,7 @@
 }
 
 .specs-label {
-    -fx-pref-width: 350;
+    -fx-pref-width: 320;
     -fx-pref-height: 80;
     -fx-font: 25px Arial;
 

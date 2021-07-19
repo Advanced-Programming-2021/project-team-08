@@ -6,19 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@../CSS/ProfileStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.ProfileScene">
     <children>
-        <Button layoutX="1000.0" layoutY="413.0" mnemonicParsing="false" onAction="#setNicknameChangeMenu" styleClass="menu-item" text="Change Nickname" />
-        <Button layoutX="1000" layoutY="150" mnemonicParsing="false" onAction="#setPasswordChangeMenu" styleClass="menu-item" text="Change Password" />
+        <Button layoutX="1000.0" layoutY="300.0" mnemonicParsing="false" onAction="#setNicknameChangeMenu" styleClass="menu-item" text="Change Nickname" />
+        <Button layoutX="1000" layoutY="100" mnemonicParsing="false" onAction="#setPasswordChangeMenu" styleClass="menu-item" text="Change Password" />
 
 
-        <Pane fx:id="changePasswordPane" layoutX="550" layoutY="150" prefHeight="300.0" prefWidth="400.0" styleClass="change-menu" visible="false">
+        <Pane fx:id="changePasswordPane" layoutX="550" layoutY="100" prefHeight="300.0" prefWidth="400.0" styleClass="change-menu" visible="false">
             <children>
                 <Label layoutX="20" styleClass="change-label" text="old password" />
-                <TextField fx:id="oldPassField" layoutX="20" layoutY="50" styleClass="text-field" />
+                <PasswordField fx:id="oldPassField" layoutX="20" layoutY="50" styleClass="text-field" />
 
                 <Label layoutX="20" layoutY="125" styleClass="change-label" text="new password" />
-                <TextField fx:id="newPassField" layoutX="20" layoutY="175" styleClass="text-field" />
+                <PasswordField fx:id="newPassField" layoutX="20" layoutY="175" styleClass="text-field" />
                 <Button layoutX="270" layoutY="175" mnemonicParsing="false" onAction="#changePassword" styleClass="change-button" text="DONE" />
 
 
@@ -28,7 +29,7 @@
         </Pane>
 
 
-        <Pane fx:id="changeNicknamePane" layoutX="550" layoutY="500" prefHeight="200.0" prefWidth="400.0" styleClass="change-menu" visible="false">
+        <Pane fx:id="changeNicknamePane" layoutX="550" layoutY="300" prefHeight="200.0" prefWidth="400.0" styleClass="change-menu" visible="false">
             <children>
                 <Label layoutX="20" styleClass="change-label" text="new nickname" />
                 <TextField fx:id="newNicknameField" layoutX="20" layoutY="50" styleClass="text-field" />
@@ -37,14 +38,15 @@
             </children>
         </Pane>
 
-        <Pane fx:id="specsPane"  prefHeight="200" prefWidth="570" layoutY="20" layoutX="50" styleClass="specs-pane">
+        <Pane fx:id="specsPane"  prefHeight="200" prefWidth="570" layoutY="20" layoutX="20" styleClass="specs-pane" >
             <Label fx:id="usernameLabel" layoutX="220" styleClass="specs-label"/>
             <Label fx:id="nicknameLabel"  layoutX="220" layoutY="100" styleClass="specs-label"/>
         </Pane>
 
         <Button layoutX="20" layoutY="750" mnemonicParsing="false" onAction="#back" styleClass="back" text="Back" />
-      <Button layoutX="1000.0" layoutY="674.0" mnemonicParsing="false" onAction="#showScoreboard" styleClass="menu-item" text="Scoreboard" />
+      <Button layoutX="1000.0" layoutY="500.0" mnemonicParsing="false" onAction="#showScoreboard" styleClass="menu-item" text="Scoreboard" />
 
+        <Button layoutX="1000.0" layoutY="700.0" mnemonicParsing="false" onAction="#logout" styleClass="menu-item" text="logout" />
 
     </children>
 </AnchorPane>

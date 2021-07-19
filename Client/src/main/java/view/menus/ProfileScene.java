@@ -95,11 +95,15 @@ public class ProfileScene extends Scene {
 
     public void setNicknameChangeMenu(ActionEvent actionEvent) {
         changeNicknamePane.setVisible(!changeNicknamePane.isVisible());
+        if (changeNicknamePane.isVisible()) changePasswordPane.setVisible(false);
+        changeNicknamePane.toFront();
         resetNicknameChangeMenu();
     }
 
     public void setPasswordChangeMenu(ActionEvent actionEvent) {
         changePasswordPane.setVisible(!changePasswordPane.isVisible());
+        if (changePasswordPane.isVisible()) changeNicknamePane.setVisible(false);
+        changePasswordPane.toFront();
         resetPasswordChangeMenu();
     }
 
@@ -141,5 +145,9 @@ public class ProfileScene extends Scene {
 
     public void showScoreboard(ActionEvent actionEvent) {
         ApplicationManger.goToScene1(SceneName.SCOREBOARD_MENU,false);
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
     }
 }
