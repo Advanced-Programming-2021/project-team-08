@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import model.User;
 import model.enums.MessageType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class ServerController {
@@ -19,6 +20,7 @@ public abstract class ServerController {
                 case "register" : return RegisterController.getInstance();
                 case "shop" : return ShopController.getInstance();
                 case "scoreboard" : return ScoreboardController.getInstance();
+                case "lobby" : return LobbyController.getInstance();
                 default: return null;
             }
         }catch (Exception e) {
@@ -49,7 +51,7 @@ public abstract class ServerController {
         return activeUsers.get(token);
     }
 
-    protected void addUser(String token, User user) {
+    protected static void addUser(String token, User user) {
         activeUsers.put(token, user);
     }
 

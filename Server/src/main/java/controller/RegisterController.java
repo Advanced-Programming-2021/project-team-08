@@ -49,6 +49,7 @@ public class RegisterController extends ServerController {
                 return serverMessage(MessageType.ERROR, "input password in wrong", null);
             }else {
                 String token = makeToken();
+                ServerController.addUser(token, user);
                 return serverMessage(MessageType.SUCCESSFUL, "you successfully got in", token);
             }
         } catch (Exception e) {
