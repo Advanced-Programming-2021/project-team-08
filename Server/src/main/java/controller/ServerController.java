@@ -17,7 +17,8 @@ public abstract class ServerController {
             String controllerName = jsonObject.get("controller").getAsString();
             switch (controllerName) {
                 case "register" : return RegisterController.getInstance();
-
+                case "shop" : return ShopController.getInstance();
+                case "scoreboard" : return ScoreboardController.getInstance();
                 default: return null;
             }
         }catch (Exception e) {

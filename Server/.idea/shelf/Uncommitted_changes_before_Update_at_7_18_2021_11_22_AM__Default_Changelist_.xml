@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_7_18_2021_11_22_AM_[Default_Changelist]" date="1626591138714" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_18_2021_11_22_AM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 7/18/2021 11:22 AM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_18_2021_11_09_AM_[Default_Changelist]/bson-4.0.5.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_18_2021_11_22_AM_[Default_Changelist]/bson-4.0.5.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="lib/bson-4.0.5.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_18_2021_11_22_AM_[Default_Changelist]/bson-4.0.51.jar" />
+  </binary>
+</changelist>

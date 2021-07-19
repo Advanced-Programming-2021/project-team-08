@@ -9,6 +9,13 @@ import model.cards.data.CardData;
 import model.enums.MessageType;
 
 public class ShopController extends ServerController{
+    
+    private static final ShopController shopController = new ShopController();
+
+    public static ShopController getInstance() {
+        return shopController;
+    }
+    
     @Override
     public String getServerMessage(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
