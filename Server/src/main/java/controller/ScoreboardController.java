@@ -34,7 +34,7 @@ public class ScoreboardController extends ServerController{
         Arrays.sort(sortedUsers, new sort());
         HashMap<String, Integer> scoreboard = new HashMap<>();
         for (UserData userData : sortedUsers) {
-            scoreboard.put(userData.getUsername(), userData.getPoint());
+            scoreboard.put(userData.getNickname(), userData.getPoint());
         }
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "", scoreboard.toString());
     }
