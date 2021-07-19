@@ -35,7 +35,7 @@ public class RegisterController extends ServerController {
             User user = new User(jsonObject.get("username").getAsString(), jsonObject.get("nickname").getAsString(), jsonObject.get("password").getAsString());
             MessageType messageType = FileManager.getInstance().createUser(user);
             if (messageType.equals(MessageType.SUCCESSFUL))
-                return serverMessage(messageType, "you successfully created your account", null);
+                return serverMessage(messageType, "you successfully created your account", new Gson().toJson(user));
             else return serverMessage(messageType, "some error in creating account", null);
         }
     }
