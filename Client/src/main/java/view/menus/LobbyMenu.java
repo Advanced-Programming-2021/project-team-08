@@ -35,6 +35,13 @@ public class LobbyMenu {
 
 
     public void initialize() {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("token",ApplicationManger.getToken());
+        String result = ApplicationManger.getServerResponse("lobby", "enter", data);
+        JsonElement jsonElement = JsonParser.parseString(result);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        message.setText(jsonObject.get("message").getAsString());
+        message.setTextFill(Color.GREEN);
     }
 
     public void threeRoundsAction() {
