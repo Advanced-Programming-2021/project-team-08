@@ -58,9 +58,10 @@ public class GamePlayScene {
     public SubScene showCard;
 
     public Label currentPhase;
+    public Label playerNumberLabel;
 
     private graphicBoard gBoard;
-    private int playerNumber = 1;
+    private int playerNumber;
 
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
@@ -79,6 +80,7 @@ public class GamePlayScene {
         sceneController = new GamePlaySceneController(this);
         gBoard = new graphicBoard(board);
         GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
+        this.playerNumber = Integer.parseInt(playerNumberLabel.getText());
 
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         FXMLLoader loader = null;
@@ -119,11 +121,17 @@ public class GamePlayScene {
         System.out.println(message);
         JsonObject json = JsonParser.parseString(message).getAsJsonObject();
         String methodName = json.get("method").getAsString();
+        int playerNumber;
         switch (methodName) {
             case "firstSetupBoardGraphic":
-                int playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
                 JsonArray cardIds = JsonParser.parseString(json.get("cardIds").getAsString()).getAsJsonArray();
                 Platform.runLater(() -> firstSetupBoardGraphic(playerNumber, cardIds));
+                break;
+            case "draw":
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                int deckCardNumber = Integer.parseInt(json.get("deckCardNumber").getAsString());
+                Platform.runLater(() -> draw(playerNumber, deckCardNumber, null));
                 break;
             default:
                 System.out.println("unknown");

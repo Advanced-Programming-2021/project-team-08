@@ -148,10 +148,16 @@ public class GameManager {
     }
 
     public void firstSetup() {
-        //player1.drawCard(5, null);
+        player1.drawCard(5);
         //EventNoParam e = new EventNoParam();
         //e.addListener(this::firstSetupAfterFirstDraw);
-        //player2.drawCard(5, e);
+        player2.drawCard(5);
+        try {
+            Thread.sleep(10000);
+            firstSetupAfterFirstDraw();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void firstSetupAfterFirstDraw() {
@@ -206,10 +212,10 @@ public class GameManager {
         if (getCurrentTurnPlayer().getBannedCardTurn() > 0) {
             getCurrentTurnPlayer().setBannedCardTurn(getCurrentTurnPlayer().getBannedCardTurn() - 1);
         } else {
-            getCurrentTurnPlayer().drawCard(1, null);
+            getCurrentTurnPlayer().drawCard(1);
         }
         scene.showPhase("Draw");
-        Platform.runLater(() -> scene.changePhase(Phase.DRAW));
+        //Platform.runLater(() -> scene.changePhase(Phase.DRAW));
         onCardActionDone();
     }
 

@@ -1,7 +1,6 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import javafx.application.Platform;
 import model.UserData;
 import model.cards.Card;
 import model.cards.MonsterCard;
@@ -89,26 +88,29 @@ public class Player {
         return playerBoard;
     }
 
-    public void drawCard(int n, EventNoParam onEnd) {
-        if (n == 0) {
-            if (onEnd != null) onEnd.invoke();
-            return;
-        }
-        Card c;
-        try {
-            c = playerBoard.drawCardFromDeck();
-        } catch (Exception e) {
-            gameManager.finishGame(gameManager.getCurrentPlayerTurn() == 1 ? 2 : 1);
-            return;
-        }
+    public void drawCard(int n) {
+        new Thread(()->{
+            for(int i=0; i<n; i++){
+                Card c;
+                try {
+                    c = playerBoard.drawCardFromDeck();
+                } catch (Exception e) {
+                    gameManager.finishGame(gameManager.getCurrentPlayerTurn() == 1 ? 2 : 1);
+                    return;
+                }
 
-        playerBoard.getHand().appendCard(c);
-        //gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
-        Platform.runLater(()->{
-                gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
-        });
+                playerBoard.getHand().appendCard(c);
+                //gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
+                gameManager.getGameController().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size());
 
-        System.out.println("new card added to the hand: " + c.getCardData().getCardName());
+                System.out.println("new card added to the hand: " + c.getCardData().getCardName());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public Card getCardFromHand(int number) throws Exception {
