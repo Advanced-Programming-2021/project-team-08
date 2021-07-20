@@ -176,4 +176,8 @@ public class MainScene extends Scene {
     public void card(MouseEvent mouseEvent) {
         goToScene("cardCreatingOptions.fxml");
     }
+
+    public void enterTV(MouseEvent mouseEvent) {
+        System.out.println("tv entered");
+    }
 }

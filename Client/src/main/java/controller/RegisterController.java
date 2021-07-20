@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import model.Command;
 import model.UserData;
 import model.cards.data.CardData;
+import model.enums.ChatType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.SceneName;
@@ -185,6 +186,10 @@ public class RegisterController {
             ApplicationManger.setLoggedInUser(user);
             ApplicationManger.setToken(message);
             System.out.println(ApplicationManger.getServerResponse("scoreboard", "scoreboard", null));
+            HashMap<String, String> data2 = new HashMap<>();
+            data2.put("type", ChatType.SEND.toString());
+            data2.put("message", "this is a message");;
+            System.out.println(ApplicationManger.getServerResponse("lobby", "send", data2));
             ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
         }
 //        try {

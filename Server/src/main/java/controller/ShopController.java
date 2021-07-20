@@ -26,12 +26,8 @@ public class ShopController extends ServerController{
                 return buyCard(input);
             case "getInventory":
                 return getInventory(input);
-            case "banCard" :
-                return banCard(input);
             case "sell" :
                 return sellCard(input);
-            case "freeCard" :
-                return freeCard(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
@@ -45,27 +41,39 @@ public class ShopController extends ServerController{
         user.getUserData().addMoney(cardData.getPrice());
         user.getUserData().removeCard(cardData.getCardId());
         return serverMessage(MessageType.SUCCESSFUL, "you sold the card successfully", null);
+        //TODO save to csv
     }
 
-    private String freeCard(String input) {
-        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
-        CardData cardData = CardData.getCardByName(jsonObject.get("name").getAsString());
-        User user = getUserByToken(jsonObject.get("token").getAsString());
-        if (!user.getUsername().equals("admin")) return serverMessage(MessageType.ERROR, "you don't have access to do that", null);
-        if (cardData == null) return serverMessage(MessageType.ERROR, "invalid card name", null);
+    public void freeCard(String name) {
+        CardData cardData = CardData.getCardByName(name);
+        if (cardData == null) {
+            System.out.println("invalid card name");
+            return;
+        }
         cardData.setBanned(false);
-        return serverMessage(MessageType.SUCCESSFUL, "you successfully freed the card", null);
+        System.out.println("card freed successfully");
+        //TODO save to csv
     }
 
-    private String banCard(String input) {
-        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
-        CardData cardData = CardData.getCardByName(jsonObject.get("name").getAsString());
-        User user = getUserByToken(jsonObject.get("token").getAsString());
-        if (!user.getUsername().equals("admin")) return serverMessage(MessageType.ERROR, "you don't have access to do that", null);
-        if (cardData == null) return serverMessage(MessageType.ERROR, "invalid card name", null);
+    public void banCard(String name) {
+        CardData cardData = CardData.getCardByName(name);
+        if (cardData == null) {
+            System.out.println("invalid card name");
+            return;
+        }
         cardData.setBanned(true);
-        return serverMessage(MessageType.SUCCESSFUL, "you successfully banned the card", null);
+        System.out.println("card banned successfully");
     }
+
+    public void changeInventory(String name) {
+        CardData cardData = CardData.getCardByName(name);
+        if (cardData == null) {
+            System.out.println("invalid card name");
+            return;
+        }
+        cardData.changeInventory();
+    }
+
 
     private String buyCard(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
@@ -81,6 +89,7 @@ public class ShopController extends ServerController{
             user.getUserData().addCard(cardData.getCardId());
             return serverMessage(MessageType.SUCCESSFUL, "you bought the card successfully", null);
         }
+        //TODO save to csv
     }
 
     private String getInventory(String input) {

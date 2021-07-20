@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login changed&#10;add chat">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" afterDir="false" />
+    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login client">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_20_2021_9_54_PM__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/getCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/MainScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/MainScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/CSS/MenuStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/CSS/MenuStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/mainScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/mainScene.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

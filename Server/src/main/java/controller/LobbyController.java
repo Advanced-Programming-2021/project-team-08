@@ -66,7 +66,7 @@ public class LobbyController extends ServerController{
         String type = jsonObject.get("type").getAsString();
         Message chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname());
         allMessage.add(chat);
-        return null;
+        return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is send", null);
     }
 
     private String updateChat(String input) {

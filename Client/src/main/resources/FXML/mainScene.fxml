@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../CSS/MainMenuStyle.css"
-            styleClass="background" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="view.menus.MainScene">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@../CSS/MainMenuStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.MainScene">
     <children>
-        <ImageView fx:id="menuName" layoutX="450" layoutY="50" fitWidth="700" fitHeight="150" styleClass="menu-name"/>
-        <Label text="main menu" layoutX="670" layoutY="100" styleClass="name-label"/>
-        <ImageView fx:id="duel" layoutX="484" layoutY="220" styleClass="menu-item"  onMouseClicked="#duelRun"/>
-        <Label fx:id="duelLabel" layoutX="484" layoutY="220" styleClass="menu-label" text="duel"/>
-        <ImageView fx:id="deck" layoutX="484" layoutY="320" styleClass="menu-item" onMouseClicked="#deckRun"/>
-        <Label fx:id="deckLabel" layoutX="484" layoutY="320" styleClass="menu-label" text="deck editor"/>
-        <ImageView fx:id="shop" layoutX="484" layoutY="420" styleClass="menu-item" onMouseClicked="#shopRun"/>
-        <Label fx:id="shopLabel" layoutX="484" layoutY="420" styleClass="menu-label" text="shop"/>
-        <ImageView fx:id="card" layoutX="484" layoutY="520" styleClass="menu-item" onMouseClicked="#card"/>
-        <Label fx:id="cardLabel" layoutX="484" layoutY="520" styleClass="menu-label" text="card"/>
-        <ImageView fx:id="profile" layoutX="484" layoutY="620" styleClass="menu-item" onMouseClicked="#profileRun"/>
-        <Label fx:id="profileLabel" layoutX="484" layoutY="620" styleClass="menu-label" text="profile"/>
-        <ImageView fx:id="exit" layoutX="484" layoutY="720" styleClass="menu-item" onMouseClicked="#exitGame"/>
-        <Label fx:id="exitLabel" layoutX="484" layoutY="720" styleClass="menu-label" text="exit"/>
+        <ImageView fx:id="menuName" fitHeight="150" fitWidth="700" layoutX="450" layoutY="50" styleClass="menu-name" />
+        <Label layoutX="670" layoutY="100" styleClass="name-label" text="main menu" />
+        <ImageView fx:id="duel" layoutX="484" layoutY="220" onMouseClicked="#duelRun" styleClass="menu-item" />
+        <Label fx:id="duelLabel" layoutX="484" layoutY="220" styleClass="menu-label" text="duel" />
+        <ImageView fx:id="deck" layoutX="484" layoutY="320" onMouseClicked="#deckRun" styleClass="menu-item" />
+        <Label fx:id="deckLabel" layoutX="484" layoutY="320" styleClass="menu-label" text="deck editor" />
+        <ImageView fx:id="shop" layoutX="484" layoutY="420" onMouseClicked="#shopRun" styleClass="menu-item" />
+        <Label fx:id="shopLabel" layoutX="484" layoutY="420" styleClass="menu-label" text="shop" />
+        <ImageView fx:id="card" layoutX="484" layoutY="520" onMouseClicked="#card" styleClass="menu-item" />
+        <Label fx:id="cardLabel" layoutX="484" layoutY="520" styleClass="menu-label" text="card" />
+        <ImageView fx:id="profile" layoutX="484" layoutY="620" onMouseClicked="#profileRun" styleClass="menu-item" />
+        <Label fx:id="profileLabel" layoutX="484" layoutY="620" styleClass="menu-label" text="profile" />
+        <ImageView fx:id="exit" layoutX="484" layoutY="720" onMouseClicked="#exitGame" styleClass="menu-item" />
+        <Label fx:id="exitLabel" layoutX="484" layoutY="720" styleClass="menu-label" text="exit" />
+        <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="50.0" layoutY="62.0" onMouseClicked="#enterTV" styleClass="tv" visible="false">
+         <image>
+            <Image url="@../asset/mainMenu/tv.png"/>
+         </image></ImageView>
     </children>
 </AnchorPane>

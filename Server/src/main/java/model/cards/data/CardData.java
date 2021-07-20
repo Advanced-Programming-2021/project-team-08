@@ -139,5 +139,7 @@ public abstract class CardData {
     }
 
 
+    public  void changeInventory() {
 
+    }
 }
