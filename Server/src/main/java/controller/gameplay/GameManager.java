@@ -65,29 +65,16 @@ public class GameManager {
 
     private boolean canAttack = true;
 
-
-    private boolean isAI;
-    private AI_Player ai;
-
-    public GameManager(boolean isPlayer, UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
+    public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
         instance = this;
         this.scene = scene;
         this.sceneController = gamePlaySceneController;
 
-        isAI = !isPlayer;
-        if (isAI) {
-            ai = new AI_Player(this);
-            gameBoard = new GameBoard(user1.getActiveDeck(), AI_Player.getAIUserData().getActiveDeck(), this, scene.board);
-
-            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
-            this.player2 = new Player(AI_Player.getAIUserData(), gameBoard.getPlayer2Board(), this, 2);
-            ai.setup(player2, player1);
-        } else {
             gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this, scene.board);
 
             this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
             this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this, 2);
-        }
+
 
         Effect.setGameManager(this);
 
@@ -95,7 +82,7 @@ public class GameManager {
     }
 
     public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene) {
-        this(duelData.isPlayer(), duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
+        this(duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -208,14 +195,6 @@ public class GameManager {
         player2.onChangeTurn();
 
         startDrawPhase();
-        if (isAI) {
-            if (currentPlayerTurn == 2) {
-                scene.setWaitForAI(true);
-                new Thread(() -> ai.playATurn()).start();
-            } else {
-                scene.setWaitForAI(false);
-            }
-        }
     }
 
     public void temporaryChangeTurn() {

@@ -67,9 +67,9 @@ public class User {
         userData.addDeck(deck);
     }
 
-//    public Deck getActiveDeck() {
-//        return userData.getActiveDeck();
-//    }
+    public Deck getActiveDeck() {
+        return userData.getActiveDeck();
+    }
 
     public ArrayList<Deck> getDecks() {
         return userData.getDecks();

@@ -9,18 +9,18 @@ import model.cards.data.TrapCardData;
 import model.effectSystem.Effect;
 import model.enums.CardStatus;
 import model.enums.CardType;
-//import model.event.EventNoParam;
-//import model.gameplay.CardSlot;
-//import model.gameplay.Player;
+import model.event.EventNoParam;
+import model.gameplay.CardSlot;
+import model.gameplay.Player;
 
 public abstract class Card {
     private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
     protected CardType cardType;
     protected CardData cardData;
-    //protected CardSlot cardSlot;
+    protected CardSlot cardSlot;
     protected CardStatus cardStatus;
-    //protected Player cardOwner;
-   // protected EventNoParam onDestroy = new EventNoParam();
+    protected Player cardOwner;
+    protected EventNoParam onDestroy = new EventNoParam();
     protected ImageView shape;
 
     public Card(CardData cardData) {
@@ -90,9 +90,9 @@ public abstract class Card {
     }
 
 
-    //public Player getCardOwner() {
-     //   return cardOwner;
-    //}
+    public Player getCardOwner() {
+        return cardOwner;
+    }
 
     public CardStatus getCardStatus() {
         return cardStatus;
@@ -110,33 +110,33 @@ public abstract class Card {
         return shape;
     }
 
-//    public void setup(Player owner) {
-//        cardOwner = owner;
-//        for (Effect effect : cardData.getEffects()) {
-//            effect.setup();
-//        }
-//    }
+    public void setup(Player owner) {
+        cardOwner = owner;
+        for (Effect effect : cardData.getEffects()) {
+            effect.setup();
+        }
+    }
 
     public abstract void onSet();
 
-//    public CardSlot getCardSlot() {
-//        return cardSlot;
-//    }
-//
-//    public void setCardSlot(CardSlot cardSlot) {
-//        this.cardSlot = cardSlot;
-//    }
-//
-//    public EventNoParam getOnDestroyEvent() {
-//        return onDestroy;
-//    }
-//
-//    public void moveToGraveyard() {
-//        CardSlot graveyard = cardOwner.getPlayerBoard().getGraveyard();
-//        onDestroy.invoke();
-//        cardSlot.removeCard();
-//        graveyard.appendCard(this);
-//    }
+    public CardSlot getCardSlot() {
+        return cardSlot;
+    }
+
+    public void setCardSlot(CardSlot cardSlot) {
+        this.cardSlot = cardSlot;
+    }
+
+    public EventNoParam getOnDestroyEvent() {
+        return onDestroy;
+    }
+
+    public void moveToGraveyard() {
+        CardSlot graveyard = cardOwner.getPlayerBoard().getGraveyard();
+        onDestroy.invoke();
+        cardSlot.removeCard();
+        graveyard.appendCard(this);
+    }
 
     @Override
     public String toString() {

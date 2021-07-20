@@ -114,14 +114,14 @@ public abstract class CardData {
         while (matcher.find()) {
             Gson gson = new Gson();
             JsonObject jsonObject = JsonParser.parseString(matcher.group()).getAsJsonObject();
-//            for (String effectName : jsonObject.keySet()) {
-//                try {
-//                    ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
-//                    effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
-//                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            for (String effectName : jsonObject.keySet()) {
+                try {
+                    ArrayList<String> args = new ArrayList<>(Arrays.asList(gson.fromJson(jsonObject.get(effectName), String[].class)));
+                    effects.add(Effect.getEffectClass(effectName).getConstructor(ArrayList.class).newInstance(args));
+                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
             //TODO: set effect must be completed
         }
     }

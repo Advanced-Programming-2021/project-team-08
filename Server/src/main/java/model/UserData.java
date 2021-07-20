@@ -89,9 +89,9 @@ public class UserData {
         save();
     }
 
-//    public Deck getActiveDeck() {
-//        return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
-//    }
+    public Deck getActiveDeck() {
+        return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
+    }
 
     public int getMoney() {
         return money;
