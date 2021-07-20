@@ -341,8 +341,7 @@ public class GameManager {
             final int playerNumber = currentPlayerTurn;
             final int a = currentSelectedCardAddress.number;
             final int b = s.getNumber();
-            //scene.summon(playerNumber, a, b);
-            Platform.runLater(() -> scene.summon(playerNumber, a, b));
+            gameController.summon(playerNumber, a, b);
             scene.log("summoned successfully");
             onCardActionDone();
             onSummonACard.invoke(currentSelectedCard);

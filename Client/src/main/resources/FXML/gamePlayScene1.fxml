@@ -332,7 +332,7 @@
       </Group>
       <Pane layoutX="1380.0" layoutY="680.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.7);">
          <children>
-            <Label fx:id="currentPhase" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefWidth="180.0" style="-fx-font-family: &quot;heebeo&quot;;" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="currentPhaseLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefWidth="180.0" style="-fx-font-family: &quot;heebeo&quot;;" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Heebeo" size="28.0" />
                </font>

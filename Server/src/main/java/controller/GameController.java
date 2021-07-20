@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GameController {
     private static ArrayList<GameController> allGames = new ArrayList<>();
@@ -63,10 +65,26 @@ public class GameController {
 
     public synchronized void processClientMessage(String input) {
         System.out.println(input);
+        Matcher matcher;
 
         if (input.equals("next phase")) {
             gameManager.goToNextPhase();
             return;
+        }
+        matcher = Pattern.compile("select ([^,]+),([^$]+)").matcher(input);
+        if (matcher.matches()) {
+            try {
+                gameManager.selectCard(matcher.group(1));
+                switch (matcher.group(2)) {
+                    case "summon":
+                        gameManager.summonCard();
+                        break;
+                    default:
+                        System.out.println("wrong command");
+                }
+            } catch (Exception e) {
+                System.out.println("wrong address");
+            }
         }
     }
 
@@ -122,5 +140,13 @@ public class GameController {
         data.put("toPhase", toPhase.toString());
         data.put("currentPlayer", Integer.valueOf(currentPlayer).toString());
         sendMessageToBoth(getMessage("changePhase", data));
+    }
+
+    public void summon(int playerNumber, int handCardNumber, int toSlotNumber) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("playerNumber", Integer.valueOf(playerNumber).toString());
+        data.put("handCardNumber", Integer.valueOf(handCardNumber).toString());
+        data.put("toSlotNumber", Integer.valueOf(toSlotNumber).toString());
+        sendMessageToBoth(getMessage("summon", data));
     }
 }

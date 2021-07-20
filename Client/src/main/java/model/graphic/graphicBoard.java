@@ -42,7 +42,6 @@ public class graphicBoard {
                 monster.add(new GraphicCardSlot(ZoneType.MONSTER, i, playerBoard.lookup("#monster" + playerNumber + "" + i)));
             }
             graveyard = new GraphicCardSlot(ZoneType.GRAVEYARD, playerBoard.lookup("#GY" + playerNumber));
-            ;
         }
 
         public GraphicCardSlot getDeck() {
@@ -72,14 +71,13 @@ public class graphicBoard {
             move.setToX(graveyard.getImageView().getLayoutX() + 5);
             move.setToY(graveyard.getImageView().getLayoutY() + 25);
 
-            if(!c.isToAttackPosition()){
+            if (!c.isToAttackPosition()) {
                 RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 90, Rotate.Z_AXIS);
                 ParallelTransition parallelTransition = new ParallelTransition();
                 parallelTransition.getChildren().add(move);
                 parallelTransition.getChildren().add(rotateTransition);
                 parallelTransition.play();
-            }
-            else {
+            } else {
                 move.play();
             }
         }

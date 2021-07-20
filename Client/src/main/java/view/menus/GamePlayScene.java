@@ -57,8 +57,14 @@ public class GamePlayScene {
     public AnchorPane root;
     public SubScene showCard;
 
-    public Label currentPhase;
+    public Label currentPhaseLabel;
     public Label playerNumberLabel;
+
+    private static GamePlayScene instance;
+
+    public static GamePlayScene getInstance() {
+        return instance;
+    }
 
     private graphicBoard gBoard;
     private int playerNumber;
@@ -66,6 +72,9 @@ public class GamePlayScene {
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
     Scanner scanner = new Scanner(System.in);
+
+    private int currentTurnPlayer;
+    private Phase currentPhase;
 
     private boolean isAI;
 
@@ -77,9 +86,14 @@ public class GamePlayScene {
         return sceneController;
     }
 
+    public Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
     @FXML
     public void initialize() {
         sceneController = new GamePlaySceneController(this);
+        instance = this;
         gBoard = new graphicBoard(board);
         GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
         this.playerNumber = Integer.parseInt(playerNumberLabel.getText());
@@ -142,6 +156,13 @@ public class GamePlayScene {
                 Phase phase = Phase.valueOf(json.get("toPhase").getAsString());
                 int currentPlayer = Integer.parseInt(json.get("currentPlayer").getAsString());
                 Platform.runLater(() -> changePhase(phase, currentPlayer));
+                break;
+            case "summon":
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                int a = Integer.parseInt(json.get("handCardNumber").getAsString());
+                int b = Integer.parseInt(json.get("toSlotNumber").getAsString());
+                Platform.runLater(() -> summon(playerNumber, a, b));
+                break;
             default:
                 System.out.println("unknown");
         }
@@ -167,13 +188,15 @@ public class GamePlayScene {
     }
 
     public void changePhase(Phase toPhase, int currentPlayer) {
-        currentPhase.setText(toPhase.toString().replace("_", " "));
+        currentPhase = toPhase;
+        currentTurnPlayer = currentPlayer;
+        currentPhaseLabel.setText(toPhase.toString().replace("_", " "));
         if (currentPlayer == 1) {
-            currentPhase.getStyleClass().clear();
-            currentPhase.getStyleClass().add("bluePlayer");
+            currentPhaseLabel.getStyleClass().clear();
+            currentPhaseLabel.getStyleClass().add("bluePlayer");
         } else {
-            currentPhase.getStyleClass().clear();
-            currentPhase.getStyleClass().add("redPlayer");
+            currentPhaseLabel.getStyleClass().clear();
+            currentPhaseLabel.getStyleClass().add("redPlayer");
         }
     }
 
@@ -369,12 +392,22 @@ public class GamePlayScene {
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
-        thisCard.setToY(slot.getImageView().getLayoutY() + 45);
-
-        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
+        thisCard.setToY(slot.getImageView().getLayoutY() + 40);
 
         ParallelTransition parallelTransition = new ParallelTransition();
+
+        RotateCenterTransition rotateTransition;
+        if (playerNumber != this.playerNumber) {
+            rotateTransition = new RotateCenterTransition(c.getShape(), 800, -45, Rotate.X_AXIS);
+        } else {
+            rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
+        }
         parallelTransition.getChildren().addAll(thisCard, rotateTransition);
+
+        if (playerNumber != this.playerNumber) {
+            FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
+            parallelTransition.getChildren().add(flipCardAnimation);
+        }
 
         parallelTransition.play();
     }

@@ -13,6 +13,7 @@ import model.enums.CardStatus;
 import model.enums.ZoneType;
 import model.gameplay.CardSlot;
 import view.CardView;
+import view.menus.GamePlayScene;
 
 public class GraphicCard {
     private static Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
@@ -35,7 +36,7 @@ public class GraphicCard {
         shape.setOnMouseExited(event -> onMouseExit());
 
         shape.setOnMouseClicked(event -> {
-            switch (GameManager.getInstance().getCurrentPhase()) {
+            switch (GamePlayScene.getInstance().getCurrentPhase()) {
                 case DRAW:
                     break;
                 case STANDBY:
@@ -99,11 +100,12 @@ public class GraphicCard {
                         menuItem1.setOnAction(e -> {
                             System.out.println("summon");
                             try {
-                                GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
+                                GamePlayScene.getInstance().sendMessageToServer("select --hand " + (slot.getAllCards().indexOf(this) + 1) + ",summon");
+                                //GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
                             } catch (Exception exception) {
                                 exception.printStackTrace();
                             }
-                            GameManager.getInstance().summonCard();
+                            //GameManager.getInstance().summonCard();
                         });
                         menuItem2 = new MenuItem("Set");
                         menuItem2.setOnAction(e -> {
