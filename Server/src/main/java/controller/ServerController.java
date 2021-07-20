@@ -32,8 +32,9 @@ public abstract class ServerController {
     public static String checkToken(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         String controllerName = jsonObject.get("controller").getAsString();
-        if (!controllerName.equals("register") && jsonObject.get("token") == null) return serverMessage(MessageType.ERROR, "no token input", null);
-        if (!controllerName.equals("register") && getUserByToken(jsonObject.get("token").getAsString()) == null) return serverMessage(MessageType.ERROR, "invalid token", null);
+        String methodName = jsonObject.get("method").getAsString();
+        if (!(controllerName.equals("register") && !methodName.equals("logout")) && jsonObject.get("token") == null) return serverMessage(MessageType.ERROR, "no token input", null);
+        if (!(controllerName.equals("register") && !methodName.equals("logout")) && getUserByToken(jsonObject.get("token").getAsString()) == null) return serverMessage(MessageType.ERROR, "invalid token", null);
         return null;
     }
 
@@ -52,8 +53,25 @@ public abstract class ServerController {
         return activeUsers.get(token);
     }
 
+    public static boolean isUserActive(User user) {
+        for (String token : activeUsers.keySet()) {
+            if (activeUsers.get(token) == user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected static void addUser(String token, User user) {
         activeUsers.put(token, user);
+    }
+
+    protected static boolean removeUser(String token) {
+        if (activeUsers.containsKey(token)) {
+            activeUsers.remove(token);
+            return true;
+        }
+        return false;
     }
 
 

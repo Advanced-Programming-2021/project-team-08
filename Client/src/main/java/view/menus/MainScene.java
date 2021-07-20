@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static controller.ApplicationManger.getServerResponse;
 import static controller.ApplicationManger.goToScene;
 
 public class MainScene extends Scene {
@@ -168,6 +169,7 @@ public class MainScene extends Scene {
     }
 
     public void exitGame(MouseEvent mouseEvent) {
+        System.out.println(getServerResponse("register", "logout", null));
         System.exit(0);
     }
 

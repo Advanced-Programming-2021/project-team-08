@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login client">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ScoreboardMenu.java" afterDir="false" />
+    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="GameConnectionController is changed">
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ServerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +15,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -49,6 +50,17 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -144,7 +156,35 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۳" />
       <updated>1626716948542</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chat is server is ready to use">
+      <created>1626761812641</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1626761812641</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chat is server is ready to use">
+      <created>1626763042581</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1626763042581</updated>
+    </task>
+    <task id="LOCAL-00006" summary="GameConnectionController is wrote">
+      <created>1626765011017</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1626765011017</updated>
+    </task>
+    <task id="LOCAL-00007" summary="GameConnectionController is changed">
+      <created>1626765191620</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1626765191620</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +206,10 @@
     <MESSAGE value="scoreboard server added" />
     <MESSAGE value="some server edit" />
     <MESSAGE value="register and login client" />
-    <option name="LAST_COMMIT_MESSAGE" value="register and login client" />
+    <MESSAGE value="chat is server is ready to use" />
+    <MESSAGE value="GameConnectionController is wrote" />
+    <MESSAGE value="GameConnectionController is changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="GameConnectionController is changed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Server$Main.ic" NAME="Main Coverage Results" MODIFIED="1626532157054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

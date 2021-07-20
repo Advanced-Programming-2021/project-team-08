@@ -4,13 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import model.User;
 import model.enums.MessageType;
 
 import java.security.SecureRandom;
 import java.util.Base64;
-
 
 
 public class RegisterController extends ServerController {
@@ -47,7 +45,10 @@ public class RegisterController extends ServerController {
             User user = User.getUserByUsername(jsonObject.get("username").getAsString());
             if (!user.getUserData().getPassword().equals(jsonObject.get("password").getAsString())) {
                 return serverMessage(MessageType.ERROR, "input password in wrong", null);
-            }else {
+            }else if (isUserActive(user)) {
+                return serverMessage(MessageType.ERROR, "you are already logged in", null);
+            }
+            else {
                 String token = makeToken();
                 ServerController.addUser(token, user);
                 return serverMessage(MessageType.SUCCESSFUL, token, new Gson().toJson(user.getUserData()));
@@ -61,12 +62,26 @@ public class RegisterController extends ServerController {
     public String getServerMessage(String input) {
         JsonElement jsonElement = JsonParser.parseString(input);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        if (jsonObject.get("method").getAsString().equals("login")) {
-            return loginUser(input);
-        }else if (jsonObject.get("method").getAsString().equals("register")) {
-            return registerUser(input);
+        String methodName = jsonObject.get("method").getAsString();
+        switch (methodName) {
+            case "login":
+                return loginUser(input);
+            case "register":
+                return registerUser(input);
+            case "logout":
+                return logout(input);
+            default:
+                return serverMessage(MessageType.ERROR, "invalid command", null);
         }
-        return serverMessage(MessageType.ERROR, "invalid command", null);
+    }
+
+    private String logout(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        String token = jsonObject.get("token").getAsString();
+        if (ServerController.removeUser(token)) {
+            return serverMessage(MessageType.SUCCESSFUL, "you logged out", null);
+        }
+        return serverMessage(MessageType.ERROR, "you are not online", null);
     }
 
     private static String makeToken() {

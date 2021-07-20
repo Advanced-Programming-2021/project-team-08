@@ -15,6 +15,8 @@ import model.enums.ProfileMessages;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static controller.ApplicationManger.getServerResponse;
+
 public class ProfileScene extends Scene {
     private final ProfileController profileController;
     public Label nicknameChangeMessage;
@@ -148,6 +150,7 @@ public class ProfileScene extends Scene {
     }
 
     public void logout(ActionEvent actionEvent) {
+        System.out.println(getServerResponse("register", "logout", null));
         ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
     }
 }

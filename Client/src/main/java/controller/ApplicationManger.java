@@ -165,7 +165,7 @@ public class ApplicationManger extends Application {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("controller", controller);
         jsonObject.addProperty("method", method);
-        if (!controller.equals("register")) {
+        if (!(controller.equals("register") && !method.equals("logout"))) {
             jsonObject.addProperty("token", token);
         }
         if (data != null) {
