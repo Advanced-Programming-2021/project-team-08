@@ -23,6 +23,7 @@
 
 <AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
    <children>
+      <Label fx:id="playerNumberLabel" text="1" />
       <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/gameplay/board.jpg" />

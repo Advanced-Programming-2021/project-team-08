@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login client">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/Ali.json" beforeDir="false" afterPath="$PROJECT_DIR$/users/Ali.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +95,7 @@
       <workItem from="1626716241536" duration="1794000" />
       <workItem from="1626718049404" duration="655000" />
       <workItem from="1626719856184" duration="1147000" />
-      <workItem from="1626790598798" duration="4338000" />
+      <workItem from="1626790598798" duration="6905000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

@@ -3,6 +3,8 @@ package controller;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import controller.gameplay.GameManager;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import model.cards.Card;
 import view.menus.GamePlayScene;
 
@@ -102,5 +104,13 @@ public class GameController {
         data.put("cardIds", cardIds.toString());
 
         sendMessageToBoth(getMessage("firstSetupBoardGraphic", data));
+    }
+
+    public void draw(int playerNumber, int deckCardNumber) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("playerNumber", Integer.valueOf(playerNumber).toString());
+        data.put("deckCardNumber", Integer.valueOf(deckCardNumber).toString());
+
+        sendMessageToBoth(getMessage("draw", data));
     }
 }
