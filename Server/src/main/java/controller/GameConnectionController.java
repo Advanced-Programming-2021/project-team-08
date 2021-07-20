@@ -51,7 +51,6 @@ public class GameConnectionController extends ServerController {
                 return serverMessage(MessageType.SUCCESSFUL, "player 2", duelDataJson);
             }
         }
-        System.out.println(waitingUsers.get(ServerController.getUserByToken(token)).getRemoteSocketAddress());
         waitingGames.add(new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
         return serverMessage(MessageType.WAITING, "waiting for a user to connect", null);
     }
