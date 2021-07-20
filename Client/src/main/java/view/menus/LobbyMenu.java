@@ -1,15 +1,23 @@
 package view.menus;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import model.UserData;
+import model.enums.ChatType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,6 +28,11 @@ public class LobbyMenu {
     public CheckBox threeRound;
     public CheckBox oneRound;
     public Label message;
+    public Label errorMessage;
+    public TextField messageText;
+    public VBox messages;
+    private static int idCounter=0;
+
 
     public void initialize() {
     }
@@ -83,6 +96,33 @@ public class LobbyMenu {
         Platform.runLater(() -> ApplicationManger.goToScene("gamePlayScene" + playerNumber + ".fxml"));
     }
 
+    public void sendMessage(ActionEvent actionEvent) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("message",messageText.getText());
+        data.put("token",ApplicationManger.getToken());
+        data.put("type","SEND");
+        String result = ApplicationManger.getServerResponse("lobby", "send", data);
+        if (result==null){
+            HBox hBox=new HBox();
+            Label message=new Label();
+            Button deleteMessageButton=new Button();
+            Button editMessageButton=new Button();
+            message.setText(messageText.getText());
+            deleteMessageButton.setText("delete");
+            editMessageButton.setText("edit");
+            hBox.getChildren().add(0,message);
+            hBox.getChildren().add(1,deleteMessageButton);
+            hBox.getChildren().add(2,editMessageButton);
+            messages.getChildren().add(hBox);
+        }
+        else{
+            JsonElement jsonElement = JsonParser.parseString(result);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            errorMessage.setText(jsonObject.get("message").getAsString());
+            errorMessage.setTextFill(Color.RED);
+        }
+    }
+
     class DuelData {
         private UserData user1Data;
         private UserData user2Data;
@@ -98,4 +138,8 @@ public class LobbyMenu {
     public void back() {
         ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
     }
+
+
+    
+    
 }

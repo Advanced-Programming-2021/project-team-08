@@ -125,13 +125,7 @@ public class RegisterController {
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String message = jsonObject.get("message").getAsString();
-        if (message.startsWith("user with username")) {
-            errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
-            errorOfSignup.setTextFill(Color.RED);
-        } else if (message.startsWith("user with nickname")) {
-            errorOfSignup.setText("user with nickname " + nicknameOfSignup.getText() + " already exists");
-            errorOfSignup.setTextFill(Color.RED);
-        } else if (message.startsWith("you")) {
+        if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")) {
             successOfSignup.setText("user created successfully!");
             registerAnchorPane.setLayoutX(1600);
             avatarAnchorPane.setLayoutX(0);
@@ -143,14 +137,12 @@ public class RegisterController {
             FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
             userFile.write(new Gson().toJson(user.getUserData()));
             userFile.close();
-        } else if (message.startsWith("some")) {
-            errorOfSignup.setText("some error in creating account");
-            errorOfSignup.setTextFill(Color.RED);
         }
-        else if (message.startsWith("invalid")){
+        else {
             errorOfSignup.setText(message);
             errorOfSignup.setTextFill(Color.RED);
         }
+
 //        try {
 //            if (User.doesUsernameExists(usernameOfSignup.getText())) {
 //                errorOfSignup.setText("user with username " + usernameOfSignup.getText() + " already exists");
@@ -183,13 +175,7 @@ public class RegisterController {
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String message = jsonObject.get("message").getAsString();
-        if (message.startsWith("input")) {
-            errorOfLogin.setText("username and password didn't match");
-            errorOfLogin.setTextFill(Color.RED);
-        } else if (message.startsWith("there")) {
-            errorOfLogin.setText("user with username " + usernameOfLogin.getText() + " doesn't exists");
-            errorOfLogin.setTextFill(Color.RED);
-        } else if (message.startsWith("invalid")) {
+        if (jsonObject.get("type").getAsString().equals("ERROR")) {
             errorOfLogin.setText(message);
             errorOfLogin.setTextFill(Color.RED);
         } else {
@@ -198,7 +184,7 @@ public class RegisterController {
                     }.getType()));
             ApplicationManger.setLoggedInUser(user);
             ApplicationManger.setToken(message);
-            System.out.println(ApplicationManger.getServerResponse("scoreboard","scoreboard",null));
+            System.out.println(ApplicationManger.getServerResponse("scoreboard", "scoreboard", null));
             ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
         }
 //        try {

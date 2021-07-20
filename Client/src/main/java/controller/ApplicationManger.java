@@ -168,6 +168,10 @@ public class ApplicationManger extends Application {
         }
     }
 
+    public static String getToken() {
+        return token;
+    }
+
     public static void setToken(String token) {
         ApplicationManger.token = token;
     }
