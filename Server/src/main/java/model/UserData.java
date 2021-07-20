@@ -141,6 +141,11 @@ public class UserData {
     public Image getProfileImage() {
         return new Image("file:" + System.getProperty("user.dir") + profileImageUrl);
     }
+
+    public void removeCard(int id) {
+        myCardsIds.remove(id);
+        save();
+    }
 }
 
 

@@ -177,7 +177,6 @@ public class ShopScene extends Scene {
 
         if (alert.getResult() == ButtonType.YES) {
             shopController.sellACard(cardData);
-            message.setText("you sold the card :)");
         }
     }
 

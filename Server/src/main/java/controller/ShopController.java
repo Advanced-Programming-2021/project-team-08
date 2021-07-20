@@ -28,11 +28,23 @@ public class ShopController extends ServerController{
                 return getInventory(input);
             case "banCard" :
                 return banCard(input);
+            case "sell" :
+                return sellCard(input);
             case "freeCard" :
                 return freeCard(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
+    }
+
+    private String sellCard(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        CardData cardData = CardData.getCardByName(jsonObject.get("name").getAsString());
+        User user = getUserByToken(jsonObject.get("token").getAsString());
+        if (cardData == null) return serverMessage(MessageType.ERROR, "invalid card name", null);
+        user.getUserData().addMoney(cardData.getPrice());
+        user.getUserData().removeCard(cardData.getCardId());
+        return serverMessage(MessageType.SUCCESSFUL, "you sold the card successfully", null);
     }
 
     private String freeCard(String input) {

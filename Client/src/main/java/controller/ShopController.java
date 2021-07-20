@@ -147,9 +147,12 @@ public class ShopController {
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
         String type = jsonObject.get("type").getAsString();
         if (type.equals("SUCCESSFUL")) {
+            System.out.println("data updated");
             activeUser.getUserData().addMoney(cardData.getPrice());
             activeUser.getUserData().addCard(cardData.getCardId());
+            activeUser.getUserData().removeCard(cardData.getCardId());
             updateUserMoney();
+            sellMenu(null);
         }
         setLabelMessage(jsonObject.get("message").getAsString(), type.equals("SUCCESSFUL"));
     }
