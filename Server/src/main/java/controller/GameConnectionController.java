@@ -41,7 +41,7 @@ public class GameConnectionController extends ServerController{
                 return serverMessage(MessageType.SUCCESSFUL, "you are connected to game", null);
             }
         }
-        new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds);
+        waitingGames.add(new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
         return serverMessage(MessageType.SUCCESSFUL, "waiting for a user to connect", null);
     }
 
