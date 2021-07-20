@@ -42,7 +42,7 @@ public class GameConnectionController extends ServerController{
             }
         }
         waitingGames.add(new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
-        return serverMessage(MessageType.SUCCESSFUL, "waiting for a user to connect", null);
+        return serverMessage(MessageType.WAITING, "waiting for a user to connect", null);
     }
 
     public void addGameWaiter(Socket socket, String input) {
