@@ -33,8 +33,6 @@ public class ServerManager {
             serverSocket = new ServerSocket(7755);
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("local socket is: " + socket.getLocalSocketAddress());
-                System.out.println("remote socket is: " + socket.getRemoteSocketAddress());
                 ServerThread serverThread = new ServerThread();
                 serverThread.init(socket, serverSocket);
                 serverThread.start();
@@ -85,14 +83,18 @@ class ServerThread extends Thread {
         try {
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            ServerController serverController = null;
             while (true) {
                 String input = dataInputStream.readUTF();
                 String result;
                 if (input.equals("")) break;
                 if ((result = ServerController.checkToken(input)) == null) {
-                    ServerController serverController = ServerController.getController(input);
+                    serverController = ServerController.getController(input);
+                    if (serverController instanceof GameConnectionController) {
+                        ((GameConnectionController) serverController).addGameWaiter(socket, input);
+                    }
                     if (serverController == null) {
-                        result = ServerController.serverMessage(MessageType.ERROR,"invalid client message", null);
+                        result = ServerController.serverMessage(MessageType.ERROR,"invalid client controller name", null);
                     }else {
                         result = serverController.getServerMessage(input);
                     }

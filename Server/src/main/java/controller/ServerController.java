@@ -21,6 +21,7 @@ public abstract class ServerController {
                 case "shop" : return ShopController.getInstance();
                 case "scoreboard" : return ScoreboardController.getInstance();
                 case "lobby" : return LobbyController.getInstance();
+                case "newGame" : return GameConnectionController.getInstance();
                 default: return null;
             }
         }catch (Exception e) {

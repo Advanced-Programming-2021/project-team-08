@@ -26,8 +26,6 @@ public class LobbyController extends ServerController{
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         String methodName = jsonObject.get("method").getAsString();
         switch (methodName) {
-            case "newGame" :
-                return newGame(input);
             case "enter":
                 return enterLobby(input);
             case "exit":
@@ -39,13 +37,6 @@ public class LobbyController extends ServerController{
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
-    }
-
-
-
-
-    private String newGame(String input) {
-        return null;
     }
 
     private String enterLobby(String input) {
