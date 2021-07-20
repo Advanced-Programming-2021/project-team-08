@@ -35,9 +35,7 @@ public class LobbyMenu {
 
 
     public void initialize() {
-        HashMap<String, String> data = new HashMap<>();
-        data.put("token",ApplicationManger.getToken());
-        String result = ApplicationManger.getServerResponse("lobby", "enter", data);
+        String result = ApplicationManger.getServerResponse("lobby", "enter", null);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         message.setText(jsonObject.get("message").getAsString());
@@ -106,10 +104,11 @@ public class LobbyMenu {
     public void sendMessage(ActionEvent actionEvent) {
         HashMap<String, String> data = new HashMap<>();
         data.put("message",messageText.getText());
-        data.put("token",ApplicationManger.getToken());
         data.put("type","SEND");
         String result = ApplicationManger.getServerResponse("lobby", "send", data);
-        if (result==null){
+        JsonElement jsonElement = JsonParser.parseString(result);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")){
             HBox hBox=new HBox();
             Label message=new Label();
             Button deleteMessageButton=new Button();
@@ -121,10 +120,10 @@ public class LobbyMenu {
             hBox.getChildren().add(1,deleteMessageButton);
             hBox.getChildren().add(2,editMessageButton);
             messages.getChildren().add(hBox);
+            errorMessage.setText(jsonObject.get("message").getAsString());
+            errorMessage.setTextFill(Color.GREEN);
         }
         else{
-            JsonElement jsonElement = JsonParser.parseString(result);
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.RED);
         }
