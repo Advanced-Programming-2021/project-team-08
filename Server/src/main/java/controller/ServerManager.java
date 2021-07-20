@@ -33,6 +33,7 @@ public class ServerManager {
             serverSocket = new ServerSocket(7755);
             while (true) {
                 Socket socket = serverSocket.accept();
+                System.out.println(socket.getRemoteSocketAddress());
                 ServerThread serverThread = new ServerThread();
                 serverThread.init(socket, serverSocket);
                 serverThread.start();

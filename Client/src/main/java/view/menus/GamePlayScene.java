@@ -53,7 +53,7 @@ public class GamePlayScene {
     public Label currentPhase;
 
     private graphicBoard gBoard;
-
+    private int playerNumber = 1;
 
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;
@@ -98,8 +98,8 @@ public class GamePlayScene {
         player2Nickname_T.setText(data.getSecondPlayer().getUsername() + " (" + data.getSecondPlayer().getNickname() + ")");
         player1Avatar.setImage(data.getFirstPlayer().getProfileImage());
         player2Avatar.setImage(data.getSecondPlayer().getProfileImage());
-        player1LP_T.setText("LP      " + sceneController.getGameManager().getPlayer1().getLP());
-        player2LP_T.setText("LP      " + sceneController.getGameManager().getPlayer2().getLP());
+        player1LP_T.setText("LP      8000");
+        player2LP_T.setText("LP      8000");
     }
 
     public void changePhase(Phase toPhase) {
@@ -267,10 +267,13 @@ public class GamePlayScene {
 
         RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
 
-        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
-
         ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().addAll(thisCard, rotateTransition, flipCardAnimation);
+        parallelTransition.getChildren().addAll(thisCard, rotateTransition);
+
+        if (playerNumber == this.playerNumber) {
+            FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.FACE_UP);
+            parallelTransition.getChildren().add(flipCardAnimation);
+        }
 
         parallelTransition.setOnFinished(onEnd);
         parallelTransition.play();
@@ -374,7 +377,7 @@ public class GamePlayScene {
         }
     }
 
-    public void applyDirectAttackResult(AttackResult result, int playerNumber){
+    public void applyDirectAttackResult(AttackResult result, int playerNumber) {
         changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
     }
 

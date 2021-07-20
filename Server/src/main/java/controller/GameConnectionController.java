@@ -5,6 +5,10 @@ import com.google.gson.JsonParser;
 import model.User;
 import model.enums.MessageType;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,10 +41,11 @@ public class GameConnectionController extends ServerController{
         User user = ServerController.getUserByToken(token);
         for (WaitingGame gameData : waitingGames) {
             if (gameData.getRounds() == rounds) {
-                //TODO start game
+                gameData.notifyOtherPlayer();
                 return serverMessage(MessageType.SUCCESSFUL, "you are connected to game", null);
             }
         }
+        System.out.println(waitingUsers.get(ServerController.getUserByToken(token)).getRemoteSocketAddress());
         waitingGames.add(new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
         return serverMessage(MessageType.WAITING, "waiting for a user to connect", null);
     }
@@ -74,5 +79,15 @@ class WaitingGame {
 
     public User getUser() {
         return user;
+    }
+
+    public void notifyOtherPlayer() {
+        try {
+            DataOutputStream outputStream = new DataOutputStream(userSocket.getOutputStream());
+            outputStream.writeUTF("{\"type\":\"SUCCESSFUL\",\"message\":\"game started\",\"returnObject\":\"null\"}");
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

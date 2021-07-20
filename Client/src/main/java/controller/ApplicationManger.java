@@ -38,7 +38,7 @@ public class ApplicationManger extends Application {
             put(SceneName.MAIN_MENU, new URL(rootPath + "mainScene.fxml"));
             put(SceneName.SHOP_MENU, new URL(rootPath + "shopScene.fxml"));
             put(SceneName.PROFILE_MENU, new URL(rootPath + "profileScene.fxml"));
-            put(SceneName.DUEL_SCENE, new URL(rootPath + "singleDuelScene.fxml"));
+            put(SceneName.DUEL_SCENE, new URL(rootPath + "duelScene.fxml"));
             put(SceneName.DECK_MENU, new URL(rootPath + "deckScene.fxml"));
             put(SceneName.SCOREBOARD_MENU, new URL(rootPath + "scoreboard.fxml"));
             put(SceneName.LOBBY_SCENE, new URL(rootPath + "Lobby.fxml"));
@@ -51,6 +51,10 @@ public class ApplicationManger extends Application {
 
     public static Stage getMainStage() {
         return mainStage;
+    }
+
+    public static DataInputStream getDataInputStream() {
+        return dataInputStream;
     }
 
     public void run(String[] args) {
@@ -192,31 +196,4 @@ public class ApplicationManger extends Application {
             return null;
         }
     }
-
-/*    public static void modifyFile(String filePath, String oldString, String newString) {
-        File fileToBeModified = new File(filePath);
-        String oldContent = "";
-        BufferedReader reader = null;
-        FileWriter writer = null;
-        try {
-            reader = new BufferedReader(new FileReader(fileToBeModified));
-            String line = reader.readLine();
-            while (line != null) {
-                oldContent = oldContent + line + System.lineSeparator();
-                line = reader.readLine();
-            }
-            String newContent = oldContent.replaceAll(oldString, newString);
-            writer = new FileWriter(fileToBeModified);
-            writer.write(newContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }
