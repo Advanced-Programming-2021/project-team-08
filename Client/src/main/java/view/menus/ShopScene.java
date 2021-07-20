@@ -1,5 +1,7 @@
 package view.menus;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import controller.ApplicationManger;
 import controller.ShopController;
 import controller.User;
@@ -114,6 +116,14 @@ public class ShopScene extends Scene {
         int y = (index / 5) * (445) + 20;
         cardImage.setX(x);
         cardImage.setY(y);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", cardData.getName());
+        String result = ApplicationManger.getServerResponse("shop", "getInventory", data);
+        JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
+        JsonObject object = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonObject();
+        int inventory = object.get("number").getAsInt();
+        boolean isBanned = object.get("isBanned").getAsBoolean();
+
         cardImage.setOnMouseEntered(event -> {
             cardImage.setFitHeight(cardImage.getFitHeight() * 1.4);
             cardImage.setFitWidth(cardImage.getFitWidth() * 1.4);
@@ -127,7 +137,11 @@ public class ShopScene extends Scene {
         });
         cardImage.setOnMouseClicked(event -> {
             if (isBuying) {
-                if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
+                if (isBanned) {
+                    message.setText("this card is banned");
+                }else if (inventory < 1) {
+                    message.setText("there is no card in the inventory");
+                } else if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
                     notEnoughMoneyAction();
                 }else {
                     buyCard(cardData);
