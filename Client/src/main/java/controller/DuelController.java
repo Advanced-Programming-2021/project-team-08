@@ -57,7 +57,7 @@ public class DuelController {
         } else {
             currentDuelData = new GamePlaySceneController.DuelData(rounds, false, activeUser.getUserData(), AI_Player.getAIUserData());
         }
-        ApplicationManger.goToScene("gameplayScene.fxml");
+        ApplicationManger.goToScene("gameplayScene1.fxml");
         return "";
     }
 }

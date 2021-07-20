@@ -7,19 +7,16 @@ import model.enums.MessageType;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameConnectionController extends ServerController{
+public class GameConnectionController extends ServerController {
     private static final GameConnectionController gameConnectionController = new GameConnectionController();
 
     public static GameConnectionController getInstance() {
         return gameConnectionController;
     }
-
 
     private final HashMap<User, Socket> waitingUsers = new HashMap<>();
     private final ArrayList<WaitingGame> waitingGames = new ArrayList<>();
@@ -41,8 +38,10 @@ public class GameConnectionController extends ServerController{
         User user = ServerController.getUserByToken(token);
         for (WaitingGame gameData : waitingGames) {
             if (gameData.getRounds() == rounds) {
-                gameData.notifyOtherPlayer();
-                return serverMessage(MessageType.SUCCESSFUL, "you are connected to game", null);
+                gameData.gameStart(user, waitingUsers.get(ServerController.getUserByToken(token)));
+                waitingGames.remove(gameData);
+                new GameController(gameData);
+                return serverMessage(MessageType.SUCCESSFUL, "you are connected to game", "2");
             }
         }
         System.out.println(waitingUsers.get(ServerController.getUserByToken(token)).getRemoteSocketAddress());
@@ -59,13 +58,16 @@ public class GameConnectionController extends ServerController{
 }
 
 class WaitingGame {
-    private User user;
+    private User user1;
+    private User user2;
     private int rounds;
-    private Socket userSocket;
+    private Socket user1Socket;
+    private Socket user2Socket;
+
 
     public WaitingGame(User user, Socket socket, int rounds) {
-        this.user = user;
-        this.userSocket = socket;
+        this.user1 = user;
+        this.user1Socket = socket;
         this.rounds = rounds;
     }
 
@@ -73,21 +75,33 @@ class WaitingGame {
         return rounds;
     }
 
-    public Socket getUserSocket() {
-        return userSocket;
+    public User getUser1() {
+        return user1;
     }
 
-    public User getUser() {
-        return user;
+    public User getUser2() {
+        return user2;
     }
 
-    public void notifyOtherPlayer() {
+    public Socket getUser1Socket() {
+        return user1Socket;
+    }
+
+    public Socket getUser2Socket() {
+        return user2Socket;
+    }
+
+    public void gameStart(User user2, Socket socket2) {
+        user2Socket = socket2;
+        this.user2 = user2;
         try {
-            DataOutputStream outputStream = new DataOutputStream(userSocket.getOutputStream());
-            outputStream.writeUTF("{\"type\":\"SUCCESSFUL\",\"message\":\"game started\",\"returnObject\":\"null\"}");
+            DataOutputStream outputStream = new DataOutputStream(user1Socket.getOutputStream());
+            outputStream.writeUTF("{\"type\":\"SUCCESSFUL\",\"message\":\"game started\",\"returnObject\":\"1\"}");
             outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ServerManager.getIsInGame().put(user1Socket, true);
+        ServerManager.getIsInGame().put(user2Socket, true);
     }
 }

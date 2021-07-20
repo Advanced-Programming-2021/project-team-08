@@ -32,11 +32,14 @@ public class LobbyMenu {
         HashMap<String, String> data = new HashMap<>();
         data.put("rounds", oneRound.isSelected() ? "1" : "3");
         String response = ApplicationManger.getServerResponse("newGame", "newGame", data);
+
         JsonObject json = JsonParser.parseString(response).getAsJsonObject();
         String type = json.get("type").getAsString();
         String responseMessage = json.get("message").getAsString();
+
         if (type.equals("SUCCESSFUL")) {
-            ApplicationManger.goToScene("gamePlayScene.fxml");
+            int playerNumber = Integer.parseInt(json.get("returnObject").getAsString());
+            ApplicationManger.goToScene("gamePlayScene" + playerNumber + ".fxml");
         } else if (type.equals("WAITING")) {
             this.message.setText(responseMessage);
             new Thread(() -> {
@@ -46,9 +49,9 @@ public class LobbyMenu {
 
                     JsonObject json1 = JsonParser.parseString(serverMessage).getAsJsonObject();
                     String type1 = json1.get("type").getAsString();
-                    //String responseMessage1 = json1.get("message").getAsString();
-                    if(type1.equals("SUCCESSFUL")){
-                        Platform.runLater(()-> ApplicationManger.goToScene("gamePlayScene.fxml"));
+                    if (type1.equals("SUCCESSFUL")) {
+                        int playerNumber = Integer.parseInt(json1.get("returnObject").getAsString());
+                        Platform.runLater(() -> ApplicationManger.goToScene("gamePlayScene" + playerNumber + ".fxml"));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

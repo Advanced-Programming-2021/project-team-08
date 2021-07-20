@@ -18,10 +18,16 @@ import java.net.SocketException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServerManager {
     ServerSocket serverSocket;
 
+    private static HashMap<Socket, Boolean> isInGame = new HashMap<>();
+
+    public static HashMap<Socket, Boolean> getIsInGame() {
+        return isInGame;
+    }
 
     public void runServer() {
         try {
@@ -33,7 +39,7 @@ public class ServerManager {
             serverSocket = new ServerSocket(7755);
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println(socket.getRemoteSocketAddress());
+                isInGame.put(socket, false);
                 ServerThread serverThread = new ServerThread();
                 serverThread.init(socket, serverSocket);
                 serverThread.start();
@@ -85,7 +91,7 @@ class ServerThread extends Thread {
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             ServerController serverController = null;
-            while (true) {
+            while (!ServerManager.getIsInGame().get(socket)) {
                 String input = dataInputStream.readUTF();
                 String result;
                 if (input.equals("")) break;
@@ -104,9 +110,6 @@ class ServerThread extends Thread {
                 dataOutputStream.writeUTF(result);
                 dataOutputStream.flush();
             }
-            dataInputStream.close();
-            socket.close();
-            serverSocket.close();
         } catch (IOException e) {
             if (e instanceof SocketException) {
                 System.out.println("one client disconnected");
