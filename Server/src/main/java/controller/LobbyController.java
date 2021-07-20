@@ -73,7 +73,7 @@ public class LobbyController extends ServerController{
         }
         String message = jsonObject.get("message").getAsString();
         String type = jsonObject.get("type").getAsString();
-        Message chat = new Message(ChatType.valueOf(type), message);
+        Message chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname());
         allMessage.add(chat);
         return null;
     }
@@ -100,13 +100,15 @@ public class LobbyController extends ServerController{
 
 class Message {
     private final String message;
+    private final String senderNickname;
     private final ChatType chatType;
     private final int id;
     private static int idCounter = 0;
 
-    public Message(ChatType chatType, String message) {
+    public Message(ChatType chatType, String message, String senderNickname) {
         this.message = message;
         this.chatType = chatType;
+        this.senderNickname = senderNickname;
         id = idCounter;
         idCounter++;
     }
