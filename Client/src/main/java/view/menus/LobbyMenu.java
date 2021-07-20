@@ -17,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.UserData;
-import model.enums.ChatType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,8 +30,9 @@ public class LobbyMenu {
     public Label errorMessage;
     public TextField messageText;
     public VBox messages;
-    private static int idCounter=0;
+    private static int idCounter = 0;
 
+    private boolean isGameStarted = false;
 
     public void initialize() {
         String result = ApplicationManger.getServerResponse("lobby", "enter", null);
@@ -65,6 +65,18 @@ public class LobbyMenu {
             startGame(response);
         } else if (type.equals("WAITING")) {
             this.message.setText(responseMessage);
+            new Thread(() -> {
+                while (!isGameStarted) {
+                    try {
+                        Thread.sleep(1000);
+                        ApplicationManger.getDataOutputStream().writeUTF("alive");
+                        ApplicationManger.getDataOutputStream().flush();
+                    } catch (InterruptedException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                isGameStarted = false;
+            }).start();
             new Thread(() -> {
                 try {
                     String serverMessage = ApplicationManger.getDataInputStream().readUTF();
@@ -103,27 +115,26 @@ public class LobbyMenu {
 
     public void sendMessage(ActionEvent actionEvent) {
         HashMap<String, String> data = new HashMap<>();
-        data.put("message",messageText.getText());
-        data.put("type","SEND");
+        data.put("message", messageText.getText());
+        data.put("type", "SEND");
         String result = ApplicationManger.getServerResponse("lobby", "send", data);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")){
-            HBox hBox=new HBox();
-            Label message=new Label();
-            Button deleteMessageButton=new Button();
-            Button editMessageButton=new Button();
+        if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")) {
+            HBox hBox = new HBox();
+            Label message = new Label();
+            Button deleteMessageButton = new Button();
+            Button editMessageButton = new Button();
             message.setText(messageText.getText());
             deleteMessageButton.setText("delete");
             editMessageButton.setText("edit");
-            hBox.getChildren().add(0,message);
-            hBox.getChildren().add(1,deleteMessageButton);
-            hBox.getChildren().add(2,editMessageButton);
+            hBox.getChildren().add(0, message);
+            hBox.getChildren().add(1, deleteMessageButton);
+            hBox.getChildren().add(2, editMessageButton);
             messages.getChildren().add(hBox);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.GREEN);
-        }
-        else{
+        } else {
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.RED);
         }
@@ -146,6 +157,4 @@ public class LobbyMenu {
     }
 
 
-    
-    
 }

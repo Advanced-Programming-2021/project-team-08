@@ -67,7 +67,7 @@ public class ServerManager {
                         }.getType())));
             }
 
-        }else {
+        } else {
             System.out.println("file list is null");
         }
 
@@ -93,8 +93,9 @@ class ServerThread extends Thread {
             ServerController serverController = null;
             while (!ServerManager.getIsInGame().get(socket)) {
                 String input = dataInputStream.readUTF();
+                System.out.println("input: " + input);
                 String result;
-                if(ServerManager.getIsInGame().get(socket)) break;
+                if (ServerManager.getIsInGame().get(socket)) break;
                 if (input.equals("")) break;
                 if ((result = ServerController.checkToken(input)) == null) {
                     serverController = ServerController.getController(input);
@@ -102,12 +103,12 @@ class ServerThread extends Thread {
                         ((GameConnectionController) serverController).addGameWaiter(socket, input);
                     }
                     if (serverController == null) {
-                        result = ServerController.serverMessage(MessageType.ERROR,"invalid client controller name", null);
-                    }else {
+                        result = ServerController.serverMessage(MessageType.ERROR, "invalid client controller name", null);
+                    } else {
                         result = serverController.getServerMessage(input);
                     }
                 }
-                System.out.println(result);
+                System.out.println("result: " + result);
                 dataOutputStream.writeUTF(result);
                 dataOutputStream.flush();
             }
@@ -119,6 +120,4 @@ class ServerThread extends Thread {
             }
         }
     }
-
-
 }
