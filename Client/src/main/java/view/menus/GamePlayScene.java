@@ -84,9 +84,9 @@ public class GamePlayScene {
         }
 
         try {
-            new Thread(() -> {
+            /*new Thread(() -> {
                 new GameManager(data, this);
-            }).start();
+            }).start();*/
             firstSetupUI(data);
         } catch (Exception e) {
             e.printStackTrace();

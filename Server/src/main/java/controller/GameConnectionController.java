@@ -1,8 +1,10 @@
 package controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.User;
+import model.UserData;
 import model.enums.MessageType;
 
 import java.io.DataOutputStream;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static controller.ServerController.serverMessage;
 
 public class GameConnectionController extends ServerController {
     private static final GameConnectionController gameConnectionController = new GameConnectionController();
@@ -38,10 +42,13 @@ public class GameConnectionController extends ServerController {
         User user = ServerController.getUserByToken(token);
         for (WaitingGame gameData : waitingGames) {
             if (gameData.getRounds() == rounds) {
-                gameData.gameStart(user, waitingUsers.get(ServerController.getUserByToken(token)));
+                DuelData duelData = new DuelData(gameData.getUser1().getUserData(), user.getUserData(), gameData.getRounds());
+                String duelDataJson = new Gson().toJson(duelData);
+
+                gameData.gameStart(user, waitingUsers.get(ServerController.getUserByToken(token)), duelDataJson);
                 waitingGames.remove(gameData);
                 new GameController(gameData);
-                return serverMessage(MessageType.SUCCESSFUL, "you are connected to game", "2");
+                return serverMessage(MessageType.SUCCESSFUL, "player 2", duelDataJson);
             }
         }
         System.out.println(waitingUsers.get(ServerController.getUserByToken(token)).getRemoteSocketAddress());
@@ -91,17 +98,30 @@ class WaitingGame {
         return user2Socket;
     }
 
-    public void gameStart(User user2, Socket socket2) {
+    public void gameStart(User user2, Socket socket2, String duelDataJson) {
         user2Socket = socket2;
         this.user2 = user2;
         try {
             DataOutputStream outputStream = new DataOutputStream(user1Socket.getOutputStream());
-            outputStream.writeUTF("{\"type\":\"SUCCESSFUL\",\"message\":\"game started\",\"returnObject\":\"1\"}");
+            String s = serverMessage(MessageType.SUCCESSFUL, "player 1", duelDataJson);
+            outputStream.writeUTF(s);
             outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
         ServerManager.getIsInGame().put(user1Socket, true);
         ServerManager.getIsInGame().put(user2Socket, true);
+    }
+}
+
+class DuelData {
+    private UserData user1Data;
+    private UserData user2Data;
+    private int rounds;
+
+    public DuelData(UserData user1Data, UserData user2Data, int rounds) {
+        this.user1Data = user1Data;
+        this.user2Data = user2Data;
+        this.rounds = rounds;
     }
 }

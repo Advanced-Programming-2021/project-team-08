@@ -18,6 +18,10 @@ public class DuelController {
         return currentDuelData;
     }
 
+    public static void setCurrentDuelData(GamePlaySceneController.DuelData currentDuelData) {
+        DuelController.currentDuelData = currentDuelData;
+    }
+
     public String duelMultiplayer(int rounds, String secondPlayerName) {
         return setupDuel(true, rounds, secondPlayerName);
     }
