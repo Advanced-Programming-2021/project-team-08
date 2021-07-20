@@ -2,6 +2,10 @@
     -fx-background-image: url("../asset/profileMenu/backgroundImge.jpg");
 }
 
+.background1 {
+    -fx-background-image: url("../asset/lobby/dlc_Ind_Illusions.jpg");
+}
+
 .menu-item {
     -fx-pref-height: 100;
     -fx-pref-width: 500;

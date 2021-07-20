@@ -4,11 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -17,9 +19,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.UserData;
+import model.enums.ChatType;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,11 +40,7 @@ public class LobbyMenu {
     private boolean isGameStarted = false;
 
     public void initialize() {
-        String result = ApplicationManger.getServerResponse("lobby", "enter", null);
-        JsonElement jsonElement = JsonParser.parseString(result);
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
-        message.setText(jsonObject.get("message").getAsString());
-        message.setTextFill(Color.GREEN);
+        ApplicationManger.getServerResponse("lobby", "enter", null);
     }
 
     public void threeRoundsAction() {
@@ -123,9 +124,20 @@ public class LobbyMenu {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")) {
             HBox hBox = new HBox();
+            hBox.setSpacing(10);
+            hBox.setPrefWidth(435);
+            hBox.setPrefHeight(50);
             Label message = new Label();
             Button deleteMessageButton = new Button();
             Button editMessageButton = new Button();
+            message.setAlignment(Pos.CENTER);
+            message.setStyle("-fx-background-color: white");
+            message.setPrefWidth(320);
+            deleteMessageButton.setPrefWidth(80);
+            editMessageButton.setPrefWidth(50);
+            message.setPrefHeight(70);
+            deleteMessageButton.setPrefHeight(50);
+            editMessageButton.setPrefHeight(50);
             message.setText(messageText.getText());
             deleteMessageButton.setText("delete");
             editMessageButton.setText("edit");
@@ -133,13 +145,57 @@ public class LobbyMenu {
             hBox.getChildren().add(1, deleteMessageButton);
             hBox.getChildren().add(2, editMessageButton);
             messages.getChildren().add(hBox);
+            errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.GREEN);
         } else {
+            errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.RED);
         }
     }
+
+    public void refresh(ActionEvent actionEvent) {
+        String result=ApplicationManger.getServerResponse("lobby", "updateChat", null);
+        JsonElement jsonElement = JsonParser.parseString(result);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        if (jsonObject.get("type").getAsString().equals("ERROR")){
+            errorMessage.setOpacity(1);
+            errorMessage.setText(jsonObject.get("message").getAsString());
+            errorMessage.setTextFill(Color.RED);
+        }
+        else if(jsonObject.get("message").getAsString().equals("there is no new message")){
+            errorMessage.setOpacity(1);
+            errorMessage.setText(jsonObject.get("message").getAsString());
+            errorMessage.setTextFill(Color.WHITE);
+        }
+        else {
+            System.out.println(jsonObject.get("returnObject").toString());
+            ArrayList<Message> data = new Gson().fromJson(jsonObject.get("returnObject").toString(),
+                    new TypeToken<List<Message>>(){}.getType());
+            errorMessage.setOpacity(1);
+            errorMessage.setText(jsonObject.get("message").getAsString());
+            errorMessage.setTextFill(Color.WHITE);
+            for (Message message:data){
+                VBox vBox= new VBox();
+                Label nicknameAndChatType=new Label();
+                Label message1 = new Label();
+                nicknameAndChatType.setStyle("-fx-background-color: white");
+                message1.setStyle("-fx-background-color: white");
+                nicknameAndChatType.setAlignment(Pos.CENTER);
+                nicknameAndChatType.setTextFill(Color.BLUE);
+                message1.setAlignment(Pos.CENTER);
+                nicknameAndChatType.setPrefWidth(420);
+                message1.setPrefWidth(420);
+                nicknameAndChatType.setText(message.getSenderNickname()+" - "+message.getChatType().toString());
+                message1.setText(message.getMessage());
+                vBox.getChildren().add(0,nicknameAndChatType);
+                vBox.getChildren().add(1, message1);
+                messages.getChildren().add(vBox);
+            }
+        }
+    }
+
 
     class DuelData {
         private UserData user1Data;
@@ -157,5 +213,29 @@ public class LobbyMenu {
         ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
     }
 
+    class Message {
+        private final String message;
+        private final String senderNickname;
+        private final ChatType chatType;
+//        private final int id;
 
+        public Message(ChatType chatType, String message, String senderNickname) {
+            this.message = message;
+            this.chatType = chatType;
+            this.senderNickname = senderNickname;
+//            id = idCounter;
+        }
+
+        public ChatType getChatType() {
+            return chatType;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getSenderNickname() {
+            return senderNickname;
+        }
+    }
 }

@@ -9,49 +9,59 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@../CSS/LobbyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.LobbyMenu">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background1" stylesheets="@../CSS/LobbyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.LobbyMenu">
    <children>
       <Button layoutX="60.0" layoutY="794.0" mnemonicParsing="false" onAction="#back" styleClass="back" text="Back" />
-      <Button layoutX="821.0" layoutY="410.0" mnemonicParsing="false" onAction="#newGame" styleClass="back" text="New Game">
+      <Button layoutX="993.0" layoutY="410.0" mnemonicParsing="false" onAction="#newGame" styleClass="back" text="New Game">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <CheckBox fx:id="oneRound" layoutX="1061.0" layoutY="390.0" mnemonicParsing="false" onAction="#oneRoundAction" selected="true" text="1 round">
+      <CheckBox fx:id="oneRound" layoutX="1233.0" layoutY="390.0" mnemonicParsing="false" onAction="#oneRoundAction" selected="true" text="1 round" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="threeRound" layoutX="1061.0" layoutY="460.0" mnemonicParsing="false" onAction="#threeRoundsAction" text="3 round">
+      <CheckBox fx:id="threeRound" layoutX="1233.0" layoutY="460.0" mnemonicParsing="false" onAction="#threeRoundsAction" text="3 round" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font>
       </CheckBox>
-      <Label fx:id="message" alignment="CENTER" layoutX="791.0" layoutY="596.0" prefHeight="50.0" prefWidth="500.0" text="" textAlignment="CENTER">
+      <Label fx:id="message" alignment="CENTER" layoutX="969.0" layoutY="555.0" prefHeight="50.0" prefWidth="500.0" text="" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="71.0" layoutY="60.0" prefHeight="510.0" prefWidth="502.0">
+      <ScrollPane layoutX="70.0" layoutY="38.0" prefHeight="510.0" prefWidth="502.0">
          <content>
-            <AnchorPane prefHeight="505.0" prefWidth="500.0">
+            <AnchorPane prefHeight="505.0" prefWidth="500.0" style="-fx-background-color: rgb(191, 214, 224);">
                <children>
-                  <VBox fx:id="messages" layoutX="26.0" layoutY="26.0" prefHeight="418.0" prefWidth="434.0" />
+                  <VBox fx:id="messages" layoutX="7.0" layoutY="11.0" prefHeight="486.0" prefWidth="487.0" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Button layoutX="466.0" layoutY="596.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="send" textFill="WHITE">
+      <Button layoutX="469.0" layoutY="627.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="send" textFill="WHITE">
          <font>
             <Font name="Arial" size="25.0" />
          </font></Button>
-      <TextField fx:id="messageText" layoutX="248.0" layoutY="596.0" />
-      <Label layoutX="97.0" layoutY="594.0" text="Message">
+      <TextField fx:id="messageText" layoutX="247.0" layoutY="626.0" style="-fx-background-color: rgb(191, 214, 224);" />
+      <Label layoutX="94.0" layoutY="626.0" text="Message" textFill="WHITE">
          <font>
             <Font size="34.0" />
          </font></Label>
-      <Label fx:id="errorMessage" layoutX="96.0" layoutY="669.0" prefHeight="61.0" prefWidth="452.0" style="-fx-alignment: center;">
+      <Label fx:id="errorMessage" layoutX="95.0" layoutY="692.0" opacity="0.0" prefHeight="61.0" prefWidth="452.0" style="-fx-alignment: center; -fx-background-color: rgb(191, 214, 224);">
          <font>
             <Font name="Arial" size="26.0" />
          </font></Label>
+      <Label layoutX="709.0" prefHeight="187.0" prefWidth="260.0" style="-fx-alignment: center;" text="Lobby" textFill="WHITE">
+         <font>
+            <Font name="Harrington" size="80.0" />
+         </font>
+      </Label>
+      <Button layoutX="70.0" layoutY="556.0" mnemonicParsing="false" onAction="#refresh" prefHeight="48.0" prefWidth="502.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="refresh" textFill="#fcfcfc">
+         <font>
+            <Font name="Arial" size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
