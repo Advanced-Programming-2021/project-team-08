@@ -85,6 +85,7 @@ public class LobbyMenu {
                     JsonObject json1 = JsonParser.parseString(serverMessage).getAsJsonObject();
                     String type1 = json1.get("type").getAsString();
                     if (type1.equals("SUCCESSFUL")) {
+                        isGameStarted = true;
                         startGame(serverMessage);
                     }
                 } catch (IOException e) {
