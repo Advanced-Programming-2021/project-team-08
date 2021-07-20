@@ -199,6 +199,7 @@ public class GameManager {
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
         player1.onChangeTurn();
         player2.onChangeTurn();
+        onChangeTurn.invoke();
 
         startDrawPhase();
     }
@@ -214,37 +215,32 @@ public class GameManager {
         } else {
             getCurrentTurnPlayer().drawCard(1);
         }
-        scene.showPhase("Draw");
-        //Platform.runLater(() -> scene.changePhase(Phase.DRAW));
+        gameController.goToPhase(Phase.DRAW, currentPlayerTurn);
         onCardActionDone();
     }
 
     private void startStandbyPhase() {
         currentPhase = Phase.STANDBY;
 
-        scene.showPhase("Standby");
-        Platform.runLater(() -> scene.changePhase(Phase.STANDBY));
+        gameController.goToPhase(Phase.STANDBY, currentPlayerTurn);
     }
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
-        onChangeTurn.invoke();
-        scene.showPhase("Main");
-        Platform.runLater(() -> scene.changePhase(Phase.MAIN));
+
+        gameController.goToPhase(Phase.MAIN, currentPlayerTurn);
     }
 
     private void startBattlePhase() {
         currentPhase = Phase.BATTLE;
 
-        scene.showPhase("Battle");
-        Platform.runLater(() -> scene.changePhase(Phase.BATTLE));
+        gameController.goToPhase(Phase.BATTLE, currentPlayerTurn);
     }
 
     private void startEndPhase() {
         currentPhase = Phase.END;
 
-        scene.showPhase("End");
-        Platform.runLater(() -> scene.changePhase(Phase.END));
+        gameController.goToPhase(Phase.END, currentPlayerTurn);
     }
 
     public Player getCurrentTurnPlayer() {

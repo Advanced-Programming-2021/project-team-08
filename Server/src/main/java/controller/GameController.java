@@ -3,9 +3,8 @@ package controller;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import controller.gameplay.GameManager;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import model.cards.Card;
+import model.enums.Phase;
 import view.menus.GamePlayScene;
 
 import java.io.DataInputStream;
@@ -25,13 +24,11 @@ public class GameController {
         player1Socket = gameData.getUser1Socket();
         player2Socket = gameData.getUser2Socket();
 
-        //setupNetwork(player1Socket);
-        //setupNetwork(player2Socket);
+        setupNetwork(player1Socket);
+        setupNetwork(player2Socket);
         allGames.add(this);
 
-        new Thread(()->{
-            gameManager = new GameManager(gameData.getUser1().getUserData(), gameData.getUser2().getUserData(), new GamePlayScene(), this);
-        }).start();
+        new Thread(() -> gameManager = new GameManager(gameData.getUser1().getUserData(), gameData.getUser2().getUserData(), new GamePlayScene(), this)).start();
 
         /*new Thread(() -> {
             while (true) {
@@ -55,6 +52,7 @@ public class GameController {
                         processClientMessage(serverMessage);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        break;
                     }
                 }
             } catch (IOException e) {
@@ -63,8 +61,13 @@ public class GameController {
         }).start();
     }
 
-    public void processClientMessage(String input) {
+    public synchronized void processClientMessage(String input) {
         System.out.println(input);
+
+        if (input.equals("next phase")) {
+            gameManager.goToNextPhase();
+            return;
+        }
     }
 
     private void sendMessageToBoth(String message) {
@@ -112,5 +115,12 @@ public class GameController {
         data.put("deckCardNumber", Integer.valueOf(deckCardNumber).toString());
 
         sendMessageToBoth(getMessage("draw", data));
+    }
+
+    public void goToPhase(Phase toPhase, int currentPlayer) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("toPhase", toPhase.toString());
+        data.put("currentPlayer", Integer.valueOf(currentPlayer).toString());
+        sendMessageToBoth(getMessage("changePhase", data));
     }
 }

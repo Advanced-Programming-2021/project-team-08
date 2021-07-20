@@ -67,6 +67,8 @@ public class GamePlayScene {
     private boolean waitForAI = false;
     Scanner scanner = new Scanner(System.in);
 
+    private boolean isAI;
+
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
     }
@@ -92,13 +94,16 @@ public class GamePlayScene {
             e.printStackTrace();
         }
 
-        /*try {
-            new Thread(() -> {
-                new GameManager(data, this);
-            }).start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        isAI = !data.isPlayer();
+        if (!data.isPlayer()) {
+            try {
+                new Thread(() -> {
+                    new GameManager(data, this);
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         firstSetupUI(data);
         setupNetwork();
@@ -133,6 +138,10 @@ public class GamePlayScene {
                 int deckCardNumber = Integer.parseInt(json.get("deckCardNumber").getAsString());
                 Platform.runLater(() -> draw(playerNumber, deckCardNumber, null));
                 break;
+            case "changePhase":
+                Phase phase = Phase.valueOf(json.get("toPhase").getAsString());
+                int currentPlayer = Integer.parseInt(json.get("currentPlayer").getAsString());
+                Platform.runLater(() -> changePhase(phase, currentPlayer));
             default:
                 System.out.println("unknown");
         }
@@ -157,9 +166,9 @@ public class GamePlayScene {
         player2LP_T.setText("LP      8000");
     }
 
-    public void changePhase(Phase toPhase) {
+    public void changePhase(Phase toPhase, int currentPlayer) {
         currentPhase.setText(toPhase.toString().replace("_", " "));
-        if (GameManager.getInstance().getCurrentPlayerTurn() == 1) {
+        if (currentPlayer == 1) {
             currentPhase.getStyleClass().clear();
             currentPhase.getStyleClass().add("bluePlayer");
         } else {
@@ -282,7 +291,11 @@ public class GamePlayScene {
     }
 
     public void nextPhase() {
-        GameManager.getInstance().goToNextPhase();
+        if (isAI) {
+            GameManager.getInstance().goToNextPhase();
+        } else {
+            sendMessageToServer("next phase");
+        }
     }
 
     public void firstSetupBoardGraphic(int playerNumber, JsonArray cardIds) {

@@ -206,6 +206,7 @@ public class GameManager {
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
         player1.onChangeTurn();
         player2.onChangeTurn();
+        onChangeTurn.invoke();
 
         startDrawPhase();
         if (isAI) {
@@ -230,7 +231,7 @@ public class GameManager {
             getCurrentTurnPlayer().drawCard(1, null);
         }
         scene.showPhase("Draw");
-        Platform.runLater(() -> scene.changePhase(Phase.DRAW));
+        Platform.runLater(() -> scene.changePhase(Phase.DRAW, currentPlayerTurn));
         onCardActionDone();
     }
 
@@ -238,28 +239,28 @@ public class GameManager {
         currentPhase = Phase.STANDBY;
 
         scene.showPhase("Standby");
-        Platform.runLater(() -> scene.changePhase(Phase.STANDBY));
+        Platform.runLater(() -> scene.changePhase(Phase.STANDBY, currentPlayerTurn));
     }
 
     private void startMainPhase() {
         currentPhase = Phase.MAIN;
-        onChangeTurn.invoke();
+
         scene.showPhase("Main");
-        Platform.runLater(() -> scene.changePhase(Phase.MAIN));
+        Platform.runLater(() -> scene.changePhase(Phase.MAIN, currentPlayerTurn));
     }
 
     private void startBattlePhase() {
         currentPhase = Phase.BATTLE;
 
         scene.showPhase("Battle");
-        Platform.runLater(() -> scene.changePhase(Phase.BATTLE));
+        Platform.runLater(() -> scene.changePhase(Phase.BATTLE, currentPlayerTurn));
     }
 
     private void startEndPhase() {
         currentPhase = Phase.END;
 
         scene.showPhase("End");
-        Platform.runLater(() -> scene.changePhase(Phase.END));
+        Platform.runLater(() -> scene.changePhase(Phase.END, currentPlayerTurn));
     }
 
     public Player getCurrentTurnPlayer() {

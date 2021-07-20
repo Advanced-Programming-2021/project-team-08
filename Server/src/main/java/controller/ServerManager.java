@@ -94,6 +94,7 @@ class ServerThread extends Thread {
             while (!ServerManager.getIsInGame().get(socket)) {
                 String input = dataInputStream.readUTF();
                 String result;
+                if(ServerManager.getIsInGame().get(socket)) break;
                 if (input.equals("")) break;
                 if ((result = ServerController.checkToken(input)) == null) {
                     serverController = ServerController.getController(input);
