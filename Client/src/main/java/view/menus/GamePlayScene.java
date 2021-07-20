@@ -1,11 +1,17 @@
 package view.menus;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
 import controller.gameplay.GameManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +26,7 @@ import javafx.util.Duration;
 import model.animation.FlipCardAnimation;
 import model.animation.RotateCenterTransition;
 import model.cards.Card;
+import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.effectSystem.EquipEffect;
 import model.enums.CardStatus;
@@ -83,12 +90,52 @@ public class GamePlayScene {
             e.printStackTrace();
         }
 
-        try {
-            /*new Thread(() -> {
+        /*try {
+            new Thread(() -> {
                 new GameManager(data, this);
-            }).start();*/
-            firstSetupUI(data);
+            }).start();
         } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        firstSetupUI(data);
+        setupNetwork();
+    }
+
+    private void setupNetwork() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    String serverMessage = ApplicationManger.getDataInputStream().readUTF();
+                    processServerMessage(serverMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void processServerMessage(String message) {
+        System.out.println(message);
+        JsonObject json = JsonParser.parseString(message).getAsJsonObject();
+        String methodName = json.get("method").getAsString();
+        switch (methodName) {
+            case "firstSetupBoardGraphic":
+                int playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                JsonArray cardIds = JsonParser.parseString(json.get("cardIds").getAsString()).getAsJsonArray();
+                Platform.runLater(() -> firstSetupBoardGraphic(playerNumber, cardIds));
+                break;
+            default:
+                System.out.println("unknown");
+        }
+    }
+
+    public void sendMessageToServer(String message) {
+        System.out.println(message);
+        try {
+            ApplicationManger.getDataOutputStream().writeUTF(message);
+            ApplicationManger.getDataOutputStream().flush();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -230,7 +277,15 @@ public class GamePlayScene {
         GameManager.getInstance().goToNextPhase();
     }
 
-    public void firstSetupBoardGraphic(int playerNumber, ArrayList<Card> cards) {
+    public void firstSetupBoardGraphic(int playerNumber, JsonArray cardIds) {
+        ArrayList<CardData> cards = new ArrayList<>();
+        for (JsonElement id : cardIds) {
+            cards.add(CardData.getCardById(id.getAsInt()));
+        }
+        firstSetupBoardGraphic(playerNumber, cards);
+    }
+
+    public void firstSetupBoardGraphic(int playerNumber, ArrayList<CardData> cards) {
         double z = cards.size();
         for (int i = 0; i < z; i++) {
             GraphicCard gc = new GraphicCard(cards.get(i));

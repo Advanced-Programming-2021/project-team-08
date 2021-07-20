@@ -14,24 +14,19 @@ import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
 public abstract class Card {
-    private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
+    //private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
     protected CardType cardType;
     protected CardData cardData;
     protected CardSlot cardSlot;
     protected CardStatus cardStatus;
     protected Player cardOwner;
     protected EventNoParam onDestroy = new EventNoParam();
-    protected ImageView shape;
 
     public Card(CardData cardData) {
         this.cardData = cardData;
         for (Effect effect : cardData.getEffects()) {
             effect.setCard(this);
         }
-        shape = new ImageView(cardBackImage);
-        shape.setFitWidth(80);
-        shape.setFitHeight(120);
-        shape.setScaleX(-1);
     }
 
     public static Card getCardByCardData(CardData data) {
@@ -104,10 +99,6 @@ public abstract class Card {
 
     public CardType getCardType() {
         return cardType;
-    }
-
-    public ImageView getShape() {
-        return shape;
     }
 
     public void setup(Player owner) {

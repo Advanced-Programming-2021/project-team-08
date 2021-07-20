@@ -105,7 +105,7 @@ public class GamePlaySceneController {
         //currentDuelData = new DuelData(rounds, isPlayer, ApplicationManger.getLoggedInUser().getUserData(), secondPlayer);
         currentRound = 1;
         System.out.println("Round " + currentRound);
-        gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
+        //gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
         isDuelStarted = true;
     }
 
@@ -116,7 +116,7 @@ public class GamePlaySceneController {
         if (!currentDuelData.isFinished()) {
             currentRound++;
             System.out.println("Round " + currentRound);
-            gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
+            //gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
 
             isDuelStarted = true;
             return;

@@ -60,6 +60,10 @@ public class ApplicationManger extends Application {
         return dataInputStream;
     }
 
+    public static DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
+    }
+
     public void run(String[] args) {
         //goToScene(SceneName.REGISTER_MENU, false);
         setupServer();

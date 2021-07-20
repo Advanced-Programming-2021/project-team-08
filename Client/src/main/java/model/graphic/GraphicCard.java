@@ -23,9 +23,9 @@ public class GraphicCard {
     private CardStatus status = CardStatus.TO_BACK;
     private boolean toAttackPosition = true;
 
-    public GraphicCard(Card card) {
-        this.data = card.getCardData();
-        this.face = card.getCardData().getCardImage();
+    public GraphicCard(CardData cardData) {
+        this.data = cardData;
+        this.face = cardData.getCardImage();
         shape = new ImageView(back);
         shape.setFitWidth(80);
         shape.setFitHeight(110);

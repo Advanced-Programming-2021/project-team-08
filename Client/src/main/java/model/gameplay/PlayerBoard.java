@@ -35,10 +35,10 @@ public class PlayerBoard {
         ArrayList<CardData> deck = playerDeck.getMainDeck();
         Collections.shuffle(deck);
 
-        ArrayList<Card> deckCards = new ArrayList<>();
+        ArrayList<CardData> deckCards = new ArrayList<>();
         for (CardData data : deck) {
             Card c = Card.createCardByCardData(data);
-            deckCards.add(c);
+            deckCards.add(c.getCardData());
             deckZone.appendCard(c);
         }
         Platform.runLater(() -> GameManager.getInstance().getScene().firstSetupBoardGraphic(playerNumber, deckCards));

@@ -9,9 +9,9 @@ public class GameBoard {
     PlayerBoard player1Board, player2Board;
     GameManager gameManager;
 
-    public GameBoard(Deck user1Deck, Deck user2Deck, GameManager gameManager, AnchorPane board) {
-        player1Board = new PlayerBoard(user1Deck, 1, (AnchorPane) board.lookup("#player1Board"));
-        player2Board = new PlayerBoard(user2Deck, 2, (AnchorPane) board.lookup("#player2Board"));
+    public GameBoard(Deck user1Deck, Deck user2Deck, GameManager gameManager) {
+        player1Board = new PlayerBoard(user1Deck, 1, gameManager);
+        player2Board = new PlayerBoard(user2Deck, 2, gameManager);
         this.gameManager = gameManager;
     }
 

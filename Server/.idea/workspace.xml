@@ -2,17 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login client">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_reflections_reflections_0_9_12.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/gameplay/AI_Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/UserData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/Ali.json" beforeDir="false" afterPath="$PROJECT_DIR$/users/Ali.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +31,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1vRjIEBvU502E5WqSq79NN0jicB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -65,17 +64,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,6 +102,7 @@
       <workItem from="1626716241536" duration="1794000" />
       <workItem from="1626718049404" duration="655000" />
       <workItem from="1626719856184" duration="1147000" />
+      <workItem from="1626790598798" duration="4338000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

@@ -1,6 +1,6 @@
 package controller.gameplay;
 
-import controller.GamePlaySceneController;
+import controller.GameController;
 import javafx.application.Platform;
 import model.Command;
 import model.UserData;
@@ -52,7 +52,7 @@ public class GameManager {
     private Card currentSelectedCard;
 
     private GamePlayScene scene;
-    private GamePlaySceneController sceneController;
+    private GameController gameController;
 
     private Event<Card> onAnSpellActivated = new Event<>();
     private Event<AttackResult> onWantAttack = new Event<>();
@@ -65,15 +65,15 @@ public class GameManager {
 
     private boolean canAttack = true;
 
-    public GameManager(UserData user1, UserData user2, GamePlayScene scene, GamePlaySceneController gamePlaySceneController) {
+    public GameManager(UserData user1, UserData user2, GamePlayScene scene, GameController gameController) {
         instance = this;
         this.scene = scene;
-        this.sceneController = gamePlaySceneController;
+        this.gameController = gameController;
 
-            gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this, scene.board);
+        gameBoard = new GameBoard(user1.getActiveDeck(), user2.getActiveDeck(), this);
 
-            this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
-            this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this, 2);
+        this.player1 = new Player(user1, gameBoard.getPlayer1Board(), this, 1);
+        this.player2 = new Player(user2, gameBoard.getPlayer2Board(), this, 2);
 
 
         Effect.setGameManager(this);
@@ -81,8 +81,8 @@ public class GameManager {
         firstSetup();
     }
 
-    public GameManager(GamePlaySceneController.DuelData duelData, GamePlayScene scene) {
-        this(duelData.getFirstPlayer(), duelData.getSecondPlayer(), scene, null);
+    public GameController getGameController() {
+        return gameController;
     }
 
     private void setCurrentSelectedCard(Card currentSelectedCard, CardSlotAddress address) {
@@ -148,10 +148,10 @@ public class GameManager {
     }
 
     public void firstSetup() {
-        player1.drawCard(5, null);
-        EventNoParam e = new EventNoParam();
-        e.addListener(this::firstSetupAfterFirstDraw);
-        player2.drawCard(5, e);
+        //player1.drawCard(5, null);
+        //EventNoParam e = new EventNoParam();
+        //e.addListener(this::firstSetupAfterFirstDraw);
+        //player2.drawCard(5, e);
     }
 
     public void firstSetupAfterFirstDraw() {
@@ -544,7 +544,8 @@ public class GameManager {
     }
 
     public void finishGame(int winnerNumber) {
-        sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
+        // TODO: ۲۰/۰۷/۲۰۲۱ finish game
+        //sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
 

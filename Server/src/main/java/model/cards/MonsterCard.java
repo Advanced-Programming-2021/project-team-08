@@ -55,7 +55,6 @@ public class MonsterCard extends Card {
     }
 
     public void onSummon() {
-        shape.toFront();
         cardStatus = CardStatus.FACE_UP;
         onFaceUp.invoke(this);
         isAttackPosition = true;
