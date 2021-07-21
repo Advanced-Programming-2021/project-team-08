@@ -88,26 +88,20 @@ public class MainScene extends Scene {
 
     private void setTV() {
         tv.setCursor(Cursor.HAND);
-        tv.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("before edit x,y: " + tv.getLayoutX() + ", " + tv.getLayoutX());
-                double ratio = 1.2;
-                tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
-                tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
-                tv.setFitWidth(tv.getFitWidth() * ratio);
-                tv.setFitHeight(tv.getFitHeight() * ratio);
-            }
+        tv.setOnMouseEntered(event -> {
+            System.out.println("before edit x,y: " + tv.getLayoutX() + ", " + tv.getLayoutX());
+            double ratio = 1.2;
+            tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
+            tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
+            tv.setFitWidth(tv.getFitWidth() * ratio);
+            tv.setFitHeight(tv.getFitHeight() * ratio);
         });
-        tv.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double ratio = 1 / 1.2;
-                tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
-                tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
-                tv.setFitWidth(tv.getFitWidth() * ratio);
-                tv.setFitHeight(tv.getFitHeight() * ratio);
-            }
+        tv.setOnMouseExited(event -> {
+            double ratio = 1 / 1.2;
+            tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
+            tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
+            tv.setFitWidth(tv.getFitWidth() * ratio);
+            tv.setFitHeight(tv.getFitHeight() * ratio);
         });
     }
 
