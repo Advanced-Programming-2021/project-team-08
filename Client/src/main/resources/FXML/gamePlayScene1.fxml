@@ -211,6 +211,26 @@
             <Point3D x="1.0" />
          </rotationAxis>
       </AnchorPane>
+      <Pane layoutX="1380.0" layoutY="680.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.7);">
+         <children>
+            <Label fx:id="currentPhaseLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefWidth="180.0" style="-fx-font-family: &quot;heebeo&quot;;" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Heebeo" size="28.0" />
+               </font>
+            </Label>
+            <Button layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onAction="#nextPhase" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Heebeo" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <SubScene fx:id="showCard" height="360.0" layoutX="50.0" layoutY="220.0" width="260.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
+      <AnchorPane fx:id="overlayPanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(255,255,255,0.8);" visible="false" />
       <Group layoutX="80.0" layoutY="640.0">
          <children>
             <Pane layoutX="80.0">
@@ -335,25 +355,6 @@
             </Pane>
          </children>
       </Group>
-      <Pane layoutX="1380.0" layoutY="680.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.7);">
-         <children>
-            <Label fx:id="currentPhaseLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefWidth="180.0" style="-fx-font-family: &quot;heebeo&quot;;" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Heebeo" size="28.0" />
-               </font>
-            </Label>
-            <Button layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onAction="#nextPhase" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="Heebeo" size="24.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <SubScene fx:id="showCard" height="360.0" layoutX="50.0" layoutY="220.0" width="260.0">
-        <root>
-          <Region />
-        </root>
-      </SubScene>
       <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="323.0" layoutY="185.0" prefHeight="115.0" prefWidth="940.0" scaleX="0.7" scaleY="0.7" styleClass="title" text="Pause" textAlignment="CENTER">

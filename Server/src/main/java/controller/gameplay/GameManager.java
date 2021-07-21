@@ -19,6 +19,7 @@ import view.menus.GamePlayScene;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class GameManager {
     private final static HashMap<String, CommandFieldType> selectMonsterCardCommand = new HashMap<String, CommandFieldType>() {{
@@ -162,7 +163,7 @@ public class GameManager {
 
     public void firstSetupAfterFirstDraw() {
         turn = 1;
-        currentPlayerTurn = 1;
+        currentPlayerTurn = new Random().nextInt(2) + 1;
         startDrawPhase();
     }
 

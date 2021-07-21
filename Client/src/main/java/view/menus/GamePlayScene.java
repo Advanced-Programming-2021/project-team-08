@@ -17,14 +17,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import model.animation.CoinAnimation;
 import model.animation.FlipCardAnimation;
 import model.animation.RotateCenterTransition;
 import model.cards.Card;
@@ -65,6 +68,8 @@ public class GamePlayScene {
     public Button muteButton;
     public AnchorPane pausePanel;
 
+    public AnchorPane overlayPanel;
+
     private static GamePlayScene instance;
 
     public static GamePlayScene getInstance() {
@@ -82,6 +87,7 @@ public class GamePlayScene {
     private Phase currentPhase;
 
     private boolean isAI;
+    private boolean coinFlipped = false;
 
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
@@ -191,7 +197,45 @@ public class GamePlayScene {
         player2LP_T.setText("LP      8000");
     }
 
+    public void coinFlip(int result) {
+        overlayPanel.setVisible(true);
+        Image coinImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/coin.png");
+        ImageView coin = new ImageView(coinImage);
+        coin.setFitWidth(200);
+        coin.setFitHeight(200);
+        overlayPanel.getChildren().add(coin);
+        coin.setLayoutX(700);
+        coin.setLayoutY(350);
+
+        CoinAnimation coinAnimation = new CoinAnimation(coinImage, coin,
+                new Rectangle2D(355, 260, 370, 370),
+                new Rectangle2D(0, 0, 370, 370),
+                1260 + 180 * result);
+        coinAnimation.setOnFinished(event -> {
+            Label label = new Label("player " + ((result == 1) ? "blue" : "red") + " goes first");
+            label.setStyle("-fx-font-size: 40; -fx-font-family: Heebeo; -fx-text-fill: " + ((result == 1) ? "blue" : "red") + ";");
+            label.setPrefWidth(600);
+            label.setLayoutX(500);
+            label.setLayoutY(600);
+            label.setAlignment(Pos.CENTER);
+            overlayPanel.getChildren().add(label);
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                    overlayPanel.setVisible(false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        });
+        coinAnimation.play();
+    }
+
     public void changePhase(Phase toPhase, int currentPlayer) {
+        if (!coinFlipped) {
+            coinFlip(currentPlayer);
+            coinFlipped = true;
+        }
         currentPhase = toPhase;
         currentTurnPlayer = currentPlayer;
         currentPhaseLabel.setText(toPhase.toString().replace("_", " "));
@@ -396,7 +440,11 @@ public class GamePlayScene {
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
-        thisCard.setToY(slot.getImageView().getLayoutY() + 35);
+        if (playerNumber == this.playerNumber) {
+            thisCard.setToY(slot.getImageView().getLayoutY() + 50);
+        } else {
+            thisCard.setToY(slot.getImageView().getLayoutY() + 35);
+        }
 
         ParallelTransition parallelTransition = new ParallelTransition();
 
