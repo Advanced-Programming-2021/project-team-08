@@ -171,7 +171,7 @@ public class LobbyMenu {
             errorMessage.setTextFill(Color.BLACK);
         }
         else {
-            JsonArray jsonArray=jsonObject.get("returnObject").getAsJsonArray();
+            JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
             ArrayList<Object> data=new ArrayList<>();
             for (int j=0;j<jsonArray.size();j++)
                 System.out.println(jsonArray.get(j));
