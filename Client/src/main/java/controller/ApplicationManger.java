@@ -76,6 +76,7 @@ public class ApplicationManger extends Application {
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setOnCloseRequest(event -> {
             System.out.println(getServerResponse("register", "logout", null));
+            System.exit(0);
         });
         soundManager = new SoundManager();
         soundManager.playBackgroundSound();

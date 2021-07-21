@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-image: url(&quot;../asset/gameplay/board.jpg&quot;);" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
+<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1600.0" styleClass="boardBackground" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.GamePlayScene">
    <children>
       <Label fx:id="playerNumberLabel" text="2" />
       <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
@@ -354,5 +354,29 @@
           <Region />
         </root>
       </SubScene>
+      <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="323.0" layoutY="185.0" prefHeight="115.0" prefWidth="940.0" scaleX="0.7" scaleY="0.7" styleClass="title" text="Pause" textAlignment="CENTER">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Button layoutX="480.0" layoutY="345.0" mnemonicParsing="false" onAction="#resume" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Resume">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button fx:id="muteButton" layoutX="480.0" layoutY="455.0" mnemonicParsing="false" onAction="#muteChange" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Mute">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button layoutX="480.0" layoutY="565.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Exit Game">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
+import controller.SoundManager;
 import controller.gameplay.GameManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SubScene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -59,6 +61,9 @@ public class GamePlayScene {
 
     public Label currentPhaseLabel;
     public Label playerNumberLabel;
+
+    public Button muteButton;
+    public AnchorPane pausePanel;
 
     private static GamePlayScene instance;
 
@@ -109,18 +114,17 @@ public class GamePlayScene {
         }
 
         isAI = !data.isPlayer();
-        if (!data.isPlayer()) {
+        if (isAI) {
             try {
-                new Thread(() -> {
-                    new GameManager(data, this);
-                }).start();
+                new Thread(() -> new GameManager(data, this)).start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            setupNetwork();
         }
 
         firstSetupUI(data);
-        setupNetwork();
     }
 
     private void setupNetwork() {
@@ -392,7 +396,7 @@ public class GamePlayScene {
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
-        thisCard.setToY(slot.getImageView().getLayoutY() + 40);
+        thisCard.setToY(slot.getImageView().getLayoutY() + 35);
 
         ParallelTransition parallelTransition = new ParallelTransition();
 
@@ -529,10 +533,29 @@ public class GamePlayScene {
     }
 
     public void pause() {
-        System.out.println("Pause");
+        if (SoundManager.isMute()) {
+            muteButton.setText("Unmute");
+        } else {
+            muteButton.setText("Mute");
+        }
+        pausePanel.setVisible(true);
     }
 
     public void resume() {
+        pausePanel.setVisible(false);
+    }
+
+    public void muteChange() {
+        if (SoundManager.isMute()) {
+            SoundManager.setMute(false);
+            muteButton.setText("Mute");
+        } else {
+            SoundManager.setMute(true);
+            muteButton.setText("Unmute");
+        }
+    }
+
+    public void exitGame() {
 
     }
 }
