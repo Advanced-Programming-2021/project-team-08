@@ -101,6 +101,7 @@ public class DeckMenu extends Scene {
                 Dragboard db = cardImage.startDragAndDrop(TransferMode.ANY);
                 HashMap<DataFormat, Object> content = new HashMap<>();
                 content.put(DataFormat.PLAIN_TEXT, cardData.getCardName());
+                content.put(DataFormat.IMAGE, cardData.getCardImage());
                 db.setContent(content);
                 event.consume();
             }
