@@ -1,9 +1,6 @@
 package view.menus;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import controller.ApplicationManger;
 import controller.DuelController;
@@ -20,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.UserData;
 import model.enums.ChatType;
+import org.json.simple.JSONArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,6 +114,7 @@ public class LobbyMenu {
     }
 
     public void sendMessage(ActionEvent actionEvent) {
+        messages.setSpacing(10);
         HashMap<String, String> data = new HashMap<>();
         data.put("message", messageText.getText());
         data.put("type", "SEND");
@@ -148,6 +147,8 @@ public class LobbyMenu {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.GREEN);
+            messageText.setText("");
+            ApplicationManger.getServerResponse("lobby", "updateChat", null);
         } else {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
@@ -156,6 +157,7 @@ public class LobbyMenu {
     }
 
     public void refresh(ActionEvent actionEvent) {
+        messages.setSpacing(10);
         String result=ApplicationManger.getServerResponse("lobby", "updateChat", null);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -167,16 +169,17 @@ public class LobbyMenu {
         else if(jsonObject.get("message").getAsString().equals("there is no new message")){
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
-            errorMessage.setTextFill(Color.WHITE);
+            errorMessage.setTextFill(Color.BLACK);
         }
         else {
-            System.out.println(jsonObject.get("returnObject").toString());
-            ArrayList<Message> data = new Gson().fromJson(jsonObject.get("returnObject").toString(),
-                    new TypeToken<List<Message>>(){}.getType());
+            JsonArray jsonArray=jsonObject.get("returnObject").getAsJsonArray();
+            ArrayList<Object> data=new ArrayList<>();
+            for (int j=0;j<jsonArray.size();j++)
+                System.out.println(jsonArray.get(j));
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.WHITE);
-            for (Message message:data){
+            for (int j=0;j<jsonArray.size();j++){
                 VBox vBox= new VBox();
                 Label nicknameAndChatType=new Label();
                 Label message1 = new Label();
@@ -187,8 +190,9 @@ public class LobbyMenu {
                 message1.setAlignment(Pos.CENTER);
                 nicknameAndChatType.setPrefWidth(420);
                 message1.setPrefWidth(420);
-                nicknameAndChatType.setText(message.getSenderNickname()+" - "+message.getChatType().toString());
-                message1.setText(message.getMessage());
+//                nicknameAndChatType.setText(message.getSenderNickname()+" - "+message.getChatType().toString());
+//                message1.setText(message.getMessage());
+//                nicknameAndChatType.setText(jsonArray.get(j).getAsJsonObject().get(""));
                 vBox.getChildren().add(0,nicknameAndChatType);
                 vBox.getChildren().add(1, message1);
                 messages.getChildren().add(vBox);
