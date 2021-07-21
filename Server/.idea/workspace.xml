@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="register and login client">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/graphicBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/graphicBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/gamePlayScene2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ApplicationManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DeckMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/deckScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/deckScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/users/Ali.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/users/Ali.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +52,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -65,48 +63,12 @@
       </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -135,6 +97,7 @@
       <workItem from="1626718049404" duration="655000" />
       <workItem from="1626719856184" duration="1147000" />
       <workItem from="1626790598798" duration="6905000" />
+      <workItem from="1626836545600" duration="4901000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

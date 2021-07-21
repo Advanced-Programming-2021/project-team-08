@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.Command;
 import model.Deck;
 import model.cards.Card;
@@ -48,6 +49,8 @@ public class DeckController {
     public Button backToListOfDecks;
     public Button backToMainScene;
     public Label addOrDeleteMessage;
+    public Rectangle mainDeckDrop;
+    public Rectangle sideDeckDrop;
 
 
     @FXML

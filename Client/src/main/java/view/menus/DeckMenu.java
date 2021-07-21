@@ -6,8 +6,10 @@ import controller.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.Deck;
@@ -15,6 +17,7 @@ import model.cards.data.CardData;
 import model.exceptions.ParseCommandException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +51,7 @@ public class DeckMenu extends Scene {
         });
         cardImage.setOnMouseClicked(event -> {
             if (scrollPaneType.equals("hand")) {
-                Button goToMainDeckButton = deckController.getGoToMainDeckButton();
+                /*Button goToMainDeckButton = deckController.getGoToMainDeckButton();
                 Button goToSideDeckButton = deckController.getGoToSideDeckButton();
                 deckController.setOpacity();
                 goToMainDeckButton.setOnMouseClicked(event1 -> {
@@ -72,7 +75,7 @@ public class DeckMenu extends Scene {
                         deckController.addOrDeleteMessage.setOpacity(1);
                         deckController.addOrDeleteMessage.setText(e.getMessage());
                     }
-                });
+                });*/
             } else {
                 Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
                 if (scrollPaneType.equals("main"))
@@ -90,6 +93,54 @@ public class DeckMenu extends Scene {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 cardImage.setCursor(Cursor.HAND);
             }
+        });
+
+        cardImage.setOnDragDetected(event -> {
+            if (scrollPaneType.equals("hand")) {
+                System.out.println("onDragDetected");
+                Dragboard db = cardImage.startDragAndDrop(TransferMode.ANY);
+                HashMap<DataFormat, Object> content = new HashMap<>();
+                content.put(DataFormat.PLAIN_TEXT, cardData.getCardName());
+                db.setContent(content);
+                event.consume();
+            }
+        });
+
+        deckController.mainDeckDrop.setOnDragEntered(event -> deckController.mainDeckDrop.setOpacity(1));
+        deckController.mainDeckDrop.setOnDragExited(event -> deckController.mainDeckDrop.setOpacity(0));
+        deckController.sideDeckDrop.setOnDragEntered(event -> deckController.sideDeckDrop.setOpacity(1));
+        deckController.sideDeckDrop.setOnDragExited(event -> deckController.sideDeckDrop.setOpacity(0));
+
+        deckController.mainDeckDrop.setOnDragOver(event -> event.acceptTransferModes(TransferMode.ANY));
+        deckController.sideDeckDrop.setOnDragOver(event -> event.acceptTransferModes(TransferMode.ANY));
+
+        deckController.mainDeckDrop.setOnDragDropped(event -> {
+            System.out.println("MAIN");
+            Dragboard db = event.getDragboard();
+            try {
+                Deck.addCardGraphic(db.getContent(DataFormat.PLAIN_TEXT).toString(), "main", deckName);
+                deckController.showMessage("card added to main deck successfully");
+                deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
+            } catch (Exception e) {
+                deckController.addOrDeleteMessage.setTextFill(Color.RED);
+                deckController.addOrDeleteMessage.setOpacity(1);
+                deckController.addOrDeleteMessage.setText(e.getMessage());
+            }
+            event.consume();
+        });
+        deckController.sideDeckDrop.setOnDragDropped(event -> {
+            System.out.println("SIDE");
+            Dragboard db = event.getDragboard();
+            try {
+                Deck.addCardGraphic(db.getContent(DataFormat.PLAIN_TEXT).toString(), "side", deckName);
+                deckController.showMessage("card added to side deck successfully");
+                deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
+            } catch (Exception e) {
+                deckController.addOrDeleteMessage.setTextFill(Color.RED);
+                deckController.addOrDeleteMessage.setOpacity(1);
+                deckController.addOrDeleteMessage.setText(e.getMessage());
+            }
+            event.consume();
         });
     }
 

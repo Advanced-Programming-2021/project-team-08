@@ -11,9 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeckController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeckController">
    <children>
       <Group>
          <children>
@@ -89,7 +90,7 @@
                       <AnchorPane fx:id="scrollMainDeck" minHeight="0.0" minWidth="0.0" prefHeight="568.0" prefWidth="423.0" style="-fx-background-color: rgb(223, 241, 255);" />
                     </content>
                   </ScrollPane>
-                  <ScrollPane layoutX="631.0" layoutY="80.0" prefHeight="592.0" prefWidth="455.0">
+                  <ScrollPane layoutX="640.0" layoutY="80.0" prefHeight="592.0" prefWidth="424.0">
                      <content>
                         <AnchorPane fx:id="scrollSideDeck" minHeight="0.0" minWidth="0.0" prefHeight="584.0" prefWidth="441.0" style="-fx-background-color: rgb(223, 241, 255);" />
                      </content>
@@ -99,17 +100,17 @@
                         <AnchorPane fx:id="scrollHandCards" minHeight="0.0" minWidth="0.0" prefHeight="583.0" prefWidth="432.0" style="-fx-background-color: rgb(223, 241, 255);" />
                      </content>
                   </ScrollPane>
-                  <Label layoutX="221.0" layoutY="24.0" prefHeight="37.0" prefWidth="155.0" text="Main Deck" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="245.0" layoutY="25.0" prefHeight="37.0" prefWidth="155.0" text="Main Deck" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1274.0" layoutY="26.0" prefHeight="37.0" prefWidth="155.0" text="Hand Cards" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1274.0" layoutY="25.0" prefHeight="37.0" prefWidth="155.0" text="Hand Cards" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="784.0" layoutY="26.0" prefHeight="37.0" prefWidth="155.0" text="Side Deck" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="770.0" layoutY="25.0" prefHeight="37.0" prefWidth="155.0" text="Side Deck" textFill="WHITE">
                      <font>
                         <Font name="Harrington" size="28.0" />
                      </font>
@@ -160,9 +161,11 @@
                      </styleClass></Button>
                   <Label fx:id="addOrDeleteMessage" alignment="CENTER" layoutX="425.0" layoutY="788.0" opacity="0.0" prefHeight="77.0" prefWidth="1043.0" style="-fx-alignment: center; -fx-background-radius: 25; -fx-background-color: rgb(0, 12, 65);" stylesheets="@../CSS/deckStyle.css" textFill="WHITE">
                      <font>
-                        <Font size="31.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
+                  <Rectangle fx:id="mainDeckDrop" arcHeight="5.0" arcWidth="5.0" fill="#20bd0f4d" height="60.0" layoutX="125.0" layoutY="15.0" opacity="0.0" stroke="TRANSPARENT" strokeType="INSIDE" width="400.0" />
+                  <Rectangle fx:id="sideDeckDrop" arcHeight="5.0" arcWidth="5.0" fill="#20bd0f4d" height="60.0" layoutX="653.0" layoutY="15.0" opacity="0.0" stroke="TRANSPARENT" strokeType="INSIDE" width="400.0" />
                </children></AnchorPane>
          </children>
       </Group>
