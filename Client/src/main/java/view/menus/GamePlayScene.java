@@ -425,7 +425,7 @@ public class GamePlayScene {
     public void firstSetupBoardGraphic(int playerNumber, ArrayList<CardData> cards) {
         double z = cards.size();
         for (int i = 0; i < z; i++) {
-            GraphicCard gc = new GraphicCard(cards.get(i));
+            GraphicCard gc = new GraphicCard(cards.get(i), playerNumber);
             gBoard.getPlayerBoard(playerNumber).getDeck().appendCard(gc);
             gBoard.getPlayerBoard(playerNumber).getPlayerBoard().getChildren().add(gc.getShape());
             gc.getShape().setTranslateX(gBoard.getPlayerBoard(playerNumber).getDeck().getImageView().getLayoutX() + 8);

@@ -22,8 +22,10 @@ public class GraphicCard {
     private GraphicCardSlot slot;
     private CardStatus status = CardStatus.TO_BACK;
     private boolean toAttackPosition = true;
+    private int cardOwnerPlayerNumber;
 
-    public GraphicCard(CardData cardData) {
+    public GraphicCard(CardData cardData, int cardOwnerNumber) {
+        cardOwnerPlayerNumber = cardOwnerNumber;
         this.data = cardData;
         this.face = cardData.getCardImage();
         shape = new ImageView(back);
@@ -195,22 +197,39 @@ public class GraphicCard {
     }
 
     public void onMouseEnter() {
-        CardView.getInstance().showCard(data);
-
-        shape.getStyleClass().add("onHoverCard");
-        switch (slot.getType()) {
-            case HAND:
+        if (cardOwnerPlayerNumber == GamePlayScene.getInstance().getPlayerNumber()) {
+            switch (slot.getType()) {
+                case FIELD:
+                case MONSTER:
+                case SPELL_AND_TRAP:
+                case HAND:
+                    CardView.getInstance().showCard(data);
+                    shape.getStyleClass().add("onHoverCard");
+                    break;
+            }
+            if (slot.getType() == ZoneType.HAND) {
                 shape.setLayoutY(shape.getLayoutY() - 30);
-                break;
+            }
+        } else {
+            switch (slot.getType()) {
+                case FIELD:
+                case SPELL_AND_TRAP:
+                case MONSTER:
+                    if (status == CardStatus.FACE_UP) {
+                        CardView.getInstance().showCard(data);
+                        shape.getStyleClass().add("onHoverCard");
+                    }
+                    break;
+            }
         }
     }
 
     public void onMouseExit() {
         shape.getStyleClass().remove("onHoverCard");
-        switch (slot.getType()) {
-            case HAND:
+        if (cardOwnerPlayerNumber == GamePlayScene.getInstance().getPlayerNumber()) {
+            if (slot.getType() == ZoneType.HAND) {
                 shape.setLayoutY(shape.getLayoutY() + 30);
-                break;
+            }
         }
     }
 
