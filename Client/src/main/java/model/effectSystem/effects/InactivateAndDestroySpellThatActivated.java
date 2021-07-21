@@ -19,7 +19,7 @@ public class InactivateAndDestroySpellThatActivated extends CounterEffect {
         int size = card.getCardOwner().getPlayerBoard().getHand().getAllCards().size();
         gameManager.getOnAnSpellActivated().addListener((card1) -> {
             card.getCardOwner().getPlayerBoard().getHand().getAParticularCard(
-                    gameManager.getScene().trowAwayACardFromHand(size)).moveToGraveyard();
+                    gameManager.getScene().throwAwayACardFromHand(size)).moveToGraveyard();
             this.card1 = card1;
             activate();
         });

@@ -373,7 +373,7 @@ public class GameManager {
                 final int playerNumber = currentPlayerTurn;
                 final int a = currentSelectedCardAddress.number;
                 final int b = s.getNumber();
-                Platform.runLater(() -> scene.setMonster(playerNumber, a, b));
+                gameController.setMonster(playerNumber, a, b);
             }
             scene.log("set successfully");
             onCardActionDone();
@@ -445,9 +445,9 @@ public class GameManager {
         }
     }
 
-    public void surrender() {
-        scene.log(getCurrentTurnPlayer().getUserData().getUsername() + " surrendered");
-        finishGame(getCurrentPlayerTurn() == 1 ? 2 : 1);
+    public void surrender(int surrenderedNumber) {
+        //scene.log(getCurrentTurnPlayer().getUserData().getUsername() + " surrendered");
+        finishGame(surrenderedNumber == 1 ? 2 : 1);
     }
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {

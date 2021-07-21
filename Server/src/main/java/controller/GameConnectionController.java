@@ -10,7 +10,6 @@ import model.enums.MessageType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,13 +45,13 @@ public class GameConnectionController extends ServerController {
                 DuelData duelData = new DuelData(gameData.getUser1().getUserData(), user.getUserData(), gameData.getRounds());
                 String duelDataJson = new Gson().toJson(duelData);
 
-                gameData.gameStart(user, waitingUsers.get(ServerController.getUserByToken(token)), duelDataJson);
+                gameData.gameStart(user, token, waitingUsers.get(ServerController.getUserByToken(token)), duelDataJson);
                 waitingGames.remove(gameData);
                 new GameController(gameData, duelDataJson);
                 return serverMessage(MessageType.SUCCESSFUL, "player 2", duelDataJson);
             }
         }
-        waitingGames.add(new WaitingGame(user, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
+        waitingGames.add(new WaitingGame(user, token, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
         return serverMessage(MessageType.WAITING, "waiting for a user to connect", null);
     }
 
@@ -70,10 +69,12 @@ class WaitingGame {
     private int rounds;
     private Socket user1Socket;
     private Socket user2Socket;
+    private String user1Token;
+    private String user2Token;
 
-
-    public WaitingGame(User user, Socket socket, int rounds) {
+    public WaitingGame(User user, String user1Token, Socket socket, int rounds) {
         this.user1 = user;
+        this.user1Token = user1Token;
         this.user1Socket = socket;
         this.rounds = rounds;
     }
@@ -98,8 +99,17 @@ class WaitingGame {
         return user2Socket;
     }
 
-    public void gameStart(User user2, Socket socket2, String duelDataJson) {
+    public String getUser1Token() {
+        return user1Token;
+    }
+
+    public String getUser2Token() {
+        return user2Token;
+    }
+
+    public void gameStart(User user2, String user2Token, Socket socket2, String duelDataJson) {
         user2Socket = socket2;
+        this.user2Token = user2Token;
         this.user2 = user2;
         try {
             DataOutputStream outputStream = new DataOutputStream(user1Socket.getOutputStream());

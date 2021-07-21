@@ -7,7 +7,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.cards.Card;
 import model.cards.data.CardData;
 import model.enums.CardStatus;
 import model.enums.ZoneType;
@@ -81,6 +80,7 @@ public class GraphicCard {
         ContextMenu contextMenu;
         MenuItem menuItem1;
         MenuItem menuItem2;
+        boolean isAI = GamePlayScene.getInstance().isAI();
         switch (slot.getType()) {
             case GRAVEYARD:
                 break;
@@ -99,23 +99,31 @@ public class GraphicCard {
                         menuItem1 = new MenuItem("Summon");
                         menuItem1.setOnAction(e -> {
                             System.out.println("summon");
-                            try {
+                            if (isAI) {
+                                try {
+                                    GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
+                                    GameManager.getInstance().summonCard();
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }
+                            } else {
                                 GamePlayScene.getInstance().sendMessageToServer("select --hand " + (slot.getAllCards().indexOf(this) + 1) + ",summon");
-                                //GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
-                            } catch (Exception exception) {
-                                exception.printStackTrace();
                             }
-                            //GameManager.getInstance().summonCard();
                         });
                         menuItem2 = new MenuItem("Set");
                         menuItem2.setOnAction(e -> {
                             System.out.println("set");
-                            try {
-                                GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
-                            } catch (Exception exception) {
-                                exception.printStackTrace();
+                            if (isAI) {
+                                try {
+                                    GameManager.getInstance().selectCard("--hand " + (slot.getAllCards().indexOf(this) + 1));
+                                    GameManager.getInstance().setCard();
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }
+                            } else {
+                                GamePlayScene.getInstance().sendMessageToServer("select --hand " + (slot.getAllCards().indexOf(this) + 1) + ",set");
                             }
-                            GameManager.getInstance().setCard();
+
                         });
                         contextMenu.getItems().addAll(menuItem1, menuItem2);
                         break;

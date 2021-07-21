@@ -472,8 +472,8 @@ public class GameManager {
     }
 
     public void surrender() {
-        scene.log(getCurrentTurnPlayer().getUserData().getUsername() + " surrendered");
-        finishGame(getCurrentPlayerTurn() == 1 ? 2 : 1);
+        scene.log("surrender");
+        finishGame(scene.getPlayerNumber() == 1 ? 2 : 1);
     }
 
     public void applyAttackResult(AttackResult result, Card attacker, Card attacked) {
@@ -575,7 +575,8 @@ public class GameManager {
     }
 
     public void finishGame(int winnerNumber) {
-        sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
+        //sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
+        scene.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
 

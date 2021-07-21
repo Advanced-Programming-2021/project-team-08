@@ -132,6 +132,7 @@ public class GamePlaySceneController {
 
         private int firstPlayerWins, secondPlayerWins;
         private int maxLP1, maxLP2;
+        private int winnerNumber;
 
         public DuelData(int rounds, boolean isPlayer, UserData firstPlayer, UserData secondPlayer) {
             this.rounds = rounds;
@@ -156,7 +157,12 @@ public class GamePlaySceneController {
             return isPlayer;
         }
 
+        public int getWinnerNumber() {
+            return winnerNumber;
+        }
+
         public String setRoundResult(int winnerNumber, int player1LP, int player2LP) {
+            this.winnerNumber = winnerNumber;
             if (player1LP > maxLP1) maxLP1 = player1LP;
             if (player2LP > maxLP2) maxLP2 = player2LP;
 

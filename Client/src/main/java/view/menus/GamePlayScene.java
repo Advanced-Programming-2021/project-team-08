@@ -64,11 +64,16 @@ public class GamePlayScene {
 
     public Label currentPhaseLabel;
     public Label playerNumberLabel;
+    public Button nextPhaseButton;
 
     public Button muteButton;
     public AnchorPane pausePanel;
 
     public AnchorPane overlayPanel;
+
+    public AnchorPane endGamePanel;
+    public Label gameEndMessage;
+    public Button gameEndExitButton;
 
     private static GamePlayScene instance;
 
@@ -89,6 +94,8 @@ public class GamePlayScene {
     private boolean isAI;
     private boolean coinFlipped = false;
 
+    private GamePlaySceneController.DuelData thisDuelData;
+
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
     }
@@ -101,12 +108,21 @@ public class GamePlayScene {
         return currentPhase;
     }
 
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public boolean isAI() {
+        return isAI;
+    }
+
     @FXML
     public void initialize() {
         sceneController = new GamePlaySceneController(this);
         instance = this;
         gBoard = new graphicBoard(board);
         GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
+        thisDuelData = data;
         this.playerNumber = Integer.parseInt(playerNumberLabel.getText());
 
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
@@ -179,9 +195,13 @@ public class GamePlayScene {
     }
 
     public void sendMessageToServer(String message) {
-        System.out.println(message);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("token", ApplicationManger.getToken());
+        jsonObject.addProperty("command", message);
+
+        System.out.println(jsonObject);
         try {
-            ApplicationManger.getDataOutputStream().writeUTF(message);
+            ApplicationManger.getDataOutputStream().writeUTF(jsonObject.toString());
             ApplicationManger.getDataOutputStream().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -253,6 +273,11 @@ public class GamePlayScene {
         } else {
             currentPhaseLabel.getStyleClass().clear();
             currentPhaseLabel.getStyleClass().add("redPlayer");
+        }
+        if (currentPlayer != playerNumber) {
+            nextPhaseButton.setVisible(false);
+        } else {
+            nextPhaseButton.setVisible(true);
         }
     }
 
@@ -356,7 +381,7 @@ public class GamePlayScene {
         return Integer.parseInt(input);
     }
 
-    public int trowAwayACardFromHand(int numberOfCardsInHand) {
+    public int throwAwayACardFromHand(int numberOfCardsInHand) {
         System.out.println("insert number of card in your hand that you want to trow away.");
         String input = scanner.nextLine();
         Matcher matcher;
@@ -449,7 +474,7 @@ public class GamePlayScene {
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         if (playerNumber == this.playerNumber) {
-            thisCard.setToY(slot.getImageView().getLayoutY() + 50);
+            thisCard.setToY(slot.getImageView().getLayoutY() + 80);
         } else {
             thisCard.setToY(slot.getImageView().getLayoutY() + 35);
         }
@@ -487,22 +512,33 @@ public class GamePlayScene {
         thisCard.setDuration(Duration.millis(800));
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
-        thisCard.setToY(slot.getImageView().getLayoutY() + 35);
+        if (playerNumber == this.playerNumber) {
+            thisCard.setToY(slot.getImageView().getLayoutY() + 80);
+        } else {
+            thisCard.setToY(slot.getImageView().getLayoutY() + 35);
+        }
 
-        RotateCenterTransition rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
+        RotateCenterTransition rotateTransition;
+        if (playerNumber != this.playerNumber) {
+            rotateTransition = new RotateCenterTransition(c.getShape(), 800, -45, Rotate.X_AXIS);
+        } else {
+            rotateTransition = new RotateCenterTransition(c.getShape(), 800, 45, Rotate.X_AXIS);
+        }
 
         RotateCenterTransition rotateTransition1 = new RotateCenterTransition(c.getShape(), 800, -90, Rotate.Z_AXIS);
-
-        FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.TO_BACK);
 
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(thisCard, rotateTransition, rotateTransition1);
 
-        SequentialTransition s = new SequentialTransition();
-        s.getChildren().add(flipCardAnimation);
-        s.getChildren().add(parallelTransition);
-
-        s.play();
+        if (playerNumber == this.playerNumber) {
+            FlipCardAnimation flipCardAnimation = new FlipCardAnimation(c, 300, CardStatus.TO_BACK);
+            SequentialTransition s = new SequentialTransition();
+            s.getChildren().add(flipCardAnimation);
+            s.getChildren().add(parallelTransition);
+            s.play();
+        }else {
+            parallelTransition.play();
+        }
     }
 
     private void removeCardFromHand(int handCardNumber, graphicBoard.GraphicPlayerBoard playerBoard) {
@@ -572,8 +608,8 @@ public class GamePlayScene {
 
     }
 
-    public void log(String setRoundResult) {
-
+    public void log(String s) {
+        System.out.println(s);
     }
 
     public void showPhase(String draw) {
@@ -587,6 +623,31 @@ public class GamePlayScene {
     public void showBoard(String gameBoardString) {
 
     }
+
+    public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
+        /////useless comment
+        String res = thisDuelData.setRoundResult(winnerNumber, player1LP, player2LP);
+
+        gameEndMessage.setText(res);
+        if (thisDuelData.getWinnerNumber() == 1) {
+            gameEndMessage.setStyle("-fx-text-fill: blue");
+        } else {
+            gameEndMessage.setStyle("-fx-text-fill: red");
+        }
+
+        endGamePanel.setVisible(true);
+
+        /*if (!thisDuelData.isFinished()) {
+            //currentRound++;
+            //System.out.println("Round " + currentRound);
+            //gameManager = new GameManager(thisDuelData.isPlayer, thisDuelData.firstPlayer, thisDuelData.secondPlayer, scene, this);
+            return;
+        }*/
+
+        thisDuelData.applyDuelResult();
+    }
+
+    //Pause Menu
 
     public void pause() {
         if (SoundManager.isMute()) {
@@ -611,7 +672,20 @@ public class GamePlayScene {
         }
     }
 
-    public void exitGame() {
+    public void surrender() {
+        pausePanel.setVisible(false);
+        if (isAI) {
+            GameManager.getInstance().surrender();
+        } else {
+            sendMessageToServer("surrender");
+        }
+    }
 
+    public void exitGame() {
+        if (isAI) {
+            ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
+        } else {
+            sendMessageToServer("exit game");
+        }
     }
 }

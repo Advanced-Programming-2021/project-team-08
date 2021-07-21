@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.enums.Phase;
@@ -20,6 +21,7 @@ public class GameController {
 
     private GameManager gameManager;
     private Socket player1Socket, player2Socket;
+    private String player1Token, player2Token;
     private int gameId;
 
     private File saveGame;
@@ -33,6 +35,9 @@ public class GameController {
     public GameController(WaitingGame gameData, String duelGameData) {
         player1Socket = gameData.getUser1Socket();
         player2Socket = gameData.getUser2Socket();
+
+        player1Token = gameData.getUser1Token();
+        player2Token = gameData.getUser2Token();
 
         setupNetwork(player1Socket);
         setupNetwork(player2Socket);
@@ -77,13 +82,37 @@ public class GameController {
 
     public synchronized void processClientMessage(String input) {
         System.out.println(input);
+        String token, command;
         Matcher matcher;
 
-        if (input.equals("next phase")) {
+        try {
+            JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+            token = jsonObject.get("token").getAsString();
+            command = jsonObject.get("command").getAsString();
+        } catch (Exception e) {
+            return;
+        }
+        int senderNumber = getSender(token);
+        if (senderNumber == 0) {
+            System.out.println("invalid token");
+            return;
+        }
+        if (command.equals("surrender")) {
+            gameManager.surrender(senderNumber);
+            return;
+        }
+        if (command.equals("exit game")) {
+            System.out.println("Exit game " + senderNumber);
+            return;
+        }
+
+        if(gameManager.getCurrentPlayerTurn() != senderNumber) return;
+
+        if (command.equals("next phase")) {
             gameManager.goToNextPhase();
             return;
         }
-        matcher = Pattern.compile("select ([^,]+),([^$]+)").matcher(input);
+        matcher = Pattern.compile("select ([^,]+),([^$]+)").matcher(command);
         if (matcher.matches()) {
             try {
                 gameManager.selectCard(matcher.group(1));
@@ -91,12 +120,25 @@ public class GameController {
                     case "summon":
                         gameManager.summonCard();
                         break;
+                    case "set":
+                        gameManager.setCard();
+                        break;
                     default:
                         System.out.println("wrong command");
                 }
             } catch (Exception e) {
                 System.out.println("wrong address");
             }
+        }
+    }
+
+    private int getSender(String token) {
+        if (token.equals(player1Token)) {
+            return 1;
+        } else if (token.equals(player2Token)) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 
@@ -171,6 +213,14 @@ public class GameController {
         data.put("handCardNumber", Integer.valueOf(handCardNumber).toString());
         data.put("toSlotNumber", Integer.valueOf(toSlotNumber).toString());
         sendMessageToBoth(getMessage("summon", data));
+    }
+
+    public void setMonster(int playerNumber, int handCardNumber, int toSlotNumber) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("playerNumber", Integer.valueOf(playerNumber).toString());
+        data.put("handCardNumber", Integer.valueOf(handCardNumber).toString());
+        data.put("toSlotNumber", Integer.valueOf(toSlotNumber).toString());
+        sendMessageToBoth(getMessage("set", data));
     }
 
     public static ArrayList<GameController> getAllGames() {

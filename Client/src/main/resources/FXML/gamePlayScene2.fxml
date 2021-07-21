@@ -218,7 +218,7 @@
                   <Font name="Heebeo" size="28.0" />
                </font>
             </Label>
-            <Button layoutX="20.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="90.0" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="nextPhaseButton" layoutX="20.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="90.0" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="26.0" />
                </font>
@@ -355,6 +355,20 @@
             </Pane>
          </children>
       </Group>
+      <AnchorPane fx:id="endGamePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(255,255,255,0.8);" visible="false">
+         <children>
+            <Label fx:id="gameEndMessage" alignment="CENTER" layoutX="350.0" layoutY="400.0" prefHeight="100.0" prefWidth="900.0" text="Label">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button fx:id="gameEndExitButton" layoutX="725.0" layoutY="600.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="Exit">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="323.0" layoutY="185.0" prefHeight="115.0" prefWidth="940.0" scaleX="0.7" scaleY="0.7" styleClass="title" text="Pause" textAlignment="CENTER">
@@ -368,6 +382,11 @@
                </font>
             </Button>
             <Button fx:id="muteButton" layoutX="480.0" layoutY="455.0" mnemonicParsing="false" onAction="#muteChange" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Mute">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button layoutX="480.0" layoutY="565.0" mnemonicParsing="false" onAction="#surrender" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Surrender">
                <font>
                   <Font size="45.0" />
                </font>
