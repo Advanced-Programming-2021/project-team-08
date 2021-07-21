@@ -7,6 +7,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import model.animation.RotateCenterTransition;
 import model.enums.ZoneType;
+import view.menus.GamePlayScene;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,24 @@ public class graphicBoard {
 
     public GraphicPlayerBoard getPlayerBoard(int playerNumber) {
         return playerNumber == 1 ? player1Board : player2Board;
+    }
+
+    public GraphicCardSlot getCardSlot(boolean forOpponent, ZoneType zone, int number) throws Exception {
+        GraphicPlayerBoard board;
+        if (forOpponent) {
+            board = (GamePlayScene.getInstance().getPlayerNumber() == 2) ? player1Board : player2Board;
+        } else {
+            board = (GamePlayScene.getInstance().getPlayerNumber() == 1) ? player1Board : player2Board;
+        }
+
+        switch (zone) {
+            case DECK:
+                return board.getDeck();
+            case MONSTER:
+                if (number < 1 || number > 5) throw new Exception("number out of bounds");
+                return board.getMonster(number);
+        }
+        return null;
     }
 
     public class GraphicPlayerBoard {

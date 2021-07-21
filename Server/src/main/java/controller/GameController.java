@@ -121,7 +121,7 @@ public class GameController {
             gameManager.goToNextPhase();
             return 1;
         }
-        matcher = Pattern.compile("select ([^,]+),([^$]+)( ([1-5]))?").matcher(command);
+        matcher = Pattern.compile("select ([^,]+),([^ $]+)( ([1-5]))*").matcher(command);
         if (matcher.matches()) {
             try {
                 gameManager.selectCard(matcher.group(1));

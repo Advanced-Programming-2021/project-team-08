@@ -56,4 +56,8 @@ public class GraphicCardSlot {
         cards.clear();
         cards.add(card);
     }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
 }

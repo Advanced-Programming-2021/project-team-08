@@ -167,8 +167,8 @@ public class GraphicCard {
                 contextMenu = new ContextMenu();
                 for (int i = 1; i <= 5; i++) {
                     try {
-                        CardSlot cs = GameManager.getInstance().getGameBoard().getCardSlot(true, ZoneType.MONSTER, i);
-                        if (!cs.isEmpty()) {
+                        GraphicCardSlot gcs = GamePlayScene.getInstance().getgBoard().getCardSlot(true, ZoneType.MONSTER, i);
+                        if (!gcs.isEmpty()) {
                             MenuItem m = new MenuItem("Attack " + i);
                             int finalI = i;
                             m.setOnAction(e -> {

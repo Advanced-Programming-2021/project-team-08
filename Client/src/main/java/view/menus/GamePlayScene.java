@@ -113,6 +113,10 @@ public class GamePlayScene {
         return isAI;
     }
 
+    public graphicBoard getgBoard() {
+        return gBoard;
+    }
+
     @FXML
     public void initialize() {
         sceneController = new GamePlaySceneController(this);
@@ -194,7 +198,7 @@ public class GamePlayScene {
                 Platform.runLater(() -> setMonster(playerNumber, a, b));
                 break;
             case "applyAttackResultGraphic":
-                AttackResultJson result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonArray(), AttackResultJson.class);
+                AttackResultJson result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonObject(), AttackResultJson.class);
                 playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
                 a = Integer.parseInt(json.get("attackerCardNumber").getAsString());
                 b = Integer.parseInt(json.get("defenderCardNumber").getAsString());
