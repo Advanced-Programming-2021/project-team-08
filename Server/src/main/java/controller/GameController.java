@@ -152,4 +152,16 @@ public class GameController {
         data.put("toSlotNumber", Integer.valueOf(toSlotNumber).toString());
         sendMessageToBoth(getMessage("summon", data));
     }
+
+    public static ArrayList<GameController> getAllGames() {
+        return allGames;
+    }
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
 }

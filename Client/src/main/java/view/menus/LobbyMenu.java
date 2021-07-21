@@ -265,3 +265,7 @@ public class LobbyMenu {
         }
     }
 }
+
+class messageBox extends VBox {
+
+}

@@ -47,8 +47,10 @@ public class TVScene {
     }
 
     public void setTopBattles(ActionEvent actionEvent) {
+
     }
 
     public void setReplayBattles(ActionEvent actionEvent) {
+
     }
 }

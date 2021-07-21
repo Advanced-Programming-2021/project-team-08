@@ -58,7 +58,7 @@ public class LobbyController extends ServerController{
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "you exited from lobby", null);
     }
 
-    private String sendMessage(String input) {
+    private synchronized String sendMessage(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         User user = ServerController.getUserByToken(jsonObject.get("token").getAsString());
         if (!lobbyUsers.containsKey(user)) {
@@ -66,7 +66,14 @@ public class LobbyController extends ServerController{
         }
         String message = jsonObject.get("message").getAsString();
         String type = jsonObject.get("type").getAsString();
-        Message chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname());
+        ChatType chatType = ChatType.valueOf(type);
+        Message chat;
+        if (chatType.equals(ChatType.SEND)) {
+            chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname(), -1);
+        }else {
+            int actionId = Integer.parseInt(jsonObject.get("actionId").getAsString());
+            chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname(), actionId);
+        }
         allMessage.add(chat);
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is send", String.valueOf(chat.getId()));
     }
@@ -122,12 +129,14 @@ class Message {
     private final String senderNickname;
     private final ChatType chatType;
     private final int id;
+    private final int actionId;
     private static int idCounter = 0;
 
-    public Message(ChatType chatType, String message, String senderNickname) {
+    public Message(ChatType chatType, String message, String senderNickname, int actionId) {
         this.message = message;
         this.chatType = chatType;
         this.senderNickname = senderNickname;
+        this.actionId = actionId;
         id = idCounter;
         idCounter++;
     }
@@ -139,4 +148,5 @@ class Message {
     public int getId() {
         return id;
     }
+
 }
