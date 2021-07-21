@@ -3,8 +3,6 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.DeckController;
 import controller.User;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DataFormat;
@@ -50,33 +48,7 @@ public class DeckMenu extends Scene {
             cardImage.setOpacity(0.5);
         });
         cardImage.setOnMouseClicked(event -> {
-            if (scrollPaneType.equals("hand")) {
-                /*Button goToMainDeckButton = deckController.getGoToMainDeckButton();
-                Button goToSideDeckButton = deckController.getGoToSideDeckButton();
-                deckController.setOpacity();
-                goToMainDeckButton.setOnMouseClicked(event1 -> {
-                    try {
-                        Deck.addCardGraphic(cardData.getCardName(), "main", deckName);
-                        deckController.showMessage("card added to main deck successfully");
-                        deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-                    } catch (Exception e) {
-                        deckController.addOrDeleteMessage.setTextFill(Color.RED);
-                        deckController.addOrDeleteMessage.setOpacity(1);
-                        deckController.addOrDeleteMessage.setText(e.getMessage());
-                    }
-                });
-                goToSideDeckButton.setOnMouseClicked(event1 -> {
-                    try {
-                        Deck.addCardGraphic(cardData.getCardName(), "side", deckName);
-                        deckController.showMessage("card added to side deck successfully");
-                        deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
-                    } catch (Exception e) {
-                        deckController.addOrDeleteMessage.setTextFill(Color.RED);
-                        deckController.addOrDeleteMessage.setOpacity(1);
-                        deckController.addOrDeleteMessage.setText(e.getMessage());
-                    }
-                });*/
-            } else {
+            if (!scrollPaneType.equals("hand")) {
                 Deck.removeCardFromDeck(cardData.getCardName(), deckName, scrollPaneType);
                 if (scrollPaneType.equals("main"))
                     deckController.showMessage("card removed from main deck successfully");
@@ -85,19 +57,13 @@ public class DeckMenu extends Scene {
                 deckController.addOrDeleteCard(Deck.getDeckWithName(deckName));
             }
         });
-        cardImage.setOnMouseExited(event -> {
-            cardImage.setOpacity(1);
-        });
-        cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                cardImage.setCursor(Cursor.HAND);
-            }
-        });
+        cardImage.setOnMouseExited(event -> cardImage.setOpacity(1));
+        cardImage.hoverProperty().addListener((observable, oldValue, newValue) -> cardImage.setCursor(Cursor.HAND));
 
         cardImage.setOnDragDetected(event -> {
             if (scrollPaneType.equals("hand")) {
                 System.out.println("onDragDetected");
+                cardImage.setVisible(false);
                 Dragboard db = cardImage.startDragAndDrop(TransferMode.ANY);
                 HashMap<DataFormat, Object> content = new HashMap<>();
                 content.put(DataFormat.PLAIN_TEXT, cardData.getCardName());
@@ -142,6 +108,9 @@ public class DeckMenu extends Scene {
                 deckController.addOrDeleteMessage.setText(e.getMessage());
             }
             event.consume();
+        });
+        cardImage.setOnDragDone(event -> {
+            cardImage.setVisible(true);
         });
     }
 

@@ -487,7 +487,7 @@ public class GamePlayScene {
     }
 
     public void applyDirectAttackResult(AttackResult result, int playerNumber) {
-        changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
+        changePlayerLP(playerNumber == 1 ? 2 : 1, -result.getPlayer2LPDecrease());
     }
 
     private void changePlayerLP(int playerNumber, int amount) {
@@ -525,6 +525,14 @@ public class GamePlayScene {
     }
 
     public void showBoard(String gameBoardString) {
+
+    }
+
+    public void pause() {
+        System.out.println("Pause");
+    }
+
+    public void resume() {
 
     }
 }
