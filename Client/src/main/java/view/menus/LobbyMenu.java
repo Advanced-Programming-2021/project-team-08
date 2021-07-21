@@ -263,15 +263,16 @@ public class LobbyMenu {
                     idOfMessage.add(Integer.parseInt(id));
                     System.out.println(idOfMessage);
                     if (chatType.equals("EDITED")) {
-                        int id1 = Integer.parseInt(jsonArray.get(j).getAsJsonObject().get("actionId").getAsString());
+                        Integer id1 = Integer.parseInt(jsonArray.get(j).getAsJsonObject().get("actionId").getAsString());
                         messages.getChildren().remove(idOfMessage.indexOf(id1));
                         idOfMessage.remove((Integer)idOfMessage.indexOf(id1));
                         System.out.println(idOfMessage);
                     }
                 }
                 else {
-                    int id2 = Integer.parseInt(jsonArray.get(j).getAsJsonObject().get("actionId").getAsString());
+                    Integer id2 = Integer.parseInt(jsonArray.get(j).getAsJsonObject().get("actionId").getAsString());
                     messages.getChildren().remove(idOfMessage.indexOf(id2));
+                    idOfMessage.remove((Integer)idOfMessage.indexOf(id2));
                     System.out.println(idOfMessage);
                 }
             }

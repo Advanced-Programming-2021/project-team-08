@@ -4,7 +4,6 @@
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="refresh">
       <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +147,8 @@
       <workItem from="1626883872066" duration="377000" />
       <workItem from="1626884310219" duration="1091000" />
       <workItem from="1626886122300" duration="75000" />
-      <workItem from="1626886251582" duration="297000" />
+      <workItem from="1626886251582" duration="349000" />
+      <workItem from="1626887880815" duration="597000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>
