@@ -148,7 +148,6 @@ public class LobbyMenu {
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.GREEN);
             messageText.setText("");
-            ApplicationManger.getServerResponse("lobby", "updateChat", null);
         } else {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
