@@ -97,6 +97,7 @@ class ServerThread extends Thread {
                 String result;
                 if (ServerManager.getIsInGame().get(socket)) break;
                 if (input.equals("")) break;
+                if (input.equals("alive")) continue;
                 if ((result = ServerController.checkToken(input)) == null) {
                     serverController = ServerController.getController(input);
                     if (serverController instanceof GameConnectionController) {

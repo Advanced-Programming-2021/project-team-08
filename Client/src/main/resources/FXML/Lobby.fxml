@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background1" stylesheets="@../CSS/LobbyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.LobbyMenu">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="background1" stylesheets="@../CSS/LobbyStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.LobbyMenu">
    <children>
       <Button layoutX="60.0" layoutY="794.0" mnemonicParsing="false" onAction="#back" styleClass="back" text="Back" />
       <Button layoutX="993.0" layoutY="410.0" mnemonicParsing="false" onAction="#newGame" styleClass="back" text="New Game">
@@ -26,11 +26,16 @@
             <Font size="35.0" />
          </font>
       </CheckBox>
-      <Label fx:id="message" alignment="CENTER" layoutX="969.0" layoutY="555.0" prefHeight="50.0" prefWidth="500.0" text="" textAlignment="CENTER">
+      <Label fx:id="message" alignment="CENTER" layoutX="969.0" layoutY="555.0" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: rgb(191, 214, 224);" text="" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Button fx:id="cancelButton" layoutX="1120.0" layoutY="630.0" mnemonicParsing="false" onAction="#cancel" styleClass="back" text="Cancel" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
       <ScrollPane layoutX="70.0" layoutY="38.0" prefHeight="453.0" prefWidth="502.0">
          <content>
             <AnchorPane prefHeight="472.0" prefWidth="500.0" style="-fx-background-color: rgb(191, 214, 224);">
