@@ -3,10 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="save game data">
       <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/TV.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/TV.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TVController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/11.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/6.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/7.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/8.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/gameData/9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/9.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

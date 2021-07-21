@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
 
 
 public class TVScene {
@@ -57,14 +59,22 @@ public class TVScene {
     }
 
     public void setReplayBattles(ActionEvent actionEvent) {
+        AnchorPane anchorPane = new AnchorPane();
         String result = ApplicationManger.getServerResponse("tv", "replayList", null);
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
+        if (jsonObject.get("type").getAsString().equals("ERROR")) {
+            System.out.println(result);
+            return;
+        }
         JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
+        int i = 0;
         for (JsonElement jsonElement : jsonArray) {
             String nickname1 = jsonElement.getAsJsonObject().get("firstPlayerNickname").getAsString();
             String nickname2 = jsonElement.getAsJsonObject().get("secondPlayerNickname").getAsString();
             int id = jsonElement.getAsJsonObject().get("id").getAsInt();
+            anchorPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i));
         }
+        tvPane = anchorPane;
     }
 }
 
@@ -73,5 +83,28 @@ class tvLabel extends Label {
     String nickname2;
     int id;
 
+    public tvLabel(String nickname1, String nickname2, int id, int index) {
+        this.nickname1 = nickname1;
+        this.nickname2 = nickname2;
+        this.id = id;
+        setText(text());
+        setPrefHeight(70);
+        setPrefWidth(200);
+        setFont(new Font(26));
+        setLayoutY(index * 100);
+        setCursor(Cursor.HAND);
+        clickInit();
+    }
 
+    void clickInit() {
+        setOnMouseClicked(event -> {
+            HashMap<String, String> data = new HashMap<>();
+            data.put("id", String.valueOf(id));
+            System.out.println(ApplicationManger.getServerResponse("tv", "play", data));
+        });
+    }
+
+    String text() {
+        return nickname1 + "   VS   " + nickname2;
+    }
 }

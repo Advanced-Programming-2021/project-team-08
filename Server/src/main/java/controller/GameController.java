@@ -384,14 +384,16 @@ public class GameController {
 
     public static ArrayList<GameData> getGameList() {
         ArrayList<GameData> savedGameData = new ArrayList<>();
+        System.out.println(idCounter);
         try {
             for (int i = 1; i < idCounter; i++) {
-                String gameData = new String(Files.readAllBytes(Paths.get("src/resources/gameData" + i + "txt")));
-                if (gameData.endsWith("end")) continue;
+                String gameData = new String(Files.readAllBytes(Paths.get("src/resources/gameData/" + i + ".txt")));
+                if (!gameData.endsWith("end")) continue;
                 String data = new Scanner(gameData).nextLine();
                 WaitingGame waitingGame = new Gson().fromJson(data, WaitingGame.class);
                 GameData saveData = new GameData(waitingGame.getRounds(), waitingGame.getUser1().getUserData().getNickname(), waitingGame.getUser2().getUserData().getNickname());
                 savedGameData.add(saveData);
+                System.out.println("one time loop done");
             }
             return savedGameData;
         } catch (IOException e) {
