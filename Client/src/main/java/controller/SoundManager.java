@@ -12,9 +12,9 @@ public class SoundManager {
     Media media;
 
     public static void setMute(boolean mute) {
-        if(mute){
+        if (mute) {
             mediaPlayer.setVolume(0);
-        }else {
+        } else {
             mediaPlayer.setVolume(1);
         }
         SoundManager.mute = mute;
@@ -24,14 +24,8 @@ public class SoundManager {
         return mute;
     }
 
-    public void playSound(String location) {
-        Media hit = new Media(new File(location).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-    }
-
-    public void playMusic(String location) {
-        Media hit = new Media(new File(location).toURI().toString());
+    public static void playSound(String fileName) {
+        Media hit = new Media(new File("SFX/" + fileName + ".mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.play();
