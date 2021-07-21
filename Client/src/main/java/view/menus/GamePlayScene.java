@@ -477,6 +477,7 @@ public class GamePlayScene {
 
         parallelTransition.setOnFinished(onEnd);
         parallelTransition.play();
+        SoundManager.playSound("draw");
     }
 
     public void summon(int playerNumber, int handCardNumber, int toSlotNumber) {
@@ -515,6 +516,7 @@ public class GamePlayScene {
         }
 
         parallelTransition.play();
+        SoundManager.playSound("summon");
     }
 
     public void setMonster(int playerNumber, int handCardNumber, int toSlotNumber) {
@@ -559,6 +561,7 @@ public class GamePlayScene {
         } else {
             parallelTransition.play();
         }
+        SoundManager.playSound("set");
     }
 
     private void removeCardFromHand(int handCardNumber, graphicBoard.GraphicPlayerBoard playerBoard) {
@@ -582,7 +585,6 @@ public class GamePlayScene {
     }
 
     public void applyAttackResultGraphic(AttackResultJson result, int playerNumber, int attackerCardNumber, int defenderCardNumber) {
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHH");
         graphicBoard.GraphicPlayerBoard attackerBoard = gBoard.getPlayerBoard(playerNumber);
         graphicBoard.GraphicPlayerBoard defenderBoard = gBoard.getPlayerBoard(playerNumber == 1 ? 2 : 1);
 
@@ -601,6 +603,7 @@ public class GamePlayScene {
         if (result.isDestroyCard2()) {
             defenderBoard.moveToGraveyard(defenderCardNumber);
         }
+        SoundManager.playSound("attack");
     }
 
     public static class AttackResultJson {
@@ -737,6 +740,7 @@ public class GamePlayScene {
             muteButton.setText("Mute");
         }
         pausePanel.setVisible(true);
+        SoundManager.playSound("pause");
     }
 
     public void resume() {
