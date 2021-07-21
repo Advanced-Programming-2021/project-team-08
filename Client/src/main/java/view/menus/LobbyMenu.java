@@ -171,27 +171,27 @@ public class LobbyMenu {
             errorMessage.setTextFill(Color.BLACK);
         }
         else {
-            JsonArray jsonArray=jsonObject.get("returnObject").getAsJsonArray();
-            ArrayList<Object> data=new ArrayList<>();
-            for (int j=0;j<jsonArray.size();j++)
-                System.out.println(jsonArray.get(j));
+            JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
+            String nickname,message,chatType;
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.WHITE);
             for (int j=0;j<jsonArray.size();j++){
+                nickname=jsonArray.get(j).getAsJsonObject().get("senderNickname").getAsString();
+                message=jsonArray.get(j).getAsJsonObject().get("message").getAsString();
+                chatType=jsonArray.get(j).getAsJsonObject().get("chatType").getAsString();
                 VBox vBox= new VBox();
                 Label nicknameAndChatType=new Label();
                 Label message1 = new Label();
                 nicknameAndChatType.setStyle("-fx-background-color: white");
                 message1.setStyle("-fx-background-color: white");
-                nicknameAndChatType.setAlignment(Pos.CENTER);
+                nicknameAndChatType.setAlignment(Pos.TOP_LEFT);
                 nicknameAndChatType.setTextFill(Color.BLUE);
                 message1.setAlignment(Pos.CENTER);
                 nicknameAndChatType.setPrefWidth(420);
                 message1.setPrefWidth(420);
-//                nicknameAndChatType.setText(message.getSenderNickname()+" - "+message.getChatType().toString());
-//                message1.setText(message.getMessage());
-//                nicknameAndChatType.setText(jsonArray.get(j).getAsJsonObject().get(""));
+                nicknameAndChatType.setText(nickname+" - "+chatType);
+                message1.setText(message);
                 vBox.getChildren().add(0,nicknameAndChatType);
                 vBox.getChildren().add(1, message1);
                 messages.getChildren().add(vBox);
