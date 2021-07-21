@@ -166,7 +166,7 @@ public class GamePlayScene {
         System.out.println(message);
         JsonObject json = JsonParser.parseString(message).getAsJsonObject();
         String methodName = json.get("method").getAsString();
-        int playerNumber;
+        int playerNumber, a, b;
         switch (methodName) {
             case "firstSetupBoardGraphic":
                 playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
@@ -185,9 +185,20 @@ public class GamePlayScene {
                 break;
             case "summon":
                 playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
-                int a = Integer.parseInt(json.get("handCardNumber").getAsString());
-                int b = Integer.parseInt(json.get("toSlotNumber").getAsString());
+                a = Integer.parseInt(json.get("handCardNumber").getAsString());
+                b = Integer.parseInt(json.get("toSlotNumber").getAsString());
                 Platform.runLater(() -> summon(playerNumber, a, b));
+                break;
+            case "set":
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                a = Integer.parseInt(json.get("handCardNumber").getAsString());
+                b = Integer.parseInt(json.get("toSlotNumber").getAsString());
+                Platform.runLater(() -> setMonster(playerNumber, a, b));
+                break;
+            case "gameFinishUI":
+                String resultMessage = json.get("resultMessage").getAsString();
+                int winnerNumber = Integer.parseInt(json.get("winnerNumber").getAsString());
+                Platform.runLater(() -> gameFinishUI(resultMessage, winnerNumber));
                 break;
             default:
                 System.out.println("unknown");
@@ -474,7 +485,7 @@ public class GamePlayScene {
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         if (playerNumber == this.playerNumber) {
-            thisCard.setToY(slot.getImageView().getLayoutY() + 80);
+            thisCard.setToY(slot.getImageView().getLayoutY() + 30);
         } else {
             thisCard.setToY(slot.getImageView().getLayoutY() + 35);
         }
@@ -513,7 +524,7 @@ public class GamePlayScene {
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         if (playerNumber == this.playerNumber) {
-            thisCard.setToY(slot.getImageView().getLayoutY() + 80);
+            thisCard.setToY(slot.getImageView().getLayoutY() + 30);
         } else {
             thisCard.setToY(slot.getImageView().getLayoutY() + 35);
         }
@@ -536,7 +547,7 @@ public class GamePlayScene {
             s.getChildren().add(flipCardAnimation);
             s.getChildren().add(parallelTransition);
             s.play();
-        }else {
+        } else {
             parallelTransition.play();
         }
     }
@@ -624,18 +635,29 @@ public class GamePlayScene {
 
     }
 
-    public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
-        /////useless comment
-        String res = thisDuelData.setRoundResult(winnerNumber, player1LP, player2LP);
-
-        gameEndMessage.setText(res);
-        if (thisDuelData.getWinnerNumber() == 1) {
+    public void gameFinishUI(String resultMessage, int winnerNumber){
+        gameEndMessage.setText(resultMessage);
+        if (winnerNumber == 1) {
             gameEndMessage.setStyle("-fx-text-fill: blue");
         } else {
             gameEndMessage.setStyle("-fx-text-fill: red");
         }
-
         endGamePanel.setVisible(true);
+    }
+
+    public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
+        /////useless comment
+        if(isAI){
+            String res = thisDuelData.setRoundResult(winnerNumber, player1LP, player2LP);
+
+            gameEndMessage.setText(res);
+            if (thisDuelData.getWinnerNumber() == 1) {
+                gameEndMessage.setStyle("-fx-text-fill: blue");
+            } else {
+                gameEndMessage.setStyle("-fx-text-fill: red");
+            }
+
+            endGamePanel.setVisible(true);
 
         /*if (!thisDuelData.isFinished()) {
             //currentRound++;
@@ -644,7 +666,8 @@ public class GamePlayScene {
             return;
         }*/
 
-        thisDuelData.applyDuelResult();
+            thisDuelData.applyDuelResult();
+        }
     }
 
     //Pause Menu

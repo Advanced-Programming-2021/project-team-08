@@ -547,7 +547,7 @@ public class GameManager {
 
     public void finishGame(int winnerNumber) {
         // TODO: ۲۰/۰۷/۲۰۲۱ finish game
-        //sceneController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
+        gameController.gameFinished(winnerNumber, player1.getLP(), player2.getLP());
         scene.log("Game Over");
     }
 

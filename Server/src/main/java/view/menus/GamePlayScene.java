@@ -50,7 +50,7 @@ public class GamePlayScene {
         return sceneController;
     }
 
-    private void firstSetupUI(GamePlaySceneController.DuelData data) {
+    private void firstSetupUI(GamePlaySceneController.DuelData1 data) {
         player1Nickname_T.setText(data.getFirstPlayer().getUsername() + " (" + data.getFirstPlayer().getNickname() + ")");
         player2Nickname_T.setText(data.getSecondPlayer().getUsername() + " (" + data.getSecondPlayer().getNickname() + ")");
         player1Avatar.setImage(data.getFirstPlayer().getProfileImage());

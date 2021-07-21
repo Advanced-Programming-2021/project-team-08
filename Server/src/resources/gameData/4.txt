@@ -1,0 +1,24 @@
+{"user1Data":{"username":"Abolfazl","nickname":"aboo","password":"abc123","point":500,"money":8300,"myCardsIds":[31,31,31,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,11,11,12,12,12,31,31,31,3,3,3,5,10,68,68,32,32,32,32,32,2,3,3,4,3,4,5,21,3,23,5,4,2,8],"decks":[{"mainDeck":[31,31,31,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,11,11,11,12,12,12,31,31,31,3,3,3,5,10,68,68],"sideDeck":[32,4,1,23],"name":"test2","username":"Abolfazl"},{"mainDeck":[],"sideDeck":[],"name":"ddd","username":"Abolfazl"},{"mainDeck":[],"sideDeck":[],"name":"myDeck","username":"Abolfazl"},{"mainDeck":[],"sideDeck":[],"name":"mydeck","username":"Abolfazl"}],"activeDeckName":"test2"},"user2Data":{"username":"ali","nickname":"abbasi","password":"123","point":0,"money":100000,"myCardsIds":[31,31,31,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,11,11,12,12,12,31,31,31,3,3,3,5,10,68,68,32,32,32,32,32,2,3,3,4,3,4,5,21,3,23,5,4,2,8],"decks":[{"mainDeck":[31,31,31,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,11,11,11,12,12,12,31,31,31,3,3,3,5,10,68,68],"sideDeck":[32,4,1,23],"name":"test","username":"ali"}],"activeDeckName":"test"},"rounds":1}
+{"method":"firstSetupBoardGraphic","playerNumber":"1","cardIds":"[1,10,3,2,8,31,12,31,1,8,3,4,3,12,9,10,1,31,7,7,5,8,3,5,3,11,6,4,31,6,9,11,3,9,5,31,2,6,11,5,31,2,12,4,10,10,7]"}
+{"method":"firstSetupBoardGraphic","playerNumber":"2","cardIds":"[4,7,12,31,10,12,2,4,4,2,7,5,9,3,31,2,31,9,10,9,6,8,1,8,6,3,3,3,1,10,3,11,10,31,1,5,8,5,11,5,31,6,3,7,11,31,12]"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"46"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"46"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"45"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"45"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"44"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"44"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"43"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"43"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"42"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"42"}
+{"method":"changePhase","toPhase":"DRAW","currentPlayer":"2"}
+{"method":"draw","playerNumber":"2","deckCardNumber":"41"}
+{"method":"changePhase","toPhase":"STANDBY","currentPlayer":"2"}
+{"method":"changePhase","toPhase":"MAIN","currentPlayer":"2"}
+{"method":"changePhase","toPhase":"END","currentPlayer":"2"}
+{"method":"changePhase","toPhase":"DRAW","currentPlayer":"1"}
+{"method":"draw","playerNumber":"1","deckCardNumber":"41"}
+{"method":"changePhase","toPhase":"STANDBY","currentPlayer":"1"}
+{"method":"changePhase","toPhase":"MAIN","currentPlayer":"1"}
+{"method":"set","playerNumber":"1","toSlotNumber":"1","handCardNumber":"5"}
+{"method":"gameFinishUI","winnerNumber":"2","resultMessage":"ali won the game and the score is: 0-1"}

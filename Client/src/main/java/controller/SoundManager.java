@@ -40,13 +40,8 @@ public class SoundManager {
     public void playBackgroundSound() {
         media = new Media(new File("musics/ForestWalk.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                playBackgroundSound();
-            }
-        });
     }
 
 }

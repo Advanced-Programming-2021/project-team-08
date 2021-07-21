@@ -26,7 +26,7 @@ public class GamePlaySceneController {
     private boolean isDuelStarted = false;
     private GamePlayScene scene;
     private GameManager gameManager;
-    private DuelData currentDuelData;
+    private DuelData1 currentDuelData;
 
     public GamePlaySceneController(GamePlayScene scene) {
         this.scene = scene;
@@ -126,7 +126,7 @@ public class GamePlaySceneController {
         scene.log(currentDuelData.getResultString());
     }
 
-    public static class DuelData {
+    public static class DuelData1 {
         private int rounds;
         private boolean isPlayer;
         private UserData firstPlayer, secondPlayer;
@@ -134,7 +134,7 @@ public class GamePlaySceneController {
         private int firstPlayerWins, secondPlayerWins;
         private int maxLP1, maxLP2;
 
-        public DuelData(int rounds, boolean isPlayer, UserData firstPlayer, UserData secondPlayer) {
+        public DuelData1(int rounds, boolean isPlayer, UserData firstPlayer, UserData secondPlayer) {
             this.rounds = rounds;
             this.isPlayer = isPlayer;
             this.firstPlayer = firstPlayer;

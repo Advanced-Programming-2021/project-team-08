@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.gameplay.GameManager;
+import model.UserData;
 import model.cards.Card;
 import model.enums.Phase;
 import view.menus.GamePlayScene;
@@ -23,6 +24,9 @@ public class GameController {
     private Socket player1Socket, player2Socket;
     private String player1Token, player2Token;
     private int gameId;
+
+    private DuelData duelData;
+    private int currentRound;
 
     private File saveGame;
 
@@ -46,6 +50,9 @@ public class GameController {
 
         saveGame = new File("src/resources/gameData/" + gameId + ".txt");
         savaGameData(duelGameData);
+
+        duelData = new DuelData(gameData.getRounds(), gameData.getUser1().getUserData(), gameData.getUser2().getUserData());
+        currentRound = 1;
 
         new Thread(() -> gameManager = new GameManager(gameData.getUser1().getUserData(), gameData.getUser2().getUserData(), new GamePlayScene(), this)).start();
 
@@ -106,7 +113,7 @@ public class GameController {
             return;
         }
 
-        if(gameManager.getCurrentPlayerTurn() != senderNumber) return;
+        if (gameManager.getCurrentPlayerTurn() != senderNumber) return;
 
         if (command.equals("next phase")) {
             gameManager.goToNextPhase();
@@ -223,6 +230,28 @@ public class GameController {
         sendMessageToBoth(getMessage("set", data));
     }
 
+    public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
+        //isDuelStarted = false;
+        String result = duelData.setRoundResult(winnerNumber, player1LP, player2LP);
+        System.out.println(result);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("resultMessage", result);
+        data.put("winnerNumber", Integer.valueOf(duelData.getWinnerNumber()).toString());
+        sendMessageToBoth(getMessage("gameFinishUI", data));
+
+        if (!duelData.isFinished()) {
+            currentRound++;
+            System.out.println("Round " + currentRound);
+            //gameManager = new GameManager(currentDuelData.firstPlayer, currentDuelData.secondPlayer, scene, this);
+
+            //isDuelStarted = true;
+            return;
+        }
+
+        duelData.applyDuelResult();
+        System.out.println(duelData.getResultString());
+    }
+
     public static ArrayList<GameController> getAllGames() {
         return allGames;
     }
@@ -233,5 +262,78 @@ public class GameController {
 
     public GameManager getGameManager() {
         return gameManager;
+    }
+
+    public class DuelData {
+        private int rounds;
+        private UserData firstPlayer, secondPlayer;
+
+        private int firstPlayerWins, secondPlayerWins;
+        private int maxLP1, maxLP2;
+
+        private int winnerNumber;
+
+        public DuelData(int rounds, UserData firstPlayer, UserData secondPlayer) {
+            this.rounds = rounds;
+            this.firstPlayer = firstPlayer;
+            this.secondPlayer = secondPlayer;
+            this.firstPlayerWins = 0;
+            this.secondPlayerWins = 0;
+            this.maxLP1 = 0;
+            this.maxLP2 = 0;
+        }
+
+        public UserData getFirstPlayer() {
+            return firstPlayer;
+        }
+
+        public UserData getSecondPlayer() {
+            return secondPlayer;
+        }
+
+        public int getWinnerNumber() {
+            return winnerNumber;
+        }
+
+        public String setRoundResult(int winnerNumber, int player1LP, int player2LP) {
+            this.winnerNumber = winnerNumber;
+            if (player1LP > maxLP1) maxLP1 = player1LP;
+            if (player2LP > maxLP2) maxLP2 = player2LP;
+
+            if (winnerNumber == 1) {
+                firstPlayerWins++;
+                return firstPlayer.getUsername() + " won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
+            } else {
+                secondPlayerWins++;
+
+                return secondPlayer.getUsername() + " won the game and the score is: " + firstPlayerWins + "-" + secondPlayerWins;
+            }
+        }
+
+        public String getResultString() {
+            if (firstPlayerWins > secondPlayerWins) {
+                return firstPlayer.getUsername() + " won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
+            } else {
+
+                return secondPlayer.getUsername() + " won the whole match with score: " + firstPlayerWins + "-" + secondPlayerWins;
+            }
+        }
+
+        public void applyDuelResult() {
+            if (firstPlayerWins > secondPlayerWins) {
+                firstPlayer.addPoint(rounds * 1000);
+                firstPlayer.addMoney(rounds * (1000 + maxLP1));
+                secondPlayer.addMoney(rounds * (100));
+            } else {
+                secondPlayer.addPoint(rounds * 1000);
+                secondPlayer.addMoney(rounds * (1000 + maxLP2));
+                firstPlayer.addMoney(rounds * (100));
+            }
+        }
+
+        public boolean isFinished() {
+            if (firstPlayerWins == 2 || secondPlayerWins == 2) return true;
+            return currentRound >= rounds;
+        }
     }
 }
