@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -7,6 +8,7 @@ import controller.gameplay.GameManager;
 import model.UserData;
 import model.cards.Card;
 import model.enums.Phase;
+import model.gameplay.AttackResult;
 import view.menus.GamePlayScene;
 
 import java.io.*;
@@ -119,7 +121,7 @@ public class GameController {
             gameManager.goToNextPhase();
             return 1;
         }
-        matcher = Pattern.compile("select ([^,]+),([^$]+)").matcher(command);
+        matcher = Pattern.compile("select ([^,]+),([^$]+)( ([1-5]))?").matcher(command);
         if (matcher.matches()) {
             try {
                 gameManager.selectCard(matcher.group(1));
@@ -129,6 +131,9 @@ public class GameController {
                         break;
                     case "set":
                         gameManager.setCard();
+                        break;
+                    case "attack":
+                        gameManager.attack(Integer.parseInt(matcher.group(4)));
                         break;
                     default:
                         System.out.println("wrong command");
@@ -229,6 +234,36 @@ public class GameController {
         data.put("handCardNumber", Integer.valueOf(handCardNumber).toString());
         data.put("toSlotNumber", Integer.valueOf(toSlotNumber).toString());
         sendMessageToBoth(getMessage("set", data));
+    }
+
+    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attackerCardNumber, int defenderCardNumber) {
+        AttackResultJson resultJson = new AttackResultJson(result);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("result", new Gson().toJson(resultJson));
+        data.put("playerNumber", Integer.valueOf(playerNumber).toString());
+        data.put("attackerCardNumber", Integer.valueOf(attackerCardNumber).toString());
+        data.put("defenderCardNumber", Integer.valueOf(defenderCardNumber).toString());
+        sendMessageToBoth(getMessage("applyAttackResultGraphic", data));
+    }
+
+    class AttackResultJson {
+        private int attackerPlayerNumber;
+        private int attackedPlayerNumber;
+        private int player1LPDecrease;
+        private int player2LPDecrease;
+        private boolean destroyCard1;
+        private boolean destroyCard2;
+        private boolean attackedFlip;
+
+        public AttackResultJson(AttackResult attackResult) {
+            attackerPlayerNumber = attackResult.getAttackerPlayer().getPlayerNumber();
+            attackedPlayerNumber = attackResult.getAttackedPlayer().getPlayerNumber();
+            player1LPDecrease = attackResult.getPlayer1LPDecrease();
+            player2LPDecrease = attackResult.getPlayer2LPDecrease();
+            destroyCard1 = attackResult.isDestroyCard1();
+            destroyCard2 = attackResult.isDestroyCard2();
+            attackedFlip = attackResult.isAttackedFlip();
+        }
     }
 
     public void gameFinished(int winnerNumber, int player1LP, int player2LP) {

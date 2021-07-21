@@ -37,6 +37,7 @@ public class GraphicCard {
         shape.setOnMouseExited(event -> onMouseExit());
 
         shape.setOnMouseClicked(event -> {
+            if (cardOwnerPlayerNumber != GamePlayScene.getInstance().getPlayerNumber()) return;
             switch (GamePlayScene.getInstance().getCurrentPhase()) {
                 case DRAW:
                     break;
@@ -153,6 +154,7 @@ public class GraphicCard {
 
 
     private void onClickBattle(MouseEvent event) {
+        boolean isAI = GamePlayScene.getInstance().isAI();
         ContextMenu contextMenu = new ContextMenu();
         switch (slot.getType()) {
             case GRAVEYARD:
@@ -170,12 +172,16 @@ public class GraphicCard {
                             MenuItem m = new MenuItem("Attack " + i);
                             int finalI = i;
                             m.setOnAction(e -> {
-                                System.out.println("attack ");
-                                try {
-                                    GameManager.getInstance().selectCard("--monster " + slot.getNumber());
-                                    GameManager.getInstance().attack(finalI);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
+                                System.out.println("attack " + finalI);
+                                if (isAI) {
+                                    try {
+                                        GameManager.getInstance().selectCard("--monster " + slot.getNumber());
+                                        GameManager.getInstance().attack(finalI);
+                                    } catch (Exception exception) {
+                                        exception.printStackTrace();
+                                    }
+                                } else {
+                                    GamePlayScene.getInstance().sendMessageToServer("select --monster " + slot.getNumber() + ",attack " + finalI);
                                 }
                             });
                             contextMenu.getItems().add(m);

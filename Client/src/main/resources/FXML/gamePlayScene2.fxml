@@ -391,7 +391,7 @@
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button layoutX="480.0" layoutY="565.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Exit Game">
+            <Button layoutX="480.0" layoutY="680.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Exit Game">
                <font>
                   <Font size="45.0" />
                </font>

@@ -1,9 +1,6 @@
 package view.menus;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
@@ -195,6 +192,13 @@ public class GamePlayScene {
                 a = Integer.parseInt(json.get("handCardNumber").getAsString());
                 b = Integer.parseInt(json.get("toSlotNumber").getAsString());
                 Platform.runLater(() -> setMonster(playerNumber, a, b));
+                break;
+            case "applyAttackResultGraphic":
+                AttackResultJson result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonArray(), AttackResultJson.class);
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                a = Integer.parseInt(json.get("attackerCardNumber").getAsString());
+                b = Integer.parseInt(json.get("defenderCardNumber").getAsString());
+                Platform.runLater(() -> applyAttackResultGraphic(result, playerNumber, a, b));
                 break;
             case "gameFinishUI":
                 String resultMessage = json.get("resultMessage").getAsString();
@@ -573,24 +577,73 @@ public class GamePlayScene {
         }
     }
 
-    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attacker, int defender) {
+    public void applyAttackResultGraphic(AttackResultJson result, int playerNumber, int attackerCardNumber, int defenderCardNumber) {
+        System.out.println("HHHHHHHHHHHHHHHHHHHHHH");
         graphicBoard.GraphicPlayerBoard attackerBoard = gBoard.getPlayerBoard(playerNumber);
         graphicBoard.GraphicPlayerBoard defenderBoard = gBoard.getPlayerBoard(playerNumber == 1 ? 2 : 1);
 
         if (result.isAttackedFlip()) {
-            GraphicCard gc = defenderBoard.getMonster(defender).getCard();
+            GraphicCard gc = defenderBoard.getMonster(defenderCardNumber).getCard();
             FlipCardAnimation flipCardAnimation = new FlipCardAnimation(gc, 300, CardStatus.FACE_UP);
             flipCardAnimation.play();
         }
 
-        changePlayerLP(result.getAttackerPlayer().getPlayerNumber(), -result.getPlayer1LPDecrease());
-        changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
+        changePlayerLP(result.getAttackerPlayerNumber(), -result.getPlayer1LPDecrease());
+        changePlayerLP(result.getAttackedPlayerNumber(), -result.getPlayer2LPDecrease());
 
         if (result.isDestroyCard1()) {
-            attackerBoard.moveToGraveyard(attacker);
+            attackerBoard.moveToGraveyard(attackerCardNumber);
         }
         if (result.isDestroyCard2()) {
-            defenderBoard.moveToGraveyard(defender);
+            defenderBoard.moveToGraveyard(defenderCardNumber);
+        }
+    }
+
+    public static class AttackResultJson {
+        private int attackerPlayerNumber;
+        private int attackedPlayerNumber;
+        private int player1LPDecrease;
+        private int player2LPDecrease;
+        private boolean destroyCard1;
+        private boolean destroyCard2;
+        private boolean attackedFlip;
+
+        public AttackResultJson(AttackResult attackResult) {
+            attackerPlayerNumber = attackResult.getAttackerPlayer().getPlayerNumber();
+            attackedPlayerNumber = attackResult.getAttackedPlayer().getPlayerNumber();
+            player1LPDecrease = attackResult.getPlayer1LPDecrease();
+            player2LPDecrease = attackResult.getPlayer2LPDecrease();
+            destroyCard1 = attackResult.isDestroyCard1();
+            destroyCard2 = attackResult.isDestroyCard2();
+            attackedFlip = attackResult.isAttackedFlip();
+        }
+
+        public int getPlayer2LPDecrease() {
+            return player2LPDecrease;
+        }
+
+        public int getPlayer1LPDecrease() {
+            return player1LPDecrease;
+        }
+
+        public int getAttackedPlayerNumber() {
+            return attackedPlayerNumber;
+        }
+
+        public int getAttackerPlayerNumber() {
+            return attackerPlayerNumber;
+        }
+
+        public boolean isDestroyCard1() {
+            return destroyCard1;
+        }
+
+        public boolean isDestroyCard2() {
+            return destroyCard2;
+        }
+
+        public boolean isAttackedFlip() {
+            return attackedFlip;
         }
     }
 

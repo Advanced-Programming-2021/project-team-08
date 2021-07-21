@@ -465,7 +465,7 @@ public class GameManager {
             attacked.moveToGraveyard();
         }
         scene.log(result.getResultMessage());
-        Platform.runLater(() -> scene.applyAttackResultGraphic(result, playerNumber, a, b));
+        gameController.applyAttackResultGraphic(result, playerNumber, a, b);
     }
 
     public void applyDirectAttack(AttackResult result) {

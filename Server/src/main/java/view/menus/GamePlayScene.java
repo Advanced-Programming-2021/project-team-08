@@ -199,9 +199,6 @@ public class GamePlayScene {
     public void setMonster(int playerNumber, int handCardNumber, int toSlotNumber) {
     }
 
-    public void applyAttackResultGraphic(AttackResult result, int playerNumber, int attacker, int defender) {
-    }
-
     public void applyDirectAttackResult(AttackResult result, int playerNumber) {
         changePlayerLP(result.getAttackedPlayer().getPlayerNumber(), -result.getPlayer2LPDecrease());
     }
