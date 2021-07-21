@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="refresh">
       <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/Lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/Lobby.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TVController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +137,10 @@
       <workItem from="1626863016983" duration="501000" />
       <workItem from="1626864590857" duration="1779000" />
       <workItem from="1626866408076" duration="598000" />
+      <workItem from="1626867124166" duration="2138000" />
+      <workItem from="1626869306508" duration="181000" />
+      <workItem from="1626869730391" duration="279000" />
+      <workItem from="1626870535731" duration="1491000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

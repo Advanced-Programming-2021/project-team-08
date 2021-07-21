@@ -31,25 +31,25 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="70.0" layoutY="38.0" prefHeight="510.0" prefWidth="502.0">
+      <ScrollPane layoutX="70.0" layoutY="38.0" prefHeight="453.0" prefWidth="502.0">
          <content>
-            <AnchorPane prefHeight="505.0" prefWidth="500.0" style="-fx-background-color: rgb(191, 214, 224);">
+            <AnchorPane prefHeight="472.0" prefWidth="500.0" style="-fx-background-color: rgb(191, 214, 224);">
                <children>
                   <VBox fx:id="messages" layoutX="7.0" layoutY="11.0" prefHeight="486.0" prefWidth="487.0" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Button layoutX="469.0" layoutY="627.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="send" textFill="WHITE">
+      <Button layoutX="469.0" layoutY="577.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="send" textFill="WHITE">
          <font>
             <Font name="Arial" size="25.0" />
          </font></Button>
-      <TextField fx:id="messageText" layoutX="247.0" layoutY="626.0" style="-fx-background-color: rgb(191, 214, 224);" />
-      <Label layoutX="94.0" layoutY="626.0" text="Message" textFill="WHITE">
+      <TextField fx:id="messageText" layoutX="255.0" layoutY="576.0" style="-fx-background-color: rgb(191, 214, 224);" />
+      <Label layoutX="94.0" layoutY="576.0" text="Message" textFill="WHITE">
          <font>
             <Font size="34.0" />
          </font></Label>
-      <Label fx:id="errorMessage" layoutX="95.0" layoutY="692.0" opacity="0.0" prefHeight="61.0" prefWidth="452.0" style="-fx-alignment: center; -fx-background-color: rgb(191, 214, 224);">
+      <Label fx:id="errorMessage" layoutX="95.0" layoutY="713.0" opacity="0.0" prefHeight="61.0" prefWidth="452.0" style="-fx-alignment: center; -fx-background-color: rgb(191, 214, 224);">
          <font>
             <Font name="Arial" size="26.0" />
          </font></Label>
@@ -58,9 +58,20 @@
             <Font name="Harrington" size="80.0" />
          </font>
       </Label>
-      <Button layoutX="70.0" layoutY="556.0" mnemonicParsing="false" onAction="#refresh" prefHeight="48.0" prefWidth="502.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="refresh" textFill="#fcfcfc">
+      <Button layoutX="70.0" layoutY="506.0" mnemonicParsing="false" onAction="#refresh" prefHeight="48.0" prefWidth="502.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="refresh" textFill="#fcfcfc">
          <font>
             <Font name="Arial" size="26.0" />
+         </font>
+      </Button>
+      <Label fx:id="editedMessageLabel" layoutX="-21.0" layoutY="645.0" opacity="0.0" prefHeight="61.0" prefWidth="293.0" style="-fx-alignment: center;" text="edited message" textFill="WHITE">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <TextField fx:id="editedMessage" layoutX="255.0" layoutY="654.0" opacity="0.0" style="-fx-background-color: rgb(191, 214, 224);" />
+      <Button fx:id="editButton" layoutX="469.0" layoutY="658.0" mnemonicParsing="false" opacity="0.0" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: rgb(0, 12, 65); -fx-background-radius: 20;" text="edit" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="25.0" />
          </font>
       </Button>
    </children>

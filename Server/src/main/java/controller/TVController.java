@@ -30,22 +30,22 @@ public class TVController extends ServerController {
                 return topMatches(input);
             case "replay":
                 return replayMatches(input);
-            case "play" :
-                return playAMatch(input);
+//            case "play" :
+//                return playAMatch(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
     }
 
-    private String playAMatch(String input) {
-        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
-        int index = Integer.parseInt(jsonObject.get("id").getAsString());
-        GameController gameController = GameController.getAllGames().get(index);
-        if (gameController == null) {
-            return serverMessage(MessageType.ERROR, "invalid game id", null);
-        }
-
-    }
+//    private String playAMatch(String input) {
+//        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+//        int index = Integer.parseInt(jsonObject.get("id").getAsString());
+//        GameController gameController = GameController.getAllGames().get(index);
+//        if (gameController == null) {
+//            return serverMessage(MessageType.ERROR, "invalid game id", null);
+//        }
+//
+//    }
 
     private String replayMatches(String input) {
 

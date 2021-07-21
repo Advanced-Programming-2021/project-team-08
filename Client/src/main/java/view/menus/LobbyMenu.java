@@ -33,6 +33,10 @@ public class LobbyMenu {
     public Label errorMessage;
     public TextField messageText;
     public VBox messages;
+    public TextField editedMessage;
+    public Label editedMessageLabel;
+    public Button editButton;
+
     private static int idCounter = 0;
 
     private boolean isGameStarted = false;
@@ -122,7 +126,7 @@ public class LobbyMenu {
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")) {
-            int id=Integer.parseInt(jsonObject.get("returnObject").getAsString());
+            int id = Integer.parseInt(jsonObject.get("returnObject").getAsString());
             HBox hBox = new HBox();
             hBox.setSpacing(10);
             hBox.setPrefWidth(435);
@@ -151,22 +155,41 @@ public class LobbyMenu {
             messageText.setText("");
             deleteMessageButton.setOnMouseClicked(event -> {
                 HashMap<String, String> data1 = new HashMap<>();
-                data1.put("id", String.valueOf(id));
-                String result1=ApplicationManger.getServerResponse("lobby","delete",data1);
+                data1.put("actionId", String.valueOf(id));
+                data1.put("message", "deleted a message");
+                data1.put("type", "DELETED");
+                String result1 = ApplicationManger.getServerResponse("lobby", "send", data1);
                 JsonElement jsonElement1 = JsonParser.parseString(result1);
                 JsonObject jsonObject1 = jsonElement1.getAsJsonObject();
-                if (jsonObject1.get("type").getAsString().equals("ERROR")){
+                if (jsonObject1.get("type").getAsString().equals("ERROR")) {
                     errorMessage.setText(jsonObject1.get("message").getAsString());
                     errorMessage.setTextFill(Color.RED);
-                }
-                else {
+                } else {
                     errorMessage.setText(jsonObject1.get("message").getAsString());
                     errorMessage.setTextFill(Color.GREEN);
-                    messages.getChildren().remove(hBox);
                 }
             });
             editMessageButton.setOnMouseClicked(event -> {
-
+                editedMessage.setOpacity(1);
+                editedMessageLabel.setOpacity(1);
+                editButton.setOpacity(1);
+                editButton.setOnMouseClicked(event1 -> {
+                    editedMessage.setText("");
+                    HashMap<String, String> data2 = new HashMap<>();
+                    data2.put("actionId", String.valueOf(id));
+                    data2.put("message", editedMessage.getText());
+                    data2.put("type", "EDITED");
+                    String result1 = ApplicationManger.getServerResponse("lobby", "send", data2);
+                    JsonElement jsonElement1 = JsonParser.parseString(result1);
+                    JsonObject jsonObject1 = jsonElement1.getAsJsonObject();
+                    if (jsonObject1.get("type").getAsString().equals("ERROR")) {
+                        errorMessage.setText(jsonObject1.get("message").getAsString());
+                        errorMessage.setTextFill(Color.RED);
+                    } else {
+                        errorMessage.setText(jsonObject1.get("message").getAsString());
+                        errorMessage.setTextFill(Color.GREEN);
+                    }
+                });
             });
         } else {
             errorMessage.setOpacity(1);
@@ -178,31 +201,29 @@ public class LobbyMenu {
 
     public void refresh(ActionEvent actionEvent) {
         messages.setSpacing(10);
-        String result=ApplicationManger.getServerResponse("lobby", "updateChat", null);
+        String result = ApplicationManger.getServerResponse("lobby", "updateChat", null);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        if (jsonObject.get("type").getAsString().equals("ERROR")){
+        if (jsonObject.get("type").getAsString().equals("ERROR")) {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.RED);
-        }
-        else if(jsonObject.get("message").getAsString().equals("there is no new message")){
+        } else if (jsonObject.get("message").getAsString().equals("there is no new message")) {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.BLACK);
-        }
-        else {
+        } else {
             JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
-            String nickname,message,chatType;
+            String nickname, message, chatType;
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.WHITE);
-            for (int j=0;j<jsonArray.size();j++){
-                nickname=jsonArray.get(j).getAsJsonObject().get("senderNickname").getAsString();
-                message=jsonArray.get(j).getAsJsonObject().get("message").getAsString();
-                chatType=jsonArray.get(j).getAsJsonObject().get("chatType").getAsString();
-                VBox vBox= new VBox();
-                Label nicknameAndChatType=new Label();
+            for (int j = 0; j < jsonArray.size(); j++) {
+                nickname = jsonArray.get(j).getAsJsonObject().get("senderNickname").getAsString();
+                message = jsonArray.get(j).getAsJsonObject().get("message").getAsString();
+                chatType = jsonArray.get(j).getAsJsonObject().get("chatType").getAsString();
+                VBox vBox = new VBox();
+                Label nicknameAndChatType = new Label();
                 Label message1 = new Label();
                 nicknameAndChatType.setStyle("-fx-background-color: white");
                 message1.setStyle("-fx-background-color: white");
@@ -212,10 +233,10 @@ public class LobbyMenu {
                 nicknameAndChatType.setPrefWidth(420);
                 message1.setPrefWidth(420);
                 if (chatType.equals("EDITED"))
-                nicknameAndChatType.setText(nickname+" - "+chatType);
-                else    nicknameAndChatType.setText(nickname);
+                    nicknameAndChatType.setText(nickname + " - " + chatType);
+                else nicknameAndChatType.setText(nickname);
                 message1.setText(message);
-                vBox.getChildren().add(0,nicknameAndChatType);
+                vBox.getChildren().add(0, nicknameAndChatType);
                 vBox.getChildren().add(1, message1);
                 messages.getChildren().add(vBox);
             }
