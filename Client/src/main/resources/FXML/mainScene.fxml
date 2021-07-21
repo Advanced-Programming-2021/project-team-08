@@ -20,7 +20,7 @@
         <Label fx:id="profileLabel" layoutX="484" layoutY="620" styleClass="menu-label" text="profile" />
         <ImageView fx:id="exit" layoutX="484" layoutY="720" onMouseClicked="#exitGame" styleClass="menu-item" />
         <Label fx:id="exitLabel" layoutX="484" layoutY="720" styleClass="menu-label" text="exit" />
-        <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="50.0" layoutY="62.0" onMouseClicked="#enterTV" styleClass="tv" visible="false">
+        <ImageView fx:id="tv" fitHeight="150.0" fitWidth="300.0"  layoutY="50.0" onMouseClicked="#enterTV" >
          <image>
             <Image url="@../asset/mainMenu/tv.png"/>
          </image></ImageView>

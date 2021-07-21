@@ -80,7 +80,7 @@ public class LobbyController extends ServerController{
         if (Message.getIdCounter() <= lastSeenMessage) {
             return ServerController.serverMessage(MessageType.SUCCESSFUL, "there is no new message", null);
         }
-        for (int i = lobbyUsers.get(user) + 1; i < Message.getIdCounter(); i++) {
+        for (int i = lobbyUsers.get(user); i < Message.getIdCounter(); i++) {
             newMessages.add(allMessage.get(i));
         }
         lobbyUsers.replace(user, Message.getIdCounter());

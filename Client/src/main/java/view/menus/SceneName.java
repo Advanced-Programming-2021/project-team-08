@@ -12,5 +12,6 @@ public enum SceneName {
     IMPORT_EXPORT_MENU,
     GAMEPLAY_SCENE,
     DUEL_SCENE,
-    LOBBY_SCENE
+    LOBBY_SCENE,
+    TV_SCENE;
 }

@@ -3,8 +3,12 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.MainMenuController;
 import javafx.animation.SequentialTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +42,7 @@ public class MainScene extends Scene {
     public Label exitLabel;
     public ImageView card;
     public Label cardLabel;
+    public ImageView tv;
     private Image menuHoverImage;
     private Image menuImage;
 
@@ -72,12 +77,38 @@ public class MainScene extends Scene {
             e.printStackTrace();
         }
         setMenuName();
+        setTV();
         setMenuItemAnimation(duel, duelLabel);
         setMenuItemAnimation(deck, deckLabel);
         setMenuItemAnimation(shop, shopLabel);
         setMenuItemAnimation(card, cardLabel);
         setMenuItemAnimation(profile, profileLabel);
         setMenuItemAnimation(exit, exitLabel);
+    }
+
+    private void setTV() {
+        tv.setCursor(Cursor.HAND);
+        tv.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("before edit x,y: " + tv.getLayoutX() + ", " + tv.getLayoutX());
+                double ratio = 1.2;
+                tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
+                tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
+                tv.setFitWidth(tv.getFitWidth() * ratio);
+                tv.setFitHeight(tv.getFitHeight() * ratio);
+            }
+        });
+        tv.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                double ratio = 1 / 1.2;
+                tv.setLayoutX(tv.getLayoutX() + tv.getFitWidth() * -0.5 * (ratio - 1));
+                tv.setLayoutY(tv.getLayoutY() + tv.getFitHeight() * - 0.5 * (ratio - 1));
+                tv.setFitWidth(tv.getFitWidth() * ratio);
+                tv.setFitHeight(tv.getFitHeight() * ratio);
+            }
+        });
     }
 
     private void setMenuName() {

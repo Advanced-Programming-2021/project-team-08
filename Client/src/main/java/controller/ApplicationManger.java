@@ -42,6 +42,7 @@ public class ApplicationManger extends Application {
             put(SceneName.DECK_MENU, new URL(rootPath + "deckScene.fxml"));
             put(SceneName.SCOREBOARD_MENU, new URL(rootPath + "scoreboard.fxml"));
             put(SceneName.LOBBY_SCENE, new URL(rootPath + "Lobby.fxml"));
+            put(SceneName.TV_SCENE, new URL(rootPath + "TV.fxml"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -74,9 +75,7 @@ public class ApplicationManger extends Application {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setOnCloseRequest(event -> {
-            //System.out.println("you are exited");
             System.out.println(getServerResponse("register", "logout", null));
-            System.exit(0);
         });
         soundManager = new SoundManager();
         soundManager.playBackgroundSound();
