@@ -8,19 +8,12 @@ import controller.User;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import model.UserData;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,26 +25,26 @@ public class ScoreboardMenu extends Scene {
 
     @FXML
     void initialize() {
-        int i,size,counter=0;
+        int i, size, counter = 0;
         int[] ranks;
-        String result=ApplicationManger.getServerResponse("scoreboard","scoreboard",null);
+        String result = ApplicationManger.getServerResponse("scoreboard", "scoreboard", null);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String returnObject = jsonObject.get("returnObject").getAsString();
         String[] parts = returnObject.split(",");
-        HashMap<String,Integer> jsonHash = new HashMap<>();
-        for(i=0;i<parts.length;i++){
-            parts[i]    =   parts[i].replace("\"", "");
-            parts[i]    =   parts[i].replace("{", "");
-            parts[i]    =   parts[i].replace("}", "");
-            parts[i]    =   parts[i].replace(" ", "");
+        HashMap<String, Integer> jsonHash = new HashMap<>();
+        for (i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].replace("\"", "");
+            parts[i] = parts[i].replace("{", "");
+            parts[i] = parts[i].replace("}", "");
+            parts[i] = parts[i].replace(" ", "");
             String[] subparts = parts[i].split("=");
-            if (i==20) break;
-            jsonHash.put(subparts[0],Integer.parseInt(subparts[1]));
+            if (i == 20) break;
+            jsonHash.put(subparts[0], Integer.parseInt(subparts[1]));
         }
         size = Math.min(20, parts.length);
         ranks = getRankServer(jsonHash, size);
-        for (String j:jsonHash.keySet()) {
+        for (String j : jsonHash.keySet()) {
             Label rank = new Label();
             Label nickName = new Label();
             Label point = new Label();
@@ -201,11 +194,11 @@ public class ScoreboardMenu extends Scene {
         return rank;
     }
 
-    public int[] getRankServer(HashMap<String,Integer> jsonHash,int size){
+    public int[] getRankServer(HashMap<String, Integer> jsonHash, int size) {
         int counterOfSamePoint = 1;
         int pointOfPreviousUser = 0;
         int[] rank = new int[size];
-        int i,counter=0;
+        int i, counter = 0;
         for (i = 0; i < size; i++) rank[i] = i;
         for (String j : jsonHash.keySet()) {
             if (jsonHash.get(j) == pointOfPreviousUser) {

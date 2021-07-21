@@ -74,12 +74,12 @@ public class GameConnectionController extends ServerController {
 }
 
 class WaitingGame {
-    private User user1;
+    private final User user1;
     private User user2;
-    private int rounds;
-    private Socket user1Socket;
+    private final int rounds;
+    private final Socket user1Socket;
     private Socket user2Socket;
-    private String user1Token;
+    private final String user1Token;
     private String user2Token;
 
     public WaitingGame(User user, String user1Token, Socket socket, int rounds) {
@@ -135,9 +135,9 @@ class WaitingGame {
 }
 
 class DuelData {
-    private UserData user1Data;
-    private UserData user2Data;
-    private int rounds;
+    private final UserData user1Data;
+    private final UserData user2Data;
+    private final int rounds;
 
     public DuelData(UserData user1Data, UserData user2Data, int rounds) {
         this.user1Data = user1Data;

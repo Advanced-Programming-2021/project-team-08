@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Player {
-    private UserData userData;
+    private final UserData userData;
     private int LP = 8000;
-    private PlayerBoard playerBoard;
-    private GameManager gameManager;
+    private final PlayerBoard playerBoard;
+    private final GameManager gameManager;
     private int bannedCardTurn = 0;
     private int trapBanned = 0;
-    private int playerNumber;
+    private final int playerNumber;
 
     private boolean summonOrSetInThisTurn = false;
-    private EventNoParam onChangeTurnEvent = new EventNoParam();
+    private final EventNoParam onChangeTurnEvent = new EventNoParam();
 
     public Player(UserData userData, PlayerBoard playerBoard, GameManager gameManager, int playerNumber) {
         this.userData = userData;
@@ -104,8 +104,8 @@ public class Player {
 
         playerBoard.getHand().appendCard(c);
         //gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
-        Platform.runLater(()->{
-                gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
+        Platform.runLater(() -> {
+            gameManager.getScene().draw(playerBoard.getPlayerNumber(), playerBoard.getDeckZone().getAllCards().size(), event -> drawCard(n - 1, onEnd));
         });
 
         System.out.println("new card added to the hand: " + c.getCardData().getCardName());

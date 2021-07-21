@@ -5,7 +5,7 @@ import model.effectSystem.ContinuousEffect;
 import java.util.ArrayList;
 
 public class IncreaseLPOnSpellActivate extends ContinuousEffect {
-    private int amount;
+    private final int amount;
 
     public IncreaseLPOnSpellActivate(ArrayList<String> args) {
         super(args);

@@ -4,15 +4,14 @@ import controller.gameplay.GameManager;
 import model.cards.Card;
 import model.cards.TrapCard;
 import org.reflections.Reflections;
-//import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.Set;
 
 public abstract class Effect {
     protected static GameManager gameManager;
-    private static Set<Class<? extends Effect>> allEffects;
-    private static ArrayList<Effect> effects = new ArrayList<>();
+    private static final Set<Class<? extends Effect>> allEffects;
+    private static final ArrayList<Effect> effects = new ArrayList<>();
 
     static {
         Reflections r = new Reflections("model.effectSystem.effects");

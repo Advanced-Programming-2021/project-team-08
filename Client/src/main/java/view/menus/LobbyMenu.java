@@ -34,9 +34,9 @@ public class LobbyMenu {
     public Label editedMessageLabel;
     public Button editButton;
     public Button cancelButton;
-    private ArrayList<Integer> idOfMessage = new ArrayList<>();
+    private final ArrayList<Integer> idOfMessage = new ArrayList<>();
 
-    private static int idCounter = 0;
+    private static final int idCounter = 0;
 
     private boolean isGameStarted = false;
 
@@ -305,9 +305,9 @@ public class LobbyMenu {
 
 
     class DuelData {
-        private UserData user1Data;
-        private UserData user2Data;
-        private int rounds;
+        private final UserData user1Data;
+        private final UserData user2Data;
+        private final int rounds;
 
         public DuelData(UserData user1Data, UserData user2Data, int rounds) {
             this.user1Data = user1Data;

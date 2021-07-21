@@ -5,7 +5,7 @@ import model.effectSystem.Effect;
 import java.util.ArrayList;
 
 public class GetCardFromDeck extends Effect {
-    private int n;
+    private final int n;
 
     public GetCardFromDeck(ArrayList<String> args) {
         super(args);

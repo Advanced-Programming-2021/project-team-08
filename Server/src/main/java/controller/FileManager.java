@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileManager {
-    private static FileManager fileManager = new FileManager();
+    private static final FileManager fileManager = new FileManager();
 
     public static FileManager getInstance() {
         return fileManager;
@@ -26,7 +26,7 @@ public class FileManager {
             if (!file.exists()) {
                 if (!file.mkdir()) throw new IOException("could not make users folder");
             }
-            userFile = new FileWriter("users/" + user.getUserData().getUsername() +".json");
+            userFile = new FileWriter("users/" + user.getUserData().getUsername() + ".json");
             userFile.write(new Gson().toJson(user));
             userFile.close();
             return MessageType.SUCCESSFUL;

@@ -18,11 +18,11 @@ public class CardView {
         return instance;
     }
 
-    public void initialize(){
+    public void initialize() {
         instance = this;
     }
 
-    public void showCard(CardData cardData){
+    public void showCard(CardData cardData) {
         cardImage.setImage(cardData.getCardImage());
         description.setText(cardData.toString());
     }

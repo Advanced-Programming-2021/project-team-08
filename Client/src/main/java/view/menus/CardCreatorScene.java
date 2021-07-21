@@ -30,8 +30,8 @@ public class CardCreatorScene extends Scene {
     public Label message;
     public Label cardPrice;
     public ChoiceBox monsterCardType;
-    private CardCreatorController controller;
-    private HashMap<CardData, Effect> effects = new HashMap<>();
+    private final CardCreatorController controller;
+    private final HashMap<CardData, Effect> effects = new HashMap<>();
 
     public CardCreatorScene() {
         this.controller = new CardCreatorController(this);

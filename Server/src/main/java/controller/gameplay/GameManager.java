@@ -1,7 +1,6 @@
 package controller.gameplay;
 
 import controller.GameController;
-import javafx.application.Platform;
 import model.Command;
 import model.UserData;
 import model.cards.Card;
@@ -44,25 +43,26 @@ public class GameManager {
         return instance;
     }
 
-    private Player player1, player2;
+    private final Player player1;
+    private final Player player2;
     private int turn, currentPlayerTurn;
     private Phase currentPhase;
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
 
     private CardSlotAddress currentSelectedCardAddress;
     private Card currentSelectedCard;
 
-    private GamePlayScene scene;
-    private GameController gameController;
+    private final GamePlayScene scene;
+    private final GameController gameController;
 
-    private Event<Card> onAnSpellActivated = new Event<>();
-    private Event<AttackResult> onWantAttack = new Event<>();
-    private Event<Card> onSummonACard = new Event<>();
-    private Event<Card> onFlipSummon = new Event<>();
-    private EventNoParam onChangeTurn = new EventNoParam();
+    private final Event<Card> onAnSpellActivated = new Event<>();
+    private final Event<AttackResult> onWantAttack = new Event<>();
+    private final Event<Card> onSummonACard = new Event<>();
+    private final Event<Card> onFlipSummon = new Event<>();
+    private final EventNoParam onChangeTurn = new EventNoParam();
     protected Event<AttackResult> destroyAMonster = new Event<>();
 
-    private boolean isFirstSetup = false;
+    private final boolean isFirstSetup = false;
 
     private boolean canAttack = true;
 
@@ -552,9 +552,9 @@ public class GameManager {
     }
 
     public class CardSlotAddress {
-        private boolean forOpponent;
-        private ZoneType zone;
-        private int number;
+        private final boolean forOpponent;
+        private final ZoneType zone;
+        private final int number;
 
         public CardSlotAddress(boolean forOpponent, ZoneType zone, int number) {
             this.forOpponent = forOpponent;

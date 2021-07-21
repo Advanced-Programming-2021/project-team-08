@@ -14,7 +14,7 @@ import model.gameplay.CardSlot;
 import model.gameplay.Player;
 
 public abstract class Card {
-    private static Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
+    private static final Image cardBackImage = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
     protected CardType cardType;
     protected CardData cardData;
     protected CardSlot cardSlot;

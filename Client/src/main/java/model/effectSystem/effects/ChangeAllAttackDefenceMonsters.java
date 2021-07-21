@@ -13,7 +13,7 @@ public class ChangeAllAttackDefenceMonsters extends FieldEffect {
     private int changedAttack;
     private int changedDefence;
 
-    private ArrayList<String> monsterTypes = new ArrayList<>();
+    private final ArrayList<String> monsterTypes = new ArrayList<>();
 
     public ChangeAllAttackDefenceMonsters(ArrayList<String> args) {
         super(args);

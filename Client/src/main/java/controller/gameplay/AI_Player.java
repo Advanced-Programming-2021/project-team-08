@@ -18,12 +18,12 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class AI_Player {
-    private Deck deck = new Deck("myDeck", "AI");
-    private static UserData data = new UserData("AI", "AI", "@A@I@");
+    private final Deck deck = new Deck("myDeck", "AI");
+    private static final UserData data = new UserData("AI", "AI", "@A@I@");
     private Player playerObject;
     private Player opponent;
     private PlayerBoard board;
-    private GameManager gameManager;
+    private final GameManager gameManager;
 
     {
         Integer[] cards = {31, 31, 31, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 12, 12, 12, 13};
@@ -56,7 +56,7 @@ public class AI_Player {
             activateSpells();
             summonMonster();
             Thread.sleep(1000);
-            if(gameManager.getTurnNumber() != 1){
+            if (gameManager.getTurnNumber() != 1) {
                 gameManager.goToNextPhase();
                 doAttack();
                 Thread.sleep(1000);
@@ -216,7 +216,8 @@ public class AI_Player {
         private int player2LPDecrease = 0;
         private boolean destroyCard1 = false;
         private boolean destroyCard2 = false;
-        private MonsterCard attacker, attacked;
+        private final MonsterCard attacker;
+        private final MonsterCard attacked;
 
         public AttackResultCalculated(MonsterCard attacker, MonsterCard attacked) {
             this.attacker = attacker;

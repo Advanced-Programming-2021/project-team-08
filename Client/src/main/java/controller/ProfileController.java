@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class ProfileController {
 
     private User activeUser;
-    private ProfileScene profileScene;
+    private final ProfileScene profileScene;
 
     public ProfileController(ProfileScene profileScene) {
         this.activeUser = ApplicationManger.getLoggedInUser();

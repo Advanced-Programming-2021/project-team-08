@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PlayerBoard {
-    private CardSlot graveyard = new CardSlot(ZoneType.GRAVEYARD);
-    private CardSlot deckZone = new CardSlot(ZoneType.DECK);
-    private CardSlot fieldZone = new CardSlot(ZoneType.FIELD);
-    private ArrayList<CardSlot> monsterZone = new ArrayList<CardSlot>(5) {{
+    private final CardSlot graveyard = new CardSlot(ZoneType.GRAVEYARD);
+    private final CardSlot deckZone = new CardSlot(ZoneType.DECK);
+    private final CardSlot fieldZone = new CardSlot(ZoneType.FIELD);
+    private final ArrayList<CardSlot> monsterZone = new ArrayList<CardSlot>(5) {{
         for (int i = 0; i < 5; i++) add(new CardSlot(i + 1, ZoneType.MONSTER));
     }};
-    private ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
+    private final ArrayList<CardSlot> spellAndTrapZone = new ArrayList<CardSlot>(5) {{
         for (int i = 0; i < 5; i++) add(new CardSlot(i + 1, ZoneType.SPELL_AND_TRAP));
     }};
-    private CardSlot hand = new CardSlot(ZoneType.HAND);
+    private final CardSlot hand = new CardSlot(ZoneType.HAND);
 
-    private int playerNumber;
+    private final int playerNumber;
 
     public PlayerBoard(Deck playerDeck, int playerNumber, GameManager gameManager) {
         this.playerNumber = playerNumber;

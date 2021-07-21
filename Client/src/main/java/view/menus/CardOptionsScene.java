@@ -12,7 +12,7 @@ public class CardOptionsScene extends Scene {
 
     public Button next;
     public TextField cardName;
-    public  Label message;
+    public Label message;
     public Label cardNameLabel;
     String name;
     private static String messageText;
@@ -34,7 +34,7 @@ public class CardOptionsScene extends Scene {
         next.setOpacity(1);
         cardNameLabel.setOpacity(1);
         next.setOnMouseClicked(event -> {
-            name=cardName.getText();
+            name = cardName.getText();
             DataManager.importCardGraphic(name);
             showMessage(messageText);
         });
@@ -48,7 +48,7 @@ public class CardOptionsScene extends Scene {
         next.setOpacity(1);
         cardNameLabel.setOpacity(1);
         next.setOnMouseClicked(event -> {
-            name=cardName.getText();
+            name = cardName.getText();
             CardData cardData = CardData.getCardByName(name);
             if (cardData == null) {
                 message.setText("There is no card with this name.");
@@ -64,11 +64,11 @@ public class CardOptionsScene extends Scene {
 
     }
 
-    public static void setMessage(String messageText1){
-        messageText=messageText1;
+    public static void setMessage(String messageText1) {
+        messageText = messageText1;
     }
 
-    public  void showMessage(String messageText){
+    public void showMessage(String messageText) {
         message.setText(messageText);
     }
 }

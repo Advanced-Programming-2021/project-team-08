@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Player {
-    private UserData userData;
+    private final UserData userData;
     private int LP = 8000;
-    private PlayerBoard playerBoard;
-    private GameManager gameManager;
+    private final PlayerBoard playerBoard;
+    private final GameManager gameManager;
     private int bannedCardTurn = 0;
     private int trapBanned = 0;
-    private int playerNumber;
+    private final int playerNumber;
 
     private boolean summonOrSetInThisTurn = false;
-    private EventNoParam onChangeTurnEvent = new EventNoParam();
+    private final EventNoParam onChangeTurnEvent = new EventNoParam();
 
     public Player(UserData userData, PlayerBoard playerBoard, GameManager gameManager, int playerNumber) {
         this.userData = userData;
@@ -89,8 +89,8 @@ public class Player {
     }
 
     public void drawCard(int n) {
-        new Thread(()->{
-            for(int i=0; i<n; i++){
+        new Thread(() -> {
+            for (int i = 0; i < n; i++) {
                 Card c;
                 try {
                     c = playerBoard.drawCardFromDeck();

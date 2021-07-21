@@ -5,27 +5,33 @@ import com.google.gson.JsonParser;
 import model.User;
 import model.enums.MessageType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class ServerController {
 
-    private static HashMap<String, User> activeUsers = new HashMap<>();
+    private static final HashMap<String, User> activeUsers = new HashMap<>();
 
     public static ServerController getController(String input) {
         try {
             JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
             String controllerName = jsonObject.get("controller").getAsString();
             switch (controllerName) {
-                case "register" : return RegisterController.getInstance();
-                case "shop" : return ShopController.getInstance();
-                case "scoreboard" : return ScoreboardController.getInstance();
-                case "lobby" : return LobbyController.getInstance();
-                case "newGame" : return GameConnectionController.getInstance();
-                case "tv" : return TVController.getInstance();
-                default: return null;
+                case "register":
+                    return RegisterController.getInstance();
+                case "shop":
+                    return ShopController.getInstance();
+                case "scoreboard":
+                    return ScoreboardController.getInstance();
+                case "lobby":
+                    return LobbyController.getInstance();
+                case "newGame":
+                    return GameConnectionController.getInstance();
+                case "tv":
+                    return TVController.getInstance();
+                default:
+                    return null;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -34,8 +40,10 @@ public abstract class ServerController {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         String controllerName = jsonObject.get("controller").getAsString();
         String methodName = jsonObject.get("method").getAsString();
-        if (!(controllerName.equals("register") && !methodName.equals("logout")) && jsonObject.get("token") == null) return serverMessage(MessageType.ERROR, "no token input", null);
-        if (!(controllerName.equals("register") && !methodName.equals("logout")) && getUserByToken(jsonObject.get("token").getAsString()) == null) return serverMessage(MessageType.ERROR, "invalid token", null);
+        if (!(controllerName.equals("register") && !methodName.equals("logout")) && jsonObject.get("token") == null)
+            return serverMessage(MessageType.ERROR, "no token input", null);
+        if (!(controllerName.equals("register") && !methodName.equals("logout")) && getUserByToken(jsonObject.get("token").getAsString()) == null)
+            return serverMessage(MessageType.ERROR, "invalid token", null);
         return null;
     }
 

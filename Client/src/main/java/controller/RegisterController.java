@@ -16,29 +16,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import model.Command;
 import model.UserData;
-import model.cards.data.CardData;
 import model.enums.ChatType;
 import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.SceneName;
-import view.menus.ShopScene;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class RegisterController {
     public TextField usernameOfSignup;
@@ -138,8 +129,7 @@ public class RegisterController {
             FileWriter userFile = new FileWriter("users/" + usernameOfSignup.getText() + ".json");
             userFile.write(new Gson().toJson(user.getUserData()));
             userFile.close();
-        }
-        else {
+        } else {
             errorOfSignup.setText(message);
             errorOfSignup.setTextFill(Color.RED);
         }
@@ -188,7 +178,7 @@ public class RegisterController {
             System.out.println(ApplicationManger.getServerResponse("scoreboard", "scoreboard", null));
             HashMap<String, String> data2 = new HashMap<>();
             data2.put("type", ChatType.SEND.toString());
-            data2.put("message", "this is a message");;
+            data2.put("message", "this is a message");
             System.out.println(ApplicationManger.getServerResponse("lobby", "send", data2));
             ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
         }

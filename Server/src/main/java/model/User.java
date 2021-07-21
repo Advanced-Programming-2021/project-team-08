@@ -1,8 +1,5 @@
 package model;
 
-import model.Deck;
-import model.UserData;
-
 import java.util.ArrayList;
 
 public class User {

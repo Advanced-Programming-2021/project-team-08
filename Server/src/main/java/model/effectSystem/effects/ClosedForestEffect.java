@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class ClosedForestEffect extends FieldEffect {
 
-    private int changedAttack;
-    private int changedDefence;
-    private ArrayList<String> monsterTypes = new ArrayList<>();
+    private final int changedAttack;
+    private final int changedDefence;
+    private final ArrayList<String> monsterTypes = new ArrayList<>();
 
     public ClosedForestEffect(ArrayList<String> args) {
         super(args);

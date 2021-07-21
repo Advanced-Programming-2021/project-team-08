@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ControlAMonster extends Effect {
     private CardSlot originalPosition;
     private Card getControlledCard;
+
     public ControlAMonster(ArrayList<String> args) {
         super(args);
     }

@@ -11,9 +11,9 @@ import javafx.util.Duration;
 
 public class RotateCenterTransition extends Transition {
     private final DoubleProperty angleY = new SimpleDoubleProperty(0);
-    private Node node;
-    private int duration;
-    private double to;
+    private final Node node;
+    private final int duration;
+    private final double to;
 
     public RotateCenterTransition(Node node, int duration, double toAngle, Point3D axis) {
         to = toAngle;

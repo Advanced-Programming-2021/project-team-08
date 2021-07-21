@@ -9,7 +9,7 @@ public class AttackResult {
     //1 for attacker
     //2 for attacked
 
-    private Player attackerPlayer;
+    private final Player attackerPlayer;
     private Player attackedPlayer;
     private int player1LPDecrease = 0;
     private int player2LPDecrease = 0;

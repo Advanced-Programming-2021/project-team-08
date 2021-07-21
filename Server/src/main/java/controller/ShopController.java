@@ -1,21 +1,19 @@
 package controller;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.User;
-import model.cards.Card;
 import model.cards.data.CardData;
 import model.enums.MessageType;
 
-public class ShopController extends ServerController{
-    
+public class ShopController extends ServerController {
+
     private static final ShopController shopController = new ShopController();
 
     public static ShopController getInstance() {
         return shopController;
     }
-    
+
     @Override
     public String getServerMessage(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
@@ -26,7 +24,7 @@ public class ShopController extends ServerController{
                 return buyCard(input);
             case "getInventory":
                 return getInventory(input);
-            case "sell" :
+            case "sell":
                 return sellCard(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
@@ -80,9 +78,11 @@ public class ShopController extends ServerController{
         CardData cardData = CardData.getCardByName(jsonObject.get("name").getAsString());
         User user = getUserByToken(jsonObject.get("token").getAsString());
         if (cardData == null) return serverMessage(MessageType.ERROR, "invalid card name", null);
-        else if (cardData.getNumber() < 1) return serverMessage(MessageType.ERROR, "this card is finished in inventory", null);
+        else if (cardData.getNumber() < 1)
+            return serverMessage(MessageType.ERROR, "this card is finished in inventory", null);
         else if (cardData.isBanned()) return serverMessage(MessageType.ERROR, "the card is banned", null);
-        else if (user.getUserData().getMoney() < cardData.getPrice()) return serverMessage(MessageType.ERROR, "not enough money", null);
+        else if (user.getUserData().getMoney() < cardData.getPrice())
+            return serverMessage(MessageType.ERROR, "not enough money", null);
         else {
             cardData.setNumber(cardData.getNumber() - 1);
             user.getUserData().decreaseMoney(cardData.getPrice());

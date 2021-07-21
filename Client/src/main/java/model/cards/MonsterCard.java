@@ -13,7 +13,7 @@ public class MonsterCard extends Card {
 
     protected Event<Card> onFaceUp = new Event<>();
 
-    private Event<AttackResult> onAttacked = new Event<>();
+    private final Event<AttackResult> onAttacked = new Event<>();
 
     public MonsterCard(MonsterCardData data) {
         super(data);
@@ -66,7 +66,7 @@ public class MonsterCard extends Card {
     }
 
     public void onAttacked(AttackResult result) {
-        if(cardStatus == CardStatus.TO_BACK) {
+        if (cardStatus == CardStatus.TO_BACK) {
             cardStatus = CardStatus.FACE_UP;
         }
         onAttacked.invoke(result);

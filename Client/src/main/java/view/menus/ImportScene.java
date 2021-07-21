@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class ImportScene extends Scene {
 
-    private ImportController importController;
+    private final ImportController importController;
 
     public ImportScene() {
         importController = new ImportController(this);

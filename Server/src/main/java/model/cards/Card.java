@@ -1,7 +1,5 @@
 package model.cards;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import model.cards.data.CardData;
 import model.cards.data.MonsterCardData;
 import model.cards.data.SpellCardData;

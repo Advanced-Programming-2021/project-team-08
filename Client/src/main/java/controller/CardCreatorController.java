@@ -14,8 +14,8 @@ import java.util.HashMap;
 
 public class CardCreatorController {
 
-    private User activeUser;
-    private CardCreatorScene scene;
+    private final User activeUser;
+    private final CardCreatorScene scene;
 
     public CardCreatorController(CardCreatorScene cardCreatorScene) {
         activeUser = ApplicationManger.getLoggedInUser();

@@ -13,5 +13,5 @@ public enum SceneName {
     GAMEPLAY_SCENE,
     DUEL_SCENE,
     LOBBY_SCENE,
-    TV_SCENE;
+    TV_SCENE
 }

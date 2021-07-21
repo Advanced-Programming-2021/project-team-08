@@ -11,10 +11,10 @@ import java.util.Collections;
 
 public class Deck {
     private static User activeUser;
-    private ArrayList<Integer> mainDeck = new ArrayList<>();
-    private ArrayList<Integer> sideDeck = new ArrayList<>();
-    private String name;
-    private String username;
+    private final ArrayList<Integer> mainDeck = new ArrayList<>();
+    private final ArrayList<Integer> sideDeck = new ArrayList<>();
+    private final String name;
+    private final String username;
 
     public Deck(String name, String username) {
         this.name = name;
@@ -35,7 +35,6 @@ public class Deck {
     }
 
 
-
     public static void removeADeck(String name) {
         Deck deck = getDeckWithName(name);
         if (deck == null) return;
@@ -50,31 +49,25 @@ public class Deck {
     public static boolean isMainDeckFull(String name) {
         Deck deck = getDeckWithName(name);
         if (deck == null) return false;
-        if (deck.mainDeck.size() == 60) return true;
-        else return false;
+        return deck.mainDeck.size() == 60;
     }
 
     public static boolean isSideDeckFull(String name) {
         Deck deck = getDeckWithName(name);
         if (deck == null) return false;
-        if (deck.sideDeck.size() == 15) return true;
-        else return false;
+        return deck.sideDeck.size() == 15;
     }
 
     public static boolean isThereAreThreeCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return false;
-        if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) >= 3) {
-            return true;
-        } else return false;
+        return deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) >= 3;
     }
 
     public static boolean isThereAreOneCardsOfThisCardInDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return false;
-        if (deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) == 1) {
-            return true;
-        } else return false;
+        return deck.numberOfThisCardInMainDeck(nameOfCard, nameOfDeck) + deck.numberOfThisCardInSideDeck(nameOfCard, nameOfDeck) == 1;
     }
 
     public static ArrayList<CardData> getCardDataArrayFromIdArray(ArrayList<Integer> cardIds) {
@@ -123,8 +116,7 @@ public class Deck {
     public static boolean isThereThisCardInSideDeckOfThisDeck(String nameOfCard, String nameOfDeck) {
         Deck deck = getDeckWithName(nameOfDeck);
         if (deck == null) return false;
-        else if (deck.sideDeck.contains(nameOfCard)) return true;
-        else return false;
+        else return deck.sideDeck.contains(nameOfCard);
     }
 
     public static boolean isThereThisCardInMainDeckOfThisDeck(String nameOfCard, String nameOfDeck) {
@@ -137,10 +129,10 @@ public class Deck {
         }
     }
 
-    public static void addCardGraphic(String cardName,String mainOrSide,String deckName) throws Exception {
+    public static void addCardGraphic(String cardName, String mainOrSide, String deckName) throws Exception {
         Integer cardId = Card.getCardIdByName(cardName);
-        CardData cardData=CardData.getCardByName(cardName);
-        if (mainOrSide.equals("main")){
+        CardData cardData = CardData.getCardByName(cardName);
+        if (mainOrSide.equals("main")) {
             if (Deck.isMainDeckFull(deckName)) {
                 throw new Exception("main deck is full");
             } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
@@ -155,8 +147,7 @@ public class Deck {
                 Deck.addCard(cardName, deckName, "main");
                 activeUser.getUserData().save();
             }
-        }
-        else if (mainOrSide.equals("side")){
+        } else if (mainOrSide.equals("side")) {
             if (Deck.isSideDeckFull(deckName)) {
                 throw new Exception("side deck is full");
             } else if (Deck.isThereAreThreeCardsOfThisCardInDeck(cardName, deckName)) {
@@ -186,7 +177,6 @@ public class Deck {
             e.printStackTrace();
         }
     }
-
 
 
     public static boolean isThisDeckValid(Deck deck) {

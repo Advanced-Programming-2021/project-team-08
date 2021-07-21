@@ -22,18 +22,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GameController {
-    private static ArrayList<GameController> allGames = new ArrayList<>();
+    private static final ArrayList<GameController> allGames = new ArrayList<>();
     private static int idCounter = 1;
 
     private GameManager gameManager;
-    private Socket player1Socket, player2Socket;
-    private String player1Token, player2Token;
-    private int gameId;
+    private final Socket player1Socket;
+    private final Socket player2Socket;
+    private final String player1Token;
+    private final String player2Token;
+    private final int gameId;
 
-    private DuelData duelData;
+    private final DuelData duelData;
     private int currentRound;
 
-    private File saveGame;
+    private final File saveGame;
 
     static {
         File directoryPath = new File("src/resources/gameData");
@@ -250,13 +252,13 @@ public class GameController {
     }
 
     class AttackResultJson {
-        private int attackerPlayerNumber;
-        private int attackedPlayerNumber;
-        private int player1LPDecrease;
-        private int player2LPDecrease;
-        private boolean destroyCard1;
-        private boolean destroyCard2;
-        private boolean attackedFlip;
+        private final int attackerPlayerNumber;
+        private final int attackedPlayerNumber;
+        private final int player1LPDecrease;
+        private final int player2LPDecrease;
+        private final boolean destroyCard1;
+        private final boolean destroyCard2;
+        private final boolean attackedFlip;
 
         public AttackResultJson(AttackResult attackResult) {
             attackerPlayerNumber = attackResult.getAttackerPlayer().getPlayerNumber();
@@ -304,8 +306,9 @@ public class GameController {
     }
 
     public class DuelData {
-        private int rounds;
-        private UserData firstPlayer, secondPlayer;
+        private final int rounds;
+        private final UserData firstPlayer;
+        private final UserData secondPlayer;
 
         private int firstPlayerWins, secondPlayerWins;
         private int maxLP1, maxLP2;

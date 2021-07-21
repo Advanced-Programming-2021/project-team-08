@@ -294,11 +294,7 @@ public class GamePlayScene {
             currentPhaseLabel.getStyleClass().clear();
             currentPhaseLabel.getStyleClass().add("redPlayer");
         }
-        if (currentPlayer != playerNumber) {
-            nextPhaseButton.setVisible(false);
-        } else {
-            nextPhaseButton.setVisible(true);
-        }
+        nextPhaseButton.setVisible(currentPlayer == playerNumber);
     }
 
     private int cheatCommand(String userInput) {
@@ -607,13 +603,13 @@ public class GamePlayScene {
     }
 
     public static class AttackResultJson {
-        private int attackerPlayerNumber;
-        private int attackedPlayerNumber;
-        private int player1LPDecrease;
-        private int player2LPDecrease;
-        private boolean destroyCard1;
-        private boolean destroyCard2;
-        private boolean attackedFlip;
+        private final int attackerPlayerNumber;
+        private final int attackedPlayerNumber;
+        private final int player1LPDecrease;
+        private final int player2LPDecrease;
+        private final boolean destroyCard1;
+        private final boolean destroyCard2;
+        private final boolean attackedFlip;
 
         public AttackResultJson(AttackResult attackResult) {
             attackerPlayerNumber = attackResult.getAttackerPlayer().getPlayerNumber();

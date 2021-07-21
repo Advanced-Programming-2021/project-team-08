@@ -16,7 +16,7 @@ public class RegisterController extends ServerController {
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
-    private static RegisterController registerController = new RegisterController();
+    private static final RegisterController registerController = new RegisterController();
 
     public static RegisterController getInstance() {
         return registerController;
@@ -45,10 +45,9 @@ public class RegisterController extends ServerController {
             User user = User.getUserByUsername(jsonObject.get("username").getAsString());
             if (!user.getUserData().getPassword().equals(jsonObject.get("password").getAsString())) {
                 return serverMessage(MessageType.ERROR, "input password in wrong", null);
-            }else if (isUserActive(user)) {
+            } else if (isUserActive(user)) {
                 return serverMessage(MessageType.ERROR, "you are already logged in", null);
-            }
-            else {
+            } else {
                 String token = makeToken();
                 ServerController.addUser(token, user);
                 return serverMessage(MessageType.SUCCESSFUL, token, new Gson().toJson(user.getUserData()));

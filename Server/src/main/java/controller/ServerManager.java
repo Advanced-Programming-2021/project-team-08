@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class ServerManager {
     ServerSocket serverSocket;
 
-    private static HashMap<Socket, Boolean> isInGame = new HashMap<>();
+    private static final HashMap<Socket, Boolean> isInGame = new HashMap<>();
 
     public static HashMap<Socket, Boolean> getIsInGame() {
         return isInGame;

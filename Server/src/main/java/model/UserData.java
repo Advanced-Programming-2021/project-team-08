@@ -13,8 +13,8 @@ public class UserData {
     private String password;
     private int point = 0;
     private int money;
-    private ArrayList<Integer> myCardsIds = new ArrayList<>();
-    private ArrayList<Deck> decks = new ArrayList<>();
+    private final ArrayList<Integer> myCardsIds = new ArrayList<>();
+    private final ArrayList<Deck> decks = new ArrayList<>();
     private String activeDeckName;
     private String profileImageUrl;
     private Image avatar;

@@ -6,10 +6,10 @@ import model.enums.ZoneType;
 import java.util.ArrayList;
 
 public class GraphicCardSlot {
-    private ArrayList<GraphicCard> cards = new ArrayList<>();
-    private ZoneType type;
+    private final ArrayList<GraphicCard> cards = new ArrayList<>();
+    private final ZoneType type;
     private int number;
-    private Node imageView;
+    private final Node imageView;
 
     public GraphicCardSlot(ZoneType type, Node imageView) {
         this.type = type;

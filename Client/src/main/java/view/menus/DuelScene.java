@@ -2,7 +2,6 @@ package view.menus;
 
 import controller.ApplicationManger;
 import controller.DuelController;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;

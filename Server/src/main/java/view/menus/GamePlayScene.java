@@ -36,7 +36,7 @@ public class GamePlayScene {
 
     public Label currentPhase;
 
-    private int playerNumber = 1;
+    private final int playerNumber = 1;
 
     private GamePlaySceneController sceneController;
     private boolean waitForAI = false;

@@ -1,20 +1,17 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.Command;
 import model.Deck;
-import model.cards.Card;
 import model.cards.data.CardData;
 import model.cards.data.SpellCardData;
 import model.cards.data.TrapCardData;
@@ -23,7 +20,6 @@ import model.enums.CommandFieldType;
 import model.exceptions.ParseCommandException;
 import view.menus.DeckMenu;
 import view.menus.SceneName;
-import view.menus.ShopScene;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -67,11 +63,11 @@ public class DeckController {
         addOrDeleteMessage.setOpacity(1);
         addOrDeleteMessage.setText(message);
         if (message.equals("card removed from main deck successfully") ||
-                message.equals("card removed from side deck successfully")||
-                message.equals("card added to side deck successfully")||
+                message.equals("card removed from side deck successfully") ||
+                message.equals("card added to side deck successfully") ||
                 message.equals("card added to main deck successfully"))
             addOrDeleteMessage.setTextFill(Color.GREEN);
-        else    addOrDeleteMessage.setTextFill(Color.RED);
+        else addOrDeleteMessage.setTextFill(Color.RED);
     }
 
     public Button getGoToMainDeckButton() {
@@ -97,7 +93,7 @@ public class DeckController {
             hBox.getChildren().add(0, deckButton);
             hBox.getChildren().add(1, deleteButton);
             System.out.println(ApplicationManger.getLoggedInUser().getUserData().getActiveDeck());
-            if (ApplicationManger.getLoggedInUser().getUserData().isThereADeckThatActivated()&&
+            if (ApplicationManger.getLoggedInUser().getUserData().isThereADeckThatActivated() &&
                     ApplicationManger.getLoggedInUser().getUserData().getActiveDeck().getName().equals(deck.getName())) {
                 Label setActiveLabel = new Label();
                 setActiveLabel.setText("active");
@@ -207,12 +203,11 @@ public class DeckController {
 
     public void nextDeckCreate() {
         String deckName = deckNameTextField.getText();
-        if (deckName.equals("")){
+        if (deckName.equals("")) {
             message.setTextFill(Color.RED);
             message.setOpacity(1);
             message.setText("You have not entered any names");
-        }
-        else {
+        } else {
             if (Deck.isThereADeckWithThisName(deckName)) {
                 message.setTextFill(Color.RED);
                 message.setOpacity(1);

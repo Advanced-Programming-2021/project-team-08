@@ -24,8 +24,8 @@ import java.util.regex.Pattern;
 
 public class ShopScene extends Scene {
 
-    private User activeUser;
-    private ShopController shopController;
+    private final User activeUser;
+    private final ShopController shopController;
     private Label cardPrice;
     private Label userMoney;
     private Label message;
@@ -139,11 +139,11 @@ public class ShopScene extends Scene {
             if (isBuying) {
                 if (isBanned) {
                     message.setText("this card is banned");
-                }else if (inventory < 1) {
+                } else if (inventory < 1) {
                     message.setText("there is no card in the inventory");
                 } else if (activeUser.getUserData().getMoney() < cardData.getPrice()) {
                     notEnoughMoneyAction();
-                }else {
+                } else {
                     buyCard(cardData);
                 }
             } else {

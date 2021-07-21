@@ -2,17 +2,95 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="tv">
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/11.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/7.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/gameData/9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/9.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/CardCreatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/CardCreatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/FirstSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/FirstSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/GamePlaySceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/GamePlaySceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ImportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ImportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/AI_Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/AI_Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/animation/CoinAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/animation/CoinAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/animation/FlipCardAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/animation/FlipCardAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/animation/RotateCenterTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/animation/RotateCenterTransition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/MonsterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/CardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/CardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/SpellCardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/SpellCardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/TrapCardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/cards/data/TrapCardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ChangeAllAttackDefenceMonsters.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ChangeAllAttackDefenceMonsters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ClosedForestEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ClosedForestEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ControlAMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/ControlAMonster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/EquipAMonsterAttackDefence.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/EquipAMonsterAttackDefence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/IncreaseLPOnSpellActivate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/effectSystem/effects/IncreaseLPOnSpellActivate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/AttackResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/AttackResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/CardSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/CardSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCardSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/GraphicCardSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/graphicBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/model/graphic/graphicBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/CardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/CardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/CardCreatorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/CardCreatorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/CardOptionsScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/CardOptionsScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DeckMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DuelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/DuelScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ImportScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ImportScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/MainScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/MainScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ProfileScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ProfileScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/SceneName.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/SceneName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ScoreboardMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ShopScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/ShopScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameConnectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GamePlaySceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ServerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TVController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/gameplay/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/MongoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/MongoManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/MonsterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/data/CardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/data/SpellCardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/data/SpellCardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/data/TrapCardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/data/TrapCardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ChangeAllAttackDefenceMonsters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ChangeAllAttackDefenceMonsters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ClosedForestEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ClosedForestEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ControlAMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/ControlAMonster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/EquipAMonsterAttackDefence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/EquipAMonsterAttackDefence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/GetCardFromDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/IncreaseLPOnSpellActivate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/effectSystem/effects/IncreaseLPOnSpellActivate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/AttackResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/AttackResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/CardSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/CardSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/gameplay/PlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/getCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/getCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/menus/GamePlayScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/menus/GamePlayScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,60 +145,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -173,6 +217,7 @@
       <workItem from="1626890325454" duration="70000" />
       <workItem from="1626890431608" duration="602000" />
       <workItem from="1626891476919" duration="179000" />
+      <workItem from="1626895229096" duration="96000" />
     </task>
     <task id="LOCAL-00001" summary="scoreboard server added">
       <created>1626674203302</created>

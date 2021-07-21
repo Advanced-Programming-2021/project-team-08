@@ -23,7 +23,7 @@ public class GamePlaySceneController {
     }};
     private static int currentRound;
     private boolean isDuelStarted = false;
-    private GamePlayScene scene;
+    private final GamePlayScene scene;
     private GameManager gameManager;
     private DuelData currentDuelData;
 
@@ -126,9 +126,10 @@ public class GamePlaySceneController {
     }
 
     public static class DuelData {
-        private int rounds;
-        private boolean isPlayer;
-        private UserData firstPlayer, secondPlayer;
+        private final int rounds;
+        private final boolean isPlayer;
+        private final UserData firstPlayer;
+        private final UserData secondPlayer;
 
         private int firstPlayerWins, secondPlayerWins;
         private int maxLP1, maxLP2;

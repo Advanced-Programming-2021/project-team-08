@@ -1,7 +1,6 @@
 package model.gameplay;
 
 import controller.gameplay.GameManager;
-import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.enums.ZoneType;
 

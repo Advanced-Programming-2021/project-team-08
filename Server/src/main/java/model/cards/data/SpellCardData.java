@@ -7,7 +7,7 @@ import model.enums.SpellTrapProperty;
 import java.util.ArrayList;
 
 public class SpellCardData extends CardData {
-    private static ArrayList<SpellCardData> allSpellCard = new ArrayList<>();
+    private static final ArrayList<SpellCardData> allSpellCard = new ArrayList<>();
     @Expose
     private SpellTrapProperty spellProperty;
     @Expose

@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Command {
-    private HashMap<String, String> fieldValues;
+    private final HashMap<String, String> fieldValues;
 
     public Command(HashMap<String, String> fieldValues) {
         this.fieldValues = fieldValues;

@@ -146,11 +146,11 @@ public class ProfileScene extends Scene {
     }
 
     public void showScoreboard(ActionEvent actionEvent) {
-        ApplicationManger.goToScene1(SceneName.SCOREBOARD_MENU,false);
+        ApplicationManger.goToScene1(SceneName.SCOREBOARD_MENU, false);
     }
 
     public void logout(ActionEvent actionEvent) {
         System.out.println(getServerResponse("register", "logout", null));
-        ApplicationManger.goToScene1(SceneName.FIRST_SCENE,false);
+        ApplicationManger.goToScene1(SceneName.FIRST_SCENE, false);
     }
 }

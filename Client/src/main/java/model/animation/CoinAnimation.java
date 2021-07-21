@@ -11,11 +11,11 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 public class CoinAnimation extends Transition {
-    private Image coinImage;
-    private ImageView coin;
-    private Rectangle2D face1;
-    private Rectangle2D face2;
-    private double toAngle;
+    private final Image coinImage;
+    private final ImageView coin;
+    private final Rectangle2D face1;
+    private final Rectangle2D face2;
+    private final double toAngle;
     private final DoubleProperty angle = new SimpleDoubleProperty(0);
     private boolean onFace1;
 

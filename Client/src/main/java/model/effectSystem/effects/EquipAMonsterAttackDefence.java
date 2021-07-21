@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class EquipAMonsterAttackDefence extends EquipEffect {
     ArrayList<String> monsterTypes = new ArrayList<>();
-    private int changeAttack;
-    private int changeDefence;
+    private final int changeAttack;
+    private final int changeDefence;
 
     public EquipAMonsterAttackDefence(ArrayList<String> args) {
         super(args);

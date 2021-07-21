@@ -3,19 +3,14 @@ package view.menus;
 import controller.ApplicationManger;
 import controller.MainMenuController;
 import javafx.animation.SequentialTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.animation.SpriteAnimation;
 
@@ -89,16 +84,16 @@ public class MainScene extends Scene {
     private void setTV() {
         tv.setCursor(Cursor.HAND);
         tv.setOnMouseEntered(event -> {
-           setRatio(1.2, tv);
+            setRatio(1.2, tv);
         });
         tv.setOnMouseExited(event -> {
-            setRatio(1/1.2, tv);
+            setRatio(1 / 1.2, tv);
         });
     }
 
     private void setRatio(double ratio, ImageView node) {
         node.setLayoutX(node.getLayoutX() + node.getFitWidth() * -0.5 * (ratio - 1));
-        node.setLayoutY(node.getLayoutY() + node.getFitHeight() * - 0.5 * (ratio - 1));
+        node.setLayoutY(node.getLayoutY() + node.getFitHeight() * -0.5 * (ratio - 1));
         node.setFitWidth(node.getFitWidth() * ratio);
         node.setFitHeight(node.getFitHeight() * ratio);
     }
@@ -201,6 +196,6 @@ public class MainScene extends Scene {
     }
 
     public void enterTV(MouseEvent mouseEvent) {
-       goToScene1(SceneName.TV_SCENE, false);
+        goToScene1(SceneName.TV_SCENE, false);
     }
 }

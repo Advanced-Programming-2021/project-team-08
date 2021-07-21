@@ -13,8 +13,8 @@ import model.enums.*;
 import java.util.ArrayList;
 
 public class CardSlot {
-    private ZoneType zoneType;
-    private ArrayList<Card> cards = new ArrayList<>();
+    private final ZoneType zoneType;
+    private final ArrayList<Card> cards = new ArrayList<>();
     private boolean isSingular;
 
     private Node slotView;
@@ -167,7 +167,7 @@ public class CardSlot {
                             return card;
                         }
                     } else if (cardType.equals(CardType.TRAP)) {
-                        TrapCardData trapCardData = (TrapCardData) ((TrapCard) card).getCardData();
+                        TrapCardData trapCardData = (TrapCardData) card.getCardData();
                         if (trapCardData.getTrapProperty().equals(spellTrapProperty)) {
                             this.removeACard(card);
                             return card;

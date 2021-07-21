@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class ScoreboardController extends ServerController{
+public class ScoreboardController extends ServerController {
 
     private static final ScoreboardController scoreboardController = new ScoreboardController();
 

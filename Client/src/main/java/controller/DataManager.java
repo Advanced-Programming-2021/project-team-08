@@ -65,7 +65,7 @@ public class DataManager {
 
     }
 
-    public static void importCardGraphic(String cardName){
+    public static void importCardGraphic(String cardName) {
         File importDir = new File("importCards");
         importDir.mkdir();
         String fileLocation = "importCards/" + cardName + ".json";
@@ -85,15 +85,16 @@ public class DataManager {
                     cardData = new ReadSpellTrapCardsData().readACardData(fileData.split(","));
                     break;
                 default:
-                     CardOptionsScene.setMessage("couldn't find card type");
+                    CardOptionsScene.setMessage("couldn't find card type");
                     return;
             }
-              CardOptionsScene.setMessage("card imported successfully.");
+            CardOptionsScene.setMessage("card imported successfully.");
         } catch (IOException e) {
-              CardOptionsScene.setMessage(e.getMessage());
+            CardOptionsScene.setMessage(e.getMessage());
         }
     }
-    public static void exportCardGraphic(CardData cardData){
+
+    public static void exportCardGraphic(CardData cardData) {
         File exportDir = new File("exportedCards");
         exportDir.mkdir();
         String fileLocation = "exportedCards/" + cardData.getCardName() + ".json";
@@ -103,9 +104,9 @@ public class DataManager {
             FileWriter fileWriter = new FileWriter(fileLocation);
             fileWriter.write(new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(cardData));
             fileWriter.close();
-              CardOptionsScene.setMessage("card exported successfully.");
+            CardOptionsScene.setMessage("card exported successfully.");
         } catch (IOException e) {
-              CardOptionsScene.setMessage("the file isn't saved yet.");
+            CardOptionsScene.setMessage("the file isn't saved yet.");
         }
     }
 }

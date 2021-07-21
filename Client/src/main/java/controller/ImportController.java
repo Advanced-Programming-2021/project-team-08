@@ -1,15 +1,11 @@
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import model.cards.data.CardData;
 import view.menus.ImportScene;
 
-import java.awt.*;
-
 public class ImportController {
 
-    private ImportScene importScene;
+    private final ImportScene importScene;
 
     public ImportController(ImportScene importScene) {
         this.importScene = importScene;
@@ -27,7 +23,8 @@ public class ImportController {
         }
         DataManager.exportCard(cardData);
     }
-    public void f(){
+
+    public void f() {
 
     }
 

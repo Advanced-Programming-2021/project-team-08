@@ -11,10 +11,10 @@ import model.graphic.GraphicCard;
 
 public class FlipCardAnimation extends Transition {
     private final DoubleProperty angleY = new SimpleDoubleProperty(0);
-    private GraphicCard card;
-    private int duration;
-    private boolean flipped = false;
-    private CardStatus toStatus;
+    private final GraphicCard card;
+    private final int duration;
+    private final boolean flipped = false;
+    private final CardStatus toStatus;
 
     public FlipCardAnimation(GraphicCard card, int duration, CardStatus to) {
         toStatus = to;

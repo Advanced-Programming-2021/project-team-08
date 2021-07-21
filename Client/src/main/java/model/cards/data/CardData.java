@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class CardData {
-    private static ArrayList<CardData> allCardData = new ArrayList<>();
+    private static final ArrayList<CardData> allCardData = new ArrayList<>();
     @Expose
     protected CardType cardType;
     @Expose

@@ -10,19 +10,18 @@ import javafx.scene.input.MouseEvent;
 import model.cards.data.CardData;
 import model.enums.CardStatus;
 import model.enums.ZoneType;
-import model.gameplay.CardSlot;
 import view.CardView;
 import view.menus.GamePlayScene;
 
 public class GraphicCard {
-    private static Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
-    private Image face;
-    private ImageView shape;
-    private CardData data;
+    private static final Image back = new Image("file:" + System.getProperty("user.dir") + "/src/main/resources/asset/gameplay/cardBack.png");
+    private final Image face;
+    private final ImageView shape;
+    private final CardData data;
     private GraphicCardSlot slot;
     private CardStatus status = CardStatus.TO_BACK;
     private boolean toAttackPosition = true;
-    private int cardOwnerPlayerNumber;
+    private final int cardOwnerPlayerNumber;
 
     public GraphicCard(CardData cardData, int cardOwnerNumber) {
         cardOwnerPlayerNumber = cardOwnerNumber;

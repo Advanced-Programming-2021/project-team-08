@@ -21,8 +21,8 @@ import java.util.regex.Pattern;
 
 public class DeckMenu extends Scene {
 
-    private User activeUser;
-    private DeckController deckController;
+    private final User activeUser;
+    private final DeckController deckController;
 
 
     public void setCards(AnchorPane anchorPane, ArrayList<CardData> cards, String scrollPaneType, String deckName) {

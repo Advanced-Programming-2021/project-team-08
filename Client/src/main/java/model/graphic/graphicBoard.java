@@ -12,8 +12,8 @@ import view.menus.GamePlayScene;
 import java.util.ArrayList;
 
 public class graphicBoard {
-    private GraphicPlayerBoard player1Board;
-    private GraphicPlayerBoard player2Board;
+    private final GraphicPlayerBoard player1Board;
+    private final GraphicPlayerBoard player2Board;
 
     public graphicBoard(AnchorPane board) {
         player1Board = new GraphicPlayerBoard(1, (AnchorPane) board.lookup("#player1Board"));
@@ -43,14 +43,14 @@ public class graphicBoard {
     }
 
     public class GraphicPlayerBoard {
-        private AnchorPane playerBoard;
-        private GraphicCardSlot deck;
-        private GraphicCardSlot hand;
-        private ArrayList<GraphicCardSlot> monster = new ArrayList<>(5);
-        private ArrayList<GraphicCardSlot> spell = new ArrayList<>(5);
+        private final AnchorPane playerBoard;
+        private final GraphicCardSlot deck;
+        private final GraphicCardSlot hand;
+        private final ArrayList<GraphicCardSlot> monster = new ArrayList<>(5);
+        private final ArrayList<GraphicCardSlot> spell = new ArrayList<>(5);
         private GraphicCardSlot field;
-        private GraphicCardSlot graveyard;
-        private int playerNumber;
+        private final GraphicCardSlot graveyard;
+        private final int playerNumber;
 
         public GraphicPlayerBoard(int playerNumber, AnchorPane playerBoard) {
             this.playerBoard = playerBoard;

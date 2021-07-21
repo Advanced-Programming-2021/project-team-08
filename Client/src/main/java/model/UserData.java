@@ -13,13 +13,10 @@ public class UserData {
     private String password;
     private int point = 0;
     private int money;
-    private ArrayList<Integer> myCardsIds = new ArrayList<>();
-    private ArrayList<Deck> decks = new ArrayList<>();
+    private final ArrayList<Integer> myCardsIds = new ArrayList<>();
+    private final ArrayList<Deck> decks = new ArrayList<>();
     private String activeDeckName;
     private String profileImageUrl;
-
-
-
 
 
     public UserData(String username, String nickname, String password) {
@@ -88,11 +85,10 @@ public class UserData {
         return decks.stream().filter(e -> e.getName().equals(activeDeckName)).findFirst().orElse(null);
     }
 
-    public boolean isThereADeckThatActivated(){
-        if (activeDeckName==null)
-            return false;
-        return true;
+    public boolean isThereADeckThatActivated() {
+        return activeDeckName != null;
     }
+
     public int getMoney() {
         return money;
     }

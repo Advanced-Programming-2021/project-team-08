@@ -3,7 +3,6 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.UserData;
 import model.enums.MessageType;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class TVController extends ServerController {
                 return topMatches(input);
             case "replayList":
                 return replayMatches(input);
-            case "play" :
+            case "play":
                 return playAMatch(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
@@ -46,7 +45,7 @@ public class TVController extends ServerController {
             return serverMessage(MessageType.ERROR, "invalid game id", null);
         }
         try {
-            String data =gameController.getGameSave();
+            String data = gameController.getGameSave();
             return serverMessage(MessageType.SUCCESSFUL, "it is game data", data);
         } catch (IOException e) {
             return ServerController.serverMessage(MessageType.ERROR, "ERROR in opening file", null);
@@ -79,9 +78,9 @@ public class TVController extends ServerController {
 }
 
 class GameData {
-    private int id;
-    private String firstPlayerNickname;
-    private String secondPlayerNickname;
+    private final int id;
+    private final String firstPlayerNickname;
+    private final String secondPlayerNickname;
 
     public GameData(int id, String firstPlayerNickname, String secondPlayerNickname) {
         this.id = id;
@@ -89,6 +88,7 @@ class GameData {
         this.secondPlayerNickname = secondPlayerNickname;
     }
 }
+
 class GameSort implements Comparator<GameController> {
     public int compare(GameController a, GameController b) {
         int aPlayersPoint = a.getGameManager().getPlayer1().getUserData().getPoint() + a.getGameManager().getPlayer2().getUserData().getPoint();
