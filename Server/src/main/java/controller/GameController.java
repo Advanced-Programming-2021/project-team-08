@@ -13,8 +13,11 @@ import view.menus.GamePlayScene;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -370,6 +373,30 @@ public class GameController {
         public boolean isFinished() {
             if (firstPlayerWins == 2 || secondPlayerWins == 2) return true;
             return currentRound >= rounds;
+        }
+
+
+    }
+
+    public String getGameSave() throws IOException {
+        return new String(Files.readAllBytes(Paths.get(saveGame.getPath())));
+    }
+
+    public static ArrayList<GameData> getGameList() {
+        ArrayList<GameData> savedGameData = new ArrayList<>();
+        try {
+            for (int i = 1; i < idCounter; i++) {
+                String gameData = new String(Files.readAllBytes(Paths.get("src/resources/gameData" + i + "txt")));
+                if (gameData.endsWith("end")) continue;
+                String data = new Scanner(gameData).nextLine();
+                WaitingGame waitingGame = new Gson().fromJson(data, WaitingGame.class);
+                GameData saveData = new GameData(waitingGame.getRounds(), waitingGame.getUser1().getUserData().getNickname(), waitingGame.getUser2().getUserData().getNickname());
+                savedGameData.add(saveData);
+            }
+            return savedGameData;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

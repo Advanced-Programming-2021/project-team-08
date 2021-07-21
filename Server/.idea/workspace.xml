@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="refresh">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/LobbyMenu.java" afterDir="false" />
+    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="save game data">
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TVController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +57,17 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

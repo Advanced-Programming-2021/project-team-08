@@ -1,10 +1,16 @@
 package view.menus;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import controller.ApplicationManger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -51,6 +57,21 @@ public class TVScene {
     }
 
     public void setReplayBattles(ActionEvent actionEvent) {
-
+        String result = ApplicationManger.getServerResponse("tv", "replayList", null);
+        JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
+        JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
+        for (JsonElement jsonElement : jsonArray) {
+            String nickname1 = jsonElement.getAsJsonObject().get("firstPlayerNickname").getAsString();
+            String nickname2 = jsonElement.getAsJsonObject().get("secondPlayerNickname").getAsString();
+            int id = jsonElement.getAsJsonObject().get("id").getAsInt();
+        }
     }
+}
+
+class tvLabel extends Label {
+    String nickname1;
+    String nickname2;
+    int id;
+
+
 }

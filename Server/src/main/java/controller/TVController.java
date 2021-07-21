@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import model.UserData;
 import model.enums.MessageType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -24,32 +25,38 @@ public class TVController extends ServerController {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         String methodName = jsonObject.get("method").getAsString();
         switch (methodName) {
-            case "live":
+            case "liveList":
                 return liveMatches(input);
-            case "top":
+            case "topList":
                 return topMatches(input);
-            case "replay":
+            case "replayList":
                 return replayMatches(input);
-//            case "play" :
-//                return playAMatch(input);
+            case "play" :
+                return playAMatch(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
     }
 
-//    private String playAMatch(String input) {
-//        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
-//        int index = Integer.parseInt(jsonObject.get("id").getAsString());
-//        GameController gameController = GameController.getAllGames().get(index);
-//        if (gameController == null) {
-//            return serverMessage(MessageType.ERROR, "invalid game id", null);
-//        }
-//
-//    }
+    private String playAMatch(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        int index = Integer.parseInt(jsonObject.get("id").getAsString());
+        GameController gameController = GameController.getAllGames().get(index);
+        if (gameController == null) {
+            return serverMessage(MessageType.ERROR, "invalid game id", null);
+        }
+        try {
+            String data =gameController.getGameSave();
+            return serverMessage(MessageType.SUCCESSFUL, "it is game data", data);
+        } catch (IOException e) {
+            return ServerController.serverMessage(MessageType.ERROR, "ERROR in opening file", null);
+        }
+    }
 
     private String replayMatches(String input) {
-
-        return null;
+        ArrayList<GameData> savedGameData = GameController.getGameList();
+        if (savedGameData == null) return serverMessage(MessageType.ERROR, "couldn't load game data", null);
+        return serverMessage(MessageType.SUCCESSFUL, "here is the list", new Gson().toJson(savedGameData));
     }
 
     private String topMatches(String input) {
@@ -65,7 +72,7 @@ public class TVController extends ServerController {
         Arrays.sort(games, new GameSort());
         ArrayList<GameData> allGameData = new ArrayList<>();
         for (GameController gameController : games) {
-            allGameData.add(new GameData(gameController));
+            allGameData.add(new GameData(gameController.getGameId(), gameController.getGameManager().getPlayer1().getUserData().getNickname(), gameController.getGameManager().getPlayer2().getUserData().getNickname()));
         }
         return serverMessage(MessageType.SUCCESSFUL, "here is the game list", new Gson().toJson(allGameData));
     }
@@ -76,20 +83,17 @@ class GameData {
     private String firstPlayerNickname;
     private String secondPlayerNickname;
 
-    public GameData(GameController gameController) {
-        this.id = gameController.getGameId();
-        this.firstPlayerNickname = gameController.getGameManager().getPlayer1().getUserData().getNickname();
-        this.secondPlayerNickname = gameController.getGameManager().getPlayer2().getUserData().getNickname();
+    public GameData(int id, String firstPlayerNickname, String secondPlayerNickname) {
+        this.id = id;
+        this.firstPlayerNickname = firstPlayerNickname;
+        this.secondPlayerNickname = secondPlayerNickname;
     }
 }
-
 class GameSort implements Comparator<GameController> {
     public int compare(GameController a, GameController b) {
         int aPlayersPoint = a.getGameManager().getPlayer1().getUserData().getPoint() + a.getGameManager().getPlayer2().getUserData().getPoint();
         int bPlayersPoint = b.getGameManager().getPlayer1().getUserData().getPoint() + b.getGameManager().getPlayer2().getUserData().getPoint();
         return bPlayersPoint - aPlayersPoint;
     }
-
-
 }
 
