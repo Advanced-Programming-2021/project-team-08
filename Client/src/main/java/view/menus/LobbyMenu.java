@@ -1,7 +1,6 @@
 package view.menus;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import controller.ApplicationManger;
 import controller.DuelController;
 import controller.GamePlaySceneController;
@@ -17,12 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.UserData;
 import model.enums.ChatType;
-import org.json.simple.JSONArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +33,7 @@ public class LobbyMenu {
     public TextField editedMessage;
     public Label editedMessageLabel;
     public Button editButton;
+    public Button cancelButton;
     private ArrayList<Integer> idOfMessage = new ArrayList<>();
 
     private static int idCounter = 0;
@@ -69,6 +67,7 @@ public class LobbyMenu {
             startGame(response);
         } else if (type.equals("WAITING")) {
             this.message.setText(responseMessage);
+            cancelButton.setVisible(true);
             new Thread(() -> {
                 while (!isGameStarted) {
                     try {
@@ -91,6 +90,9 @@ public class LobbyMenu {
                     if (type1.equals("SUCCESSFUL")) {
                         isGameStarted = true;
                         startGame(serverMessage);
+                    } else if (type1.equals("CANCEL")) {
+                        this.message.setText("");
+                        cancelButton.setVisible(false);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -98,6 +100,19 @@ public class LobbyMenu {
             }).start();
         } else {
             this.message.setText(responseMessage);
+        }
+    }
+
+    public void cancel() {
+        try {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("controller", "newGame");
+            jsonObject.addProperty("method", "cancel");
+            jsonObject.addProperty("token", ApplicationManger.getToken());
+            ApplicationManger.getDataOutputStream().writeUTF(jsonObject.toString());
+            ApplicationManger.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -172,7 +187,7 @@ public class LobbyMenu {
                     errorMessage.setTextFill(Color.GREEN);
                 }
                 messages.getChildren().remove(idOfMessage.indexOf(id));
-                Label delete=new Label();
+                Label delete = new Label();
                 delete.setPrefWidth(435);
                 delete.setPrefHeight(50);
                 delete.setAlignment(Pos.CENTER);
@@ -265,7 +280,7 @@ public class LobbyMenu {
                     nicknameAndChatType.setText("  " + nickname + " - " + chatType);
                 else nicknameAndChatType.setText(nickname);
                 message1.setText(message);
-                if (chatType.equals("DELETED")){
+                if (chatType.equals("DELETED")) {
                     message1.setTextFill(Color.BLUE);
                 }
                 vBox.getChildren().add(0, nicknameAndChatType);

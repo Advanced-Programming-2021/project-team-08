@@ -32,6 +32,9 @@ public class GameConnectionController extends ServerController {
         if (methodName.equals("newGame")) {
             return newGame(input);
         }
+        if (methodName.equals("cancel")) {
+            return cancel(input);
+        }
         return serverMessage(MessageType.ERROR, "invalid method name", null);
     }
 
@@ -53,6 +56,13 @@ public class GameConnectionController extends ServerController {
         }
         waitingGames.add(new WaitingGame(user, token, waitingUsers.get(ServerController.getUserByToken(token)), rounds));
         return serverMessage(MessageType.WAITING, "waiting for a user to connect", null);
+    }
+
+    private String cancel(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        String token = jsonObject.get("token").getAsString();
+        waitingGames.removeIf(e -> e.getUser1Token().equals(token));
+        return serverMessage(MessageType.CANCEL, "game canceled", null);
     }
 
     public void addGameWaiter(Socket socket, String input) {
