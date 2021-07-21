@@ -7,9 +7,7 @@ import model.cards.Card;
 import model.enums.Phase;
 import view.menus.GamePlayScene;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +22,15 @@ public class GameController {
     private Socket player1Socket, player2Socket;
     private int gameId;
 
-    public GameController(WaitingGame gameData) {
+    private File saveGame;
+
+    static {
+        File directoryPath = new File("src/resources/gameData");
+        File[] filesList = directoryPath.listFiles();
+        idCounter = filesList.length + 1;
+    }
+
+    public GameController(WaitingGame gameData, String duelGameData) {
         player1Socket = gameData.getUser1Socket();
         player2Socket = gameData.getUser2Socket();
 
@@ -32,6 +38,9 @@ public class GameController {
         setupNetwork(player2Socket);
         allGames.add(this);
         this.gameId = idCounter++;
+
+        saveGame = new File("src/resources/gameData/" + gameId + ".txt");
+        savaGameData(duelGameData);
 
         new Thread(() -> gameManager = new GameManager(gameData.getUser1().getUserData(), gameData.getUser2().getUserData(), new GamePlayScene(), this)).start();
 
@@ -101,6 +110,17 @@ public class GameController {
             dataOutputStream = new DataOutputStream(player2Socket.getOutputStream());
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        savaGameData(message);
+    }
+
+    private void savaGameData(String data) {
+        try {
+            FileWriter fileWriter = new FileWriter(saveGame, true);
+            fileWriter.write(data + "\n");
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

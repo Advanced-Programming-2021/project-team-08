@@ -48,7 +48,7 @@ public class GameConnectionController extends ServerController {
 
                 gameData.gameStart(user, waitingUsers.get(ServerController.getUserByToken(token)), duelDataJson);
                 waitingGames.remove(gameData);
-                new GameController(gameData);
+                new GameController(gameData, duelDataJson);
                 return serverMessage(MessageType.SUCCESSFUL, "player 2", duelDataJson);
             }
         }

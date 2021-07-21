@@ -27,7 +27,7 @@ public class ApplicationManger extends Application {
     private static Socket socket;
     private static DataInputStream dataInputStream;
     private static DataOutputStream dataOutputStream;
-    private static String token;
+    private static String token = null;
 
     public static HashMap<SceneName, URL> fxmlAddresses = new HashMap<SceneName, URL>() {{
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
@@ -75,7 +75,9 @@ public class ApplicationManger extends Application {
         mainStage = primaryStage;
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setOnCloseRequest(event -> {
-            System.out.println(getServerResponse("register", "logout", null));
+            if (token != null) {
+                System.out.println(getServerResponse("register", "logout", null));
+            }
             System.exit(0);
         });
         soundManager = new SoundManager();
