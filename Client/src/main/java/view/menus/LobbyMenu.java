@@ -122,6 +122,7 @@ public class LobbyMenu {
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         if (jsonObject.get("type").getAsString().equals("SUCCESSFUL")) {
+            int id=Integer.parseInt(jsonObject.get("returnObject").getAsString());
             HBox hBox = new HBox();
             hBox.setSpacing(10);
             hBox.setPrefWidth(435);
@@ -148,11 +149,31 @@ public class LobbyMenu {
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.GREEN);
             messageText.setText("");
+            deleteMessageButton.setOnMouseClicked(event -> {
+                HashMap<String, String> data1 = new HashMap<>();
+                data1.put("id", String.valueOf(id));
+                String result1=ApplicationManger.getServerResponse("lobby","delete",data1);
+                JsonElement jsonElement1 = JsonParser.parseString(result1);
+                JsonObject jsonObject1 = jsonElement1.getAsJsonObject();
+                if (jsonObject1.get("type").getAsString().equals("ERROR")){
+                    errorMessage.setText(jsonObject1.get("message").getAsString());
+                    errorMessage.setTextFill(Color.RED);
+                }
+                else {
+                    errorMessage.setText(jsonObject1.get("message").getAsString());
+                    errorMessage.setTextFill(Color.GREEN);
+                    messages.getChildren().remove(hBox);
+                }
+            });
+            editMessageButton.setOnMouseClicked(event -> {
+
+            });
         } else {
             errorMessage.setOpacity(1);
             errorMessage.setText(jsonObject.get("message").getAsString());
             errorMessage.setTextFill(Color.RED);
         }
+
     }
 
     public void refresh(ActionEvent actionEvent) {
@@ -190,7 +211,9 @@ public class LobbyMenu {
                 message1.setAlignment(Pos.CENTER);
                 nicknameAndChatType.setPrefWidth(420);
                 message1.setPrefWidth(420);
+                if (chatType.equals("EDITED"))
                 nicknameAndChatType.setText(nickname+" - "+chatType);
+                else    nicknameAndChatType.setText(nickname);
                 message1.setText(message);
                 vBox.getChildren().add(0,nicknameAndChatType);
                 vBox.getChildren().add(1, message1);

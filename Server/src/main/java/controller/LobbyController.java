@@ -34,6 +34,8 @@ public class LobbyController extends ServerController{
                 return sendMessage(input);
             case "updateChat":
                 return updateChat(input);
+            case "delete":
+                return deleteMessage(input);
             default:
                 return serverMessage(MessageType.ERROR, "invalid method name", null);
         }
@@ -66,8 +68,19 @@ public class LobbyController extends ServerController{
         String type = jsonObject.get("type").getAsString();
         Message chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname());
         allMessage.add(chat);
-        return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is send", null);
+        return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is send", String.valueOf(chat.getId()));
     }
+
+    private String deleteMessage(String input){
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        User user = ServerController.getUserByToken(jsonObject.get("token").getAsString());
+        if (!lobbyUsers.containsKey(user)) {
+            return ServerController.serverMessage(MessageType.ERROR, "you can send message from lobby", null);
+        }
+        allMessage.remove(getMessageById(jsonObject.get("id").getAsInt()));
+        return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is removed", null);
+    }
+
 
     private String updateChat(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
@@ -94,6 +107,14 @@ public class LobbyController extends ServerController{
         System.out.println("new last seen : " + lobbyUsers.get(user));
     }
 
+    public  Message getMessageById(int id){
+        for (Message message: allMessage){
+            if (message.getId()==id)
+                return message;
+        }
+        return null;
+    }
+
 }
 
 class Message {
@@ -113,5 +134,9 @@ class Message {
 
     public static int getIdCounter() {
         return idCounter;
+    }
+
+    public int getId() {
+        return id;
     }
 }
