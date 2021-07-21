@@ -36,7 +36,7 @@ public class ServerManager {
             e.printStackTrace();
         }
         try {
-            serverSocket = new ServerSocket(7755);
+            serverSocket = new ServerSocket(12345);
             while (true) {
                 Socket socket = serverSocket.accept();
                 isInGame.put(socket, false);
