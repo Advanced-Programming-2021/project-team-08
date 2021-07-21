@@ -6,9 +6,23 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class SoundManager {
+    private static boolean mute;
 
-    MediaPlayer mediaPlayer;
+    static MediaPlayer mediaPlayer;
     Media media;
+
+    public static void setMute(boolean mute) {
+        if(mute){
+            mediaPlayer.setVolume(0);
+        }else {
+            mediaPlayer.setVolume(1);
+        }
+        SoundManager.mute = mute;
+    }
+
+    public static boolean isMute() {
+        return mute;
+    }
 
     public void playSound(String location) {
         Media hit = new Media(new File(location).toURI().toString());

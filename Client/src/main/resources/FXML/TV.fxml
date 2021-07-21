@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.menus.TVScene"
-            prefHeight="900.0" prefWidth="1600.0">
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.TVScene">
+    <children>
+        <ScrollPane layoutX="400" layoutY="300" prefHeight="200.0" prefWidth="200.0">
+            <content>
+                <AnchorPane fx:id="tvPane"/>
+            </content>
+        </ScrollPane>
+        <Button fx:id="liveButton" layoutY="300" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="live" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setLiveBattles"/>
+        <Button fx:id="topButton" layoutY="500" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="top" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setTopBattles"/>
+        <Button fx:id="replayButton" layoutY="700" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="replay" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setReplayBattles"/>
+    </children>
 </AnchorPane>

@@ -78,13 +78,20 @@ public class LobbyController extends ServerController{
         ArrayList<Message> newMessages = new ArrayList<>();
         int lastSeenMessage = lobbyUsers.get(user);
         if (Message.getIdCounter() <= lastSeenMessage) {
+            System.out.println("id counter is : " + Message.getIdCounter() + "last seen message is : " + lastSeenMessage);
             return ServerController.serverMessage(MessageType.SUCCESSFUL, "there is no new message", null);
         }
         for (int i = lobbyUsers.get(user); i < Message.getIdCounter(); i++) {
             newMessages.add(allMessage.get(i));
         }
-        lobbyUsers.replace(user, Message.getIdCounter());
+        updateLastSeenMessage(user);
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "here is the new messages", new Gson().toJson(newMessages));
+    }
+
+    private void updateLastSeenMessage(User user) {
+        System.out.println("old last seen : " + lobbyUsers.get(user));
+        lobbyUsers.replace(user, Message.getIdCounter());
+        System.out.println("new last seen : " + lobbyUsers.get(user));
     }
 
 }
