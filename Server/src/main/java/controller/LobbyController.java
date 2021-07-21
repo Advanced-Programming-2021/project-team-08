@@ -10,7 +10,7 @@ import model.enums.MessageType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LobbyController extends ServerController{
+public class LobbyController extends ServerController {
 
     private static final LobbyController lobbyController = new LobbyController();
     private final ArrayList<Message> allMessage = new ArrayList<>();
@@ -70,7 +70,7 @@ public class LobbyController extends ServerController{
         Message chat;
         if (chatType.equals(ChatType.SEND)) {
             chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname(), -1);
-        }else {
+        } else {
             int actionId = Integer.parseInt(jsonObject.get("actionId").getAsString());
             chat = new Message(ChatType.valueOf(type), message, user.getUserData().getNickname(), actionId);
         }
@@ -78,7 +78,7 @@ public class LobbyController extends ServerController{
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "your message is send", String.valueOf(chat.getId()));
     }
 
-    private String deleteMessage(String input){
+    private String deleteMessage(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         User user = ServerController.getUserByToken(jsonObject.get("token").getAsString());
         if (!lobbyUsers.containsKey(user)) {
@@ -102,7 +102,8 @@ public class LobbyController extends ServerController{
             return ServerController.serverMessage(MessageType.SUCCESSFUL, "there is no new message", null);
         }
         for (int i = lobbyUsers.get(user); i < Message.getIdCounter(); i++) {
-            newMessages.add(allMessage.get(i));
+            if (!allMessage.get(i).getSenderNickname().equals(user.getUserData().getNickname()))
+                newMessages.add(allMessage.get(i));
         }
         updateLastSeenMessage(user);
         return ServerController.serverMessage(MessageType.SUCCESSFUL, "here is the new messages", new Gson().toJson(newMessages));
@@ -114,9 +115,9 @@ public class LobbyController extends ServerController{
         System.out.println("new last seen : " + lobbyUsers.get(user));
     }
 
-    public  Message getMessageById(int id){
-        for (Message message: allMessage){
-            if (message.getId()==id)
+    public Message getMessageById(int id) {
+        for (Message message : allMessage) {
+            if (message.getId() == id)
                 return message;
         }
         return null;
@@ -149,4 +150,7 @@ class Message {
         return id;
     }
 
+    public String getSenderNickname() {
+        return senderNickname;
+    }
 }
