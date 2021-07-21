@@ -160,7 +160,7 @@ public class ApplicationManger extends Application {
 
     private void setupServer() {
         try {
-            socket = new Socket("localhost", 7755);
+            socket = new Socket("6.tcp.ngrok.io", 11249);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {

@@ -29,6 +29,11 @@
             <Image url="@../asset/gameplay/board.jpg" />
          </image>
       </ImageView>
+      <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#pause" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="pause">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
       <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
          <children>
             <AnchorPane fx:id="player1Board" layoutX="400.0" layoutY="50.0" prefHeight="370.0" prefWidth="790.0" rotate="180.0">

@@ -17,3 +17,9 @@
     -fx-border-color: blue;
     -fx-border-width: 8;
 }
+.pauseButton{
+    -fx-background-radius: 30;
+    -fx-font-family: Heebeo;
+    -fx-text-fill: white;
+    -fx-background-color: rgb(0, 12, 65);
+}
