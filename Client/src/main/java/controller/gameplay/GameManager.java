@@ -45,7 +45,7 @@ public class GameManager {
     }
 
     private Player player1, player2;
-    private int turn, currentPlayerTurn;
+    private int turnNumber, currentPlayerTurn;
     private Phase currentPhase;
     private GameBoard gameBoard;
 
@@ -129,6 +129,10 @@ public class GameManager {
         this.canAttack = canAttack;
     }
 
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+
     public GamePlayScene getScene() {
         return scene;
     }
@@ -169,7 +173,7 @@ public class GameManager {
     }
 
     public void firstSetupAfterFirstDraw() {
-        turn = 1;
+        turnNumber = 1;
         currentPlayerTurn = new Random().nextInt(2) + 1;
         startDrawPhase();
     }
@@ -183,7 +187,7 @@ public class GameManager {
                 startMainPhase();
                 break;
             case MAIN:
-                if (turn == 1) {
+                if (turnNumber == 1) {
                     startEndPhase();
                 } else {
                     startBattlePhase();
@@ -203,21 +207,13 @@ public class GameManager {
     }
 
     private void changeTurn() {
-        turn++;
+        turnNumber++;
         currentPlayerTurn = (currentPlayerTurn == 1) ? 2 : 1;
         player1.onChangeTurn();
         player2.onChangeTurn();
         onChangeTurn.invoke();
 
         startDrawPhase();
-        if (isAI) {
-            if (currentPlayerTurn == 2) {
-                scene.setWaitForAI(true);
-                new Thread(() -> ai.playATurn()).start();
-            } else {
-                scene.setWaitForAI(false);
-            }
-        }
     }
 
     public void temporaryChangeTurn() {
@@ -234,6 +230,15 @@ public class GameManager {
         scene.showPhase("Draw");
         Platform.runLater(() -> scene.changePhase(Phase.DRAW, currentPlayerTurn));
         onCardActionDone();
+
+        if (isAI) {
+            if (currentPlayerTurn == 2) {
+                scene.setWaitForAI(true);
+                new Thread(() -> ai.playATurn()).start();
+            } else {
+                scene.setWaitForAI(false);
+            }
+        }
     }
 
     private void startStandbyPhase() {

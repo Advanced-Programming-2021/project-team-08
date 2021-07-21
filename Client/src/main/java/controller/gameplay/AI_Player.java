@@ -56,9 +56,11 @@ public class AI_Player {
             activateSpells();
             summonMonster();
             Thread.sleep(1000);
-            gameManager.goToNextPhase();
-            doAttack();
-            Thread.sleep(1000);
+            if(gameManager.getTurnNumber() != 1){
+                gameManager.goToNextPhase();
+                doAttack();
+                Thread.sleep(1000);
+            }
             gameManager.goToNextPhase();
             Thread.sleep(1000);
             gameManager.goToNextPhase();

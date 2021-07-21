@@ -221,7 +221,7 @@ public class GamePlayScene {
             overlayPanel.getChildren().add(label);
             new Thread(() -> {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2500);
                     overlayPanel.setVisible(false);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -233,8 +233,16 @@ public class GamePlayScene {
 
     public void changePhase(Phase toPhase, int currentPlayer) {
         if (!coinFlipped) {
-            coinFlip(currentPlayer);
-            coinFlipped = true;
+            new Thread(() -> {
+                Platform.runLater(() -> coinFlip(currentPlayer));
+                coinFlipped = true;
+                try {
+                    Thread.sleep(4500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                changePhase(toPhase, currentPlayer);
+            }).start();
         }
         currentPhase = toPhase;
         currentTurnPlayer = currentPlayer;

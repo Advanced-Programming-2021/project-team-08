@@ -218,9 +218,9 @@
                   <Font name="Heebeo" size="28.0" />
                </font>
             </Label>
-            <Button layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onAction="#nextPhase" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button layoutX="20.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="90.0" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Heebeo" size="24.0" />
+                  <Font size="26.0" />
                </font>
             </Button>
          </children>
