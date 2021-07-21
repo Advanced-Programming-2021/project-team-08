@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="save game data">
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/view/menus/TVScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/FXML/TV.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/FXML/TV.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameController.java" afterDir="false" />
+    <list default="true" id="862ad930-0f31-488a-a5ce-6e0f7195c038" name="Default Changelist" comment="tv">
       <change beforePath="$PROJECT_DIR$/src/resources/gameData/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/gameData/10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/10.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/gameData/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/gameData/11.txt" afterDir="false" />
@@ -232,7 +228,14 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۸" />
       <updated>1626864740767</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="tv">
+      <created>1626894699898</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1626894699898</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,7 +262,8 @@
     <MESSAGE value="GameConnectionController is changed" />
     <MESSAGE value="register and login changed&#10;add chat" />
     <MESSAGE value="refresh" />
-    <option name="LAST_COMMIT_MESSAGE" value="refresh" />
+    <MESSAGE value="tv" />
+    <option name="LAST_COMMIT_MESSAGE" value="tv" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Server$Main.ic" NAME="Main Coverage Results" MODIFIED="1626532157054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
