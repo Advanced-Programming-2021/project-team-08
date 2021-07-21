@@ -18,9 +18,11 @@ import java.util.regex.Pattern;
 
 public class GameController {
     private static ArrayList<GameController> allGames = new ArrayList<>();
+    private static int idCounter = 1;
 
     private GameManager gameManager;
     private Socket player1Socket, player2Socket;
+    private int gameId;
 
     public GameController(WaitingGame gameData) {
         player1Socket = gameData.getUser1Socket();
@@ -29,6 +31,7 @@ public class GameController {
         setupNetwork(player1Socket);
         setupNetwork(player2Socket);
         allGames.add(this);
+        this.gameId = idCounter++;
 
         new Thread(() -> gameManager = new GameManager(gameData.getUser1().getUserData(), gameData.getUser2().getUserData(), new GamePlayScene(), this)).start();
 
