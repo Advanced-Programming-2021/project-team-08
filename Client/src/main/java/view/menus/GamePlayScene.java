@@ -157,6 +157,7 @@ public class GamePlayScene {
                     processServerMessage(serverMessage);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    break;
                 }
             }
         }).start();
@@ -485,7 +486,7 @@ public class GamePlayScene {
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         if (playerNumber == this.playerNumber) {
-            thisCard.setToY(slot.getImageView().getLayoutY() + 30);
+            thisCard.setToY(slot.getImageView().getLayoutY() + 45);
         } else {
             thisCard.setToY(slot.getImageView().getLayoutY() + 35);
         }
@@ -524,7 +525,7 @@ public class GamePlayScene {
         thisCard.setNode(c.getShape());
         thisCard.setToX(slot.getImageView().getLayoutX() + 144);
         if (playerNumber == this.playerNumber) {
-            thisCard.setToY(slot.getImageView().getLayoutY() + 30);
+            thisCard.setToY(slot.getImageView().getLayoutY() + 45);
         } else {
             thisCard.setToY(slot.getImageView().getLayoutY() + 35);
         }
@@ -635,7 +636,7 @@ public class GamePlayScene {
 
     }
 
-    public void gameFinishUI(String resultMessage, int winnerNumber){
+    public void gameFinishUI(String resultMessage, int winnerNumber) {
         gameEndMessage.setText(resultMessage);
         if (winnerNumber == 1) {
             gameEndMessage.setStyle("-fx-text-fill: blue");
@@ -647,7 +648,7 @@ public class GamePlayScene {
 
     public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
         /////useless comment
-        if(isAI){
+        if (isAI) {
             String res = thisDuelData.setRoundResult(winnerNumber, player1LP, player2LP);
 
             gameEndMessage.setText(res);
@@ -705,10 +706,9 @@ public class GamePlayScene {
     }
 
     public void exitGame() {
-        if (isAI) {
-            ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
-        } else {
+        if (!isAI) {
             sendMessageToServer("exit game");
         }
+        ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
     }
 }

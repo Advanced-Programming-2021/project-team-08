@@ -75,7 +75,7 @@ public class GameController {
                 while (true) {
                     try {
                         String serverMessage = inputStream.readUTF();
-                        processClientMessage(serverMessage);
+                        if (processClientMessage(serverMessage) == 0) break;
                     } catch (IOException e) {
                         e.printStackTrace();
                         break;
@@ -87,7 +87,7 @@ public class GameController {
         }).start();
     }
 
-    public synchronized void processClientMessage(String input) {
+    public synchronized int processClientMessage(String input) {
         System.out.println(input);
         String token, command;
         Matcher matcher;
@@ -97,27 +97,27 @@ public class GameController {
             token = jsonObject.get("token").getAsString();
             command = jsonObject.get("command").getAsString();
         } catch (Exception e) {
-            return;
+            return 1;
         }
         int senderNumber = getSender(token);
         if (senderNumber == 0) {
             System.out.println("invalid token");
-            return;
+            return 1;
         }
         if (command.equals("surrender")) {
             gameManager.surrender(senderNumber);
-            return;
+            return 1;
         }
         if (command.equals("exit game")) {
             System.out.println("Exit game " + senderNumber);
-            return;
+            return 0;
         }
 
-        if (gameManager.getCurrentPlayerTurn() != senderNumber) return;
+        if (gameManager.getCurrentPlayerTurn() != senderNumber) return 1;
 
         if (command.equals("next phase")) {
             gameManager.goToNextPhase();
-            return;
+            return 1;
         }
         matcher = Pattern.compile("select ([^,]+),([^$]+)").matcher(command);
         if (matcher.matches()) {
@@ -137,6 +137,7 @@ public class GameController {
                 System.out.println("wrong address");
             }
         }
+        return 1;
     }
 
     private int getSender(String token) {
