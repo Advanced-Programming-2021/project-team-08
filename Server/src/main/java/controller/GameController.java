@@ -140,6 +140,8 @@ public class GameController {
                     case "set":
                         gameManager.setCard();
                         break;
+                    case "attack direct":
+                        gameManager.attackDirect();
                     case "attack":
                         gameManager.attack(Integer.parseInt(matcher.group(4)));
                         break;
@@ -289,6 +291,14 @@ public class GameController {
         data.put("attackerCardNumber", Integer.valueOf(attackerCardNumber).toString());
         data.put("defenderCardNumber", Integer.valueOf(defenderCardNumber).toString());
         sendMessageToBoth(getMessage("applyAttackResultGraphic", data));
+    }
+
+    public void applyDirectAttackResult(AttackResult result, int playerNumber) {
+        AttackResultJson resultJson = new AttackResultJson(result);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("result", new Gson().toJson(resultJson));
+        data.put("playerNumber", Integer.valueOf(playerNumber).toString());
+        sendMessageToBoth(getMessage("applyDirectAttackResult", data));
     }
 
     class AttackResultJson {

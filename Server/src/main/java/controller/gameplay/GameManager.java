@@ -472,6 +472,8 @@ public class GameManager {
         if (result.isCanceled()) return;
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         scene.log(result.getResultMessage());
+        final int playerNumber = currentPlayerTurn;
+        gameController.applyDirectAttackResult(result, playerNumber);
     }
 
     public ArrayList<Integer> getTribute(int numberOfTributes) throws Exception {
