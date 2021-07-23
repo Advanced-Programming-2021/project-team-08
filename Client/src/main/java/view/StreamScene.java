@@ -65,7 +65,7 @@ public class StreamScene {
 
     public Label currentPhaseLabel;
     public Label playerNumberLabel;
-    public Button nextPhaseButton;
+    //public Button nextPhaseButton;
 
     public Button muteButton;
     public AnchorPane pausePanel;
@@ -146,6 +146,11 @@ public class StreamScene {
         new Thread(()->{
             for (int i=1; i<size-1; i++){
                 processServerMessage(gameOrders.get(i));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
@@ -247,18 +252,6 @@ public class StreamScene {
     }
 
     public void changePhase(Phase toPhase, int currentPlayer) {
-        if (!coinFlipped) {
-            new Thread(() -> {
-                Platform.runLater(() -> coinFlip(currentPlayer));
-                coinFlipped = true;
-                try {
-                    Thread.sleep(4500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                changePhase(toPhase, currentPlayer);
-            }).start();
-        }
         currentPhase = toPhase;
         currentTurnPlayer = currentPlayer;
         currentPhaseLabel.setText(toPhase.toString().replace("_", " "));
@@ -269,7 +262,7 @@ public class StreamScene {
             currentPhaseLabel.getStyleClass().clear();
             currentPhaseLabel.getStyleClass().add("redPlayer");
         }
-        nextPhaseButton.setVisible(currentPlayer == playerNumber);
+        //nextPhaseButton.setVisible(currentPlayer == playerNumber);
     }
 
     private int cheatCommand(String userInput) {

@@ -218,11 +218,6 @@
                   <Font name="Heebeo" size="28.0" />
                </font>
             </Label>
-            <Button fx:id="nextPhaseButton" visible="false" layoutX="20.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="90.0" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
       <SubScene fx:id="showCard" height="360.0" layoutX="50.0" layoutY="220.0" width="260.0">
@@ -362,11 +357,6 @@
                   <Font size="35.0" />
                </font>
             </Label>
-            <Button fx:id="gameEndExitButton" layoutX="725.0" layoutY="600.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="Exit">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
@@ -382,16 +372,6 @@
                </font>
             </Button>
             <Button fx:id="muteButton" layoutX="480.0" layoutY="455.0" mnemonicParsing="false" onAction="#muteChange" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Mute">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button layoutX="480.0" layoutY="565.0" mnemonicParsing="false" onAction="#surrender" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Surrender">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button layoutX="480.0" layoutY="680.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Exit Game">
                <font>
                   <Font size="45.0" />
                </font>

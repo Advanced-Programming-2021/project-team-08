@@ -8,8 +8,10 @@ import controller.ApplicationManger;
 import controller.gameplay.StreamController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +21,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -113,6 +117,18 @@ class tvLabel extends Label {
             String gameData = jsonObject.get("returnObject").getAsString();
             ArrayList<String> gameOrders = new ArrayList<>(Arrays.asList(gameData.split("\n")));
             StreamController.getInstance().setGameOrders(gameOrders);
+
+            String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
+            try {
+                FXMLLoader loader = new FXMLLoader(new URL(rootPath + "gameStream.fxml"));
+                AnchorPane root = loader.load();
+                javafx.scene.Scene scene = new javafx.scene.Scene(root);
+                scene.setCamera(new PerspectiveCamera());
+                ApplicationManger.getMainStage().setScene(scene);
+                ApplicationManger.getMainStage().show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
