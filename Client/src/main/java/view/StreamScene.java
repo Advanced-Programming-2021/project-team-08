@@ -6,6 +6,7 @@ import controller.DuelController;
 import controller.GamePlaySceneController;
 import controller.SoundManager;
 import controller.gameplay.GameManager;
+import controller.gameplay.StreamController;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
@@ -38,6 +39,7 @@ import model.gameplay.Player;
 import model.graphic.GraphicCard;
 import model.graphic.GraphicCardSlot;
 import model.graphic.graphicBoard;
+import view.menus.LobbyMenu;
 import view.menus.SceneName;
 
 import java.io.IOException;
@@ -90,10 +92,9 @@ public class StreamScene {
     private int currentTurnPlayer;
     private Phase currentPhase;
 
-    private boolean isAI;
     private boolean coinFlipped = false;
 
-    private GamePlaySceneController.DuelData thisDuelData;
+    private ArrayList<String> gameOrders;
 
     public void setWaitForAI(boolean waitForAI) {
         this.waitForAI = waitForAI;
@@ -111,10 +112,6 @@ public class StreamScene {
         return playerNumber;
     }
 
-    public boolean isAI() {
-        return isAI;
-    }
-
     public graphicBoard getgBoard() {
         return gBoard;
     }
@@ -123,10 +120,12 @@ public class StreamScene {
     public void initialize() {
 //        sceneController = new GamePlaySceneController(this);
         instance = this;
+        gameOrders = StreamController.streamController.getGameOrders();
         gBoard = new graphicBoard(board);
-        GamePlaySceneController.DuelData data = DuelController.getCurrentDuelData();
-        thisDuelData = data;
-        this.playerNumber = Integer.parseInt(playerNumberLabel.getText());
+
+        LobbyMenu.DuelData getDuelJson = new Gson().fromJson(gameOrders.get(0), LobbyMenu.DuelData.class);
+        GamePlaySceneController.DuelData data = new GamePlaySceneController.DuelData(getDuelJson.getRounds(), true, getDuelJson.getUser1Data(), getDuelJson.getUser2Data());
+        this.playerNumber = 1;
 
         String rootPath = "file:" + System.getProperty("user.dir") + "/src/main/resources/FXML/";
         FXMLLoader loader = null;
@@ -137,20 +136,16 @@ public class StreamScene {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        isAI = !data.isPlayer();
+
         firstSetupUI(data);
+        playStream();
     }
 
-    private void setupNetwork() {
-        new Thread(() -> {
-            while (true) {
-                try {
-                    String serverMessage = ApplicationManger.getDataInputStream().readUTF();
-                    if (processServerMessage(serverMessage) == 0) break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    break;
-                }
+    private void playStream(){
+        int size = gameOrders.size();
+        new Thread(()->{
+            for (int i=1; i<size-1; i++){
+                processServerMessage(gameOrders.get(i));
             }
         }).start();
     }
@@ -206,20 +201,6 @@ public class StreamScene {
                 System.out.println("unknown");
         }
         return 1;
-    }
-
-    public void sendMessageToServer(String message) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("token", ApplicationManger.getToken());
-        jsonObject.addProperty("command", message);
-
-        System.out.println(jsonObject);
-        try {
-            ApplicationManger.getDataOutputStream().writeUTF(jsonObject.toString());
-            ApplicationManger.getDataOutputStream().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void firstSetupUI(GamePlaySceneController.DuelData data) {
@@ -402,14 +383,6 @@ public class StreamScene {
             matcher = Pattern.compile("([\\d]+)").matcher(input);
         }
         return Integer.parseInt(matcher.group(1));
-    }
-
-    public void nextPhase() {
-        if (isAI) {
-            GameManager.getInstance().goToNextPhase();
-        } else {
-            sendMessageToServer("next phase");
-        }
     }
 
     public void firstSetupBoardGraphic(int playerNumber, JsonArray cardIds) {
@@ -696,31 +669,6 @@ public class StreamScene {
         endGamePanel.setVisible(true);
     }
 
-    public void gameFinished(int winnerNumber, int player1LP, int player2LP) {
-        /////useless comment
-        if (isAI) {
-            String res = thisDuelData.setRoundResult(winnerNumber, player1LP, player2LP);
-
-            gameEndMessage.setText(res);
-            if (thisDuelData.getWinnerNumber() == 1) {
-                gameEndMessage.setStyle("-fx-text-fill: blue");
-            } else {
-                gameEndMessage.setStyle("-fx-text-fill: red");
-            }
-
-            endGamePanel.setVisible(true);
-
-        /*if (!thisDuelData.isFinished()) {
-            //currentRound++;
-            //System.out.println("Round " + currentRound);
-            //gameManager = new GameManager(thisDuelData.isPlayer, thisDuelData.firstPlayer, thisDuelData.secondPlayer, scene, this);
-            return;
-        }*/
-
-            thisDuelData.applyDuelResult();
-        }
-    }
-
     //Pause Menu
 
     public void pause() {
@@ -746,22 +694,4 @@ public class StreamScene {
             muteButton.setText("Unmute");
         }
     }
-
-    public void surrender() {
-        pausePanel.setVisible(false);
-        if (isAI) {
-            GameManager.getInstance().surrender();
-        } else {
-            sendMessageToServer("surrender");
-        }
-    }
-
-    public void exitGame() {
-        if (!isAI) {
-            sendMessageToServer("exit game");
-        }
-        ApplicationManger.goToScene1(SceneName.DUEL_SCENE, false);
-    }
-
-
 }

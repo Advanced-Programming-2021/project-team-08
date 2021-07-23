@@ -31,6 +31,8 @@ public class TVScene {
     public Button topButton;
     public Button replayButton;
 
+
+
     @FXML
     void initialize() {
         buttonInit(liveButton, 1.2);
@@ -110,6 +112,7 @@ class tvLabel extends Label {
             JsonObject jsonObject = JsonParser.parseString(serverResponse).getAsJsonObject();
             String gameData = jsonObject.get("returnObject").getAsString();
             ArrayList<String> gameOrders = new ArrayList<>(Arrays.asList(gameData.split("\n")));
+            StreamController.getInstance().setGameOrders(gameOrders);
         });
     }
 

@@ -304,7 +304,7 @@ public class LobbyMenu {
     }
 
 
-    class DuelData {
+    public class DuelData {
         private final UserData user1Data;
         private final UserData user2Data;
         private final int rounds;
@@ -313,6 +313,18 @@ public class LobbyMenu {
             this.user1Data = user1Data;
             this.user2Data = user2Data;
             this.rounds = rounds;
+        }
+
+        public UserData getUser1Data() {
+            return user1Data;
+        }
+
+        public UserData getUser2Data() {
+            return user2Data;
+        }
+
+        public int getRounds() {
+            return rounds;
         }
     }
 
