@@ -23,9 +23,9 @@ import java.util.HashMap;
 public class ServerManager {
     private static ServerSocket serverSocket;
 
-    private static HashMap<Socket, Boolean> isInGame = new HashMap<>();
+    private static HashMap<String, Boolean> isInGame = new HashMap<>();
 
-    public static HashMap<Socket, Boolean> getIsInGame() {
+    public static HashMap<String, Boolean> getIsInGame() {
         return isInGame;
     }
 
@@ -43,7 +43,7 @@ public class ServerManager {
             serverSocket = new ServerSocket(12345);
             while (true) {
                 Socket socket = serverSocket.accept();
-                isInGame.put(socket, false);
+                isInGame.put(socket.getRemoteSocketAddress().toString(), false);
                 ServerThread serverThread = new ServerThread(socket, serverSocket);
                 serverThread.start();
             }
@@ -94,13 +94,14 @@ class ServerThread extends Thread {
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             ServerController serverController = null;
-            while (!ServerManager.getIsInGame().get(socket)) {
+            while (!ServerManager.getIsInGame().get(socket.getRemoteSocketAddress().toString())) {
                 String input = dataInputStream.readUTF();
-                System.out.println("input: " + input);
+                System.out.println("input: " + input + ", socket:" + socket.getRemoteSocketAddress());
+                System.out.println("socket:" + socket.getRemoteSocketAddress() + "," + ServerManager.getIsInGame().get(socket.getRemoteSocketAddress().toString()));
                 String result;
-                if (ServerManager.getIsInGame().get(socket)) break;
+                if (ServerManager.getIsInGame().get(socket.getRemoteSocketAddress().toString())) break;
                 if (input.equals("")) break;
-                if (input.equals("alive")) continue;
+                if (input.equals("alive")) break;
                 if ((result = ServerController.checkToken(input)) == null) {
                     serverController = ServerController.getController(input);
                     if (serverController instanceof GameConnectionController) {
@@ -116,6 +117,7 @@ class ServerThread extends Thread {
                 dataOutputStream.writeUTF(result);
                 dataOutputStream.flush();
             }
+            System.out.println("socket:" + socket.getRemoteSocketAddress() + "," + ServerManager.getIsInGame().get(socket.getRemoteSocketAddress().toString()));
         } catch (IOException e) {
             if (e instanceof SocketException) {
                 System.out.println("one client disconnected");

@@ -82,8 +82,9 @@ public class GameController {
                 DataInputStream inputStream = new DataInputStream(socket.getInputStream());
                 while (true) {
                     try {
-                        String serverMessage = inputStream.readUTF();
-                        if (processClientMessage(serverMessage) == 0) break;
+                        String clientMessage = inputStream.readUTF();
+                        System.out.println(clientMessage);
+                        if (processClientMessage(clientMessage) == 0) break;
                     } catch (IOException e) {
                         e.printStackTrace();
                         break;
@@ -95,8 +96,7 @@ public class GameController {
         }).start();
     }
 
-    public synchronized int processClientMessage(String input) {
-        System.out.println(input);
+    public int processClientMessage(String input) {
         String token, command;
         Matcher matcher;
 
@@ -155,12 +155,12 @@ public class GameController {
         System.out.println("Exit game " + senderNumber);
         if (senderNumber == 1) {
             sendMessageToOne("successful exit", senderNumber);
-            ServerManager.getIsInGame().put(player1Socket, false);
+            ServerManager.getIsInGame().put(player1Socket.getRemoteSocketAddress().toString(), false);
             ServerThread serverThread = new ServerThread(player1Socket, ServerManager.getServerSocket());
             serverThread.start();
         } else if (senderNumber == 2) {
             sendMessageToOne("successful exit", senderNumber);
-            ServerManager.getIsInGame().put(player2Socket, false);
+            ServerManager.getIsInGame().put(player2Socket.getRemoteSocketAddress().toString(), false);
             ServerThread serverThread = new ServerThread(player2Socket, ServerManager.getServerSocket());
             serverThread.start();
         }

@@ -129,8 +129,8 @@ class WaitingGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ServerManager.getIsInGame().put(user1Socket, true);
-        ServerManager.getIsInGame().put(user2Socket, true);
+        ServerManager.getIsInGame().put(user1Socket.getRemoteSocketAddress().toString(), true);
+        ServerManager.getIsInGame().put(user2Socket.getRemoteSocketAddress().toString(), true);
     }
 }
 
