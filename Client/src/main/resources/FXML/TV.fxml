@@ -22,6 +22,9 @@
         <Button fx:id="topButton" layoutY="500" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="top"  styleClass="stream-button" onAction="#setTopBattles"/>
         <Button fx:id="replayButton" layoutY="700" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="replay"  styleClass="stream-button" onAction="#setReplayBattles"/>
 
-        <Button layoutX="50" layoutY="700" prefHeight="80" prefWidth="200" mnemonicParsing="false" text="Back"  styleClass="back" onAction="#Back"/>
+        <Button fx:id="pauseButton" layoutX="20" layoutY="400" prefHeight="80" prefWidth="200" mnemonicParsing="false" text="pause"  styleClass="back" onAction="#pauseResume" visible="false"/>
+
+
+        <Button layoutX="20" layoutY="700" prefHeight="80" prefWidth="200" mnemonicParsing="false" text="Back"  styleClass="back" onAction="#Back"/>
     </children>
 </AnchorPane>

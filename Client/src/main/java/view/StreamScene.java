@@ -1,11 +1,8 @@
 package view;
 
 import com.google.gson.*;
-import controller.ApplicationManger;
-import controller.DuelController;
 import controller.GamePlaySceneController;
 import controller.SoundManager;
-import controller.gameplay.GameManager;
 import controller.gameplay.StreamController;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
@@ -40,7 +37,6 @@ import model.graphic.GraphicCard;
 import model.graphic.GraphicCardSlot;
 import model.graphic.graphicBoard;
 import view.menus.LobbyMenu;
-import view.menus.SceneName;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,6 +71,8 @@ public class StreamScene {
     public AnchorPane endGamePanel;
     public Label gameEndMessage;
     public Button gameEndExitButton;
+
+    private playThread playThread;
 
     private static StreamScene instance;
 
@@ -141,21 +139,25 @@ public class StreamScene {
         playStream();
     }
 
-    private void playStream(){
+    private void playStream() {
         int size = gameOrders.size();
-        new Thread(()->{
-            for (int i=1; i<size-1; i++){
-                processServerMessage(gameOrders.get(i));
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        playThread = new playThread();
+        playThread.start();
     }
 
-    private int processServerMessage(String message) {
+    public void stopStream() {
+        playThread.stopThread();
+    }
+
+    public void pauseStream() {
+        playThread.pauseThread();
+    }
+
+    public void resumeStream() {
+        playThread.resumeThread();
+    }
+
+    int processServerMessage(String message) {
         System.out.println(message);
         if (message.equals("successful exit")) return 0;
 
@@ -686,5 +688,50 @@ public class StreamScene {
             SoundManager.setMute(true);
             muteButton.setText("Unmute");
         }
+    }
+}
+
+class playThread extends Thread {
+
+
+    private ArrayList<String> gameOrders;
+    private boolean isDone = false;
+    private boolean isPause = false;
+
+    public playThread() {
+        gameOrders = StreamController.streamController.getGameOrders();
+    }
+
+    @Override
+    public void run() {
+        int size = gameOrders.size();
+        for (int i = 1; i < size - 1; i++) {
+            if (isDone) return;
+            while (isPause) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            StreamScene.getInstance().processServerMessage(gameOrders.get(i));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void stopThread() {
+        isDone = true;
+    }
+
+    public void pauseThread() {
+        isPause = true;
+    }
+
+    public void resumeThread() {
+        isPause = false;
     }
 }

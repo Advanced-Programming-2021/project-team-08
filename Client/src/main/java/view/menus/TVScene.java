@@ -21,6 +21,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import view.StreamScene;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +39,7 @@ public class TVScene {
     public AnchorPane parent;
     public SubScene tv;
     public ScrollPane tvScroll;
+    public Button pauseButton;
 
 
     @FXML
@@ -98,6 +100,16 @@ public class TVScene {
     public void Back(ActionEvent actionEvent) {
         ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
     }
+
+    public void pauseResume(ActionEvent actionEvent) {
+        if (pauseButton.getText().equals("pause")) {
+            pauseButton.setText("resume");
+            StreamScene.getInstance().pauseStream();
+        }else {
+            pauseButton.setText("pause");
+            StreamScene.getInstance().resumeStream();
+        }
+    }
 }
 
 class tvLabel extends Label {
@@ -143,6 +155,7 @@ class tvLabel extends Label {
                 tv.setScaleY(0.7);
                 tv.setCamera(new PerspectiveCamera());
                 tv.setVisible(true);
+                tv.toFront();
             } catch (IOException e) {
                 e.printStackTrace();
             }

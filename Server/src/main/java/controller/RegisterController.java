@@ -7,6 +7,8 @@ import com.google.gson.JsonParser;
 import model.User;
 import model.enums.MessageType;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -31,6 +33,14 @@ public class RegisterController extends ServerController {
             return serverMessage(MessageType.ERROR, "user with nickname " + jsonObject.get("nickname") + " already exists", null);
         } else {
             User user = new User(jsonObject.get("username").getAsString(), jsonObject.get("nickname").getAsString(), jsonObject.get("password").getAsString());
+            FileWriter userFile = null;
+            try {
+                userFile = new FileWriter("users/" + user.getUsername() + ".json");
+                userFile.write(new Gson().toJson(user.getUserData()));
+                userFile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             MessageType messageType = FileManager.getInstance().createUser(user);
             if (messageType.equals(MessageType.SUCCESSFUL))
                 return serverMessage(messageType, "you successfully created your account", new Gson().toJson(user));
