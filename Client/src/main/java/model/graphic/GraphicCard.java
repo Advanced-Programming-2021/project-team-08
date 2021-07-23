@@ -189,6 +189,23 @@ public class GraphicCard {
                         e.printStackTrace();
                     }
                 }
+                if(contextMenu.getItems().size() == 0){
+                    MenuItem m = new MenuItem("Attack Direct");
+                    m.setOnAction(event1 -> {
+                        System.out.println("attack direct");
+                        if (isAI) {
+                            try {
+                                GameManager.getInstance().selectCard("--monster " + slot.getNumber());
+                                GameManager.getInstance().attackDirect();
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        } else {
+                            GamePlayScene.getInstance().sendMessageToServer("select --monster " + slot.getNumber() + ",attack direct");
+                        }
+                    });
+                    contextMenu.getItems().add(m);
+                }
                 break;
             case SPELL_AND_TRAP:
                 break;

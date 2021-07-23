@@ -502,8 +502,8 @@ public class GameManager {
         final int playerNumber = currentPlayerTurn;
         getCurrentTurnOpponentPlayer().decreaseLP(result.getPlayer2LPDecrease());
         scene.log(result.getResultMessage());
-        Platform.runLater(() -> scene.applyDirectAttackResult(result, playerNumber));
-
+        GamePlayScene.AttackResultJson resultJson = new GamePlayScene.AttackResultJson(result);
+        Platform.runLater(() -> scene.applyDirectAttackResult(resultJson, playerNumber));
     }
 
     public ArrayList<Integer> getTribute(int numberOfTributes) throws Exception {

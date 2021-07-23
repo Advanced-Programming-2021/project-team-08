@@ -166,11 +166,12 @@ public class GamePlayScene {
 
     private int processServerMessage(String message) {
         System.out.println(message);
-        if(message.equals("successful exit")) return 0;
+        if (message.equals("successful exit")) return 0;
 
         JsonObject json = JsonParser.parseString(message).getAsJsonObject();
         String methodName = json.get("method").getAsString();
         int playerNumber, a, b;
+        AttackResultJson result;
         switch (methodName) {
             case "firstSetupBoardGraphic":
                 playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
@@ -200,11 +201,16 @@ public class GamePlayScene {
                 Platform.runLater(() -> setMonster(playerNumber, a, b));
                 break;
             case "applyAttackResultGraphic":
-                AttackResultJson result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonObject(), AttackResultJson.class);
+                result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonObject(), AttackResultJson.class);
                 playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
                 a = Integer.parseInt(json.get("attackerCardNumber").getAsString());
                 b = Integer.parseInt(json.get("defenderCardNumber").getAsString());
                 Platform.runLater(() -> applyAttackResultGraphic(result, playerNumber, a, b));
+                break;
+            case "applyDirectAttackResult":
+                result = new Gson().fromJson(JsonParser.parseString(json.get("result").getAsString()).getAsJsonObject(), AttackResultJson.class);
+                playerNumber = Integer.parseInt(json.get("playerNumber").getAsString());
+                Platform.runLater(() -> applyDirectAttackResult(result, playerNumber));
                 break;
             case "gameFinishUI":
                 String resultMessage = json.get("resultMessage").getAsString();
@@ -653,7 +659,7 @@ public class GamePlayScene {
         }
     }
 
-    public void applyDirectAttackResult(AttackResult result, int playerNumber) {
+    public void applyDirectAttackResult(AttackResultJson result, int playerNumber) {
         changePlayerLP(playerNumber == 1 ? 2 : 1, -result.getPlayer2LPDecrease());
     }
 
@@ -669,8 +675,10 @@ public class GamePlayScene {
         }
 
         int current = Integer.parseInt(text.getText().substring(8));
-        text.setText("LP      " + (current + amount));
-        double ratio = (double) (current + amount) / 8000;
+        int n = current + amount;
+        if (n < 0) n = 0;
+        text.setText("LP      " + n);
+        double ratio = (double) n / 8000;
         bar.setViewport(new Rectangle2D(0, 0, ratio * 284, 32));
         bar.setFitWidth(ratio * 284);
     }
