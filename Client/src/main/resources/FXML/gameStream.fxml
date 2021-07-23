@@ -5,7 +5,6 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.SubScene?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,11 +28,6 @@
             <Image url="@../asset/gameplay/board.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#pause" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="Pause">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
          <children>
             <AnchorPane fx:id="player1Board" layoutX="390.0" layoutY="450.0" prefHeight="370.0" prefWidth="790.0">
@@ -359,24 +353,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
-         <children>
-            <Label alignment="CENTER" layoutX="323.0" layoutY="185.0" prefHeight="115.0" prefWidth="940.0" scaleX="0.7" scaleY="0.7" styleClass="title" text="Pause" textAlignment="CENTER">
-               <font>
-                  <Font size="60.0" />
-               </font>
-            </Label>
-            <Button layoutX="480.0" layoutY="345.0" mnemonicParsing="false" onAction="#resume" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Resume">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button fx:id="muteButton" layoutX="480.0" layoutY="455.0" mnemonicParsing="false" onAction="#muteChange" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Mute">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="900.0" prefWidth="1600.0" />
    </children>
 </AnchorPane>
