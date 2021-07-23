@@ -116,7 +116,7 @@ public class GameController {
             return 1;
         }
         if (command.equals("exit game")) {
-            System.out.println("Exit game " + senderNumber);
+            exitGame(senderNumber);
             return 0;
         }
 
@@ -148,6 +148,19 @@ public class GameController {
             }
         }
         return 1;
+    }
+
+    private void exitGame(int senderNumber){
+        System.out.println("Exit game " + senderNumber);
+        if(senderNumber == 1){
+            ServerManager.getIsInGame().put(player1Socket, false);
+            ServerThread serverThread = new ServerThread(player1Socket, ServerManager.getServerSocket());
+            serverThread.start();
+        }else if(senderNumber == 2){
+            ServerManager.getIsInGame().put(player2Socket, false);
+            ServerThread serverThread = new ServerThread(player2Socket, ServerManager.getServerSocket());
+            serverThread.start();
+        }
     }
 
     private int getSender(String token) {

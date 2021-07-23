@@ -21,12 +21,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServerManager {
-    ServerSocket serverSocket;
+    private static ServerSocket serverSocket;
 
-    private static final HashMap<Socket, Boolean> isInGame = new HashMap<>();
+    private static HashMap<Socket, Boolean> isInGame = new HashMap<>();
 
     public static HashMap<Socket, Boolean> getIsInGame() {
         return isInGame;
+    }
+
+    public static ServerSocket getServerSocket() {
+        return serverSocket;
     }
 
     public void runServer() {
@@ -40,8 +44,7 @@ public class ServerManager {
             while (true) {
                 Socket socket = serverSocket.accept();
                 isInGame.put(socket, false);
-                ServerThread serverThread = new ServerThread();
-                serverThread.init(socket, serverSocket);
+                ServerThread serverThread = new ServerThread(socket, serverSocket);
                 serverThread.start();
             }
         } catch (IOException e) {
@@ -80,7 +83,7 @@ class ServerThread extends Thread {
     Socket socket;
     ServerSocket serverSocket;
 
-    public void init(Socket socket, ServerSocket serverSocket) {
+    public ServerThread(Socket socket, ServerSocket serverSocket) {
         this.socket = socket;
         this.serverSocket = serverSocket;
     }
