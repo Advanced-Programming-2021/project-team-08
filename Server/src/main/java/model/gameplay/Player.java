@@ -207,6 +207,9 @@ public class Player {
         if (myCard.getCardSlot().getZoneType() != ZoneType.MONSTER) {
             throw new Exception("you can't attack with this card");
         }
+        if (!((MonsterCard)myCard).isAttackPosition()) {
+            throw new Exception("you can't attack with this card");
+        }
         if (gameManager.getCurrentPhase() != Phase.BATTLE) {
             throw new Exception("action not allowed in this phase");
         }
