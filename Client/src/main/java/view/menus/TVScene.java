@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.ApplicationManger;
+import controller.gameplay.StreamController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -18,6 +19,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -102,7 +105,11 @@ class tvLabel extends Label {
         setOnMouseClicked(event -> {
             HashMap<String, String> data = new HashMap<>();
             data.put("id", String.valueOf(id));
-            System.out.println(ApplicationManger.getServerResponse("tv", "play", data));
+            String serverResponse = ApplicationManger.getServerResponse("tv", "play", data);
+            if (serverResponse == null) return;
+            JsonObject jsonObject = JsonParser.parseString(serverResponse).getAsJsonObject();
+            String gameData = jsonObject.get("returnObject").getAsString();
+            ArrayList<String> gameOrders = new ArrayList<>(Arrays.asList(gameData.split("\n")));
         });
     }
 

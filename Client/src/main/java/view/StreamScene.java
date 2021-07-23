@@ -47,7 +47,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StreamController {
+public class StreamScene {
 
     public ImageView player1Avatar;
     public ImageView player2Avatar;
@@ -74,9 +74,9 @@ public class StreamController {
     public Label gameEndMessage;
     public Button gameEndExitButton;
 
-    private static StreamController instance;
+    private static StreamScene instance;
 
-    public static StreamController getInstance() {
+    public static StreamScene getInstance() {
         return instance;
     }
 
