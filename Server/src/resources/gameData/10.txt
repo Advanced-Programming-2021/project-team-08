@@ -24,3 +24,4 @@
 {"method":"summon","playerNumber":"2","toSlotNumber":"1","handCardNumber":"6"}
 {"method":"changePhase","toPhase":"BATTLE","currentPlayer":"2"}
 {"method":"applyAttackResultGraphic","result":"{\"attackerPlayerNumber\":2,\"attackedPlayerNumber\":1,\"player1LPDecrease\":400,\"player2LPDecrease\":0,\"destroyCard1\":true,\"destroyCard2\":false,\"attackedFlip\":false}","playerNumber":"2","attackerCardNumber":"1","defenderCardNumber":"1"}
+end

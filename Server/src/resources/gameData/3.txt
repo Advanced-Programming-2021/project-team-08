@@ -22,3 +22,4 @@
 {"method":"changePhase","toPhase":"STANDBY","currentPlayer":"1"}
 {"method":"changePhase","toPhase":"MAIN","currentPlayer":"1"}
 {"method":"summon","playerNumber":"1","toSlotNumber":"1","handCardNumber":"5"}
+end

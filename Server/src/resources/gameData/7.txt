@@ -31,3 +31,4 @@
 {"method":"summon","playerNumber":"1","toSlotNumber":"2","handCardNumber":"4"}
 {"method":"changePhase","toPhase":"BATTLE","currentPlayer":"1"}
 {"method":"gameFinishUI","winnerNumber":"2","resultMessage":"ali won the game and the score is: 0-1"}
+end

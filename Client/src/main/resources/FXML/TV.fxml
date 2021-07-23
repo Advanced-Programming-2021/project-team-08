@@ -6,9 +6,9 @@
 <AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.TVScene">
     <children>
-        <ScrollPane layoutX="400" layoutY="100" prefHeight="600.0" prefWidth="800.0">
+        <ScrollPane  layoutX="400" layoutY="100" prefHeight="600.0" prefWidth="800.0">
             <content>
-                <AnchorPane fx:id="tvPane"/>
+                <AnchorPane fx:id="tvPane" prefWidth="800" prefHeight="600"/>
             </content>
         </ScrollPane>
         <Button fx:id="liveButton" layoutY="300" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="live" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setLiveBattles"/>

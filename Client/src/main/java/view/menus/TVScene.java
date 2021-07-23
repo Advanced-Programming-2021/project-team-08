@@ -7,10 +7,15 @@ import com.google.gson.JsonParser;
 import controller.ApplicationManger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.HashMap;
@@ -52,22 +57,26 @@ public class TVScene {
     }
 
     public void setReplayBattles(ActionEvent actionEvent) {
-        AnchorPane anchorPane = new AnchorPane();
+        tvPane.getChildren().clear();
+        tvPane.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(1), new Insets(1))));
         String result = ApplicationManger.getServerResponse("tv", "replayList", null);
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
+        System.out.println(jsonObject);
         if (jsonObject.get("type").getAsString().equals("ERROR")) {
             System.out.println(result);
             return;
         }
         JsonArray jsonArray = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonArray();
+        System.out.println(jsonArray);
         int i = 0;
         for (JsonElement jsonElement : jsonArray) {
             String nickname1 = jsonElement.getAsJsonObject().get("firstPlayerNickname").getAsString();
             String nickname2 = jsonElement.getAsJsonObject().get("secondPlayerNickname").getAsString();
             int id = jsonElement.getAsJsonObject().get("id").getAsInt();
-            anchorPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i));
+            System.out.println("first nickname is: " + nickname1 + " second nickname is: " + nickname2 + " id is: " + id);
+            tvPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i));
+            i++;
         }
-        tvPane = anchorPane;
     }
 }
 
@@ -81,8 +90,8 @@ class tvLabel extends Label {
         this.nickname2 = nickname2;
         this.id = id;
         setText(text());
-        setPrefHeight(70);
-        setPrefWidth(200);
+        setPrefHeight(80);
+        setPrefWidth(400);
         setFont(new Font(26));
         setLayoutY(index * 100);
         setCursor(Cursor.HAND);

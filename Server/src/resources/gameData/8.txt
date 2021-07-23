@@ -23,3 +23,4 @@
 {"method":"changePhase","toPhase":"MAIN","currentPlayer":"2"}
 {"method":"summon","playerNumber":"2","toSlotNumber":"1","handCardNumber":"2"}
 {"method":"changePhase","toPhase":"BATTLE","currentPlayer":"2"}
+end

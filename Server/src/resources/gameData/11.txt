@@ -30,3 +30,4 @@
 {"method":"changePhase","toPhase":"STANDBY","currentPlayer":"1"}
 {"method":"changePhase","toPhase":"MAIN","currentPlayer":"1"}
 {"method":"changePhase","toPhase":"BATTLE","currentPlayer":"1"}
+end

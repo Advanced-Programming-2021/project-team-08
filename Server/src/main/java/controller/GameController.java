@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.gameplay.GameManager;
+import model.GameData;
 import model.UserData;
 import model.cards.Card;
 import model.enums.Phase;
@@ -430,9 +431,9 @@ public class GameController {
                 String gameData = new String(Files.readAllBytes(Paths.get("src/resources/gameData/" + i + ".txt")));
                 if (!gameData.endsWith("end")) continue;
                 String data = new Scanner(gameData).nextLine();
-                WaitingGame waitingGame = new Gson().fromJson(data, WaitingGame.class);
-                GameData saveData = new GameData(waitingGame.getRounds(), waitingGame.getUser1().getUserData().getNickname(), waitingGame.getUser2().getUserData().getNickname());
-                savedGameData.add(saveData);
+                SendDuelData saveData = new Gson().fromJson(data, SendDuelData.class);
+                GameData gameData1 = new GameData(i, saveData.getUser1Data().getNickname(), saveData.getUser2Data().getNickname());
+                savedGameData.add(gameData1);
                 System.out.println("one time loop done");
             }
             return savedGameData;
@@ -440,5 +441,11 @@ public class GameController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getGameData(int id) throws IOException {
+        String gameData = new String(Files.readAllBytes(Paths.get("src/resources/gameData/" + id + ".txt")));
+        if (!gameData.endsWith("end")) return null;
+        return gameData;
     }
 }

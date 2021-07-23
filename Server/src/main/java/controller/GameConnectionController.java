@@ -45,7 +45,7 @@ public class GameConnectionController extends ServerController {
         User user = ServerController.getUserByToken(token);
         for (WaitingGame gameData : waitingGames) {
             if (gameData.getRounds() == rounds) {
-                DuelData duelData = new DuelData(gameData.getUser1().getUserData(), user.getUserData(), gameData.getRounds());
+                SendDuelData duelData = new SendDuelData(gameData.getUser1().getUserData(), user.getUserData(), gameData.getRounds());
                 String duelDataJson = new Gson().toJson(duelData);
 
                 gameData.gameStart(user, token, waitingUsers.get(ServerController.getUserByToken(token)), duelDataJson);
@@ -134,14 +134,26 @@ class WaitingGame {
     }
 }
 
-class DuelData {
+class SendDuelData {
     private final UserData user1Data;
     private final UserData user2Data;
     private final int rounds;
 
-    public DuelData(UserData user1Data, UserData user2Data, int rounds) {
+    public SendDuelData(UserData user1Data, UserData user2Data, int rounds) {
         this.user1Data = user1Data;
         this.user2Data = user2Data;
         this.rounds = rounds;
+    }
+
+    public int getRounds() {
+        return rounds;
+    }
+
+    public UserData getUser1Data() {
+        return user1Data;
+    }
+
+    public UserData getUser2Data() {
+        return user2Data;
     }
 }

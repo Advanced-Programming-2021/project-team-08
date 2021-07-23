@@ -27,3 +27,4 @@
 {"method":"changePhase","toPhase":"DRAW","currentPlayer":"1"}
 {"method":"draw","playerNumber":"1","deckCardNumber":"40"}
 {"method":"gameFinishUI","winnerNumber":"2","resultMessage":"ali won the game and the score is: 0-1"}
+end

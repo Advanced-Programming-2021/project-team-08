@@ -36,3 +36,4 @@
 {"method":"changePhase","toPhase":"STANDBY","currentPlayer":"2"}
 {"method":"changePhase","toPhase":"MAIN","currentPlayer":"2"}
 {"method":"set","playerNumber":"2","toSlotNumber":"2","handCardNumber":"4"}
+end

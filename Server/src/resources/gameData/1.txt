@@ -32,3 +32,4 @@
 {"method":"changePhase","toPhase":"END","currentPlayer":"1"}
 {"method":"changePhase","toPhase":"DRAW","currentPlayer":"2"}
 {"method":"draw","playerNumber":"2","deckCardNumber":"40"}
+end

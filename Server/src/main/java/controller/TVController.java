@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import model.GameData;
 import model.enums.MessageType;
 
 import java.io.IOException;
@@ -40,6 +41,20 @@ public class TVController extends ServerController {
     private String playAMatch(String input) {
         JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
         int index = Integer.parseInt(jsonObject.get("id").getAsString());
+        try {
+            String gameData = GameController.getGameData(index);
+            if (gameData == null) {
+                return serverMessage(MessageType.ERROR, "game is not finished", null);
+            }
+            return serverMessage(MessageType.SUCCESSFUL, "it is game data", gameData);
+        } catch (IOException e) {
+            return ServerController.serverMessage(MessageType.ERROR, "invalid game id", null);
+        }
+    }
+
+    private String playALiveMatch(String input) {
+        JsonObject jsonObject = JsonParser.parseString(input).getAsJsonObject();
+        int index = Integer.parseInt(jsonObject.get("id").getAsString());
         GameController gameController = GameController.getAllGames().get(index);
         if (gameController == null) {
             return serverMessage(MessageType.ERROR, "invalid game id", null);
@@ -54,6 +69,9 @@ public class TVController extends ServerController {
 
     private String replayMatches(String input) {
         ArrayList<GameData> savedGameData = GameController.getGameList();
+        for (GameData gameData : savedGameData) {
+            System.out.println(gameData);
+        }
         if (savedGameData == null) return serverMessage(MessageType.ERROR, "couldn't load game data", null);
         return serverMessage(MessageType.SUCCESSFUL, "here is the list", new Gson().toJson(savedGameData));
     }
@@ -77,17 +95,6 @@ public class TVController extends ServerController {
     }
 }
 
-class GameData {
-    private final int id;
-    private final String firstPlayerNickname;
-    private final String secondPlayerNickname;
-
-    public GameData(int id, String firstPlayerNickname, String secondPlayerNickname) {
-        this.id = id;
-        this.firstPlayerNickname = firstPlayerNickname;
-        this.secondPlayerNickname = secondPlayerNickname;
-    }
-}
 
 class GameSort implements Comparator<GameController> {
     public int compare(GameController a, GameController b) {
