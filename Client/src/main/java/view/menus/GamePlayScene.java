@@ -155,7 +155,7 @@ public class GamePlayScene {
             while (true) {
                 try {
                     String serverMessage = ApplicationManger.getDataInputStream().readUTF();
-                    processServerMessage(serverMessage);
+                    if (processServerMessage(serverMessage) == 0) break;
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;
@@ -164,8 +164,10 @@ public class GamePlayScene {
         }).start();
     }
 
-    private void processServerMessage(String message) {
+    private int processServerMessage(String message) {
         System.out.println(message);
+        if(message.equals("successful exit")) return 0;
+
         JsonObject json = JsonParser.parseString(message).getAsJsonObject();
         String methodName = json.get("method").getAsString();
         int playerNumber, a, b;
@@ -212,6 +214,7 @@ public class GamePlayScene {
             default:
                 System.out.println("unknown");
         }
+        return 1;
     }
 
     public void sendMessageToServer(String message) {

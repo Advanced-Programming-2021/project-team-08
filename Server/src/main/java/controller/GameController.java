@@ -150,13 +150,15 @@ public class GameController {
         return 1;
     }
 
-    private void exitGame(int senderNumber){
+    private void exitGame(int senderNumber) {
         System.out.println("Exit game " + senderNumber);
-        if(senderNumber == 1){
+        if (senderNumber == 1) {
+            sendMessageToOne("successful exit", senderNumber);
             ServerManager.getIsInGame().put(player1Socket, false);
             ServerThread serverThread = new ServerThread(player1Socket, ServerManager.getServerSocket());
             serverThread.start();
-        }else if(senderNumber == 2){
+        } else if (senderNumber == 2) {
+            sendMessageToOne("successful exit", senderNumber);
             ServerManager.getIsInGame().put(player2Socket, false);
             ServerThread serverThread = new ServerThread(player2Socket, ServerManager.getServerSocket());
             serverThread.start();
@@ -187,6 +189,28 @@ public class GameController {
             e.printStackTrace();
         }
         savaGameData(message);
+    }
+
+    private void sendMessageToOne(String message, int playerNumber) {
+        System.out.println(message);
+        DataOutputStream dataOutputStream;
+        if (playerNumber == 1) {
+            try {
+                dataOutputStream = new DataOutputStream(player1Socket.getOutputStream());
+                dataOutputStream.writeUTF(message);
+                dataOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (playerNumber == 2) {
+            try {
+                dataOutputStream = new DataOutputStream(player2Socket.getOutputStream());
+                dataOutputStream.writeUTF(message);
+                dataOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void savaGameData(String data) {
