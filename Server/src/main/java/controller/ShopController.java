@@ -38,6 +38,7 @@ public class ShopController extends ServerController {
         if (cardData == null) return serverMessage(MessageType.ERROR, "invalid card name", null);
         user.getUserData().addMoney(cardData.getPrice());
         user.getUserData().removeCard(cardData.getCardId());
+        cardData.setNumber(cardData.getNumber() + 1);
         return serverMessage(MessageType.SUCCESSFUL, "you sold the card successfully", null);
         //TODO save to csv
     }
@@ -63,13 +64,13 @@ public class ShopController extends ServerController {
         System.out.println("card banned successfully");
     }
 
-    public void changeInventory(String name) {
+    public void changeInventory(String name, int newValue) {
         CardData cardData = CardData.getCardByName(name);
         if (cardData == null) {
             System.out.println("invalid card name");
             return;
         }
-        cardData.changeInventory();
+        cardData.changeInventory(newValue);
     }
 
 

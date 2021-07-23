@@ -123,7 +123,7 @@ public class ShopScene extends Scene {
         JsonObject object = JsonParser.parseString(jsonObject.get("returnObject").getAsString()).getAsJsonObject();
         int inventory = object.get("number").getAsInt();
         boolean isBanned = object.get("isBanned").getAsBoolean();
-
+        String serverMessage = jsonObject.get("message").getAsString();
         cardImage.setOnMouseEntered(event -> {
             cardImage.setFitHeight(cardImage.getFitHeight() * 1.4);
             cardImage.setFitWidth(cardImage.getFitWidth() * 1.4);
@@ -149,7 +149,7 @@ public class ShopScene extends Scene {
             } else {
                 sellCard(cardData);
             }
-
+            message.setText();
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -180,7 +180,6 @@ public class ShopScene extends Scene {
 
         if (alert.getResult() == ButtonType.YES) {
             shopController.buyACard(cardData);
-            message.setText("you bought the card :)");
         }
     }
 

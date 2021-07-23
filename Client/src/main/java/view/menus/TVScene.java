@@ -92,7 +92,7 @@ public class TVScene {
             String nickname2 = jsonElement.getAsJsonObject().get("secondPlayerNickname").getAsString();
             int id = jsonElement.getAsJsonObject().get("id").getAsInt();
             System.out.println("first nickname is: " + nickname1 + " second nickname is: " + nickname2 + " id is: " + id);
-            tvPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i, tv, tvScroll));
+            tvPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i, tv, tvScroll, pauseButton));
             i++;
         }
     }
@@ -118,13 +118,15 @@ class tvLabel extends Label {
     int id;
     SubScene tv;
     ScrollPane tvScroll;
+    Button pauseButton;
 
-    public tvLabel(String nickname1, String nickname2, int id, int index, SubScene tv, ScrollPane tvPane) {
+    public tvLabel(String nickname1, String nickname2, int id, int index, SubScene tv, ScrollPane tvPane, Button pauseButton) {
         this.nickname1 = nickname1;
         this.nickname2 = nickname2;
         this.id = id;
         this.tv = tv;
         this.tvScroll = tvPane;
+        this.pauseButton = pauseButton;
         setText(text());
         setPrefHeight(80);
         setPrefWidth(400);
@@ -156,6 +158,7 @@ class tvLabel extends Label {
                 tv.setCamera(new PerspectiveCamera());
                 tv.setVisible(true);
                 tv.toFront();
+                pauseButton.setVisible(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
