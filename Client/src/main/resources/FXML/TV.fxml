@@ -3,16 +3,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.TVScene">
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.layout.Region?>
+<AnchorPane fx:id="parent" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menus.TVScene" stylesheets="@../CSS/tvStyle.css" styleClass="background">
     <children>
-        <ScrollPane  layoutX="400" layoutY="100" prefHeight="600.0" prefWidth="800.0">
+        <ScrollPane fx:id="tvScroll"  layoutX="400" layoutY="100" prefHeight="600.0" prefWidth="800.0">
             <content>
                 <AnchorPane fx:id="tvPane" prefWidth="800" prefHeight="600"/>
             </content>
         </ScrollPane>
-        <Button fx:id="liveButton" layoutY="300" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="live" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setLiveBattles"/>
-        <Button fx:id="topButton" layoutY="500" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="top" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setTopBattles"/>
-        <Button fx:id="replayButton" layoutY="700" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="replay" stylesheets="@../CSS/MenuStyles.css" styleClass="shop-buy-sell" onAction="#setReplayBattles"/>
+        <SubScene fx:id="tv" height="900.0"  width="1600.0" visible="false">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <Button fx:id="liveButton" layoutY="300" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="live" styleClass="stream-button" onAction="#setLiveBattles"/>
+        <Button fx:id="topButton" layoutY="500" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="top"  styleClass="stream-button" onAction="#setTopBattles"/>
+        <Button fx:id="replayButton" layoutY="700" layoutX="1400" prefHeight="80" prefWidth="160" mnemonicParsing="false" text="replay"  styleClass="stream-button" onAction="#setReplayBattles"/>
+
+        <Button layoutX="50" layoutY="700" prefHeight="80" prefWidth="200" mnemonicParsing="false" text="Back"  styleClass="back" onAction="#Back"/>
     </children>
 </AnchorPane>

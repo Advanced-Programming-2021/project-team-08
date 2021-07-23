@@ -10,10 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
-import javafx.scene.PerspectiveCamera;
+import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -34,7 +35,9 @@ public class TVScene {
     public Button liveButton;
     public Button topButton;
     public Button replayButton;
-
+    public AnchorPane parent;
+    public SubScene tv;
+    public ScrollPane tvScroll;
 
 
     @FXML
@@ -42,6 +45,7 @@ public class TVScene {
         buttonInit(liveButton, 1.2);
         buttonInit(topButton, 1.2);
         buttonInit(replayButton, 1.2);
+        tv.setVisible(false);
     }
 
     private void buttonInit(Button button, double ratio) {
@@ -58,15 +62,18 @@ public class TVScene {
     }
 
     public void setLiveBattles(ActionEvent actionEvent) {
-
+        tvPane.getChildren().clear();
+        tvScroll.setVisible(true);
     }
 
     public void setTopBattles(ActionEvent actionEvent) {
-
+        tvPane.getChildren().clear();
+        tvScroll.setVisible(true);
     }
 
     public void setReplayBattles(ActionEvent actionEvent) {
         tvPane.getChildren().clear();
+        tvScroll.setVisible(true);
         tvPane.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(1), new Insets(1))));
         String result = ApplicationManger.getServerResponse("tv", "replayList", null);
         JsonObject jsonObject = JsonParser.parseString(result).getAsJsonObject();
@@ -83,9 +90,13 @@ public class TVScene {
             String nickname2 = jsonElement.getAsJsonObject().get("secondPlayerNickname").getAsString();
             int id = jsonElement.getAsJsonObject().get("id").getAsInt();
             System.out.println("first nickname is: " + nickname1 + " second nickname is: " + nickname2 + " id is: " + id);
-            tvPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i));
+            tvPane.getChildren().add(i, new tvLabel(nickname1, nickname2, id, i, tv, tvScroll));
             i++;
         }
+    }
+
+    public void Back(ActionEvent actionEvent) {
+        ApplicationManger.goToScene1(SceneName.MAIN_MENU, false);
     }
 }
 
@@ -93,11 +104,15 @@ class tvLabel extends Label {
     String nickname1;
     String nickname2;
     int id;
+    SubScene tv;
+    ScrollPane tvScroll;
 
-    public tvLabel(String nickname1, String nickname2, int id, int index) {
+    public tvLabel(String nickname1, String nickname2, int id, int index, SubScene tv, ScrollPane tvPane) {
         this.nickname1 = nickname1;
         this.nickname2 = nickname2;
         this.id = id;
+        this.tv = tv;
+        this.tvScroll = tvPane;
         setText(text());
         setPrefHeight(80);
         setPrefWidth(400);
@@ -109,6 +124,7 @@ class tvLabel extends Label {
 
     void clickInit() {
         setOnMouseClicked(event -> {
+            tvScroll.setVisible(false);
             HashMap<String, String> data = new HashMap<>();
             data.put("id", String.valueOf(id));
             String serverResponse = ApplicationManger.getServerResponse("tv", "play", data);
@@ -122,10 +138,11 @@ class tvLabel extends Label {
             try {
                 FXMLLoader loader = new FXMLLoader(new URL(rootPath + "gameStream.fxml"));
                 AnchorPane root = loader.load();
-                javafx.scene.Scene scene = new javafx.scene.Scene(root);
-                scene.setCamera(new PerspectiveCamera());
-                ApplicationManger.getMainStage().setScene(scene);
-                ApplicationManger.getMainStage().show();
+                tv.setRoot(root);
+                tv.setScaleX(0.7);
+                tv.setScaleY(0.7);
+                tv.setCamera(new PerspectiveCamera());
+                tv.setVisible(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -133,6 +150,6 @@ class tvLabel extends Label {
     }
 
     String text() {
-        return nickname1 + "   VS   " + nickname2;
+        return "   " + nickname1 + "   VS   " + nickname2;
     }
 }
