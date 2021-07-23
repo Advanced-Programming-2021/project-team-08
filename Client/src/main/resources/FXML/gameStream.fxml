@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1600.0" styleClass="boardBackground" stylesheets="@../CSS/GameplayStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StreamController">
+   <children>
+      <Label fx:id="playerNumberLabel" text="1" />
+      <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/gameplay/board.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#pause" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="Pause">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="board" layoutY="-65.0" prefHeight="900.0" prefWidth="1600.0" rotate="-45.0">
+         <children>
+            <AnchorPane fx:id="player1Board" layoutX="390.0" layoutY="450.0" prefHeight="370.0" prefWidth="790.0">
+               <children>
+                  <GridPane fx:id="mainZone1" alignment="CENTER" layoutX="130.0" layoutY="20.0" prefHeight="310.0" prefWidth="560.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="monster15" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster13" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster11" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster12" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster14" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="Field1" fitHeight="130.0" fitWidth="130.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/Field-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="GY1" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/GY-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="deck1" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/default-1.png" />
+                     </image>
+                  </ImageView>
+                  <Group fx:id="hand1" layoutX="400.0" layoutY="370.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="player2Board" layoutX="400.0" layoutY="50.0" prefHeight="370.0" prefWidth="790.0" rotate="180.0">
+               <children>
+                  <GridPane fx:id="mainZone2" alignment="CENTER" layoutX="130.0" layoutY="20.0" prefHeight="310.0" prefWidth="560.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView fx:id="monster25" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster23" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster21" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster22" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="monster24" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../asset/gameplay/default-2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="Field2" fitHeight="130.0" fitWidth="130.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/Field-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="GY2" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/GY-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="deck2" fitHeight="130.0" fitWidth="130.0" layoutX="710.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/default-2.png" />
+                     </image>
+                  </ImageView>
+                  <Group fx:id="hand2" layoutX="400.0" layoutY="370.0" />
+               </children>
+            </AnchorPane>
+         </children>
+         <rotationAxis>
+            <Point3D x="1.0" />
+         </rotationAxis>
+      </AnchorPane>
+      <Pane layoutX="1380.0" layoutY="680.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.7);">
+         <children>
+            <Label fx:id="currentPhaseLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefWidth="180.0" style="-fx-font-family: &quot;heebeo&quot;;" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Heebeo" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="nextPhaseButton" visible="false" layoutX="20.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="90.0" prefWidth="160.0" style="-fx-background-color: green; -fx-font-family: &quot;heebeo&quot;;" text="Next Phase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <SubScene fx:id="showCard" height="360.0" layoutX="50.0" layoutY="220.0" width="260.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
+      <AnchorPane fx:id="overlayPanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(255,255,255,0.8);" visible="false" />
+      <Group layoutX="80.0" layoutY="640.0">
+         <children>
+            <Pane layoutX="80.0">
+               <children>
+                  <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/avatar-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Avatar" fitHeight="120.0" fitWidth="120.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane layoutY="135.0" prefHeight="38.0" prefWidth="290.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#1f93ffc9" height="38.0" stroke="#4208e1" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <ImageView fx:id="player1LP_bar" fitHeight="32.0" fitWidth="284.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../asset/gameplay/LP_FILL.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D height="32.0" width="284.0" />
+                     </viewport>
+                  </ImageView>
+                  <Label fx:id="player1LP_T" alignment="CENTER" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="LP      8000" textAlignment="CENTER" textFill="#efff00">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="175.0" prefHeight="38.0" prefWidth="370.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" height="38.0" stroke="#4208e1" strokeType="INSIDE" strokeWidth="3.0" width="370.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.014035088010132313" green="0.18000000715255737" blue="0.31578946113586426" opacity="0.7900000214576721" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.31929823756217957" green="0.5489473938941956" blue="0.7368420958518982" opacity="0.5600000023841858" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <Label fx:id="player1Nickname_T" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="nickname" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Group>
+      <Group layoutX="1150.0" layoutY="51.0">
+         <children>
+            <Pane layoutX="160.0" layoutY="80.0">
+               <children>
+                  <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/gameplay/avatar-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player2Avatar" fitHeight="120.0" fitWidth="120.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane layoutX="80.0" layoutY="40.0" prefHeight="38.0" prefWidth="290.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ff2121c9" height="38.0" stroke="#b40000" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <ImageView fx:id="player2LP_bar" fitHeight="32.0" fitWidth="284.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../asset/gameplay/LP_FILL.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D height="32.0" width="284.0" />
+                     </viewport>
+                  </ImageView>
+                  <Label fx:id="player2LP_T" alignment="CENTER" prefHeight="38.0" prefWidth="290.0" style="-fx-font-family: &quot;heebeo&quot;;" text="LP      8000" textAlignment="CENTER" textFill="#efff00">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="38.0" prefWidth="370.0">
+               <children>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" height="38.0" stroke="#b40000" strokeType="INSIDE" strokeWidth="3.0" width="370.0">
+                     <fill>
+                        <LinearGradient endX="0.7824427917713427" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9157894849777222" green="0.2849122881889343" blue="0.2849122881889343" opacity="0.25999999046325684" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.6299999952316284" green="0.03779999911785126" blue="0.03779999911785126" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <Label fx:id="player2Nickname_T" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="370.0" style="-fx-font-family: &quot;heebeo&quot;;" text="nickname" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Group>
+      <AnchorPane fx:id="endGamePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(255,255,255,0.8);" visible="false">
+         <children>
+            <Label fx:id="gameEndMessage" alignment="CENTER" layoutX="350.0" layoutY="400.0" prefHeight="100.0" prefWidth="900.0" text="Label">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button fx:id="gameEndExitButton" layoutX="725.0" layoutY="600.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="40.0" prefWidth="150.0" styleClass="pauseButton" text="Exit">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pausePanel" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: rgba(0,0,75,0.8);" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="323.0" layoutY="185.0" prefHeight="115.0" prefWidth="940.0" scaleX="0.7" scaleY="0.7" styleClass="title" text="Pause" textAlignment="CENTER">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Button layoutX="480.0" layoutY="345.0" mnemonicParsing="false" onAction="#resume" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Resume">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button fx:id="muteButton" layoutX="480.0" layoutY="455.0" mnemonicParsing="false" onAction="#muteChange" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Mute">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button layoutX="480.0" layoutY="565.0" mnemonicParsing="false" onAction="#surrender" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Surrender">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button layoutX="480.0" layoutY="680.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="635.0" scaleX="0.8" scaleY="0.8" styleClass="pauseMenuButton" text="Exit Game">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

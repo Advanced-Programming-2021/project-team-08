@@ -16,6 +16,8 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -329,6 +331,7 @@ public class GameController {
 
         duelData.applyDuelResult();
         System.out.println(duelData.getResultString());
+        savaGameData(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "|end");
     }
 
     public static ArrayList<GameController> getAllGames() {
