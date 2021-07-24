@@ -7,6 +7,7 @@ import model.UserData;
 import model.cards.data.ReadMonsterCardsData;
 import model.cards.data.ReadSpellTrapCardsData;
 import model.enums.MessageType;
+import view.GetCommand;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -40,6 +41,7 @@ public class ServerManager {
             e.printStackTrace();
         }
         try {
+            new GetCommand().start();
             serverSocket = new ServerSocket(12345);
             while (true) {
                 Socket socket = serverSocket.accept();

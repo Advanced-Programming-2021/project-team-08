@@ -149,7 +149,7 @@ public class ShopScene extends Scene {
             } else {
                 sellCard(cardData);
             }
-            message.setText();
+            message.setText(serverMessage);
         });
         cardImage.hoverProperty().addListener(new ChangeListener<Boolean>() {
             @Override

@@ -110,10 +110,10 @@ public class RegisterController {
 
     public void nextOfSignup(ActionEvent actionEvent) throws Exception {
         HashMap<String, String> data = new HashMap<>();
-        data.put("username", usernameOfLogin.getText());
-        data.put("nickname", usernameOfLogin.getText());
-        data.put("password", passwordOfLogin.getText());
-        String result = ApplicationManger.getServerResponse("register", "login", data);
+        data.put("username", usernameOfSignup.getText());
+        data.put("nickname", nicknameOfSignup.getText());
+        data.put("password", passwordOfSignup.getText());
+        String result = ApplicationManger.getServerResponse("register", "register", data);
         JsonElement jsonElement = JsonParser.parseString(result);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String message = jsonObject.get("message").getAsString();

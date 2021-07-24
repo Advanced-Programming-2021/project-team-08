@@ -27,7 +27,7 @@ public class FileManager {
                 if (!file.mkdir()) throw new IOException("could not make users folder");
             }
             userFile = new FileWriter("users/" + user.getUserData().getUsername() + ".json");
-            userFile.write(new Gson().toJson(user));
+            userFile.write(new Gson().toJson(user.getUserData()));
             userFile.close();
             return MessageType.SUCCESSFUL;
         } catch (IOException e) {
